@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:11:08 by larlena           #+#    #+#             */
-/*   Updated: 2024/03/19 19:59:02 by larlena          ###   ########.fr       */
+/*   Updated: 2024/03/25 17:21:38 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,36 +14,62 @@
 
 namespace kfs::driver::vga {
 
-void	VGATextMode::write(char c) {
-	if (c == '\n') {
-		pressNewLine();
-	} else if (c == '\b') {
-		pressBackSpace();
-	} else if (c == '\t') {
-		pressTab();
-	} else if ((uint8_t)c == interface::IKeyboardDecoder::DOWN) {
-		pressScroll();
-	} else if (ft_isprint(c)) {
-		putEntry(c, mColor, mRow, mColumn);
-		if (++mRow == mRowsNumber) {
-			mRow = 0;
-			if (++mColumn == mColumnsNumber) {
-				mColumn = 0;
-				clear();
-			}
-		}
+// void	VGATextMode::write(char character) {
+// 	putEntry(character, mColor, mRow, mColumn);
+// 	if (++mRow == mRowsNumber) {
+// 		mRow = 0;
+// 		if (++mColumn == mColumnsNumber) {
+// 			mColumn = 0;
+// 			clear();
+// 		}
+// 	}
+// }
+
+// void	VGATextMode::write(const char* data, size_t size) {
+// 	for (size_t i = 0; i < size; i++)
+// 		write(data[i]);
+// }
+
+// void	VGATextMode::write(const char* data) {
+// 	write(data, ft_strlen(data));
+// }
+
+// void	VGATextMode::write(char character, size_t row, size_t column) {
+// 	if (mRowsNumber > row && mColumnsNumber > column) {
+// 		putEntry(character, mColor, row, column);
+// 	}
+// }
+
+VGATextMode::IProxyScreenWriter	*VGATextMode::ProxyVGAScreenWriter::put(const char &character) {
+	*mBuffer = vgaEntry(character, 0);
+}
+
+// const VGATextMode::IProxyScreenWriter	&VGATextMode::ProxyVGAScreenWriter::operator = (const char &character) const {
+// }
+
+VGATextMode::IProxyScreenWriter	*VGATextMode::ProxyVGATextMode::row(size_t row) {
+	static ProxyVGAScreenWriter	screen;
+
+	screen = mBuffer + row;
+	if (row > mRowsNumber) {
+		screen = mBuffer;
 	}
-	update_cursor(mRow, mColumn);
+
+	return &screen;
 }
 
-void	VGATextMode::write(const char* data, size_t size) {
-	for (size_t i = 0; i < size; i++)
-		write(data[i]);
+VGATextMode::IProxyTextMode	*VGATextMode::column(size_t column) {
+	static ProxyVGATextMode	proxy = ProxyVGATextMode(mRowsNumber);
+
+	proxy = mBuffer + (column * mRowsNumber);
+	if (column > mColumnsNumber) {
+		proxy = mBuffer;
+	}
+	return &proxy;
 }
 
-void	VGATextMode::write(const char* data) {
-	write(data, ft_strlen(data));
-}
+// const VGATextMode::IProxyTextMode	*VGATextMode::operator [] (size_t column) const {
+// }
 
 void	VGATextMode::clear() {
 	for (size_t y = 0; y != mColumnsNumber; ++y) {
@@ -53,45 +79,12 @@ void	VGATextMode::clear() {
 	}
 }
 
-void	VGATextMode::pressBackSpace() {
-	if (mRow == 0 && mColumn != 0) {
-		mColumn -= 1;
-		mRow = mRowsNumber;
-	}
-	mRow -= 1;
-	putEntry(' ', mColor, mRow, mColumn);
-}
-
-void	VGATextMode::pressNewLine() {
-	mRow = 0;
-	if (++mColumn == mColumnsNumber) {
-		mColumn = 0;
-		clear();
-	}
-}
-
-void	VGATextMode::pressTab() {
-	size_t	tabSize = 8;
-
-	mRow += tabSize - (mRow % tabSize);
-}
-
-void	VGATextMode::pressScroll() {
-	size_t	it;
-
-	if (mColumn == 0)
-		return ;
-	for (it = 0; it < mRowsNumber * (mColumnsNumber - 1); ++it) {
-		mBuffer[it] = mBuffer[it + mRowsNumber];
-	}
-	for (; it < mRowsNumber * mColumnsNumber; ++it) {
-		mBuffer[it] = ' ';
-	}
-	mColumn -= 1;
-}
-
 bool	VGATextMode::setCursorPosition(size_t row, size_t column) {
-	return ITextMode::setCursorPosition(row, column);
+	auto&&	retValue = ITextMode::setCursorPosition(row, column);
+	
+	if (!retValue)
+		updateCursor(mRow, mColumn);
+	return retValue;
 }
 
 
@@ -106,16 +99,16 @@ void	VGATextMode::putEntry(char c, uint8_t color, size_t x, size_t y) {
 }
 
 
-uint8_t VGATextMode::vga_entry_color(enum Color fg, enum Color bg) {
-	return fg | bg << 4;
-}
+// uint8_t VGATextMode::vga_entry_color(enum Color fg, enum Color bg) {
+// 	return fg | bg << 4;
+// }
 
-uint16_t VGATextMode::vga_entry(unsigned char uc, uint8_t color) {
-	return (uint16_t) uc | (uint16_t) color << 8;
-}
+// uint16_t VGATextMode::vga_entry(unsigned char uc, uint8_t color) {
+// 	return (uint16_t) uc | (uint16_t) color << 8;
+// }
 
 
-void	VGATextMode::update_cursor(int row, int column) {
+void	VGATextMode::updateCursor(int row, int column) {
 	uint16_t pos = column * mRowsNumber + row;
 
 	mPort1.write(0x0F);
@@ -124,7 +117,7 @@ void	VGATextMode::update_cursor(int row, int column) {
 	mPort2.write((uint8_t) ((pos >> 8) & 0xFF));
 }
 
-void	VGATextMode::enable_cursor(uint8_t cursor_start, uint8_t cursor_end) {
+void	VGATextMode::enableCursor(uint8_t cursor_start, uint8_t cursor_end) {
 	mPort1.write(0x0A);
 	mPort2.write((mPort2.read() & 0xC0) | cursor_start);
 
@@ -132,7 +125,7 @@ void	VGATextMode::enable_cursor(uint8_t cursor_start, uint8_t cursor_end) {
 	mPort2.write((mPort2.read() & 0xE0) | cursor_end);
 }
 
-void	VGATextMode::disable_cursor() {
+void	VGATextMode::disableCursor() {
 	mPort1.write(0x0A);
 	mPort2.write(0x20);
 }

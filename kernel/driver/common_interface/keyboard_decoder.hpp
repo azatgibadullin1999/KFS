@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 14:06:44 by larlena           #+#    #+#             */
-/*   Updated: 2024/03/19 19:22:57 by larlena          ###   ########.fr       */
+/*   Updated: 2024/03/23 14:01:20 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ public:
 	~IKeyboardDecoder() { }
 	virtual uint8_t	scanLowercase(const uint8_t &code) const = 0;
 	virtual uint8_t	scanUppercase(const uint8_t &code) const = 0;
+	virtual uint8_t	scanBackward(const uint8_t &code) const = 0;
 
 	static const uint8_t UNKNOWN = 0xFF;
 	static const uint8_t ESC = 0xFF - 1;

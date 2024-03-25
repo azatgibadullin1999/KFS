@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 17:46:12 by larlena           #+#    #+#             */
-/*   Updated: 2024/03/19 02:56:49 by larlena          ###   ########.fr       */
+/*   Updated: 2024/03/25 17:23:30 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,26 @@ const char	*header = "\
 extern "C" void kernel_main(void) {
 	auto&&	display = kfs::driver::vga::VGATextMode();
 	auto&&	codes = kfs::driver::common::USqwerty();
-	auto&&	keyboard = kfs::driver::ps2::Keyboard(&codes);
+	auto&&	keyboard = kfs::driver::ps2::Keyboard();
+	char	strbuff[8];
 	uint8_t	buff;
 
-	display.write(header);
+	// display.write(header);
+	// display[2]->operator[](3)->operator=('2');
+	display.column(2)->row(1)->put('2');
 	keyboard.read();
 	while (1) {
 		buff = keyboard.read();
 		if (buff == 0xFF) {
 			continue;
 		}
-		display.write(buff);
+		// keyboard.isPressed(codes.scanBackward(buff));
+		// display.write(ft_itoa(buff, strbuff, 16));
+		// display.write('\n');
+		display.write((buff = codes.scanLowercase(buff)));
+		// display.write('\n');
+		// display.write(ft_itoa(codes.scanBackward(buff), strbuff, 16));
+		// display.write('\n');
+		// display.write('\n');
 	}
 }

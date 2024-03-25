@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   console.hpp                                        :+:      :+:    :+:   */
+/*   command.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/13 20:46:27 by larlena           #+#    #+#             */
-/*   Updated: 2024/03/23 21:22:52 by larlena          ###   ########.fr       */
+/*   Created: 2024/03/23 20:52:03 by larlena           #+#    #+#             */
+/*   Updated: 2024/03/23 21:15:33 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __KFS_KERNEL_DRIVER_UTILS_CONSOLE_HPP__
-# define __KFS_KERNEL_DRIVER_UTILS_CONSOLE_HPP__
+#ifndef __KFS_KERNEL_INTERFACE_COMMAND_HPP__
+# define __KFS_KERNEL_INTERFACE_COMMAND_HPP__
 
-# include "../../interface/mediator.hpp"
+namespace kfs::interface {
 
-namespace kfs::driver::common {
-
-class Console : public kfs::interface::IMediator {
-	void	notify(kfs::interface::BaseComponent *component, uint8_t event) override; 
+class ICommand {
+public:
+	virtual void	execute() = 0;
+};
+	
 }
 
-};
-
-#endif // __KFS_KERNEL_DRIVER_UTILS_CONSOLE_HPP__
+#endif // __KFS_KERNEL_INTERFACE_COMMAND_HPP__

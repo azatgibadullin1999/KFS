@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 14:35:10 by larlena           #+#    #+#             */
-/*   Updated: 2024/03/13 20:27:28 by larlena          ###   ########.fr       */
+/*   Updated: 2024/03/23 14:02:07 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,14 @@ namespace kfs::driver::common {
 
 class USqwerty : public kfs::driver::interface::IKeyboardDecoder {
 public:
+	USqwerty() {
+		for (uint8_t it = 0; it < sizeof(mLowercase); ++it) {
+			mBackward[mLowercase[it]] = it;
+		}
+		for (uint8_t it = 0; it < sizeof(mUppercase); ++it) {
+			mBackward[mUppercase[it]] = it;
+		}
+	}
 	~USqwerty() { }
 
 	uint8_t scanLowercase(const uint8_t &code) const override {
@@ -29,13 +37,15 @@ public:
 		return mUppercase[code];
 	}
 
+	uint8_t	scanBackward(const uint8_t &code) const override {
+		return mBackward[code];
+	}
+
 private:
 	const uint8_t mLowercase[128] = {
-	UNKNOWN,ESC,'1','2','3','4','5','6','7','8',
-	'9','0','-','=','\b','\t','q','w','e','r',
-	't','y','u','i','o','p','[',']','\n',CTRL,
-	'a','s','d','f','g','h','j','k','l',';',
-	'\'','`',LSHFT,'\\','z','x','c','v','b','n','m',',',
+	UNKNOWN,ESC,'1','2','3','4','5','6','7','8', '9','0','-','=','\b','\t',
+	'q','w','e','r','t','y','u','i','o','p','[',']','\n',CTRL,'a','s',
+	'd','f','g','h','j','k','l',';','\'','`',LSHFT,'\\','z','x','c','v','b','n','m',',',
 	'.','/',RSHFT,'*',ALT,' ',CAPS,F1,F2,F3,F4,F5,F6,F7,F8,F9,F10,NUMLCK,SCRLCK,HOME,UP,PGUP,'-',LEFT,UNKNOWN,RIGHT,
 	'+',END,DOWN,PGDOWN,INS,DEL,UNKNOWN,UNKNOWN,UNKNOWN,F11,F12,UNKNOWN,UNKNOWN,UNKNOWN,UNKNOWN,UNKNOWN,UNKNOWN,
 	UNKNOWN,UNKNOWN,UNKNOWN,UNKNOWN,UNKNOWN,UNKNOWN,UNKNOWN,UNKNOWN,UNKNOWN,UNKNOWN,UNKNOWN,UNKNOWN,UNKNOWN,UNKNOWN,
@@ -52,6 +62,8 @@ private:
 	UNKNOWN,UNKNOWN,UNKNOWN,UNKNOWN,UNKNOWN,UNKNOWN,UNKNOWN,UNKNOWN,UNKNOWN,UNKNOWN,UNKNOWN,UNKNOWN,UNKNOWN,UNKNOWN,
 	UNKNOWN,UNKNOWN,UNKNOWN,UNKNOWN,UNKNOWN,UNKNOWN,UNKNOWN
 	};
+
+	uint8_t mBackward[256];
 
 };
 

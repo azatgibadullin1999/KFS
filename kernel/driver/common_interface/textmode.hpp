@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 17:20:14 by larlena           #+#    #+#             */
-/*   Updated: 2024/03/19 19:20:00 by larlena          ###   ########.fr       */
+/*   Updated: 2024/03/25 17:20:23 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,24 +20,27 @@ namespace kfs::driver::interface {
 
 class ITextMode {
 public:
+	class IProxyScreenWriter {
+	public:
+		virtual IProxyScreenWriter	*put(const char &c) = 0;
+	};
+	class IProxyTextMode {
+	public:
+		
+		virtual IProxyScreenWriter	*row(size_t) = 0;
+	};
 	ITextMode(const size_t &columnsNumber, const size_t &rowsNumber) :
 	mColumnsNumber(columnsNumber),
 	mRowsNumber(rowsNumber),
 	mColumn(0),
 	mRow(0) { }
 
-	virtual void	write(char) = 0;
-	virtual void	write(const char *) = 0;
-	virtual void	write(const char *, size_t) = 0;
-
 	virtual void	clear() = 0;
-	virtual void	pressBackSpace() = 0;
-	virtual void	pressNewLine() = 0;
-	virtual void	pressTab() = 0;
-
-	virtual void	pressScroll() = 0;
 
 	virtual bool	setCursorPosition(size_t row, size_t column) = 0;
+
+	virtual IProxyTextMode	*column(size_t) = 0;
+	// virtual const IProxyTextMode	*operator [] (size_t column) const = 0;
 	
 	const size_t	&getCurrentColumn() const {
 		return mColumn;

@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 12:02:00 by larlena           #+#    #+#             */
-/*   Updated: 2024/03/19 17:07:00 by larlena          ###   ########.fr       */
+/*   Updated: 2024/03/21 13:04:37 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,12 @@ uint8_t	Keyboard::read() {
 		return 0xFF;
 	}
 	mKeysState[code] = true;
-	return mDecoder->scanLowercase(code);
+	return code;
+}
+
+
+bool	Keyboard::isPressed(const uint8_t &code) const {
+	return mKeysState[code];
 }
 
 } // namespace kfs::bios
