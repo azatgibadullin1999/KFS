@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   textmode.cc                                        :+:      :+:    :+:   */
+/*   specialsymbolprocessor.hpp                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/18 15:16:05 by larlena           #+#    #+#             */
-/*   Updated: 2024/03/26 20:58:43 by larlena          ###   ########.fr       */
+/*   Created: 2024/03/26 01:23:52 by larlena           #+#    #+#             */
+/*   Updated: 2024/03/26 01:28:13 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "textmode.hpp"
+#ifndef __KFS_KERNEL_DIRVER_COMMON_INTERFACE_SPECIALSYMBOLPROCESSOR_HPP__
+# define __KFS_KERNEL_DIRVER_COMMON_INTERFACE_SPECIALSYMBOLPROCESSOR_HPP__
+
+# include "../../interface/command.hpp"
 
 namespace kfs::driver::interface {
 
-bool	ITextMode::setCursorPosition(size_t row, size_t column) {
-	if (column < mColumnsNumber && row < mRowsNumber) {
-		mColumn = column;
-		mRow = row;
-		return 0;
-	}
-	return 1;
-}
+class ISpecialSymbolProcessor {
+public:
+	virtual kfs::interface::ICommand	*process(const char&) const = 0;
+};
 
 }
+
+#endif // __KFS_KERNEL_DIRVER_COMMON_INTERFACE_SPECIALSYMBOLPROCESSOR_HPP__

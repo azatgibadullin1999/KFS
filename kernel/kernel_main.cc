@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 17:46:12 by larlena           #+#    #+#             */
-/*   Updated: 2024/03/25 17:23:30 by larlena          ###   ########.fr       */
+/*   Updated: 2024/03/27 16:01:12 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@
 #include "./utils/libft.h"
 #include "./driver/ps2/service/impl/keyboard.hpp"
 #include "./driver/vga/service/impl/textmode.hpp"
+#include "./driver/utils/specialsymbolprocessor.hpp"
 #include "./driver/utils/usqwerty.hpp"
+#include "console.hpp"
 
 #if defined(__linux__)
 # error "You are not using a cross-compiler, you will most certainly run into trouble"
@@ -39,25 +41,10 @@ extern "C" void kernel_main(void) {
 	auto&&	display = kfs::driver::vga::VGATextMode();
 	auto&&	codes = kfs::driver::common::USqwerty();
 	auto&&	keyboard = kfs::driver::ps2::Keyboard();
-	char	strbuff[8];
-	uint8_t	buff;
+	auto&&	processor = kfs::driver::common::SpecialSymbolProcessor(&display);
 
-	// display.write(header);
-	// display[2]->operator[](3)->operator=('2');
-	display.column(2)->row(1)->put('2');
-	keyboard.read();
+	auto&&	console = kfs::Console(&display, &processor, &codes, &keyboard);
 	while (1) {
-		buff = keyboard.read();
-		if (buff == 0xFF) {
-			continue;
-		}
-		// keyboard.isPressed(codes.scanBackward(buff));
-		// display.write(ft_itoa(buff, strbuff, 16));
-		// display.write('\n');
-		display.write((buff = codes.scanLowercase(buff)));
-		// display.write('\n');
-		// display.write(ft_itoa(codes.scanBackward(buff), strbuff, 16));
-		// display.write('\n');
-		// display.write('\n');
+		console.doWork();
 	}
 }

@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   textmode.cc                                        :+:      :+:    :+:   */
+/*   commandempty.hpp                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/18 15:16:05 by larlena           #+#    #+#             */
-/*   Updated: 2024/03/26 20:58:43 by larlena          ###   ########.fr       */
+/*   Created: 2024/03/26 20:32:15 by larlena           #+#    #+#             */
+/*   Updated: 2024/03/26 20:34:10 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "textmode.hpp"
+#ifndef __KFS_KERNEL_DRIVER_UTILS_COMMANDEMPTY_HPP__
+# define __KFS_KERNEL_DRIVER_UTILS_COMMANDEMPTY_HPP__
 
-namespace kfs::driver::interface {
+# include "../../interface/command.hpp"
+# include "../common_interface/textmode.hpp"
 
-bool	ITextMode::setCursorPosition(size_t row, size_t column) {
-	if (column < mColumnsNumber && row < mRowsNumber) {
-		mColumn = column;
-		mRow = row;
-		return 0;
-	}
-	return 1;
+namespace kfs::driver::common {
+
+class CommandEmpty : public kfs::interface::ICommand {
+	void	execute() override { }
+};
+
 }
 
-}
+#endif // __KFS_KERNEL_DRIVER_UTILS_COMMANDEMPTY_HPP__

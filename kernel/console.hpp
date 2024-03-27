@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   textmode.cc                                        :+:      :+:    :+:   */
+/*   console.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/18 15:16:05 by larlena           #+#    #+#             */
-/*   Updated: 2024/03/26 20:58:43 by larlena          ###   ########.fr       */
+/*   Created: 2024/03/27 15:26:50 by larlena           #+#    #+#             */
+/*   Updated: 2024/03/27 15:58:45 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "textmode.hpp"
+#ifndef __KFS_KERNEL_CONSOLE_HPP__
+# define __KFS_KERNEL_CONSOLE_HPP__
 
-namespace kfs::driver::interface {
+# include "interface/console.hpp"
 
-bool	ITextMode::setCursorPosition(size_t row, size_t column) {
-	if (column < mColumnsNumber && row < mRowsNumber) {
-		mColumn = column;
-		mRow = row;
-		return 0;
-	}
-	return 1;
+namespace kfs {
+
+class Console : kfs::interface::IConsole {
+public:
+	using IConsole::IConsole;
+
+	void	doWork() override;
+private:
+	uint8_t	mScanCodeBuff;
+	char	mCharBuff;
+};
+
 }
 
-}
+#endif // __KFS_KERNEL_CONSOLE_HPP__

@@ -5,10 +5,12 @@ CFLAGS =	-O0 \
 		-std=c++17 \
 		-Wall \
 		-Wextra \
+		-Werror \
 		-fno-builtin \
 		-fno-exceptions \
 		-fno-stack-protector \
 		-fno-rtti \
+		-fno-threadsafe-statics \
 		-ffreestanding \
 		-nostdlib \
 		-nodefaultlibs
@@ -35,7 +37,9 @@ SOURCE_ASM_NAME = boot$(SOURCE_ASM_EXT)
 SOURCE_CPP_NAME =	kernel_main$(SOURCE_CPP_EXT) \
 			keyboard$(SOURCE_CPP_EXT) \
 			textmode$(SOURCE_CPP_EXT) \
-			port$(SOURCE_CPP_EXT) 
+			port$(SOURCE_CPP_EXT) \
+			console$(SOURCE_CPP_EXT) \
+			specialsymbolprocessor$(SOURCE_CPP_EXT)
 
 LINKER_SCRIPT_NAME = linker$(LINKER_SCRIPT_EXT)
 
