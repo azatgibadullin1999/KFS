@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 15:31:13 by larlena           #+#    #+#             */
-/*   Updated: 2024/03/27 15:40:09 by larlena          ###   ########.fr       */
+/*   Updated: 2024/03/27 17:36:28 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define __KFS_KERNEL_INTERFACE_CONSOLE_HPP__
 
 # include "../driver/common_interface/textmode.hpp"
-# include "../driver/common_interface/keyboard.hpp"
+// # include "../driver/common_interface/keyboard.hpp"
 # include "../driver/common_interface/keyboard_decoder.hpp"
 # include "../driver/common_interface/specialsymbolprocessor.hpp"
 namespace kfs::interface {

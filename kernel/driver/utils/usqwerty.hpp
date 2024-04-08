@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 14:35:10 by larlena           #+#    #+#             */
-/*   Updated: 2024/03/23 14:02:07 by larlena          ###   ########.fr       */
+/*   Updated: 2024/03/27 17:18:16 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,29 +19,16 @@ namespace kfs::driver::common {
 
 class USqwerty : public kfs::driver::interface::IKeyboardDecoder {
 public:
-	USqwerty() {
-		for (uint8_t it = 0; it < sizeof(mLowercase); ++it) {
-			mBackward[mLowercase[it]] = it;
-		}
-		for (uint8_t it = 0; it < sizeof(mUppercase); ++it) {
-			mBackward[mUppercase[it]] = it;
-		}
-	}
-	~USqwerty() { }
+	USqwerty(kfs::driver::interface::IKayboard *keyboard);
 
-	uint8_t scanLowercase(const uint8_t &code) const override {
-		return mLowercase[code];
-	}
+	uint8_t scan(const uint8_t &code) const override;
 
-	uint8_t scanUppercase(const uint8_t &code) const override {
-		return mUppercase[code];
-	}
+private:
 
-	uint8_t	scanBackward(const uint8_t &code) const override {
+	uint8_t	scanBackward(const uint8_t &code) const {
 		return mBackward[code];
 	}
 
-private:
 	const uint8_t mLowercase[128] = {
 	UNKNOWN,ESC,'1','2','3','4','5','6','7','8', '9','0','-','=','\b','\t',
 	'q','w','e','r','t','y','u','i','o','p','[',']','\n',CTRL,'a','s',

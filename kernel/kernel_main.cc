@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 17:46:12 by larlena           #+#    #+#             */
-/*   Updated: 2024/03/27 16:01:12 by larlena          ###   ########.fr       */
+/*   Updated: 2024/03/27 17:00:43 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ const char	*header = "\
 
 extern "C" void kernel_main(void) {
 	auto&&	display = kfs::driver::vga::VGATextMode();
-	auto&&	codes = kfs::driver::common::USqwerty();
 	auto&&	keyboard = kfs::driver::ps2::Keyboard();
+	auto&&	codes = kfs::driver::common::USqwerty(&keyboard);
 	auto&&	processor = kfs::driver::common::SpecialSymbolProcessor(&display);
 
 	auto&&	console = kfs::Console(&display, &processor, &codes, &keyboard);
