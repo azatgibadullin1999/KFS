@@ -6,18 +6,18 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 17:46:12 by larlena           #+#    #+#             */
-/*   Updated: 2024/03/27 17:00:43 by larlena          ###   ########.fr       */
+/*   Updated: 2024/04/14 11:07:36 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
-#include "./utils/libft.h"
-#include "./driver/ps2/service/impl/keyboard.hpp"
-#include "./driver/vga/service/impl/textmode.hpp"
-#include "./driver/utils/specialsymbolprocessor.hpp"
-#include "./driver/utils/usqwerty.hpp"
+#include "utils/libft.h"
+#include "driver/ps2/service/impl/kayboard.hpp"
+#include "driver/vga/service/impl/textmode.hpp"
+#include "driver/utils/specialsymbolprocessor.hpp"
+#include "driver/utils/usqwerty.hpp"
 #include "console.hpp"
 
 #if defined(__linux__)
@@ -39,7 +39,7 @@ const char	*header = "\
 
 extern "C" void kernel_main(void) {
 	auto&&	display = kfs::driver::vga::VGATextMode();
-	auto&&	keyboard = kfs::driver::ps2::Keyboard();
+	auto&&	keyboard = kfs::driver::ps2::Kayboard();
 	auto&&	codes = kfs::driver::common::USqwerty(&keyboard);
 	auto&&	processor = kfs::driver::common::SpecialSymbolProcessor(&display);
 

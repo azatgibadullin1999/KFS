@@ -6,11 +6,11 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 01:29:56 by larlena           #+#    #+#             */
-/*   Updated: 2024/03/27 15:54:57 by larlena          ###   ########.fr       */
+/*   Updated: 2024/04/14 11:03:41 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../common_interface/keyboard_decoder.hpp"
+#include "driver/common_interface/kayboard_decoder.hpp"
 #include "specialsymbolprocessor.hpp"
 #include "commandpressbackspace.hpp"
 #include "commandpressnewline.hpp"
@@ -21,23 +21,23 @@
 namespace kfs::driver::common {
 
 kfs::interface::ICommand	*SpecialSymbolProcessor::process(const char &symbol) const {
-	static CommandPressBackspace	comBackspace(mTextmode);
-	static CommandPressNewLine	comNewLine(mTextmode);
-	static CommandPressScroll	comScroll(mTextmode);
-	static CommandPressTab		comTab(mTextmode, 8);
-	static CommandDefault		comDefault(mTextmode);
+	static CommandPressBackspace	Backspace(mTextmode);
+	static CommandPressNewLine	NewLine(mTextmode);
+	static CommandPressScroll	Scroll(mTextmode);
+	static CommandPressTab		Tab(mTextmode, 8);
+	static CommandDefault		Default(mTextmode);
 
 	if (symbol == '\b') {
-		return &comBackspace;
+		return &Backspace;
 	} else if (symbol == '\n') {
-		return &comNewLine;
+		return &NewLine;
 	} else if (symbol == '\t') {
-		return &comTab;
-	} else if (static_cast<uint8_t>(symbol) == kfs::driver::interface::IKeyboardDecoder::DOWN) {
-		return &comScroll;
+		return &Tab;
+	} else if (static_cast<uint8_t>(symbol) == kfs::driver::interface::IKayboardDecoder::DOWN) {
+		return &Scroll;
 	}
-	comDefault = symbol;
-	return &comDefault;
+	Default = symbol;
+	return &Default;
 }
 
 }

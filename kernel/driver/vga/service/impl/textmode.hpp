@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 18:30:28 by larlena           #+#    #+#             */
-/*   Updated: 2024/03/27 13:58:51 by larlena          ###   ########.fr       */
+/*   Updated: 2024/04/14 11:06:52 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,9 @@
 
 # include <stdint.h>
 # include <stddef.h>
-# include "../../../../utils/libft.h"
-# include "../../../utils/port.hpp"
-# include "../../../common_interface/keyboard_decoder.hpp"
-# include "../../../common_interface/textmode.hpp"
+# include "utils/libft.h"
+# include "driver/utils/port.hpp"
+# include "driver/common_interface/textmode.hpp"
 
 namespace kfs::driver::vga {
 
@@ -55,9 +54,6 @@ public:
 	VGATextMode() :
 	VGATextMode(25, 80) { }
 
-	// void	write(char character) override;
-	// void	write(const char *data) override;
-	// void	write(const char *data, size_t size) override;
 	void	write(char character, size_t row, size_t column) override;
 	char	read(size_t row, size_t column) override;
 
@@ -79,30 +75,6 @@ private:
 	uint8_t mColor;
 	const kfs::driver::utils::Port	mPort1;
 	const kfs::driver::utils::Port	mPort2;
-public:
-	// class VGAProxyModifier : public ITextMode::IProxyModifier {
-	// public:
-	// 	VGAProxyModifier	&operator = (uint16_t *buff) { mBuffer = buff; return *this; }
-	// 	IProxyModifier	*operator = (const char &c) override;
-	// 	char		operator * () override;
-	// private:
-	// 	uint8_t vgaEntryColor(enum Color fg, enum Color bg) { return fg | bg << 4; }
-	// 	uint16_t vgaEntry(unsigned char uc, uint8_t color) { return (uint16_t) uc | (uint16_t) color << 8; }
-	// private:
-	// 	uint16_t* mBuffer;
-	// };
-
-	// class VGAProxyAccessor : public ITextMode::IProxyAccessor {
-	// public:
-	// 	VGAProxyAccessor(size_t rowsNumber) : mRowsNumber(rowsNumber) { }
-	// 	VGAProxyAccessor	&operator = (uint16_t *buff) { mBuffer = buff; return *this; }
-	// 	virtual IProxyModifier	*operator [] (size_t row) override;
-	// private:
-	// 	uint16_t	*mBuffer;
-	// 	size_t		mRowsNumber;
-	// };
-
-	// WrapperProxyAccessor	operator [] (size_t column) override;
 };
 
 }

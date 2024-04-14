@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keyboard_decoder.hpp                               :+:      :+:    :+:   */
+/*   kayboard_decoder.hpp                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 14:06:44 by larlena           #+#    #+#             */
-/*   Updated: 2024/03/27 18:21:13 by larlena          ###   ########.fr       */
+/*   Updated: 2024/04/13 12:51:50 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __KFS_KERNEL_DRIVER_COMMON_INTERFACE_KEYBOARD_DECODER_HPP__
-# define __KFS_KERNEL_DRIVER_COMMON_INTERFACE_KEYBOARD_DECODER_HPP__
+#ifndef __KFS_KERNEL_DRIVER_COMMON_INTERFACE_KAYBOARD_DECODER_HPP__
+# define __KFS_KERNEL_DRIVER_COMMON_INTERFACE_KAYBOARD_DECODER_HPP__
 
 # include <stdint.h>
-# include "keyboard.hpp"
+# include "kayboard.hpp"
 
 namespace kfs::driver::interface {
 
-class IKeyboardDecoder {
+class IKayboardDecoder {
 public:
-	IKeyboardDecoder(kfs::driver::interface::IKayboard *keyboard) :
-	mKeyboard(keyboard) { }
+	IKayboardDecoder(kfs::driver::interface::IKayboard *kayboard) :
+	mKayboard(kayboard) { }
 	
 	virtual uint8_t	scan(const uint8_t &code) const = 0;
 
@@ -59,9 +59,9 @@ public:
 	inline static const uint8_t ALTGR = 0xFF - 31;
 	inline static const uint8_t NUMLCK = 0xFF - 32;
 protected:
-	kfs::driver::interface::IKayboard	*mKeyboard;
+	kfs::driver::interface::IKayboard	*mKayboard;
 };
 
 }
 
-#endif // __KFS_KERNEL_DRIVER_COMMON_INTERFACE_KEYBOARD_DECODER_HPP__
+#endif // __KFS_KERNEL_DRIVER_COMMON_INTERFACE_KAYBOARD_DECODER_HPP__

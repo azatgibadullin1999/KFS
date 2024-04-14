@@ -6,17 +6,17 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 17:16:16 by larlena           #+#    #+#             */
-/*   Updated: 2024/03/28 16:25:17 by larlena          ###   ########.fr       */
+/*   Updated: 2024/04/14 11:10:52 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "usqwerty.hpp"
-#include "../../utils/libft.h"
+#include "utils/libft.h"
 
 namespace kfs::driver::common {
 
 USqwerty::USqwerty(kfs::driver::interface::IKayboard *keyboard) :
-IKeyboardDecoder(keyboard) {
+IKayboardDecoder(keyboard) {
 	for (uint8_t it = 0; it < sizeof(mLowercase); ++it) {
 		mBackward[mLowercase[it]] = it;
 	}

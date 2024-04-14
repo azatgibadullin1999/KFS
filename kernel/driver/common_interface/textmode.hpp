@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 17:20:14 by larlena           #+#    #+#             */
-/*   Updated: 2024/03/27 14:23:34 by larlena          ###   ########.fr       */
+/*   Updated: 2024/04/13 12:37:52 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,39 +50,6 @@ protected:
 	const size_t mRowsNumber;
 	size_t mColumn;
 	size_t mRow;
-
-public:
-	// struct IProxyModifier {
-	// 	virtual IProxyModifier	*operator = (const char &) = 0;
-	// 	virtual char		operator * () = 0;
-	// };
-	// struct IProxyAccessor {
-	// 	virtual IProxyModifier	*operator [] (size_t) = 0;
-	// };
-	// struct WrapperProxyModifier {
-	// 	WrapperProxyModifier(IProxyModifier *proxy) :
-	// 	mProxy(proxy) { }
-	// 	WrapperProxyModifier	operator = (const char &character) {
-	// 		return WrapperProxyModifier(mProxy->operator=(character));
-	// 	}
-	// 	char			operator * () {
-	// 		return mProxy->operator*();
-	// 	}
-	// private:
-	// 	IProxyModifier	*mProxy;
-	// };
-
-	// struct WrapperProxyAccessor {
-	// 	WrapperProxyAccessor(IProxyAccessor *proxy) :
-	// 	mProxy(proxy) { }
-	// 	WrapperProxyModifier	operator [] (size_t row) {
-	// 		return WrapperProxyModifier(mProxy->operator[](row));
-	// 	}
-	// private:
-	// 	IProxyAccessor	*mProxy;
-	// };
-
-	// virtual WrapperProxyAccessor	operator [] (size_t column) = 0;
 };
 
 

@@ -35,7 +35,7 @@ INCLUDE_EXT = .hpp
 SOURCE_ASM_NAME = boot$(SOURCE_ASM_EXT)
 
 SOURCE_CPP_NAME =	kernel_main$(SOURCE_CPP_EXT) \
-			keyboard$(SOURCE_CPP_EXT) \
+			kayboard$(SOURCE_CPP_EXT) \
 			textmode$(SOURCE_CPP_EXT) \
 			port$(SOURCE_CPP_EXT) \
 			console$(SOURCE_CPP_EXT) \
@@ -71,7 +71,7 @@ $(NAME): $(OBJECT_FILES) $(LIBFT)
 	$(ASM) $< -o $@
 
 %$(OBJECT_EXT): %$(SOURCE_CPP_EXT)
-	$(CC) $(CFLAGS) -c -o $@ $<
+	$(CC) $(CFLAGS) -I./ -I./kernel/ -c -o $@ $<
 
 clean::
 	@rm -rf $(OBJECT_FILES)

@@ -1,28 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   inputdevice.hpp                                    :+:      :+:    :+:   */
+/*   kayboard.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/10 11:51:27 by larlena           #+#    #+#             */
-/*   Updated: 2024/03/23 14:01:42 by larlena          ###   ########.fr       */
+/*   Created: 2024/03/13 19:42:09 by larlena           #+#    #+#             */
+/*   Updated: 2024/04/14 11:05:28 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __KERNEL_DRIVER_COMMON_INTERFACES_INPUTDEVICE_HPP__
-# define __KERNEL_DRIVER_COMMON_INTERFACES_INPUTDEVICE_HPP__
+#ifndef __KFS_KERNEL_DIRVER_COMMON_INTERFACE_KAYBOARD__
+# define __KFS_KERNEL_DIRVER_COMMON_INTERFACE_KAYBOARD__
 
-# include <stdint.h>
+# include "utils/libft.h"
 
 namespace kfs::driver::interface {
 
-class IInputDevice {
+class IKayboard {
 public:
-	virtual ~IInputDevice();
-	virtual uint16_t	read() = 0;
+	IKayboard() {
+		ft_bzero(mKaysState, sizeof(mKaysState));
+	}
+
+	virtual uint8_t	read() = 0;
+
+	bool	isPressed(const uint8_t &code) const {
+		return mKaysState[code];
+	}
+protected:
+ 	uint8_t	mKaysState[128];
 };
 
 }
 
-#endif // __KERNEL_DRIVER_COMMON_INTERFACES_INPUTDEVICE_HPP__
+#endif // __KFS_KERNEL_DIRVER_COMMON_INTERFACE_KAYBOARD__

@@ -6,18 +6,18 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 14:35:10 by larlena           #+#    #+#             */
-/*   Updated: 2024/03/27 17:18:16 by larlena          ###   ########.fr       */
+/*   Updated: 2024/04/14 11:05:56 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __KFS_KERNEL_DRIVER_UTILS_USQWERTY_HPP__
 # define __KFS_KERNEL_DRIVER_UTILS_USQWERTY_HPP__
 
-# include "../common_interface/keyboard_decoder.hpp"
+# include "driver/common_interface/kayboard_decoder.hpp"
 
 namespace kfs::driver::common {
 
-class USqwerty : public kfs::driver::interface::IKeyboardDecoder {
+class USqwerty : public kfs::driver::interface::IKayboardDecoder {
 public:
 	USqwerty(kfs::driver::interface::IKayboard *keyboard);
 

@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 23:17:56 by larlena           #+#    #+#             */
-/*   Updated: 2024/03/25 01:53:44 by larlena          ###   ########.fr       */
+/*   Updated: 2024/04/14 11:15:32 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 
 # include <stdint.h>
 # include <stddef.h>
-# include "../../interface/command.hpp"
-# include "../common_interface/textmode.hpp"
+# include "common/command.hpp"
+# include "driver/common_interface/textmode.hpp"
 
 namespace kfs::driver::common {
 
-class CommandPressTab : public kfs::interface::ICommand {
+class CommandPressTab final : public kfs::interface::ICommand {
 public:
 	CommandPressTab(kfs::driver::interface::ITextMode *textMode, size_t tabSize) :
 	mTextMode(textMode),
@@ -28,8 +28,9 @@ public:
 
 	void	execute() override {
 		auto&&	currentRow = mTextMode->getCurrentRow();
+		auto&&	cursorPositionByRow = currentRow + (mTabSize - (currentRow % mTabSize));
 
-		mTextMode->setCursorPosition(currentRow + (mTabSize - (currentRow % mTabSize)), mTextMode->getCurrentColumn());
+		mTextMode->setCursorPosition(cursorPositionByRow, mTextMode->getCurrentColumn());
 	}
 
 private:

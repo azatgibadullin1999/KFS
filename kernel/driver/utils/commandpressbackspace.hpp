@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 23:47:48 by larlena           #+#    #+#             */
-/*   Updated: 2024/03/25 14:50:18 by larlena          ###   ########.fr       */
+/*   Updated: 2024/04/14 11:04:48 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 # define __KFS_KERNEL_DRIVER_UTILS_COMMANDPRESSBACKSPACE_HPP__
 
 # include <stddef.h>
-# include "../../interface/command.hpp"
-# include "../common_interface/textmode.hpp"
+# include "common/command.hpp"
+# include "driver/common_interface/textmode.hpp"
 
 namespace kfs::driver::common {
 
-class CommandPressBackspace : public kfs::interface::ICommand {
+class CommandPressBackspace final : public kfs::interface::ICommand {
 public:
 	CommandPressBackspace(kfs::driver::interface::ITextMode *textMode) :
 	mTextMode(textMode) { }

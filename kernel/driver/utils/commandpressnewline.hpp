@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 01:16:34 by larlena           #+#    #+#             */
-/*   Updated: 2024/03/25 01:53:48 by larlena          ###   ########.fr       */
+/*   Updated: 2024/04/14 11:04:43 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 # define __KFS_KERNEL_DRIVER_UTILS_COMMANDPRESSNEWLINE_HPP__
 
 # include <stddef.h>
-# include "../../interface/command.hpp"
-# include "../common_interface/textmode.hpp"
+# include "common/command.hpp"
+# include "driver/common_interface/textmode.hpp"
 
 namespace kfs::driver::common {
 
-class CommandPressNewLine : public kfs::interface::ICommand {
+class CommandPressNewLine final : public kfs::interface::ICommand {
 public:
 	CommandPressNewLine(kfs::driver::interface::ITextMode *textMode) :
 	mTextMode(textMode) { }
