@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 15:31:13 by larlena           #+#    #+#             */
-/*   Updated: 2024/04/14 11:07:19 by larlena          ###   ########.fr       */
+/*   Updated: 2024/04/14 18:54:48 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "driver/common_interface/textmode.hpp"
 # include "driver/common_interface/kayboard.hpp"
 # include "driver/common_interface/kayboard_decoder.hpp"
-# include "driver/common_interface/specialsymbolprocessor.hpp"
+# include "driver/common_interface/special_symbol_processor.hpp"
 namespace kfs::interface {
 
 class IConsole {

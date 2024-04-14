@@ -40,7 +40,7 @@ SOURCE_CPP_NAME =	kernel_main$(SOURCE_CPP_EXT) \
 			port$(SOURCE_CPP_EXT) \
 			console$(SOURCE_CPP_EXT) \
 			usqwerty$(SOURCE_CPP_EXT) \
-			specialsymbolprocessor$(SOURCE_CPP_EXT)
+			special_symbol_processor$(SOURCE_CPP_EXT)
 
 LINKER_SCRIPT_NAME = linker$(LINKER_SCRIPT_EXT)
 

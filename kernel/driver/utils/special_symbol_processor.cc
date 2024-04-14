@@ -1,43 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   specialsymbolprocessor.cc                          :+:      :+:    :+:   */
+/*   special_symbol_processor.cc                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 01:29:56 by larlena           #+#    #+#             */
-/*   Updated: 2024/04/14 11:03:41 by larlena          ###   ########.fr       */
+/*   Updated: 2024/04/14 19:05:39 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "driver/common_interface/kayboard_decoder.hpp"
-#include "specialsymbolprocessor.hpp"
-#include "commandpressbackspace.hpp"
-#include "commandpressnewline.hpp"
-#include "commandpressscroll.hpp"
-#include "commandpresstab.hpp"
-#include "commanddefault.hpp"
+#include "special_symbol_processor.hpp"
+#include "command_press_backspace.hpp"
+#include "command_press_newline.hpp"
+#include "command_press_scroll.hpp"
+#include "command_press_tab.hpp"
+#include "command_default.hpp"
 
 namespace kfs::driver::common {
 
 kfs::interface::ICommand	*SpecialSymbolProcessor::process(const char &symbol) const {
-	static CommandPressBackspace	Backspace(mTextmode);
-	static CommandPressNewLine	NewLine(mTextmode);
-	static CommandPressScroll	Scroll(mTextmode);
-	static CommandPressTab		Tab(mTextmode, 8);
-	static CommandDefault		Default(mTextmode);
+	static CommandPressBackspace	backspace(mTextmode);
+	static CommandPressNewLine	newLine(mTextmode);
+	static CommandPressScroll	scroll(mTextmode);
+	static CommandPressTab		tab(mTextmode, 8);
+	static CommandDefault		conventional(mTextmode);
 
 	if (symbol == '\b') {
-		return &Backspace;
+		return &backspace;
 	} else if (symbol == '\n') {
-		return &NewLine;
+		return &newLine;
 	} else if (symbol == '\t') {
-		return &Tab;
+		return &tab;
 	} else if (static_cast<uint8_t>(symbol) == kfs::driver::interface::IKayboardDecoder::DOWN) {
-		return &Scroll;
+		return &scroll;
 	}
-	Default = symbol;
-	return &Default;
+	conventional = symbol;
+	return &conventional;
 }
 
 }

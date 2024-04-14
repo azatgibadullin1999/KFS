@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   commanddefault.hpp                                 :+:      :+:    :+:   */
+/*   command_default.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 15:45:49 by larlena           #+#    #+#             */
-/*   Updated: 2024/04/14 11:04:56 by larlena          ###   ########.fr       */
+/*   Updated: 2024/04/14 18:51:16 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __KFS_KERNEL_DRIVER_UTILS_COMMANDDEFAULT_HPP__
-# define __KFS_KERNEL_DRIVER_UTILS_COMMANDDEFAULT_HPP__
+#ifndef __KFS_KERNEL_DRIVER_UTILS_COMMAND_DEFAULT_HPP__
+# define __KFS_KERNEL_DRIVER_UTILS_COMMAND_DEFAULT_HPP__
 
 # include "common/command.hpp"
 # include "driver/common_interface/textmode.hpp"
@@ -53,4 +53,4 @@ private:
 
 }
 
-#endif // __KFS_KERNEL_DRIVER_UTILS_COMMANDDEFAULT_HPP__
+#endif // __KFS_KERNEL_DRIVER_UTILS_COMMAND_DEFAULT_HPP__

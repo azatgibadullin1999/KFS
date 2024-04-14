@@ -1,43 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   commandpresstab.hpp                                :+:      :+:    :+:   */
+/*   command_press_backspace.hpp                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/24 23:17:56 by larlena           #+#    #+#             */
-/*   Updated: 2024/04/14 11:15:32 by larlena          ###   ########.fr       */
+/*   Created: 2024/03/24 23:47:48 by larlena           #+#    #+#             */
+/*   Updated: 2024/04/14 18:51:31 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __KFS_KERNEL_DRIVER_UTILS_COMMANDPRESSTAB_HPP__
-# define __KFS_KERNEL_DRIVER_UTILS_COMMANDPRESSTAB_HPP__
+#ifndef __KFS_KERNEL_DRIVER_UTILS_COMMAND_PRESSBACK_SPACE_HPP__
+# define __KFS_KERNEL_DRIVER_UTILS_COMMAND_PRESSBACK_SPACE_HPP__
 
-# include <stdint.h>
 # include <stddef.h>
 # include "common/command.hpp"
 # include "driver/common_interface/textmode.hpp"
 
 namespace kfs::driver::common {
 
-class CommandPressTab final : public kfs::interface::ICommand {
+class CommandPressBackspace final : public kfs::interface::ICommand {
 public:
-	CommandPressTab(kfs::driver::interface::ITextMode *textMode, size_t tabSize) :
-	mTextMode(textMode),
-	mTabSize(tabSize) { }
+	CommandPressBackspace(kfs::driver::interface::ITextMode *textMode) :
+	mTextMode(textMode) { }
 
 	void	execute() override {
-		auto&&	currentRow = mTextMode->getCurrentRow();
-		auto&&	cursorPositionByRow = currentRow + (mTabSize - (currentRow % mTabSize));
-
-		mTextMode->setCursorPosition(cursorPositionByRow, mTextMode->getCurrentColumn());
+		size_t	row = mTextMode->getCurrentRow();
+		size_t	column = mTextMode->getCurrentColumn();
+	
+		if (row == 0 && column != 0) {
+			column -= 1;
+			row = mTextMode->getRow();
+		}
+		row -= 1;
+		mTextMode->write(' ', row, column);
+		mTextMode->setCursorPosition(row, column);
 	}
-
 private:
 	kfs::driver::interface::ITextMode *mTextMode;
-	size_t	mTabSize;
 };
 
 }
 
-#endif // __KFS_KERNEL_DRIVER_UTILS_COMMANDPRESSTAB_HPP__
+#endif // __KFS_KERNEL_DRIVER_UTILS_COMMAND_PRESSBACK_SPACE_HPP__

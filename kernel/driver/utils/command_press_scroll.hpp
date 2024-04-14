@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   commandpressscroll.hpp                             :+:      :+:    :+:   */
+/*   command_press_scroll.hpp                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 01:51:01 by larlena           #+#    #+#             */
-/*   Updated: 2024/04/14 11:04:36 by larlena          ###   ########.fr       */
+/*   Updated: 2024/04/14 18:52:07 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __KFS_KERNEL_DRIVER_UTILS_COMMANDPRESSSCROLL_HPP__
-# define __KFS_KERNEL_DRIVER_UTILS_COMMANDPRESSSCROLL_HPP__
+#ifndef __KFS_KERNEL_DRIVER_UTILS_COMMAND_PRESS_SCROLL_HPP__
+# define __KFS_KERNEL_DRIVER_UTILS_COMMAND_PRESS_SCROLL_HPP__
 
 # include "common/command.hpp"
 # include "driver/common_interface/textmode.hpp"
@@ -44,4 +44,4 @@ private:
 
 }
 
-#endif // __KFS_KERNEL_DRIVER_UTILS_COMMANDPRESSSCROLL_HPP__
+#endif // __KFS_KERNEL_DRIVER_UTILS_COMMAND_PRESS_SCROLL_HPP__

@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 21:08:01 by larlena           #+#    #+#             */
-/*   Updated: 2024/03/23 21:23:05 by larlena          ###   ########.fr       */
+/*   Updated: 2024/04/14 11:21:38 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ class BaseComponent {
 public:
 	virtual void	setMediator(IMediator* mediator) {
 		if (!mediator)
-			mMeidator = mediator;
+			mMediator = mediator;
 	}
 
 	virtual void	unsetMediator() {
 		mMediator = nullptr;
 	}
 private:
-	IMediator	*mMediaotr;
+	IMediator	*mMediator;
 };
 
 

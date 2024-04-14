@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 17:46:12 by larlena           #+#    #+#             */
-/*   Updated: 2024/04/14 11:07:36 by larlena          ###   ########.fr       */
+/*   Updated: 2024/04/14 18:53:59 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "utils/libft.h"
 #include "driver/ps2/service/impl/kayboard.hpp"
 #include "driver/vga/service/impl/textmode.hpp"
-#include "driver/utils/specialsymbolprocessor.hpp"
+#include "driver/utils/special_symbol_processor.hpp"
 #include "driver/utils/usqwerty.hpp"
 #include "console.hpp"
 

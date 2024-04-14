@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 17:16:16 by larlena           #+#    #+#             */
-/*   Updated: 2024/04/14 11:10:52 by larlena          ###   ########.fr       */
+/*   Updated: 2024/04/14 19:06:23 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ IKayboardDecoder(keyboard) {
 
 uint8_t USqwerty::scan(const uint8_t &code) const {
 	static bool	capsLock = 0;
-	// static bool	shift = mKeyboard->isPressed(scanBackward(LSHFT)) || mKeyboard->isPressed(scanBackward(RSHFT));
 
 	if (mLowercase[code] == CAPS)
 		capsLock = !capsLock;		

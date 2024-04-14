@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   commandpressnewline.hpp                            :+:      :+:    :+:   */
+/*   command_press_newline.hpp                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 01:16:34 by larlena           #+#    #+#             */
-/*   Updated: 2024/04/14 11:04:43 by larlena          ###   ########.fr       */
+/*   Updated: 2024/04/14 18:51:52 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __KFS_KERNEL_DRIVER_UTILS_COMMANDPRESSNEWLINE_HPP__
-# define __KFS_KERNEL_DRIVER_UTILS_COMMANDPRESSNEWLINE_HPP__
+#ifndef __KFS_KERNEL_DRIVER_UTILS_COMMAND_PRESS_NEWLINE_HPP__
+# define __KFS_KERNEL_DRIVER_UTILS_COMMAND_PRESS_NEWLINE_HPP__
 
 # include <stddef.h>
 # include "common/command.hpp"
@@ -40,4 +40,4 @@ private:
 
 }
 
-#endif // __KFS_KERNEL_DRIVER_UTILS_COMMANDPRESSNEWLINE_HPP__
+#endif // __KFS_KERNEL_DRIVER_UTILS_COMMAND_PRESS_NEWLINE_HPP__
