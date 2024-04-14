@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 23:17:56 by larlena           #+#    #+#             */
-/*   Updated: 2024/04/14 18:58:37 by larlena          ###   ########.fr       */
+/*   Updated: 2024/04/14 19:26:05 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,7 @@ public:
 	mTextMode(textMode),
 	mTabSize(tabSize) { }
 
-	void	execute() override {
-		auto&&	currentRow = mTextMode->getCurrentRow();
-		auto&&	newCursorPositionByRow = currentRow + (mTabSize - (currentRow % mTabSize));
-
-		mTextMode->setCursorPosition(newCursorPositionByRow, mTextMode->getCurrentColumn());
-	}
-
+	void	execute() override;
 private:
 	kfs::driver::interface::ITextMode *mTextMode;
 	size_t	mTabSize;

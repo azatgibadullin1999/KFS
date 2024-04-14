@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 15:45:49 by larlena           #+#    #+#             */
-/*   Updated: 2024/04/14 18:51:16 by larlena          ###   ########.fr       */
+/*   Updated: 2024/04/14 19:18:42 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,23 +29,7 @@ public:
 		return *this;
 	}
 
-
-	void	execute() override {
-		if (!ft_isprint(mCharacter))
-			return;
-		size_t	row = mTextMode->getCurrentRow();
-		size_t	column = mTextMode->getCurrentColumn();
-		
-		mTextMode->write(mCharacter, row, column);
-		if (++row == mTextMode->getRow()) {
-			row = 0;
-			if (++column == mTextMode->getColumn()) {
-				column = 0;
-				mTextMode->clear();
-			}
-		}
-		mTextMode->setCursorPosition(row, column);
-	}
+	void	execute() override;
 private:
 	char	mCharacter;
 	kfs::driver::interface::ITextMode *mTextMode;

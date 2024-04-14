@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 23:47:48 by larlena           #+#    #+#             */
-/*   Updated: 2024/04/14 18:51:31 by larlena          ###   ########.fr       */
+/*   Updated: 2024/04/14 19:20:28 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,7 @@ public:
 	CommandPressBackspace(kfs::driver::interface::ITextMode *textMode) :
 	mTextMode(textMode) { }
 
-	void	execute() override {
-		size_t	row = mTextMode->getCurrentRow();
-		size_t	column = mTextMode->getCurrentColumn();
-	
-		if (row == 0 && column != 0) {
-			column -= 1;
-			row = mTextMode->getRow();
-		}
-		row -= 1;
-		mTextMode->write(' ', row, column);
-		mTextMode->setCursorPosition(row, column);
-	}
+	void	execute() override;
 private:
 	kfs::driver::interface::ITextMode *mTextMode;
 };
