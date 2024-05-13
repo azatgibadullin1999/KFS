@@ -9,6 +9,7 @@ CFLAGS =	-O0 \
 		-fno-rtti \
 		-fno-threadsafe-statics \
 		-ffreestanding \
+		-flto \
 		-nostdlib \
 		-nodefaultlibs \
 		-Wall \
@@ -52,7 +53,9 @@ SOURCE_CPP_NAME =	kernel_main$(SOURCE_CPP_EXT) \
 			command_press_tab$(SOURCE_CPP_EXT) \
 			write$(SOURCE_CPP_EXT) \
 			gdt_default$(SOURCE_CPP_EXT) \
-			shell$(SOURCE_CPP_EXT)
+			shell$(SOURCE_CPP_EXT) \
+			memory$(SOURCE_CPP_EXT) \
+			init_x86$(SOURCE_CPP_EXT)
 
 LINKER_SCRIPT_NAME = linker$(LINKER_SCRIPT_EXT)
 
@@ -101,6 +104,9 @@ fclean:: clean
 
 run:
 	@qemu-system-i386 -cdrom $(ISO)
+
+run_debug:
+	@qemu-system-i386 -kernel kfs -s -S -cdrom $(ISO)
 
 re:: fclean all
 
