@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   special_symbol_processor.hpp                       :+:      :+:    :+:   */
+/*   gdt_default.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/26 01:23:52 by larlena           #+#    #+#             */
-/*   Updated: 2024/05/13 15:42:45 by larlena          ###   ########.fr       */
+/*   Created: 2024/04/15 23:07:39 by larlena           #+#    #+#             */
+/*   Updated: 2024/04/16 13:10:31 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __KFS_KERNEL_DIRVER_COMMON_INTERFACE_SPECIAL_SYMBOL_PROCESSOR_HPP__
-# define __KFS_KERNEL_DIRVER_COMMON_INTERFACE_SPECIAL_SYMBOL_PROCESSOR_HPP__
+#ifndef __KFS_KERNEL_ARCH_X86_GDT_DEFAULT_HPP__
+# define __KFS_KERNEL_ARCH_X86_GDT_DEFAULT_HPP__
 
-# include "common/command.hpp"
+#define GDT_DEFAULT_BASE	0x00000800
+#define GDT_DEFAULT_SIZE	7
 
-namespace kfs::driver::interface {
+# include "gdt.hpp"
 
-class ISpecialSymbolProcessor {
+namespace kfs::x86 {
+
+class GDTDefault : public kfs::x86::GlobalDescriptorTable<GDT_DEFAULT_SIZE> {
 public:
-	virtual kfs::interface::ICommand	*process(const char&) = 0;
+	GDTDefault();
 };
 
 }
 
-#endif // __KFS_KERNEL_DIRVER_COMMON_INTERFACE_SPECIAL_SYMBOL_PROCESSOR_HPP__
+#endif // __KFS_KERNEL_ARCH_X86_GDT_DEFAULT_HPP__

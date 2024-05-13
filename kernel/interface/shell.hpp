@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   special_symbol_processor.hpp                       :+:      :+:    :+:   */
+/*   shell.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/26 01:23:52 by larlena           #+#    #+#             */
-/*   Updated: 2024/05/13 15:42:45 by larlena          ###   ########.fr       */
+/*   Created: 2024/04/23 21:08:28 by larlena           #+#    #+#             */
+/*   Updated: 2024/04/23 22:10:43 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __KFS_KERNEL_DIRVER_COMMON_INTERFACE_SPECIAL_SYMBOL_PROCESSOR_HPP__
-# define __KFS_KERNEL_DIRVER_COMMON_INTERFACE_SPECIAL_SYMBOL_PROCESSOR_HPP__
+#ifndef __KFS_KERNEL_INTERFACE_SHELL_HPP__
+# define __KFS_KERNEL_INTERFACE_SHELL_HPP__
 
-# include "common/command.hpp"
+# include "interface/console.hpp"
 
-namespace kfs::driver::interface {
+namespace kfs::interface {
 
-class ISpecialSymbolProcessor {
+class IShell {
 public:
-	virtual kfs::interface::ICommand	*process(const char&) = 0;
+	IShell(IConsole *console) :
+	mConsole(console) { }
+
+	virtual void	process() = 0;
+protected:
+	IConsole	*mConsole;
 };
 
 }
 
-#endif // __KFS_KERNEL_DIRVER_COMMON_INTERFACE_SPECIAL_SYMBOL_PROCESSOR_HPP__
+#endif // __KFS_KERNEL_INTERFACE_SHELL_HPP__

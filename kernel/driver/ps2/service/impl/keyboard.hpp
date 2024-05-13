@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 12:02:21 by larlena           #+#    #+#             */
-/*   Updated: 2024/04/15 13:38:04 by larlena          ###   ########.fr       */
+/*   Updated: 2024/05/13 15:42:48 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ public:
 
 	uint8_t	read() override;
 private:
-	kfs::driver::utils::Port	mPort;
+	kfs::driver::utils::PortByte	mPort;
 };
 
 }

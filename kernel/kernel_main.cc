@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 17:46:12 by larlena           #+#    #+#             */
-/*   Updated: 2024/04/17 16:58:15 by larlena          ###   ########.fr       */
+/*   Updated: 2024/05/13 15:42:37 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,14 @@
 #include "utils/libft.hpp"
 #include "driver/ps2/service/impl/keyboard.hpp"
 #include "driver/vga/service/impl/textmode.hpp"
-#include "driver/service/special_symbol_processor.hpp"
+#include "driver/service/special_symbol_processor_auto_scroll.hpp"
 #include "driver/service/usqwerty.hpp"
 #include "console.hpp"
+#include "service/shell/shell.hpp"
+
+#include "arch/x86/gdt_default.hpp"
+
+
 
 #if defined(__linux__)
 # error "You are not using a cross-compiler, you will most certainly run into trouble"
@@ -38,10 +43,12 @@ const char	*header = "\
    ##########  ##########    #########	        	###   ########.fr\n\n";
 
 extern "C" void kernel_main(void) {
+	auto&&	table = kfs::x86::GDTDefault();
 	auto&&	display = kfs::driver::vga::VGATextMode();
 	auto&&	keyboard = kfs::driver::ps2::Keyboard();
 	auto&&	codes = kfs::driver::common::USqwerty(&keyboard);
-	auto&&	processor = kfs::driver::common::SpecialSymbolProcessor(&display);
+	auto&&	processor = kfs::driver::common::SpecialSymbolProcessorAutoScroll(&display);
+	auto&&	shell = kfs::Shell(&kfs::ConsoleSingleton::getInstance());
 	kfs::ConsoleSingleton::getInstance().setTextmode(&display);
 	kfs::ConsoleSingleton::getInstance().setKeyboard(&keyboard);
 	kfs::ConsoleSingleton::getInstance().setKeyboardDecoder(&codes);
@@ -49,6 +56,6 @@ extern "C" void kernel_main(void) {
 
 	kfs::ConsoleSingleton::getInstance().write(header);
 	while (1) {
-		kfs::ConsoleSingleton::getInstance().process();
+		shell.process();
 	}
 }

@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   special_symbol_processor.hpp                       :+:      :+:    :+:   */
+/*   string.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/26 01:23:52 by larlena           #+#    #+#             */
-/*   Updated: 2024/05/13 15:42:45 by larlena          ###   ########.fr       */
+/*   Created: 2024/05/04 15:21:56 by larlena           #+#    #+#             */
+/*   Updated: 2024/05/04 17:55:21 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __KFS_KERNEL_DIRVER_COMMON_INTERFACE_SPECIAL_SYMBOL_PROCESSOR_HPP__
-# define __KFS_KERNEL_DIRVER_COMMON_INTERFACE_SPECIAL_SYMBOL_PROCESSOR_HPP__
+#ifndef __KFS_KERNEL_UTILS_STL_STRING_HPP__
+# define __KFS_KERNEL_UTILS_STL_STRING_HPP__
 
-# include "common/command.hpp"
+#include "stddef.h"
+#include "array.hpp"
 
-namespace kfs::driver::interface {
+namespace ktl {
 
-class ISpecialSymbolProcessor {
-public:
-	virtual kfs::interface::ICommand	*process(const char&) = 0;
+template <size_t capacity>
+class stack_string : public ktl::array<char, capacity> {
+
 };
 
 }
 
-#endif // __KFS_KERNEL_DIRVER_COMMON_INTERFACE_SPECIAL_SYMBOL_PROCESSOR_HPP__
+#endif // __KFS_KERNEL_UTILS_STL_STRING_HPP__

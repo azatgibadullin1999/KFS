@@ -12,7 +12,7 @@
 
 #include "libft.hpp"
 
-inline int	kfs::isspace(int c) {
+int	kfs::isspace(int c) {
 	return (c == '\t' || c == '\v' || c == ' ' ||
 		c == '\n' || c == '\r' || c == '\f');
 }
