@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 15:26:50 by larlena           #+#    #+#             */
-/*   Updated: 2024/04/16 16:45:19 by larlena          ###   ########.fr       */
+/*   Updated: 2024/05/13 15:42:36 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ public:
 	void	process() override;
 	void	write(char c) override;
 	void	write(const char *str) override;
+	char	read() override;
+	char	readBlocking() override;
 private:
 	uint8_t	mScanCodeBuff;
 	char	mCharBuff;
