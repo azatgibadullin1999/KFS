@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 23:17:56 by larlena           #+#    #+#             */
-/*   Updated: 2024/04/17 14:20:03 by larlena          ###   ########.fr       */
+/*   Updated: 2024/05/21 17:16:27 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,20 @@
 
 # include <stdint.h>
 # include <stddef.h>
-# include "common/command.hpp"
-# include "driver/common_interface/textmode.hpp"
+# include "command_text_display.hpp"
 
 namespace kfs::driver::common {
 
-class CommandPressTab final : public kfs::interface::ICommand {
+class CommandPressTab final : public kfs::interface::CommandTextDisplay<CommandPressTab> {
 public:
-	CommandPressTab(kfs::driver::interface::ITextMode *textMode, size_t tabSize) :
-	mTextMode(textMode),
+	CommandPressTab(char c,kfs::driver::interface::ITextDisplay *textDisplay, size_t tabSize) :
+	CommandTextDisplay(c, textDisplay),
 	mTabSize(tabSize) { }
+	using CommandTextDisplay::operator==;
+	using CommandTextDisplay::operator=;
 
 	void	execute() override;
 private:
-	kfs::driver::interface::ITextMode *mTextMode;
 	size_t	mTabSize;
 };
 

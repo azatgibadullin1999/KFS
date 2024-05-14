@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 19:21:56 by larlena           #+#    #+#             */
-/*   Updated: 2024/04/14 19:23:12 by larlena          ###   ########.fr       */
+/*   Updated: 2024/05/17 19:37:54 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 namespace kfs::driver::common {
 
 void	CommandPressNewLine::execute() {
-	size_t	column = mTextMode->getCurrentColumn();
+	size_t	column = mTextDisplay->getCurrentColumn();
 	size_t	row = 0;
 
-	if (++column == mTextMode->getColumn()) {
+	if (++column == mTextDisplay->getColumn()) {
 		column = 0;
-		mTextMode->clear();
+		mTextDisplay->clear();
 	}
-	mTextMode->setCursorPosition(row, column);
+	mTextDisplay->setCursorPosition(row, column);
 }
 
 }

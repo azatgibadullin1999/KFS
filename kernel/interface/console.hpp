@@ -6,17 +6,16 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 15:31:13 by larlena           #+#    #+#             */
-/*   Updated: 2024/05/13 15:42:58 by larlena          ###   ########.fr       */
+/*   Updated: 2024/05/17 22:52:48 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __KFS_KERNEL_INTERFACE_CONSOLE_HPP__
 # define __KFS_KERNEL_INTERFACE_CONSOLE_HPP__
 
-# include "driver/common_interface/textmode.hpp"
+# include "driver/common_interface/text_display.hpp"
 # include "driver/common_interface/keyboard.hpp"
-# include "driver/common_interface/keyboard_decoder.hpp"
-# include "driver/common_interface/special_symbol_processor.hpp"
+# include "driver/common_interface/symbol_processor.hpp"
 namespace kfs::interface {
 
 class IConsole {
@@ -24,13 +23,11 @@ public:
 	IConsole() { }
 
 	IConsole(
-	kfs::driver::interface::ITextMode		*textmode,
-	kfs::driver::interface::ISpecialSymbolProcessor	*processor,
-	kfs::driver::interface::IKeyboardDecoder	*decoder,
+	kfs::driver::interface::ITextDisplay		*textDisplay,
+	kfs::driver::interface::ISymbolProcessor	*processor,
 	kfs::driver::interface::IKeyboard		*keyboard) :
-	mTextmode(textmode),
+	mTextDisplay(textDisplay),
 	mProcessor(processor),
-	mDecoder(decoder),
 	mKeyboard(keyboard) { }
 
 	virtual void	process() = 0;
@@ -39,25 +36,20 @@ public:
 	virtual char	read() = 0;
 	virtual char	readBlocking() = 0;
 
-	void	setTextmode(kfs::driver::interface::ITextMode *textmode) {
-		mTextmode = textmode;
+	void	setTextDisplay(kfs::driver::interface::ITextDisplay *textDisplay) {
+		mTextDisplay = textDisplay;
 	}
 
-	void	setSpecialSymbolProcessor(kfs::driver::interface::ISpecialSymbolProcessor *processor) {
+	void	setSymbolProcessor(kfs::driver::interface::ISymbolProcessor *processor) {
 		mProcessor = processor;
-	}
-
-	void	setKeyboardDecoder(kfs::driver::interface::IKeyboardDecoder *decoder) {
-		mDecoder = decoder;
 	}
 
 	void	setKeyboard(kfs::driver::interface::IKeyboard *keyboard) {
 		mKeyboard = keyboard;
 	}
 protected:
-	kfs::driver::interface::ITextMode		*mTextmode;
-	kfs::driver::interface::ISpecialSymbolProcessor	*mProcessor;
-	kfs::driver::interface::IKeyboardDecoder	*mDecoder;
+	kfs::driver::interface::ITextDisplay		*mTextDisplay;
+	kfs::driver::interface::ISymbolProcessor	*mProcessor;
 	kfs::driver::interface::IKeyboard		*mKeyboard;
 };
 

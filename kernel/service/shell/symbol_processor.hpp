@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   special_symbol_processor.hpp                       :+:      :+:    :+:   */
+/*   symbol_processor.hpp                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,7 +13,7 @@
 #ifndef __KFS_KERNEL_SERVICE_SHELL_SPECIAL_SYBOL_PROCESSOR_HPP__
 # define __KFS_KERNEL_SERVICE_SHELL_SPECIAL_SYBOL_PROCESSOR_HPP__
 
-# include "driver/common_interface/special_symbol_processor.hpp"
+# include "driver/common_interface/symbol_processor.hpp"
 # include "utils/stl/iterator_traits.hpp"
 # include "command_default.hpp"
 # include "command_press_backspace.hpp"
@@ -22,18 +22,19 @@
 namespace kfs::shell {
 
 template <typename Container>
-class SpecialSymbolProcessorForShell : public kfs::driver::interface::ISpecialSymbolProcessor {
+class SymbolProcessorForShell : public kfs::driver::interface::ISymbolProcessor {
 public:
-	SpecialSymbolProcessorForShell(Container &sharedContainer, typename Container::iterator &sharedIt, kfs::interface::IConsole *console) :
+	SymbolProcessorForShell(Container &sharedContainer, typename Container::iterator &sharedIt, kfs::interface::IConsole *console) :
 		mBackspace(sharedContainer, sharedIt, console),
 		mDefault(sharedContainer, sharedIt, console) { }
 
-	kfs::interface::ICommand	*process(const char &symbol) override {
+	void	process(const char &symbol) override {
 		if (symbol == '\b') {
-			return &mBackspace;
+			mBackspace.execute();
+		} else {
+			mDefault = symbol;
+			mDefault.execute();
 		}
-		mDefault = symbol;
-		return &mDefault;
 	}
 private:
 	CommandPressBackspaceShell<Container>	mBackspace;

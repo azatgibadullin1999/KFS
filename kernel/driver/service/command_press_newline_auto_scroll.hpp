@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 17:15:16 by larlena           #+#    #+#             */
-/*   Updated: 2024/05/12 17:16:06 by larlena          ###   ########.fr       */
+/*   Updated: 2024/05/21 17:16:27 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,16 @@
 # define __KFS_KERNEL_DRIVER_SERVICE_COMMAND_PRESS_NEWLINE_AUTO_SCROLL_HPP__
 
 # include <stddef.h>
-# include "common/command.hpp"
-# include "driver/common_interface/textmode.hpp"
+# include "command_text_display.hpp"
 
 namespace kfs::driver::common {
 
-class CommandPressNewLineAutoScroll final : public kfs::interface::ICommand {
+class CommandPressNewLineAutoScroll final : public kfs::interface::CommandTextDisplay<CommandPressNewLineAutoScroll> {
 public:
-	CommandPressNewLineAutoScroll(kfs::driver::interface::ITextMode *textMode) :
-	mTextMode(textMode) { }
-
+	using CommandTextDisplay::CommandTextDisplay;
+	using CommandTextDisplay::operator==;
+	using CommandTextDisplay::operator=;
 	void	execute() override;
-private:
-	kfs::driver::interface::ITextMode	*mTextMode;
 };
 
 }

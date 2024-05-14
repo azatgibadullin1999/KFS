@@ -6,33 +6,28 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 16:37:02 by larlena           #+#    #+#             */
-/*   Updated: 2024/05/12 16:38:08 by larlena          ###   ########.fr       */
+/*   Updated: 2024/05/21 17:16:27 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __KFS_KERNEL_DRIVER_SERVICE_COMMAND_DEFAULT_AUTO_SCROLL_HPP__
 # define __KFS_KERNEL_DRIVER_SERVICE_COMMAND_DEFAULT_AUTO_SCROLL_HPP__
 
-# include "common/command.hpp"
-# include "driver/common_interface/textmode.hpp"
+# include "command_text_display.hpp"
 # include "utils/libft.hpp"
 
 namespace kfs::driver::common {
 
-class CommandDefaultAutoScroll final : public kfs::interface::ICommand {
+class CommandDefaultAutoScroll final : public kfs::interface::CommandTextDisplay<CommandDefaultAutoScroll> {
 public:
-	CommandDefaultAutoScroll(kfs::driver::interface::ITextMode *textMode) :
-	mTextMode(textMode) { }
+	using CommandTextDisplay::CommandTextDisplay;
+	using CommandTextDisplay::operator=;
 
-	CommandDefaultAutoScroll	&operator = (const char &c) {
-		mCharacter = c;
-		return *this;
+	bool	operator == (const char &rhs) const {
+		return kfs::isprint(rhs);
 	}
 
 	void	execute() override;
-private:
-	char	mCharacter;
-	kfs::driver::interface::ITextMode *mTextMode;
 };
 
 }

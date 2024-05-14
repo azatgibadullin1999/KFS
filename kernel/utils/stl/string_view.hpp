@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 22:26:08 by larlena           #+#    #+#             */
-/*   Updated: 2024/05/12 16:21:14 by larlena          ###   ########.fr       */
+/*   Updated: 2024/05/21 16:25:21 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ public:
 		return mLength;
 	}
 
-	const bool	empty() const noexcept {
+	bool	empty() const noexcept {
 		return mLength;
 	}
 

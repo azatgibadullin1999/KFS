@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 15:03:13 by larlena           #+#    #+#             */
-/*   Updated: 2024/05/12 14:58:37 by larlena          ###   ########.fr       */
+/*   Updated: 2024/05/14 21:46:08 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,16 @@ OutputIt	copy_if(InputIt first, InputIt last, OutputIt d_first, UnaryPred pred) 
 	return d_first;
 }
 
+template <class InputIt, class OutputIt>
+constexpr OutputIt	move(InputIt first, InputIt last, OutputIt d_first) {
+	for (; first != last; ++first, ++d_first) {
+		*d_first = ktl::move(*first);
+	}
+	return d_first;
+}
+
 template <typename ForwardIt, typename T = typename ktl::iterator_traits<ForwardIt>::value_type>
-void fill(ForwardIt first, ForwardIt last, const T& value) {
+void	fill(ForwardIt first, ForwardIt last, const T& value) {
 	for (; first != last; ++first) {
 		*first = value;
 	}

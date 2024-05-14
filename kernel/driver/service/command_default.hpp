@@ -6,33 +6,23 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 15:45:49 by larlena           #+#    #+#             */
-/*   Updated: 2024/04/17 14:20:03 by larlena          ###   ########.fr       */
+/*   Updated: 2024/05/21 17:16:27 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __KFS_KERNEL_DRIVER_SERVICE_COMMAND_DEFAULT_HPP__
 # define __KFS_KERNEL_DRIVER_SERVICE_COMMAND_DEFAULT_HPP__
 
-# include "common/command.hpp"
-# include "driver/common_interface/textmode.hpp"
+# include "command_text_display.hpp"
 # include "utils/libft.hpp"
 
 namespace kfs::driver::common {
 
-class CommandDefault final : public kfs::interface::ICommand {
+class CommandDefault final : public kfs::interface::CommandTextDisplay<CommandDefault> {
 public:
-	CommandDefault(kfs::driver::interface::ITextMode *textMode) :
-	mTextMode(textMode) { }
-
-	CommandDefault	&operator = (const char &c) {
-		mCharacter = c;
-		return *this;
-	}
-
+	using CommandTextDisplay::CommandTextDisplay;
+	using CommandTextDisplay::operator=;
 	void	execute() override;
-private:
-	char	mCharacter;
-	kfs::driver::interface::ITextMode *mTextMode;
 };
 
 }

@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 12:02:21 by larlena           #+#    #+#             */
-/*   Updated: 2024/05/13 15:42:48 by larlena          ###   ########.fr       */
+/*   Updated: 2024/05/17 20:21:54 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ namespace kfs::driver::ps2 {
 
 class Keyboard : public kfs::driver::interface::IKeyboard {
 public:
-	Keyboard() :
-		IKeyboard(),
+	Keyboard(Decoder &&decoder) :
+		IKeyboard(ktl::move(decoder)),
 		mPort(0x60) { }
 
-	uint8_t	read() override;
+	uint8_t	read() const override;
 private:
 	kfs::driver::utils::PortByte	mPort;
 };
