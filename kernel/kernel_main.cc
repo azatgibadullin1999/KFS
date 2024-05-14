@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 17:46:12 by larlena           #+#    #+#             */
-/*   Updated: 2024/05/13 15:42:37 by larlena          ###   ########.fr       */
+/*   Updated: 2024/05/17 22:52:56 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 #include <stdint.h>
 #include "utils/libft.hpp"
 #include "driver/ps2/service/impl/keyboard.hpp"
-#include "driver/vga/service/impl/textmode.hpp"
-#include "driver/service/special_symbol_processor_auto_scroll.hpp"
+#include "driver/vga/service/impl/text_display.hpp"
+#include "driver/service/symbol_processor_auto_scroll.hpp"
 #include "driver/service/usqwerty.hpp"
 #include "console.hpp"
 #include "service/shell/shell.hpp"
@@ -44,15 +44,13 @@ const char	*header = "\
 
 extern "C" void kernel_main(void) {
 	auto&&	table = kfs::x86::GDTDefault();
-	auto&&	display = kfs::driver::vga::VGATextMode();
-	auto&&	keyboard = kfs::driver::ps2::Keyboard();
-	auto&&	codes = kfs::driver::common::USqwerty(&keyboard);
-	auto&&	processor = kfs::driver::common::SpecialSymbolProcessorAutoScroll(&display);
+	auto&&	display = kfs::driver::vga::VGATextDisplay();
+	auto&&	keyboard = kfs::driver::ps2::Keyboard(kfs::driver::common::USqwerty());
+	auto&&	processor = kfs::driver::common::SymbolProcessorAutoScroll(&display);
 	auto&&	shell = kfs::Shell(&kfs::ConsoleSingleton::getInstance());
-	kfs::ConsoleSingleton::getInstance().setTextmode(&display);
+	kfs::ConsoleSingleton::getInstance().setTextDisplay(&display);
 	kfs::ConsoleSingleton::getInstance().setKeyboard(&keyboard);
-	kfs::ConsoleSingleton::getInstance().setKeyboardDecoder(&codes);
-	kfs::ConsoleSingleton::getInstance().setSpecialSymbolProcessor(&processor);
+	kfs::ConsoleSingleton::getInstance().setSymbolProcessor(&processor);
 
 	kfs::ConsoleSingleton::getInstance().write(header);
 	while (1) {

@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   textmode.hpp                                       :+:      :+:    :+:   */
+/*   text_display.hpp                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 18:30:28 by larlena           #+#    #+#             */
-/*   Updated: 2024/05/13 15:42:55 by larlena          ###   ########.fr       */
+/*   Updated: 2024/05/17 20:27:14 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __KERNEL_DRIVER_VGA_SERVICE_IMPL_TEXTMODE_HPP__
-# define __KERNEL_DRIVER_VGA_SERVICE_IMPL_TEXTMODE_HPP__
+#ifndef __KERNEL_DRIVER_VGA_SERVICE_IMPL_TEXT_DISPLAY_HPP__
+# define __KERNEL_DRIVER_VGA_SERVICE_IMPL_TEXT_DISPLAY_HPP__
 
 # include <stdint.h>
 # include <stddef.h>
 # include "utils/libft.hpp"
 # include "driver/utils/port.hpp"
-# include "driver/common_interface/textmode.hpp"
+# include "driver/common_interface/text_display.hpp"
 
 namespace kfs::driver::vga {
 
-class VGATextMode : public kfs::driver::interface::ITextMode {
+class VGATextDisplay : public kfs::driver::interface::ITextDisplay {
 public:
-	VGATextMode(const size_t &sizeOfColumn, const size_t &sizeOfRow) :
-	ITextMode(sizeOfColumn, sizeOfRow),
+	VGATextDisplay(const size_t &sizeOfColumn, const size_t &sizeOfRow) :
+	ITextDisplay(sizeOfColumn, sizeOfRow),
 	mBuffer(reinterpret_cast<uint16_t*>(0xB8000)),
 	mColor(vgaEntryColor(CYAN, BLACK)),
 	mPort1(0x3D4),
@@ -32,8 +32,8 @@ public:
 		clear();
 	}
 	
-	VGATextMode() :
-	VGATextMode(25, 80) { }
+	VGATextDisplay() :
+	VGATextDisplay(25, 80) { }
 
 	void	write(char character, size_t row, size_t column) override;
 	char	read(size_t row, size_t column) override;
@@ -62,4 +62,4 @@ private:
 
 }
 
-#endif // __KERNEL_DRIVER_VGA_SERVICE_IMPL_TEXTMODE_HPP__
+#endif // __KERNEL_DRIVER_VGA_SERVICE_IMPL_TEXT_DISPLAY_HPP__

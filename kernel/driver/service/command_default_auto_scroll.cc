@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 16:37:16 by larlena           #+#    #+#             */
-/*   Updated: 2024/05/12 17:12:07 by larlena          ###   ########.fr       */
+/*   Updated: 2024/05/17 19:37:29 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,23 @@
 namespace kfs::driver::common {
 
 void	CommandDefaultAutoScroll::execute() {
-	static auto&&	scroll = CommandPressScroll(mTextMode);
-	if (!kfs::isprint(mCharacter))
+	static auto&&	scroll = CommandPressScroll(0, mTextDisplay);
+	if (!kfs::isprint(mChar))
 			return;
-	size_t	row = mTextMode->getCurrentRow();
-	size_t	column = mTextMode->getCurrentColumn();
+	size_t	row = mTextDisplay->getCurrentRow();
+	size_t	column = mTextDisplay->getCurrentColumn();
 		
-	mTextMode->write(mCharacter, row, column);
-	if (++row == mTextMode->getRow()) {
+	mTextDisplay->write(mChar, row, column);
+	if (++row == mTextDisplay->getRow()) {
 		row = 0;
-		if (++column == mTextMode->getColumn() - 1) {
-			mTextMode->setCursorPosition(row, column);
+		if (++column == mTextDisplay->getColumn() - 1) {
+			mTextDisplay->setCursorPosition(row, column);
 			scroll.execute();
-			row = mTextMode->getCurrentRow();
-			column = mTextMode->getCurrentColumn();
+			row = mTextDisplay->getCurrentRow();
+			column = mTextDisplay->getCurrentColumn();
 		}
 	}
-	mTextMode->setCursorPosition(row, column);
+	mTextDisplay->setCursorPosition(row, column);
 }
 
 }

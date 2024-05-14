@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   textmode.hpp                                       :+:      :+:    :+:   */
+/*   text_display.hpp                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 17:20:14 by larlena           #+#    #+#             */
-/*   Updated: 2024/05/13 15:42:48 by larlena          ###   ########.fr       */
+/*   Updated: 2024/05/17 20:13:00 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __KFS_KERNEL_DIRVER_COMMON_INTERFACE_TEXTMODE__
-# define __KFS_KERNEL_DIRVER_COMMON_INTERFACE_TEXTMODE__
+#ifndef __KFS_KERNEL_DRIVER_COMMON_INTERFACE_TEXT_DISPLAY__
+# define __KFS_KERNEL_DRIVER_COMMON_INTERFACE_TEXT_DISPLAY__
 
 # include <stdint.h>
 # include <stddef.h>
 
 namespace kfs::driver::interface {
 
-class ITextMode {
+class ITextDisplay {
 public:
 	enum Color {
 		BLACK = 0,
@@ -39,7 +39,7 @@ public:
 		WHITE = 15,
 	};
 public:
-	ITextMode(const size_t &columnsNumber, const size_t &rowsNumber) :
+	ITextDisplay(const size_t &columnsNumber, const size_t &rowsNumber) :
 	mColumnsNumber(columnsNumber),
 	mRowsNumber(rowsNumber),
 	mColumn(0),
@@ -78,4 +78,4 @@ protected:
 
 }
 
-#endif // __KFS_KERNEL_DIRVER_COMMON_INTERFACE_TEXTMODE__
+#endif // __KFS_KERNEL_DRIVER_COMMON_INTERFACE_TEXT_DISPLAY__

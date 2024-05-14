@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:27:15 by larlena           #+#    #+#             */
-/*   Updated: 2024/05/04 15:03:48 by larlena          ###   ########.fr       */
+/*   Updated: 2024/05/14 21:46:08 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ struct iterator_traits {
 
 template <typename T>
 struct iterator_traits<T*> {
-	// typedef typename std::random_access_iterator_tag	iterator_category;
+	// typedef typename ktl::random_access_iterator_tag	iterator_category;
 	typedef T						value_type;
 	typedef ptrdiff_t					difference_type;
 	typedef T&						reference;
@@ -37,7 +37,7 @@ struct iterator_traits<T*> {
 
 template <typename T>
 struct iterator_traits<const T*> {
-	// typedef typename std::random_access_iterator_tag	iterator_category;
+	// typedef typename ktl::random_access_iterator_tag	iterator_category;
 	typedef T						value_type;
 	typedef ptrdiff_t					difference_type;
 	typedef const T&					reference;

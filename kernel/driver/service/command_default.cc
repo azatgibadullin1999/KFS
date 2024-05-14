@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 19:17:22 by larlena           #+#    #+#             */
-/*   Updated: 2024/04/15 13:16:12 by larlena          ###   ########.fr       */
+/*   Updated: 2024/05/17 19:37:36 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,28 @@
 namespace kfs::driver::common {
 
 void	CommandDefault::execute() {
-	if (!kfs::isprint(mCharacter))
+	if (!kfs::isprint(mChar))
 			return;
-		size_t	row = mTextMode->getCurrentRow();
-		size_t	column = mTextMode->getCurrentColumn();
+	size_t	row = mTextDisplay->getCurrentRow();
+	size_t	column = mTextDisplay->getCurrentColumn();
 		
-		mTextMode->write(mCharacter, row, column);
-		if (++row == mTextMode->getRow()) {
-			row = 0;
-			if (++column == mTextMode->getColumn()) {
-				column = 0;
-				mTextMode->clear();
-			}
+	mTextDisplay->write(mChar, row, column);
+	if (++row == mTextDisplay->getRow()) {
+		row = 0;
+		if (++column == mTextDisplay->getColumn()) {
+			column = 0;
+			mTextDisplay->clear();
 		}
-	mTextMode->setCursorPosition(row, column);
+	}
+	mTextDisplay->setCursorPosition(row, column);
+}
+
+bool	operator == (const CommandDefault &lhs, const char &rhs) {
+	return kfs::isprint(rhs);
+}
+
+bool	operator == (const char &lhs, const CommandDefault &rhs) {
+	return rhs == lhs;
 }
 
 }
