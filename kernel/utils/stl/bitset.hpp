@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 18:53:52 by larlena           #+#    #+#             */
-/*   Updated: 2024/05/14 22:22:39 by larlena          ###   ########.fr       */
+/*   Updated: 2024/05/21 17:11:58 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,42 +17,48 @@
 # include "array.hpp"
 namespace ktl {
 
+namespace detail {
+
+class reference {
+public:
+	constexpr reference(uint8_t &_byte, uint8_t _mask) noexcept :
+	byte(_byte),
+	mask(_mask) { }
+
+	constexpr operator bool() const noexcept {
+		return byte & mask;
+	}
+
+	constexpr reference	&operator = (bool x) noexcept {
+		if (x) {
+			byte |= mask;
+		} else {
+			byte &= ~mask;
+		}
+		return *this;
+	}
+
+	constexpr reference	&operator = (const reference &x) noexcept {
+		return *this = bool(x);
+	}
+
+	constexpr void	flip() noexcept {
+		byte ^= mask;
+	}
+private:
+	uint8_t	&byte;
+	uint8_t	mask;
+};
+
+}
+
 template <size_t N>
 class bitset {
 public:
-	class reference {
-	public:
-		constexpr reference(uint8_t &_byte, uint8_t _mask) noexcept : byte(_byte), mask(_mask) { }
-
-		constexpr operator bool() const noexcept {
-			return byte & mask;
-		}
-
-		constexpr reference	&operator = (bool x) noexcept {
-			if (x) {
-				byte |= mask;
-			} else {
-				byte &= ~mask;
-			}
-			return *this;
-		}
-
-		constexpr reference	&operator = (const reference &x) noexcept {
-			return *this = bool(x);
-		}
-
-		constexpr void	flip() noexcept {
-			byte ^= mask;
-		}
-	private:
-		uint8_t	&byte;
-		uint8_t	mask;
-	};
-
 	constexpr bitset() noexcept : data() { }
 
-	constexpr reference	operator [] (size_t pos) noexcept {
-		return reference(data[pos / 8], bitmask[pos % 8]);
+	constexpr detail::reference	operator [] (size_t pos) noexcept {
+		return detail::reference(data[pos / 8], bitmask[pos % 8]);
 	}
 
 private:

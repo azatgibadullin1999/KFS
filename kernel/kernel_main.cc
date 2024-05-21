@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 17:46:12 by larlena           #+#    #+#             */
-/*   Updated: 2024/05/17 22:52:56 by larlena          ###   ########.fr       */
+/*   Updated: 2024/05/21 17:25:33 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@
 #include "service/shell/shell.hpp"
 
 #include "arch/x86/gdt_default.hpp"
-
-
 
 #if defined(__linux__)
 # error "You are not using a cross-compiler, you will most certainly run into trouble"
@@ -43,7 +41,7 @@ const char	*header = "\
    ##########  ##########    #########	        	###   ########.fr\n\n";
 
 extern "C" void kernel_main(void) {
-	auto&&	table = kfs::x86::GDTDefault();
+	auto&&	table [[maybe_unused]] = kfs::x86::GDTDefault();
 	auto&&	display = kfs::driver::vga::VGATextDisplay();
 	auto&&	keyboard = kfs::driver::ps2::Keyboard(kfs::driver::common::USqwerty());
 	auto&&	processor = kfs::driver::common::SymbolProcessorAutoScroll(&display);

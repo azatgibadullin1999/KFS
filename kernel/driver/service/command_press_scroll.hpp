@@ -6,14 +6,14 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 01:51:01 by larlena           #+#    #+#             */
-/*   Updated: 2024/05/17 18:41:23 by larlena          ###   ########.fr       */
+/*   Updated: 2024/05/21 17:16:27 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __KFS_KERNEL_DRIVER_SERVICE_COMMAND_PRESS_SCROLL_HPP__
 # define __KFS_KERNEL_DRIVER_SERVICE_COMMAND_PRESS_SCROLL_HPP__
 
-# include "command_textdisplay.hpp"
+# include "command_text_display.hpp"
 
 namespace kfs::driver::common {
 

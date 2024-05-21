@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 11:54:03 by larlena           #+#    #+#             */
-/*   Updated: 2024/05/04 15:03:48 by larlena          ###   ########.fr       */
+/*   Updated: 2024/05/21 16:23:38 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ protected:
 public:
 	template <typename ... Args>
 	GlobalDescriptorTable(Register &&reg, Args&& ... args) :
-	mRegister(ktl::forward<Register>(reg)),
-	mDesks{ktl::forward<Args>(args) ...} {
+	mDesks{ktl::forward<Args>(args) ...},
+	mRegister(ktl::forward<Register>(reg)) {
 		mRegister.move(mDesks.data());
 		mRegister.load();
 		asm(

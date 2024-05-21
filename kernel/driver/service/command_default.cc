@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 19:17:22 by larlena           #+#    #+#             */
-/*   Updated: 2024/05/17 19:37:36 by larlena          ###   ########.fr       */
+/*   Updated: 2024/05/21 16:22:16 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	CommandDefault::execute() {
 	mTextDisplay->setCursorPosition(row, column);
 }
 
-bool	operator == (const CommandDefault &lhs, const char &rhs) {
+bool	operator == (const CommandDefault &lhs [[maybe_unused]], const char &rhs) {
 	return kfs::isprint(rhs);
 }
 

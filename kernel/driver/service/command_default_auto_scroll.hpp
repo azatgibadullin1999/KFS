@@ -6,14 +6,14 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 16:37:02 by larlena           #+#    #+#             */
-/*   Updated: 2024/05/17 18:55:34 by larlena          ###   ########.fr       */
+/*   Updated: 2024/05/21 17:16:27 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __KFS_KERNEL_DRIVER_SERVICE_COMMAND_DEFAULT_AUTO_SCROLL_HPP__
 # define __KFS_KERNEL_DRIVER_SERVICE_COMMAND_DEFAULT_AUTO_SCROLL_HPP__
 
-# include "command_textdisplay.hpp"
+# include "command_text_display.hpp"
 # include "utils/libft.hpp"
 
 namespace kfs::driver::common {

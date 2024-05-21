@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   command_textdisplay.hpp                            :+:      :+:    :+:   */
+/*   command_text_display.hpp                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 15:41:55 by larlena           #+#    #+#             */
-/*   Updated: 2024/05/17 19:36:55 by larlena          ###   ########.fr       */
+/*   Updated: 2024/05/21 17:16:23 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __KFS_KERNEL_DRIVER_SERVICE_COMMAND_TEXTDISPLAY_HPP__
-# define __KFS_KERNEL_DRIVER_SERVICE_COMMAND_TEXTDISPLAY_HPP__
+#ifndef __KFS_KERNEL_DRIVER_SERVICE_COMMAND_TEXT_DISPLAY_HPP__
+# define __KFS_KERNEL_DRIVER_SERVICE_COMMAND_TEXT_DISPLAY_HPP__
 
 # include "common/command.hpp"
 # include "driver/common_interface/text_display.hpp"
@@ -22,8 +22,8 @@ template <typename Child>
 class CommandTextDisplay : public kfs::interface::ICommand {
 public:
 	CommandTextDisplay(char character, kfs::driver::interface::ITextDisplay *textDisplay) :
-	mChar(character),
-	mTextDisplay(textDisplay) { }
+	mTextDisplay(textDisplay),
+	mChar(character) { }
 
 	CommandTextDisplay	&operator = (const char &c) noexcept {
 		mChar = c;
@@ -39,10 +39,10 @@ public:
 	}
 
 protected:
-	char	mChar;
 	kfs::driver::interface::ITextDisplay *mTextDisplay;
+	char	mChar;
 };
 
 } // namespace kfs::interface
 
-#endif // __KFS_KERNEL_DRIVER_SERVICE_COMMAND_TEXTDISPLAY_HPP__
+#endif // __KFS_KERNEL_DRIVER_SERVICE_COMMAND_TEXT_DISPLAY_HPP__

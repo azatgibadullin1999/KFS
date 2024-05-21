@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 23:17:56 by larlena           #+#    #+#             */
-/*   Updated: 2024/05/17 19:31:19 by larlena          ###   ########.fr       */
+/*   Updated: 2024/05/21 17:16:27 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <stdint.h>
 # include <stddef.h>
-# include "command_textdisplay.hpp"
+# include "command_text_display.hpp"
 
 namespace kfs::driver::common {
 
