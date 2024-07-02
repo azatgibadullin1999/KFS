@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 17:20:14 by larlena           #+#    #+#             */
-/*   Updated: 2024/04/17 16:40:41 by larlena          ###   ########.fr       */
+/*   Updated: 2024/05/13 15:42:48 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ public:
 	virtual void	clear() = 0;
 
 	virtual bool	setCursorPosition(size_t row, size_t column) = 0;
+
+	virtual void	updateCursorPosition() = 0;
 
 	virtual void	setColor(Color color) = 0;
 

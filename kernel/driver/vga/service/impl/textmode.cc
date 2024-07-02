@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:11:08 by larlena           #+#    #+#             */
-/*   Updated: 2024/04/17 16:55:13 by larlena          ###   ########.fr       */
+/*   Updated: 2024/05/13 15:42:54 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ void	VGATextMode::clear() {
 
 bool	VGATextMode::setCursorPosition(size_t row, size_t column) {
 	auto&&	retValue = ITextMode::setCursorPosition(row, column);
-
-	if (!retValue)
-		updateCursor(mRow, mColumn);
 	return retValue;
 }
 
+void	VGATextMode::updateCursorPosition() {
+	updateCursor(mRow, mColumn);
+}
 
 
 void	VGATextMode::setColor(Color color) {

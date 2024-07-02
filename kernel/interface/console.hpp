@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 15:31:13 by larlena           #+#    #+#             */
-/*   Updated: 2024/04/16 16:45:32 by larlena          ###   ########.fr       */
+/*   Updated: 2024/05/13 15:42:58 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ public:
 	virtual void	process() = 0;
 	virtual void	write(char) = 0;
 	virtual void	write(const char *) = 0;
+	virtual char	read() = 0;
+	virtual char	readBlocking() = 0;
 
 	void	setTextmode(kfs::driver::interface::ITextMode *textmode) {
 		mTextmode = textmode;

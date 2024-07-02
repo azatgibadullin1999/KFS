@@ -14,25 +14,20 @@
 
 int		kfs::atoi(const char *str)
 {
-	size_t		i;
-	int		sign;
-	long long	dst;
+	size_t		it = 0;
+	int		sign = 1;
+	long long	dst = 0;
 
-	dst = 0;
-	i = 0;
-	sign = 1;
-	while (kfs::isspace(str[i]))
-		i++;
-	if (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
+	while (kfs::isspace(str[it]))
+		it++;
+	if (str[it] == '-' || str[it] == '+') {
+		if (str[it] == '-')
 			sign = -1;
-		i++;
+		it++;
 	}
-	while (kfs::isdigit(str[i]))
-	{
-		dst = dst * 10 + str[i] - '0';
-		i++;
+	while (kfs::isdigit(str[it])) {
+		dst = dst * 10 + str[it] - '0';
+		it++;
 	}
 	return (dst * sign);
 }

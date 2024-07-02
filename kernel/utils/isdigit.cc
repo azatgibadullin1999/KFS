@@ -12,7 +12,7 @@
 
 #include "libft.hpp"
 
-inline int	kfs::isdigit(int c)
+int	kfs::isdigit(int c)
 {
 	return (c >= '0' && c <= '9');
 }

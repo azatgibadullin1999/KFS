@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 18:30:28 by larlena           #+#    #+#             */
-/*   Updated: 2024/04/17 16:58:09 by larlena          ###   ########.fr       */
+/*   Updated: 2024/05/13 15:42:55 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ public:
 
 	bool	setCursorPosition(size_t row, size_t column) override;
 
+	void	updateCursorPosition() override;
+
 	void	setColor(Color color);
 
 private:
@@ -54,8 +56,8 @@ private:
 private:
 	uint16_t* mBuffer;
 	uint8_t mColor;
-	const kfs::driver::utils::Port	mPort1;
-	const kfs::driver::utils::Port	mPort2;
+	const kfs::driver::utils::PortByte	mPort1;
+	const kfs::driver::utils::PortByte	mPort2;
 };
 
 }

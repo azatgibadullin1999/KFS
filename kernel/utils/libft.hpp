@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 17:01:45 by larlena           #+#    #+#             */
-/*   Updated: 2024/04/17 14:44:41 by larlena          ###   ########.fr       */
+/*   Updated: 2024/05/13 15:43:04 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,15 @@
 # include <stddef.h>
 # include "api.hpp"
 
+typedef struct	s_width {
+	size_t	num;
+}		t_width;
+
 typedef struct	s_printf {
 	va_list		ap;
 	size_t		i;
 	size_t		str_size;
+	t_width		width;
 }			t_printf;
 
 namespace kfs {

@@ -12,7 +12,6 @@
 
 #include "libft.hpp"
 
-void	kfs::bzero(void *s, size_t n)
-{
-	kfs::memset(s, '\0', n);
+void	kfs::bzero(void *s, size_t n) {
+	kfs::memset(s, 0, n);
 }

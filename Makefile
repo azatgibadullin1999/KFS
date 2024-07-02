@@ -44,12 +44,17 @@ SOURCE_CPP_NAME =	kernel_main$(SOURCE_CPP_EXT) \
 			console$(SOURCE_CPP_EXT) \
 			usqwerty$(SOURCE_CPP_EXT) \
 			special_symbol_processor$(SOURCE_CPP_EXT) \
+			special_symbol_processor_auto_scroll$(SOURCE_CPP_EXT) \
 			command_default$(SOURCE_CPP_EXT) \
+			command_default_auto_scroll$(SOURCE_CPP_EXT) \
+			command_press_newline_auto_scroll$(SOURCE_CPP_EXT) \
 			command_press_backspace$(SOURCE_CPP_EXT) \
 			command_press_newline$(SOURCE_CPP_EXT) \
 			command_press_scroll$(SOURCE_CPP_EXT) \
-			command_press_tab$(SOURCE_CPP_EXT)\
-			write$(SOURCE_CPP_EXT)
+			command_press_tab$(SOURCE_CPP_EXT) \
+			write$(SOURCE_CPP_EXT) \
+			gdt_default$(SOURCE_CPP_EXT) \
+			shell$(SOURCE_CPP_EXT)
 
 LINKER_SCRIPT_NAME = linker$(LINKER_SCRIPT_EXT)
 
