@@ -10,10 +10,9 @@ CFLAGS =	-O0 \
 		-fno-threadsafe-statics \
 		-ffreestanding \
 		-nostdlib \
-		-nodefaultlibs
-		# -Wall \
-		# -Wextra \
-		# -Werror \
+		-nodefaultlibs \
+		-Wall \
+		-Wextra
 
 export CC
 export ASM
@@ -39,12 +38,11 @@ SOURCE_ASM_NAME = boot$(SOURCE_ASM_EXT)
 SOURCE_CPP_NAME =	kernel_main$(SOURCE_CPP_EXT) \
 			global_variable_support$(SOURCE_CPP_EXT) \
 			keyboard$(SOURCE_CPP_EXT) \
-			textmode$(SOURCE_CPP_EXT) \
+			text_display$(SOURCE_CPP_EXT) \
 			port$(SOURCE_CPP_EXT) \
 			console$(SOURCE_CPP_EXT) \
 			usqwerty$(SOURCE_CPP_EXT) \
-			special_symbol_processor$(SOURCE_CPP_EXT) \
-			special_symbol_processor_auto_scroll$(SOURCE_CPP_EXT) \
+			command_text_display$(SOURCE_CPP_EXT) \
 			command_default$(SOURCE_CPP_EXT) \
 			command_default_auto_scroll$(SOURCE_CPP_EXT) \
 			command_press_newline_auto_scroll$(SOURCE_CPP_EXT) \

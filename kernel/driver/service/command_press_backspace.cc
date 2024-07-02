@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 19:19:12 by larlena           #+#    #+#             */
-/*   Updated: 2024/04/14 19:20:47 by larlena          ###   ########.fr       */
+/*   Updated: 2024/05/17 19:37:40 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,16 @@
 namespace kfs::driver::common {
 
 void	CommandPressBackspace::execute() {
-	size_t	row = mTextMode->getCurrentRow();
-	size_t	column = mTextMode->getCurrentColumn();
+	size_t	row = mTextDisplay->getCurrentRow();
+	size_t	column = mTextDisplay->getCurrentColumn();
 
 	if (row == 0 && column != 0) {
 		column -= 1;
-		row = mTextMode->getRow();
+		row = mTextDisplay->getRow();
 	}
 	row -= 1;
-	mTextMode->write(' ', row, column);
-	mTextMode->setCursorPosition(row, column);	
+	mTextDisplay->write(' ', row, column);
+	mTextDisplay->setCursorPosition(row, column);	
 }
 
 }

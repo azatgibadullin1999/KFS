@@ -6,12 +6,12 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 00:12:42 by larlena           #+#    #+#             */
-/*   Updated: 2024/05/12 21:34:23 by larlena          ###   ########.fr       */
+/*   Updated: 2024/05/14 23:06:02 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.hpp"
-#include "special_symbol_processor.hpp"
+#include "symbol_processor.hpp"
 #include "impl/factory_command_builtin_default.hpp"
 
 namespace {
@@ -39,14 +39,14 @@ ContainerArgs	&parse(ContainerArgs &args, ContainerStr &str) {
 void	kfs::Shell::process() {
 	static auto&&	factory = kfs::shell::FactoryCommandBuiltinDefault();
 	auto&&	sharedIt = mInputStringBuff.begin();
-	auto&&	processor = kfs::shell::SpecialSymbolProcessorForShell<Container>(mInputStringBuff, sharedIt, mConsole);
+	auto&&	processor = kfs::shell::SymbolProcessorForShell<Container>(mInputStringBuff, sharedIt, mConsole);
 	ktl::fill(mInputStringBuff.begin(), mInputStringBuff.end(), 0);
 	ktl::fill(mArgs.begin(), mArgs.end(), nullptr);
 
 	mConsole->write(mPromptForInput);
 	while (*sharedIt != '\n') {
 		*sharedIt = mConsole->readBlocking();
-		processor.process(*sharedIt)->execute();
+		processor.process(*sharedIt);
 	}
 	mConsole->write('\n');
 

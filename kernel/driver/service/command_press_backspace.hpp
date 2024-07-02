@@ -6,29 +6,26 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 23:47:48 by larlena           #+#    #+#             */
-/*   Updated: 2024/04/17 14:20:03 by larlena          ###   ########.fr       */
+/*   Updated: 2024/05/21 17:16:27 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __KFS_KERNEL_DRIVER_SERVICE_COMMAND_PRESSBACK_SPACE_HPP__
-# define __KFS_KERNEL_DRIVER_SERVICE_COMMAND_PRESSBACK_SPACE_HPP__
+#ifndef __KFS_KERNEL_DRIVER_SERVICE_COMMAND_PRESS_BACKSPACE_HPP__
+# define __KFS_KERNEL_DRIVER_SERVICE_COMMAND_PRESS_BACKSPACE_HPP__
 
 # include <stddef.h>
-# include "common/command.hpp"
-# include "driver/common_interface/textmode.hpp"
+# include "command_text_display.hpp"
 
 namespace kfs::driver::common {
 
-class CommandPressBackspace final : public kfs::interface::ICommand {
+class CommandPressBackspace final : public kfs::interface::CommandTextDisplay<CommandPressBackspace> {
 public:
-	CommandPressBackspace(kfs::driver::interface::ITextMode *textMode) :
-	mTextMode(textMode) { }
-
+	using CommandTextDisplay::CommandTextDisplay;
+	using CommandTextDisplay::operator==;
+	using CommandTextDisplay::operator=;
 	void	execute() override;
-private:
-	kfs::driver::interface::ITextMode *mTextMode;
 };
 
 }
 
-#endif // __KFS_KERNEL_DRIVER_SERVICE_COMMAND_PRESSBACK_SPACE_HPP__
+#endif // __KFS_KERNEL_DRIVER_SERVICE_COMMAND_PRESS_BACKSPACE_HPP__

@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 15:45:49 by larlena           #+#    #+#             */
-/*   Updated: 2024/04/28 06:41:58 by larlena          ###   ########.fr       */
+/*   Updated: 2024/05/21 16:31:47 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ class CommandDefaultShell final : public kfs::interface::ICommand {
 public:
 	CommandDefaultShell(Container &sharedContainer, typename Container::iterator &sharedIt, kfs::interface::IConsole *console) :
 	mSharedContainer(sharedContainer),
-	mSharedIt(sharedIt),
-	mConsole(console) { }
+	mConsole(console),
+	mSharedIt(sharedIt) { }
 
 	CommandDefaultShell	&operator = (const char &c) {
 		mCharacter = c;

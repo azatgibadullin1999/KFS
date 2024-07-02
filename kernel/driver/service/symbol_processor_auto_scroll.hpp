@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   special_symbol_processor_auto_scroll.hpp           :+:      :+:    :+:   */
+/*   symbol_processor_auto_scroll.hpp           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,19 +13,32 @@
 #ifndef __KFS_KERNEL_DRIVER_SERVICE_SPECIAL_SYMBOL_PROCESSOR_AUTO_SCROLL_HPP__
 # define __KFS_KERNEL_DRIVER_SERVICE_SPECIAL_SYMBOL_PROCESSOR_AUTO_SCROLL_HPP__
 
-# include "driver/common_interface/special_symbol_processor.hpp"
-# include "driver/common_interface/textmode.hpp"
+# include "driver/common_interface/symbol_processor.hpp"
+# include "driver/common_interface/keyboard.hpp"
+# include "command_press_newline_auto_scroll.hpp"
+# include "command_default_auto_scroll.hpp"
+# include "command_press_backspace.hpp"
+# include "command_press_scroll.hpp"
+# include "command_press_tab.hpp"
 
 namespace kfs::driver::common {
 
-class SpecialSymbolProcessorAutoScroll : public kfs::driver::interface::ISpecialSymbolProcessor {
+class SymbolProcessorAutoScroll final : public kfs::driver::interface::SymbolProcessor <
+	kfs::driver::common::CommandPressTab,
+	kfs::driver::common::CommandPressScroll,
+	kfs::driver::common::CommandPressBackspace,
+	kfs::driver::common::CommandDefaultAutoScroll,
+	kfs::driver::common::CommandPressNewLineAutoScroll
+> {
 public:
-	SpecialSymbolProcessorAutoScroll(kfs::driver::interface::ITextMode *textmode) :
-	mTextmode(textmode) { }
-
-	kfs::interface::ICommand	*process(const char&) override;
-private:
-	kfs::driver::interface::ITextMode *mTextmode;
+	SymbolProcessorAutoScroll(kfs::driver::interface::ITextDisplay *textDisplay) :
+	SymbolProcessor(
+		CommandPressTab('\t', textDisplay, 8),
+		CommandPressScroll(kfs::driver::interface::IKeyboard::Decoder::DOWN, textDisplay),
+		CommandPressBackspace('\b', textDisplay),
+		CommandDefaultAutoScroll(0, textDisplay),
+		CommandPressNewLineAutoScroll('\n', textDisplay)
+		) { }
 };
 
 }

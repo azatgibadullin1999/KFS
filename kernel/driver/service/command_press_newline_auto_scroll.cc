@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 17:15:19 by larlena           #+#    #+#             */
-/*   Updated: 2024/05/12 17:23:55 by larlena          ###   ########.fr       */
+/*   Updated: 2024/05/17 19:37:49 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,17 @@
 namespace kfs::driver::common {
 
 void	CommandPressNewLineAutoScroll::execute() {
-	static auto&&	scroll = CommandPressScroll(mTextMode);
-	size_t	column = mTextMode->getCurrentColumn();
+	static auto&&	scroll = CommandPressScroll(0, mTextDisplay);
+	size_t	column = mTextDisplay->getCurrentColumn();
 	size_t	row = 0;
 
-	if (++column == mTextMode->getColumn() - 1) {
-		mTextMode->setCursorPosition(row, column);
+	if (++column == mTextDisplay->getColumn() - 1) {
+		mTextDisplay->setCursorPosition(row, column);
 		scroll.execute();
-		row = mTextMode->getCurrentRow();
-		column = mTextMode->getCurrentColumn();
+		row = mTextDisplay->getCurrentRow();
+		column = mTextDisplay->getCurrentColumn();
 	}
-	mTextMode->setCursorPosition(row, column);
+	mTextDisplay->setCursorPosition(row, column);
 }
 
 }

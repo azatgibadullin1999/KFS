@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 12:02:00 by larlena           #+#    #+#             */
-/*   Updated: 2024/04/15 11:04:56 by larlena          ###   ########.fr       */
+/*   Updated: 2024/05/17 20:19:42 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,23 @@
 
 namespace kfs::driver::ps2 {
 
-uint8_t	Keyboard::read() {
+uint8_t	Keyboard::read() const {
 	auto&&	code = mPort.read();
-	auto&&	state = code & 0x80;
-
+	auto&&	isReleased = code & 0x80;
 	code &= ~0x80;
-	if (isPressed(code)) {
-		mKeysState[code] = !state;
+	if (mKeysState[code]) {
+		mKeysState[code] = !isReleased;
 		return 0xFF;
 	}
-	if (state) {
+	if (isReleased) {
 		return 0xFF;
 	}
 	mKeysState[code] = true;
-	return code;
+	if (isKeyPressed(Decoder::LSHFT) || isKeyPressed(Decoder::RSHFT)) {
+		return mDecoder.decodeShift(code);
+	} else {
+		return mDecoder.decode(code);
+	}
 }
 
 }

@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 15:42:15 by larlena           #+#    #+#             */
-/*   Updated: 2024/05/13 15:42:35 by larlena          ###   ########.fr       */
+/*   Updated: 2024/05/17 22:52:16 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,20 @@ void	kfs::Console::process() {
 	if (mScanCodeBuff == 0xFF) {
 		return;
 	}
-	mCharBuff = mDecoder->scan(mScanCodeBuff);
-	mProcessor->process(mCharBuff)->execute();
-	mTextmode->updateCursorPosition();
+	mProcessor->process(mCharBuff);
+	mTextDisplay->updateCursorPosition();
 }
 
 void	kfs::Console::write(char c) {
-	mProcessor->process(c)->execute();
-	mTextmode->updateCursorPosition();
+	mProcessor->process(c);
+	mTextDisplay->updateCursorPosition();
 }
 
 void	kfs::Console::write(const char *str) {
 	for (size_t it = 0; str[it]; ++it) {
-		mProcessor->process(str[it])->execute();
+		mProcessor->process(str[it]);
 	}
-	mTextmode->updateCursorPosition();
+	mTextDisplay->updateCursorPosition();
 }
 
 char	kfs::Console::read() {
@@ -39,7 +38,7 @@ char	kfs::Console::read() {
 	if (mScanCodeBuff == 0xFF) {
 		return -1;
 	}
-	return mDecoder->scan(mScanCodeBuff);
+	return mScanCodeBuff;
 }
 
 char	kfs::Console::readBlocking() {

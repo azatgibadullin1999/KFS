@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 11:54:03 by larlena           #+#    #+#             */
-/*   Updated: 2024/05/04 15:03:48 by larlena          ###   ########.fr       */
+/*   Updated: 2024/05/21 21:25:43 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ namespace kfs::x86 {
 template <size_t NumberOfDesks>
 class GlobalDescriptorTable {
 protected:
-	class Desk {
+	class [[gnu::packed]] Desk {
 	public:
 		Desk() { }
 
@@ -43,9 +43,9 @@ protected:
 		uint8_t mLimitHigh:4;
 		uint8_t mOther:4;
 		uint8_t mBaseHigh;
-	} __attribute__((packed));
+	};
 
-	class Register {
+	class [[gnu::packed]] Register {
 	public:
 		Register(uint16_t numverOfDesks, uint32_t base) :
 			mLimit(numverOfDesks * sizeof(Desk)),
@@ -64,13 +64,13 @@ protected:
 	private:
 		uint16_t mLimit;
 		uint32_t mBase;
-	} __attribute__ ((packed));
+	};
 
 public:
 	template <typename ... Args>
 	GlobalDescriptorTable(Register &&reg, Args&& ... args) :
-	mRegister(ktl::forward<Register>(reg)),
-	mDesks{ktl::forward<Args>(args) ...} {
+	mDesks{ktl::forward<Args>(args) ...},
+	mRegister(ktl::forward<Register>(reg)) {
 		mRegister.move(mDesks.data());
 		mRegister.load();
 		asm(
