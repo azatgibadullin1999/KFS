@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 22:17:54 by larlena           #+#    #+#             */
-/*   Updated: 2024/05/26 22:21:50 by larlena          ###   ########.fr       */
+/*   Updated: 2024/06/28 18:28:48 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,16 @@ InitialPageTable::InitialPageTable() noexcept {
 	static size_t it = 0;
 	flags.present = 1;
 	flags.read_write = 1;
-	setBaseAddress(it++ * 0x1000);
+	setPhysicalAddress(it++ * 0x1000);
 }
 
 InitialPageDirectory::InitialPageDirectory() noexcept {
 	flags.read_write = 1;
-	setTableBaseAddress(0);
+	setPhysicalAddress(0);
 }
 
 InitialPaging::InitialPaging() noexcept {
-	get_page_directory()[0].setTableBaseAddress(get_page_table().data());
+	get_page_directory()[0].setPhysicalAddress(reinterpret_cast<kfs::PhysicalAddress>(get_page_table().data()));
 	get_page_directory()[0].flags.present = 1;
 
 	asm volatile (

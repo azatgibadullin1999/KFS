@@ -1,0 +1,7 @@
+#ifndef _LIBCPP_ITERATOR
+# define _LIBCPP_ITERATOR
+
+# include <__iterator/iterator_traits.h>
+# include <__iterator/reverse_iterator.h>
+
+#endif // _LIBCPP_ITERATOR

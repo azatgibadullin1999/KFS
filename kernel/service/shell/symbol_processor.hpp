@@ -13,8 +13,8 @@
 #ifndef __KFS_KERNEL_SERVICE_SHELL_SPECIAL_SYBOL_PROCESSOR_HPP__
 # define __KFS_KERNEL_SERVICE_SHELL_SPECIAL_SYBOL_PROCESSOR_HPP__
 
+# include <iterator>
 # include "driver/common_interface/symbol_processor.hpp"
-# include "utils/stl/iterator_traits.hpp"
 # include "command_default.hpp"
 # include "command_press_backspace.hpp"
 # include "command_press_newline.hpp"

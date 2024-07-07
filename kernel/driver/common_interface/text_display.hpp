@@ -6,15 +6,15 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 17:20:14 by larlena           #+#    #+#             */
-/*   Updated: 2024/05/17 20:13:00 by larlena          ###   ########.fr       */
+/*   Updated: 2024/06/12 18:11:21 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __KFS_KERNEL_DRIVER_COMMON_INTERFACE_TEXT_DISPLAY__
 # define __KFS_KERNEL_DRIVER_COMMON_INTERFACE_TEXT_DISPLAY__
 
-# include <stdint.h>
-# include <stddef.h>
+# include <cstdint>
+# include <cstddef>
 
 namespace kfs::driver::interface {
 

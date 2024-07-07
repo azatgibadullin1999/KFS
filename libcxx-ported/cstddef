@@ -1,0 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cstddef                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/31 19:32:31 by larlena           #+#    #+#             */
+/*   Updated: 2024/05/31 19:33:34 by larlena          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef __KFS_OWN_LIBCXX_CSTDDEF__
+# define __KFS_OWN_LIBCXX_CSTDDEF__
+
+namespace std {
+
+#include <stddef.h>
+
+}
+
+#endif // __KFS_OWN_LIBCXX_CSTDDEF__

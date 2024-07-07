@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 19:42:09 by larlena           #+#    #+#             */
-/*   Updated: 2024/05/17 20:07:24 by larlena          ###   ########.fr       */
+/*   Updated: 2024/06/05 21:54:48 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 # define __KFS_KERNEL_DRIVER_COMMON_INTERFACE_KEYBOARD__
 
 # include <stdint.h>
-# include "utils/libft.hpp"
-# include "utils/stl/move.hpp"
-# include "utils/stl/array.hpp"
-# include "utils/stl/bitset.hpp"
+# include <utility>
+# include <array>
+# include <bitset>
+# include <libft.hpp>
 
 namespace kfs::driver::interface {
 
@@ -28,14 +28,14 @@ public:
 		using container = ktl::array<uint8_t, 128>;
 
 		constexpr Decoder(container &&keyMap, container &&shiftKeyMap) :
-		mKeyMap(ktl::move(keyMap)),
-		mShiftKeyMap(ktl::move(shiftKeyMap)),
+		mKeyMap(std::move(keyMap)),
+		mShiftKeyMap(std::move(shiftKeyMap)),
 		mBackwardKeyMap() {
 			updateBackwardKeyMap();
 		}
 
 		constexpr Decoder(Decoder &&other) :
-		Decoder(ktl::move(other.mKeyMap), ktl::move(other.mShiftKeyMap)) { }
+		Decoder(std::move(other.mKeyMap), std::move(other.mShiftKeyMap)) { }
 
 		uint8_t	decode(const uint8_t &key) const {
 			return mKeyMap[key];
@@ -95,7 +95,7 @@ public:
 		ktl::array<uint8_t, 256>	mBackwardKeyMap;
 	};
 	constexpr IKeyboard(Decoder &&decoder) :
-	mDecoder(ktl::move(decoder)) { }
+	mDecoder(std::move(decoder)) { }
 
 	virtual uint8_t	read() const = 0;
 

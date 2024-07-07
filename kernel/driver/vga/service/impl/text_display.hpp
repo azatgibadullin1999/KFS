@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 18:30:28 by larlena           #+#    #+#             */
-/*   Updated: 2024/05/17 20:27:14 by larlena          ###   ########.fr       */
+/*   Updated: 2024/05/29 16:11:50 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <stdint.h>
 # include <stddef.h>
-# include "utils/libft.hpp"
+# include <libft.hpp>
 # include "driver/utils/port.hpp"
 # include "driver/common_interface/text_display.hpp"
 

@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 11:54:03 by larlena           #+#    #+#             */
-/*   Updated: 2024/05/21 21:25:43 by larlena          ###   ########.fr       */
+/*   Updated: 2024/06/12 18:13:03 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 # define __KFS_KERNEL_ARCH_X86_GDT_HPP__
 
 # include <stdint.h>
-# include "utils/libft.hpp"
-# include "utils/stl/move.hpp"
-# include "utils/stl/array.hpp"
+# include <array>
+# include <utility>
+# include <libft.hpp>
 
 namespace kfs::x86 {
 
@@ -52,7 +52,7 @@ protected:
 			mBase(base) { }
 
 		void	move(Desk *desk) const  {
-			kfs::memmove((void *)mBase, desk, mLimit);
+			memmove((void *)mBase, desk, mLimit);
 		}
 
 		void	load() const {
@@ -69,8 +69,8 @@ protected:
 public:
 	template <typename ... Args>
 	GlobalDescriptorTable(Register &&reg, Args&& ... args) :
-	mDesks{ktl::forward<Args>(args) ...},
-	mRegister(ktl::forward<Register>(reg)) {
+	mDesks{std::forward<Args>(args) ...},
+	mRegister(std::forward<Register>(reg)) {
 		mRegister.move(mDesks.data());
 		mRegister.load();
 		asm(

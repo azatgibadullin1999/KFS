@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 06:44:56 by larlena           #+#    #+#             */
-/*   Updated: 2024/05/12 11:35:44 by larlena          ###   ########.fr       */
+/*   Updated: 2024/06/05 21:56:32 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define __KFS_KERNEL_SERVICE_SHELL_INTERFACE_COMMAND_BUILTIN_HPP__
 
 # include "common/command.hpp"
-# include "utils/stl/string_view.hpp"
-# include "utils/stl/array.hpp"
+# include <string_view>
+# include <array>
 
 namespace kfs::shell::interface {
 

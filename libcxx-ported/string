@@ -1,0 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   string                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/04 15:21:56 by larlena           #+#    #+#             */
+/*   Updated: 2024/06/05 21:40:05 by larlena          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef __KFS_KERNEL_UTILS_STL_STRING_HPP__
+# define __KFS_KERNEL_UTILS_STL_STRING_HPP__
+
+#include <stddef.h>
+#include <array>
+
+namespace ktl {
+
+template <size_t capacity>
+class stack_string : public ktl::array<char, capacity> {
+
+};
+
+}
+
+#endif // __KFS_KERNEL_UTILS_STL_STRING_HPP__

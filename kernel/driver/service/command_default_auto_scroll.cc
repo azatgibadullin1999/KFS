@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 16:37:16 by larlena           #+#    #+#             */
-/*   Updated: 2024/05/17 19:37:29 by larlena          ###   ########.fr       */
+/*   Updated: 2024/06/12 18:10:23 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ namespace kfs::driver::common {
 
 void	CommandDefaultAutoScroll::execute() {
 	static auto&&	scroll = CommandPressScroll(0, mTextDisplay);
-	if (!kfs::isprint(mChar))
+	if (!isprint(mChar))
 			return;
 	size_t	row = mTextDisplay->getCurrentRow();
 	size_t	column = mTextDisplay->getCurrentColumn();

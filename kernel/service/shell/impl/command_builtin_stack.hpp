@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 07:02:48 by larlena           #+#    #+#             */
-/*   Updated: 2024/05/22 13:03:31 by larlena          ###   ########.fr       */
+/*   Updated: 2024/06/12 18:14:14 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@ public:
 		auto	ite = reinterpret_cast<uint8_t *>(esp);
 
 		if (*(mArgs + 1)) {
-			it -= shift * kfs::atoi(*(mArgs + 1));
+			it -= shift * atoi(*(mArgs + 1));
 		}
 		if (*(mArgs + 2)) {
-			ite = it - shift * kfs::atoi(*(mArgs + 2));
+			ite = it - shift * atoi(*(mArgs + 2));
 		}
 		
 		for (; it > ite; it -= shift) {
@@ -59,7 +59,7 @@ public:
 				}
 			}
 			for (size_t index = 1; index != -(shift + 1); --index) {
-				if (kfs::isprint(it[index]) && !kfs::isspace(it[index])) {
+				if (isprint(it[index]) && !isspace(it[index])) {
 					printf("%c", it[index]);
 				} else {
 					printf("%c", '.');

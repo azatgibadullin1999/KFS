@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 20:11:34 by larlena           #+#    #+#             */
-/*   Updated: 2024/05/26 22:01:58 by larlena          ###   ########.fr       */
+/*   Updated: 2024/06/20 18:31:17 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 class Memory {
 public:
-	static Memory	init(multiboot_memory_map_t *addr, size_t len);
+	static Memory	init(multiboot_memory_map_t *addr, size_t len, multiboot_elf_section_header_table_t *elfsh);
 private:
 };
 

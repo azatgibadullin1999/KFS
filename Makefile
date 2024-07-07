@@ -1,19 +1,20 @@
-CC = i686-elf-g++
+CC = i686-elf-gcc
+CXX = i686-elf-g++
 ASM = i686-elf-as
-CFLAGS =	-O0 \
+CFLAGS =	-O2 \
 		-g \
-		-std=c++17 \
+		-std=c++20 \
 		-fno-builtin \
 		-fno-exceptions \
 		-fno-stack-protector \
 		-fno-rtti \
 		-fno-threadsafe-statics \
 		-ffreestanding \
-		-flto \
 		-nostdlib \
 		-nodefaultlibs \
 		-Wall \
 		-Wextra
+
 
 export CC
 export ASM
@@ -22,7 +23,7 @@ export CFLAGS
 NAME = kfs
 ISO = $(NAME).iso
 GRUB_FILE = grub/grub.cfg
-LIBFT_DIR = kernel/utils
+LIBFT_DIR = libc-own
 # LIBFT_MK = libft.mk
 LIBFT = $(LIBFT_DIR)/libft.a
 
@@ -38,6 +39,8 @@ SOURCE_ASM_NAME = boot$(SOURCE_ASM_EXT)
 
 SOURCE_CPP_NAME =	kernel_main$(SOURCE_CPP_EXT) \
 			global_variable_support$(SOURCE_CPP_EXT) \
+			pure_virtual_functions$(SOURCE_CPP_EXT) \
+			alloc$(SOURCE_CPP_EXT) \
 			keyboard$(SOURCE_CPP_EXT) \
 			text_display$(SOURCE_CPP_EXT) \
 			port$(SOURCE_CPP_EXT) \
@@ -55,7 +58,10 @@ SOURCE_CPP_NAME =	kernel_main$(SOURCE_CPP_EXT) \
 			gdt_default$(SOURCE_CPP_EXT) \
 			shell$(SOURCE_CPP_EXT) \
 			memory$(SOURCE_CPP_EXT) \
-			init_x86$(SOURCE_CPP_EXT)
+			physical_memory$(SOURCE_CPP_EXT) \
+			page_manager$(SOURCE_CPP_EXT) \
+			init_x86$(SOURCE_CPP_EXT) \
+			mmap$(SOURCE_CPP_EXT)
 
 LINKER_SCRIPT_NAME = linker$(LINKER_SCRIPT_EXT)
 
@@ -80,13 +86,13 @@ $(ISO): $(NAME)
 	@grub-mkrescue -o $(ISO) $(ISO_BUILD_DIR)
 
 $(NAME): $(OBJECT_FILES) $(LIBFT)
-	$(CC) -T $(LINKER_SCRIPT_FILES) -o $(NAME) -ffreestanding -nostdlib $^ $(LIBFT) -lgcc
+	$(CXX) -T $(LINKER_SCRIPT_FILES) -o $(NAME) -ffreestanding -nostdlib $^ $(LIBFT) -lgcc
 
 %$(OBJECT_EXT): %$(SOURCE_ASM_EXT)
 	$(ASM) $< -o $@
 
 %$(OBJECT_EXT): %$(SOURCE_CPP_EXT)
-	$(CC) $(CFLAGS) -I./kernel/ -I./kernel/api -c -o $@ $<
+	$(CXX) $(CFLAGS) -I./kernel/ -I./kernel/api -I./libcxx-llvm-ported -I./libc-own -c -o $@ $<
 
 $(LIBFT):
 	$(MAKE) --directory=$(LIBFT_DIR)

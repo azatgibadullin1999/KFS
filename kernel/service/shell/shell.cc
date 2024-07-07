@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 00:12:42 by larlena           #+#    #+#             */
-/*   Updated: 2024/05/14 23:06:02 by larlena          ###   ########.fr       */
+/*   Updated: 2024/06/07 17:46:37 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ ContainerArgs	&parse(ContainerArgs &args, ContainerStr &str) {
 
 	for (; argsIt != args.end() - 1 && it != str.end(); ++argsIt) {
 		*argsIt = it;
-		it = ktl::find_first_of(it, str.end(), spaceChars.begin(), spaceChars.end());
+		it = std::find_first_of(it, str.end(), spaceChars.begin(), spaceChars.end());
 		ite = ktl::find_first_not_of(it, str.end(), spaceChars.begin(), spaceChars.end());
-		ktl::fill(it, ite, 0);
+		std::fill(it, ite, 0);
 		it = ite;
 	}
 	*--argsIt = nullptr;
@@ -40,8 +40,8 @@ void	kfs::Shell::process() {
 	static auto&&	factory = kfs::shell::FactoryCommandBuiltinDefault();
 	auto&&	sharedIt = mInputStringBuff.begin();
 	auto&&	processor = kfs::shell::SymbolProcessorForShell<Container>(mInputStringBuff, sharedIt, mConsole);
-	ktl::fill(mInputStringBuff.begin(), mInputStringBuff.end(), 0);
-	ktl::fill(mArgs.begin(), mArgs.end(), nullptr);
+	std::fill(mInputStringBuff.begin(), mInputStringBuff.end(), 0);
+	std::fill(mArgs.begin(), mArgs.end(), nullptr);
 
 	mConsole->write(mPromptForInput);
 	while (*sharedIt != '\n') {

@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 01:16:34 by larlena           #+#    #+#             */
-/*   Updated: 2024/04/27 23:08:02 by larlena          ###   ########.fr       */
+/*   Updated: 2024/06/07 16:15:59 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define __KFS_KERNEL_SERVICE_SHELL_COMMAND_PRESS_NEWLINE_HPP__
 
 # include <stddef.h>
+# include <iterator>
 # include "common/command.hpp"
-# include "utils/stl/iterator_traits.hpp"
 
 
 namespace kfs::shell {

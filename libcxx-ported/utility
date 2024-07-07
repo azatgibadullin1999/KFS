@@ -1,0 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utility                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/26 23:01:39 by larlena           #+#    #+#             */
+/*   Updated: 2024/06/07 12:23:15 by larlena          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef __KFS_LIBCXX_PORTED_UTILITY__
+# define __KFS_LIBCXX_PORTED_UTILITY__
+
+# include <__utility/declval.hpp>
+# include <__utility/exchange.hpp>
+# include <__utility/forward.hpp>
+# include <__utility/move.hpp>
+# include <__utility/swap.hpp>
+# include <__utility/pair_own.hpp>
+
+#endif // __KFS_LIBCXX_PORTED_UTILITY__

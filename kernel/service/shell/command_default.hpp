@@ -6,15 +6,15 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 15:45:49 by larlena           #+#    #+#             */
-/*   Updated: 2024/05/21 16:31:47 by larlena          ###   ########.fr       */
+/*   Updated: 2024/06/12 18:10:23 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __KFS_KERNEL_SERVICE_SHELL_COMMAND_DEFAULT_HPP__
 # define __KFS_KERNEL_SERVICE_SHELL_COMMAND_DEFAULT_HPP__
 
+# include <iterator>
 # include "common/command.hpp"
-# include "utils/stl/iterator_traits.hpp"
 # include "interface/console.hpp"
 
 namespace kfs::shell {
@@ -33,7 +33,7 @@ public:
 	}
 
 	void	execute() override {
-		if (!kfs::isprint(mCharacter) || mSharedIt == (mSharedContainer.end() - 1))
+		if (!isprint(mCharacter) || mSharedIt == (mSharedContainer.end() - 1))
 			return;
 		*mSharedIt = mCharacter;
 		mConsole->write(mCharacter);
