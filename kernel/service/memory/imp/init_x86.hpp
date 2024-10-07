@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 20:19:04 by larlena           #+#    #+#             */
-/*   Updated: 2024/06/16 16:53:09 by larlena          ###   ########.fr       */
+/*   Updated: 2024/07/08 23:03:43 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,4 @@ public:
 	InitialPageDirectory() noexcept;
 };
 
-class InitialPaging {
-public:
-	InitialPaging() noexcept;
-};
+std::pair<kfs::x86::PageDirectoryPointer, kfs::x86::PageTablePointer>	initPaging() noexcept;

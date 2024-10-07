@@ -30,7 +30,7 @@ class _LIBCPP_AVAILABILITY_PMR _LIBCPP_EXPORTED_FROM_ABI memory_resource {
   static const size_t __max_align = alignof(max_align_t);
 
 public:
-  // /* virtual */ ~memory_resource();
+  virtual ~memory_resource() { }
 
   _LIBCPP_NODISCARD_AFTER_CXX17
   [[using __gnu__: __returns_nonnull__, __alloc_size__(2), __alloc_align__(3)]] _LIBCPP_HIDE_FROM_ABI void*

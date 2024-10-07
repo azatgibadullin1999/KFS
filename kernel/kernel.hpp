@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 13:00:57 by larlena           #+#    #+#             */
-/*   Updated: 2024/06/21 14:54:23 by larlena          ###   ########.fr       */
+/*   Updated: 2024/10/07 20:04:56 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include "driver/service/usqwerty.hpp"
 # include "console.hpp"
 # include "service/shell/shell.hpp"
+# include "service/panic/panic.hpp"
 
 # include "service/memory/memory.hpp"
 
@@ -31,17 +32,17 @@
 class Kernel {
 public:
 	static Kernel	init(multiboot_info_t* mbd) {
-		auto&&	memory [[maybe_unused]] = Memory::init(
-			reinterpret_cast<multiboot_memory_map_t *>(mbd->mmap_addr),
-			mbd->mmap_length,
-			&mbd->u.elf_sec);
-
 		static auto&&	display = kfs::driver::vga::VGATextDisplay();
 		static auto&&	keyboard = kfs::driver::ps2::Keyboard(kfs::driver::common::USqwerty());
 		static auto&&	processor = kfs::driver::common::SymbolProcessorAutoScroll(&display);
 		kfs::ConsoleSingleton::getInstance().setTextDisplay(&display);
 		kfs::ConsoleSingleton::getInstance().setKeyboard(&keyboard);
 		kfs::ConsoleSingleton::getInstance().setSymbolProcessor(&processor);
+
+		auto&&	memory [[maybe_unused]] = Memory::init(
+			reinterpret_cast<multiboot_memory_map_t *>(mbd->mmap_addr),
+			mbd->mmap_length,
+			&mbd->u.elf_sec);
 		
 		static auto&&	kernel = Kernel();
 		return kernel;
@@ -62,7 +63,6 @@ public:
 		while (1) {
 			shell.process();
 		}
-
 	}
 };
 

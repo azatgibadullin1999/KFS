@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 22:15:30 by larlena           #+#    #+#             */
-/*   Updated: 2024/07/06 16:33:13 by larlena          ###   ########.fr       */
+/*   Updated: 2024/07/11 16:38:21 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 int	kfs::PageManager::map(kfs::x86::PageDirectory& directory, const kfs::x86::VirtualAddress addr) {
 	auto&&	directoryEntry = directory[addr.getDirectoryIndex()];
-
 
 	if (!directoryEntry.isPresent()) {
 		allocatePageTable(directory, addr);
@@ -30,11 +29,9 @@ int	kfs::PageManager::map(kfs::x86::PageDirectory& directory, const kfs::x86::Vi
 
 template <typename range>
 auto	kfs::PageManager::findFirstFreePages(kfs::x86::PageDirectory& directory, range& outRange) {
-	auto&&	existingPageDirectoryEntrys =
-		directory
+	auto&&	existingPageDirectoryEntrys = directory
 		| std::views::filter([](auto&& directoryEntry){ return directoryEntry.isPresent(); });
-	auto&&	freePageTableEntrys =
-		std::views::transform([this](auto&& directoryEntry) {
+	auto&&	freePageTableEntrys = std::views::transform([this](auto&& directoryEntry) {
 			return *this->mMap[directoryEntry.getPhysicalAddress()];
 		})
 		| std::views::join

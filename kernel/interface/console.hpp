@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 15:31:13 by larlena           #+#    #+#             */
-/*   Updated: 2024/05/17 22:52:48 by larlena          ###   ########.fr       */
+/*   Updated: 2024/07/11 14:20:24 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,24 @@ public:
 		mTextDisplay = textDisplay;
 	}
 
+	kfs::driver::interface::ITextDisplay*	getTextDisplay() {
+		return mTextDisplay;
+	}
+
 	void	setSymbolProcessor(kfs::driver::interface::ISymbolProcessor *processor) {
 		mProcessor = processor;
+	}
+	
+	kfs::driver::interface::ISymbolProcessor*	getSymbolProcessor() {
+		return mProcessor;
 	}
 
 	void	setKeyboard(kfs::driver::interface::IKeyboard *keyboard) {
 		mKeyboard = keyboard;
+	}
+	
+	kfs::driver::interface::IKeyboard*	getKeyboard() {
+		return mKeyboard;
 	}
 protected:
 	kfs::driver::interface::ITextDisplay		*mTextDisplay;

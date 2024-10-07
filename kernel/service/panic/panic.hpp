@@ -1,30 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   address_space.hpp                                  :+:      :+:    :+:   */
+/*   panic.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/19 14:19:30 by larlena           #+#    #+#             */
-/*   Updated: 2024/07/10 15:01:42 by larlena          ###   ########.fr       */
+/*   Created: 2024/07/11 12:20:16 by larlena           #+#    #+#             */
+/*   Updated: 2024/07/11 14:11:02 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __KFS_KERNEL_SERVICE_MEMORY_ADDRESS_SPACE_HPP__
-# define __KFS_KERNEL_SERVICE_MEMORY_ADDRESS_SPACE_HPP__
-
-# include "arch/x86/paging.hpp"
-
 namespace kfs {
 
-class AddressSpace {
-public:
-	AddressSpace(kfs::x86::PageDirectoryPointer directory)
-	: mDirectory(directory) { }
-private:
-	kfs::x86::PageDirectoryPointer	mDirectory;
-};
+void	panic();
 
-}
-
-#endif // __KFS_KERNEL_SERVICE_MEMORY_ADDRESS_SPACE_HPP__
+} // namespace kfs

@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:48:22 by larlena           #+#    #+#             */
-/*   Updated: 2024/07/06 16:33:01 by larlena          ###   ########.fr       */
+/*   Updated: 2024/07/12 19:03:51 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@ namespace kfs {
 
 class PageManager {
 public:
+	PageManager(const kfs::x86::PageTablePointer& initialPage)
+	: mMap({std::make_pair(initialPage.address, initialPage.pointer)}),
+	  mFreePages(std::ranges::distance(*initialPage.pointer | std::views::filter([](auto&& tableEntry) { return tableEntry.isPresent(); }))) { }
+
 	int	map(kfs::x86::PageDirectory &directory, const kfs::x86::VirtualAddress addr);
 private:
 	using TableWithDirectory = std::pair<kfs::x86::PageDirectoryEntry*, kfs::x86::PageTableEntry*>;
@@ -32,6 +36,7 @@ private:
 	int	allocatePageTable(kfs::x86::PageDirectory&, const kfs::x86::VirtualAddress);
 	int	registerPageTable(kfs::x86::PageDirectoryEntry&, kfs::x86::PageTableEntry&, const kfs::x86::VirtualAddress);
 	std::map<PhysicalAddress, kfs::x86::PageTable*>	mMap;
+	size_t	mFreePages;
 }; // class PageManager
 
 } // namespace kfs

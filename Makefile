@@ -58,10 +58,12 @@ SOURCE_CPP_NAME =	kernel_main$(SOURCE_CPP_EXT) \
 			gdt_default$(SOURCE_CPP_EXT) \
 			shell$(SOURCE_CPP_EXT) \
 			memory$(SOURCE_CPP_EXT) \
+			memory_range$(SOURCE_CPP_EXT) \
 			physical_memory$(SOURCE_CPP_EXT) \
 			page_manager$(SOURCE_CPP_EXT) \
 			init_x86$(SOURCE_CPP_EXT) \
-			mmap$(SOURCE_CPP_EXT)
+			mmap$(SOURCE_CPP_EXT) \
+			panic$(SOURCE_CPP_EXT)
 
 LINKER_SCRIPT_NAME = linker$(LINKER_SCRIPT_EXT)
 

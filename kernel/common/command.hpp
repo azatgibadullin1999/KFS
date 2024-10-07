@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 20:52:03 by larlena           #+#    #+#             */
-/*   Updated: 2024/03/23 21:15:33 by larlena          ###   ########.fr       */
+/*   Updated: 2024/07/11 12:32:56 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ namespace kfs::interface {
 
 class ICommand {
 public:
+	virtual ~ICommand() { }
 	virtual void	execute() = 0;
 };
 	

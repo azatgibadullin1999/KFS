@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 18:17:49 by larlena           #+#    #+#             */
-/*   Updated: 2024/06/28 18:25:03 by larlena          ###   ########.fr       */
+/*   Updated: 2024/07/12 19:03:45 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,17 +143,9 @@ public:
 		return base_high << 16 | base_low << 12;
 	}
 
-	void	setPresent() noexcept {
-		flags.present = 1;
-	}
-
-	void	unsetPresent() noexcept {
-		flags.present = 0;
-	}
-
-	bool	isPresent() noexcept {
-		return flags.present;
-	}
+	void	setPresent() noexcept { flags.present = true; }
+	void	unsetPresent() noexcept { flags.present = false; }
+	bool	isPresent() noexcept { return flags.present; }
 
 	operator uint32_t() noexcept {
 		return *reinterpret_cast<uint32_t *>(this);
@@ -171,17 +163,9 @@ public:
 		return base_high << 16 | base_low << 12;
 	}
 
-	void	setPresent() noexcept {
-		flags.present = 1;
-	}
-
-	void	unsetPresent() noexcept {
-		flags.present = 0;
-	}
-
-	bool	isPresent() noexcept {
-		return flags.present;
-	}
+	void	setPresent() noexcept { flags.present = true; }
+	void	unsetPresent() noexcept { flags.present = false; }
+	bool	isPresent() noexcept { return flags.present; }
 
 	operator uint32_t() noexcept {
 		return *reinterpret_cast<uint32_t *>(this);
@@ -196,15 +180,37 @@ using PageDirectory = ktl::array<PageDirectoryEntry, 0x400>;
 
 using PageTable = ktl::array<PageTableEntry, 0x400>;
 
-// struct PageDirectoryPointer {
-// 	PageDirectory	*pointer;
-// 	PhysicalAddress	address;
-// }; // struct PageDirectoryPointer
+// template <typename PageElement>
+// class PagePointer {
+// public:
+// 	PagePointer(PageElement* ptr, PhysicalAddress addr)
+// 	: pointer(ptr),
+// 	  address(addr) { }
 
-// struct PageTablePointer {
-// 	PageTable	*pointer;
+// 	PageElement&	operator * () noexcept {
+// 		return *pointer;
+// 	}
+
+// 	PageElement*	operator -> () noexcept {
+// 		return pointer;
+// 	}
+
+
+
+// private:
+// 	PageElement	*pointer;
 // 	PhysicalAddress	address;
-// }; // struct PageTablePointer
+// };
+
+struct PageDirectoryPointer {
+	PageDirectory	*pointer;
+	PhysicalAddress	address;
+}; // struct PageDirectoryPointer
+
+struct PageTablePointer {
+	PageTable	*pointer;
+	PhysicalAddress	address;
+}; // struct PageTablePointer
 
 } // namespace kfs::x86
 

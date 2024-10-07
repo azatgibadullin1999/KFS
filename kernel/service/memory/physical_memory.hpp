@@ -6,21 +6,19 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 20:02:55 by larlena           #+#    #+#             */
-/*   Updated: 2024/07/06 14:00:35 by larlena          ###   ########.fr       */
+/*   Updated: 2024/08/28 12:33:17 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __KFS_KERNEL_SERVICE_MEMORY_PHYSICAL_MEMORY_HPP__
 # define __KFS_KERNEL_SERVICE_MEMORY_PHYSICAL_MEMORY_HPP__
 
+# include "memory_range.hpp"
 # include "../boot/multiboot.h"
 # include "common/singleton.hpp"
-# include <cstdint>
 # include <list>
 
 namespace kfs {
-
-using PhysicalAddress = size_t;
 
 namespace details {
 
@@ -32,9 +30,7 @@ public:
 	PhysicalAddress	alloc();
 	void	dealloc(PhysicalAddress);
 private:
-	using pair = std::pair<PhysicalAddress, PhysicalAddress>;
-
-	std::pmr::list<pair>	mMap;
+	std::list<MemoryRange>	mMap;
 	static const inline size_t	chunk_size = 0x400;
 }; // class PhysicalMemory
 

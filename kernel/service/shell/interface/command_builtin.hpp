@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 06:44:56 by larlena           #+#    #+#             */
-/*   Updated: 2024/06/05 21:56:32 by larlena          ###   ########.fr       */
+/*   Updated: 2024/07/11 12:32:47 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ namespace kfs::shell::interface {
 
 class ICommandBuiltin : public kfs::interface::ICommand {
 public:
+	virtual ~ICommandBuiltin() { }
 	virtual ktl::string_view	getName() const = 0;
 	virtual ktl::string_view	getShortDescription() const = 0;
 	virtual ktl::string_view	getFullDescription() const = 0;

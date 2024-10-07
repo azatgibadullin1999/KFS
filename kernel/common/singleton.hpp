@@ -6,14 +6,16 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 14:27:33 by larlena           #+#    #+#             */
-/*   Updated: 2024/07/07 12:37:27 by larlena          ###   ########.fr       */
+/*   Updated: 2024/08/28 11:49:27 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __KFS_KERNEL_INTERFACE_SINGLETON_HPP__
 # define __KFS_KERNEL_INTERFACE_SINGLETON_HPP__
 
-# include <memory>
+# include <utility>
+// # include <memory>
+
 namespace kfs::interface {
 
 template <typename WrappedClass>
@@ -37,10 +39,10 @@ public:
 template <typename WrappedClass>
 class DynamicSingletonWrapper final : public WrappedClass {
 private:
-	// static DynamicSingletonWrapper*	instance;
-	static std::unique_ptr<DynamicSingletonWrapper>	instance;
 	DynamicSingletonWrapper() = default;
 public:
+	// static std::unique_ptr<DynamicSingletonWrapper>	instance;
+	static DynamicSingletonWrapper*	instance;
 	template <typename ... Args>
 	DynamicSingletonWrapper(Args ... args)
 	: WrappedClass{std::forward<Args>(args) ...} { }
@@ -57,12 +59,18 @@ public:
 
 	template <typename ... Args>
 	static void	init(Args... args) {
-		if (DynamicSingletonWrapper::instance) {
+		static bool isInitialized = 0;
+		if (isInitialized) {
 			return;
 		}
-		DynamicSingletonWrapper::instance = std::make_unique<DynamicSingletonWrapper>(std::forward<Args>(args) ...);
+		// DynamicSingletonWrapper::instance = std::make_unique<DynamicSingletonWrapper>(std::forward<Args>(args) ...);
+		DynamicSingletonWrapper::instance = new DynamicSingletonWrapper(std::forward<Args>(args) ...);
+		isInitialized = 1;
 	}
 };
+
+template<typename WrappedClass>
+DynamicSingletonWrapper<WrappedClass>* DynamicSingletonWrapper<WrappedClass>::instance = nullptr;
 
 }
 
