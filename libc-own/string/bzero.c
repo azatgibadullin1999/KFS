@@ -1,21 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   write.cc                                           :+:      :+:    :+:   */
+/*   bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/17 14:26:49 by larlena           #+#    #+#             */
-/*   Updated: 2024/10/08 11:56:34 by larlena          ###   ########.fr       */
+/*   Created: 2020/11/07 19:37:19 by larlena           #+#    #+#             */
+/*   Updated: 2020/11/09 16:31:25 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "service/console/console.hpp"
+#include <string.h>
 
-extern "C" void	putchar(char c) {
-	kfs::ConsoleSingleton::getInstance().write(c);
-}
-
-extern "C" void	putstr(const char *str) {
-	kfs::ConsoleSingleton::getInstance().write(str);
+void	bzero(void *s, size_t n) {
+	memset(s, 0, n);
 }

@@ -6,14 +6,15 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 17:46:12 by larlena           #+#    #+#             */
-/*   Updated: 2024/07/11 16:33:38 by larlena          ###   ########.fr       */
+/*   Updated: 2024/12/23 20:23:20 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdint.h>
 #include "../boot/multiboot.h"
 #include "kernel.hpp"
-#include <libft.hpp>
+#include <string.h>
+#include <stdio.h>
 #include <elf.h>
 
 #include <span>

@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   write.cc                                           :+:      :+:    :+:   */
+/*   isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/17 14:26:49 by larlena           #+#    #+#             */
-/*   Updated: 2024/10/08 11:56:34 by larlena          ###   ########.fr       */
+/*   Created: 2020/11/07 23:24:43 by larlena           #+#    #+#             */
+/*   Updated: 2024/03/19 14:01:42 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "service/console/console.hpp"
+#include <string.h>
 
-extern "C" void	putchar(char c) {
-	kfs::ConsoleSingleton::getInstance().write(c);
-}
-
-extern "C" void	putstr(const char *str) {
-	kfs::ConsoleSingleton::getInstance().write(str);
+int	isprint(int c)
+{
+	return (c >= 32 && c <= 126);
 }

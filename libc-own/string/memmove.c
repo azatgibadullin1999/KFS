@@ -1,21 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   write.cc                                           :+:      :+:    :+:   */
+/*   memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/17 14:26:49 by larlena           #+#    #+#             */
-/*   Updated: 2024/10/08 11:56:34 by larlena          ###   ########.fr       */
+/*   Created: 2020/11/07 19:50:08 by larlena           #+#    #+#             */
+/*   Updated: 2020/11/10 10:33:49 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "service/console/console.hpp"
+#include <string.h>
 
-extern "C" void	putchar(char c) {
-	kfs::ConsoleSingleton::getInstance().write(c);
-}
+void	*memmove(void *dst, const void *src, size_t len)
+{
+	unsigned char	*buf1;
+	unsigned char	*buf2;
 
-extern "C" void	putstr(const char *str) {
-	kfs::ConsoleSingleton::getInstance().write(str);
+	buf1 = (unsigned char *)dst;
+	buf2 = (unsigned char *)src;
+	if (len == 0)
+		return (dst);
+	if (src > dst)
+		memcpy(dst, src, len);
+	if (src < dst)
+	{
+		len--;
+		while (len > 0)
+		{
+			buf1[len] = buf2[len];
+			len--;
+		}
+		buf1[len] = buf2[len];
+	}
+	return (dst);
 }

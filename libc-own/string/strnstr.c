@@ -1,21 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   write.cc                                           :+:      :+:    :+:   */
+/*   strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/17 14:26:49 by larlena           #+#    #+#             */
-/*   Updated: 2024/10/08 11:56:34 by larlena          ###   ########.fr       */
+/*   Created: 2020/11/07 21:47:55 by larlena           #+#    #+#             */
+/*   Updated: 2020/11/09 16:53:04 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "service/console/console.hpp"
+#include <string.h>
 
-extern "C" void	putchar(char c) {
-	kfs::ConsoleSingleton::getInstance().write(c);
-}
+char	*strnstr(const char *str1, const char *str2, size_t len)
+{
+	size_t	i;
+	size_t	j;
 
-extern "C" void	putstr(const char *str) {
-	kfs::ConsoleSingleton::getInstance().write(str);
+	i = 0;
+	while (str1[i] && i <= len)
+	{
+		j = 0;
+		while (i < len && str1[i] && str2[j] && (str1[i] == str2[j]))
+		{
+			i++;
+			j++;
+		}
+		if (str2[j] == '\0')
+			return ((char *)&str1[i - j]);
+		i = i - j;
+		i++;
+	}
+	return (NULL);
 }

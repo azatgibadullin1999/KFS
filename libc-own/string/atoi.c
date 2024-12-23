@@ -1,21 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   write.cc                                           :+:      :+:    :+:   */
+/*   atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/17 14:26:49 by larlena           #+#    #+#             */
-/*   Updated: 2024/10/08 11:56:34 by larlena          ###   ########.fr       */
+/*   Created: 2020/11/07 22:57:58 by larlena           #+#    #+#             */
+/*   Updated: 2024/03/06 12:45:01 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "service/console/console.hpp"
+#include <string.h>
 
-extern "C" void	putchar(char c) {
-	kfs::ConsoleSingleton::getInstance().write(c);
-}
+int		atoi(const char *str)
+{
+	size_t		it = 0;
+	int		sign = 1;
+	long long	dst = 0;
 
-extern "C" void	putstr(const char *str) {
-	kfs::ConsoleSingleton::getInstance().write(str);
+	while (isspace(str[it]))
+		it++;
+	if (str[it] == '-' || str[it] == '+') {
+		if (str[it] == '-')
+			sign = -1;
+		it++;
+	}
+	while (isdigit(str[it])) {
+		dst = dst * 10 + str[it] - '0';
+		it++;
+	}
+	return (dst * sign);
 }

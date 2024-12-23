@@ -1,21 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   write.cc                                           :+:      :+:    :+:   */
+/*   memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/17 14:26:49 by larlena           #+#    #+#             */
-/*   Updated: 2024/10/08 11:56:34 by larlena          ###   ########.fr       */
+/*   Created: 2020/11/07 20:26:04 by larlena           #+#    #+#             */
+/*   Updated: 2020/11/09 16:39:17 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "service/console/console.hpp"
+#include <string.h>
 
-extern "C" void	putchar(char c) {
-	kfs::ConsoleSingleton::getInstance().write(c);
-}
+int		memcmp(const void *s1, const void *s2, size_t n)
+{
+	size_t			i;
+	unsigned char	*buf1;
+	unsigned char	*buf2;
 
-extern "C" void	putstr(const char *str) {
-	kfs::ConsoleSingleton::getInstance().write(str);
+	i = 0;
+	buf1 = (unsigned char *)s1;
+	buf2 = (unsigned char *)s2;
+	while (i < n)
+	{
+		if (buf1[i] - buf2[i] != 0)
+			return (buf1[i] - buf2[i]);
+		i++;
+	}
+	return (0);
 }

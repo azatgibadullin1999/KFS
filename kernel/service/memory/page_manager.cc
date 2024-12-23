@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 22:15:30 by larlena           #+#    #+#             */
-/*   Updated: 2024/07/11 16:38:21 by larlena          ###   ########.fr       */
+/*   Updated: 2024/12/23 20:57:15 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	kfs::PageManager::map(kfs::x86::PageDirectory& directory, const kfs::x86::Vi
 		allocatePageTable(directory, addr);
 	}
 
-	auto&&	tableEntry = (*mMap[directoryEntry.getPhysicalAddress()])[addr.getTableIndex()];
+	auto&&	tableEntry = (*mPageTableMap[directoryEntry.getPhysicalAddress()])[addr.getTableIndex()];
 	if (tableEntry.isPresent()) {
 		return 1;
 	}
@@ -32,7 +32,7 @@ auto	kfs::PageManager::findFirstFreePages(kfs::x86::PageDirectory& directory, ra
 	auto&&	existingPageDirectoryEntrys = directory
 		| std::views::filter([](auto&& directoryEntry){ return directoryEntry.isPresent(); });
 	auto&&	freePageTableEntrys = std::views::transform([this](auto&& directoryEntry) {
-			return *this->mMap[directoryEntry.getPhysicalAddress()];
+			return *this->mPageTableMap[directoryEntry.getPhysicalAddress()];
 		})
 		| std::views::join
 		| std::views::filter([](auto &&tableEntry) { return !tableEntry.isPresent(); });
@@ -71,7 +71,7 @@ int	kfs::PageManager::registerPageTable(kfs::x86::PageDirectoryEntry& directoryE
 	freeTableEntry.setPresent();
 
 	auto&&	newPageTable = std::construct_at(reinterpret_cast<kfs::x86::PageTable *>(addr.get()));
-	auto&&	result = mMap.emplace(physicalAddress, newPageTable);
+	auto&&	result = mPageTableMap.emplace(physicalAddress, newPageTable);
 
 	directoryEntry.setPhysicalAddress(result.first->first);
 }

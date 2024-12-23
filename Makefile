@@ -3,37 +3,48 @@ CXX = i686-elf-g++
 ASM = i686-elf-as
 CFLAGS =	-O2 \
 		-g \
-		-std=c++20 \
 		-fno-builtin \
 		-fno-exceptions \
 		-fno-stack-protector \
-		-fno-rtti \
-		-fno-threadsafe-statics \
 		-ffreestanding \
 		-nostdlib \
 		-nodefaultlibs \
 		-Wall \
 		-Wextra
 
+CXXFLAGS =	$(CFLAGS) \
+		-std=c++20 \
+		-fno-rtti \
+		-fno-threadsafe-statics \
+
 
 export CC
 export ASM
 export CFLAGS
+export CXXFLAGS
 
 NAME = kfs
 ISO = $(NAME).iso
 GRUB_FILE = grub/grub.cfg
-LIBFT_DIR = libc-own
+LIBC_DIR = libc-own
 # LIBFT_MK = libft.mk
-LIBFT = $(LIBFT_DIR)/libft.a
+LIBFT = $(LIBC_DIR)/libc.a
 
-LIBRARYS += $(LIBFT_DIR)
+LIBRARYS += $(LIBC_DIR)
 
 SOURCE_CPP_EXT = .cc
+SOURCE_C_EXT = .c
 SOURCE_ASM_EXT = .S
 LINKER_SCRIPT_EXT = .ld
 OBJECT_EXT = .o
 INCLUDE_EXT = .hpp
+
+export SOURCE_CPP_EXT
+export SOURCE_C_EXT
+export SOURCE_ASM_EXT
+export LINKER_SCRIPT_EXT
+export OBJECT_EXT
+export INCLUDE_EXT
 
 SOURCE_ASM_NAME = boot$(SOURCE_ASM_EXT)
 
@@ -94,21 +105,21 @@ $(NAME): $(OBJECT_FILES) $(LIBFT)
 	$(ASM) $< -o $@
 
 %$(OBJECT_EXT): %$(SOURCE_CPP_EXT)
-	$(CXX) $(CFLAGS) -I./kernel/ -I./kernel/api -I./libcxx-llvm-ported -I./libc-own -c -o $@ $<
+	$(CXX) $(CXXFLAGS) -I./kernel/ -I./kernel/api -I./libcxx-llvm-ported -I./libc-own -c -o $@ $<
 
 $(LIBFT):
-	$(MAKE) --directory=$(LIBFT_DIR)
+	$(MAKE) --directory=$(LIBC_DIR)
 
 clean::
 	@rm -rf $(OBJECT_FILES)
 	@rm -rf $(ISO_BUILD_DIR)
-	$(MAKE) --directory=$(LIBFT_DIR) clean
+	$(MAKE) --directory=$(LIBC_DIR) clean
 
 fclean:: clean
 	@rm -rf $(NAME)
 	@rm -rf $(ISO)
 	@rm -rf $(LIBFT)
-	$(MAKE) --directory=$(LIBFT_DIR) fclean
+	$(MAKE) --directory=$(LIBC_DIR) fclean
 
 run:
 	@qemu-system-i386 -cdrom $(ISO)

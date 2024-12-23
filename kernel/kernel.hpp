@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 13:00:57 by larlena           #+#    #+#             */
-/*   Updated: 2024/10/07 20:04:56 by larlena          ###   ########.fr       */
+/*   Updated: 2024/10/08 11:55:33 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include "driver/vga/service/impl/text_display.hpp"
 # include "driver/service/symbol_processor_auto_scroll.hpp"
 # include "driver/service/usqwerty.hpp"
-# include "console.hpp"
+# include "service/console/console.hpp"
 # include "service/shell/shell.hpp"
 # include "service/panic/panic.hpp"
 

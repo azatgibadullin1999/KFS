@@ -1,58 +1,26 @@
-TARGET = libft.a
+TARGET = libc.a
 
-FUNCTION =	printf.cc \
-		atoi.cc \
-		itoa.cc \
-		isalnum.cc \
-		isalpha.cc \
-		isascii.cc \
-		isdigit.cc \
-		isprint.cc \
-		isspace.cc \
-		memccpy.cc \
-		memchr.cc \
-		memcmp.cc \
-		memcpy.cc \
-		memmove.cc \
-		memset.cc \
-		bzero.cc \
-		strchr.cc \
-		strlcat.cc \
-		strlcpy.cc \
-		strlen.cc \
-		strncmp.cc \
-		strnstr.cc \
-		strrchr.cc \
-		tolower.cc \
-		toupper.cc \
-		malloc.cc \
+SOURCE_FILES :=
 
-STDLIB_DIR = stdlib
-STDLIB = $(STDLIB_DIR)/stdlib.a
+include ./stdio.mk
+include ./stdlib.mk
+include ./string.mk
 
-FILE =  $(foreach P, $(FUNCTION), $(shell find . -name "$(P)"))
-OFILE = $(FILE:.cc=.o)
+OBJECT_FILES =	$(SOURCE_FILES:$(SOURCE_C_EXT)=$(OBJECT_EXT))
 
-HEAD = libft.hpp
+all:: $(TARGET)
 
-all:: $(TARGET) $(OFILE)
+$(TARGET): $(OBJECT_FILES)
+	ar rcT $(TARGET) $^
 
-$(TARGET): $(OFILE) $(STDLIB)
-	ar rcT $(TARGET) $(STDLIB) $^
-
-%.o : %.cc
-	$(CC) $(CFLAGS) -I./../kernel/api/ -o $@ -c $<
-
-$(STDLIB):
-	$(MAKE) --directory=$(STDLIB_DIR)
+%$(OBJECT_EXT) : %$(SOURCE_C_EXT)
+	$(CC) $(CFLAGS) -I./ -I./../kernel/api/ -o $@ -c $<
 
 clean::
-	rm -f $(OFILE)
-	$(MAKE) --directory=$(STDLIB_DIR) clean
+	rm -f $(OBJECT_FILES)
 
 fclean:: clean
 	rm -f $(TARGET)
-	$(MAKE) --directory=$(STDLIB_DIR) fclean
 
 re:: fclean all
 

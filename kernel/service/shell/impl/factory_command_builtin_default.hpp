@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 12:14:16 by larlena           #+#    #+#             */
-/*   Updated: 2024/05/01 22:25:01 by larlena          ###   ########.fr       */
+/*   Updated: 2024/10/09 11:08:55 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,14 @@
 # include "command_builtin_stack.hpp"
 # include "command_builtin_time.hpp"
 # include "command_builtin_empty.hpp"
+# include "command_builtin_panic.hpp"
 
 # define LIST_OF_COMMANDS \
 kfs::shell::CommandBuiltinReboot, \
 kfs::shell::CommandBuiltinShutdown, \
 kfs::shell::CommandBuiltinTime, \
-kfs::shell::CommandBuiltinStack 
+kfs::shell::CommandBuiltinStack, \
+kfs::shell::CommandBuiltinPanic
 
 namespace kfs::shell {
 

@@ -6,14 +6,14 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:48:22 by larlena           #+#    #+#             */
-/*   Updated: 2024/07/12 19:03:51 by larlena          ###   ########.fr       */
+/*   Updated: 2024/10/09 12:41:03 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __KFS_KERNEL_SERVICE_MEMORY_PAGE_MANAGER_HPP__
 # define __KFS_KERNEL_SERVICE_MEMORY_PAGE_MANAGER_HPP__
 
-# include "arch/x86/paging.hpp"
+# include "arch/paging.hpp"
 # include <__map/map.hpp>
 # include <algorithm>
 # include <ranges>
@@ -24,7 +24,7 @@ namespace kfs {
 class PageManager {
 public:
 	PageManager(const kfs::x86::PageTablePointer& initialPage)
-	: mMap({std::make_pair(initialPage.address, initialPage.pointer)}),
+	: mPageTableMap({std::make_pair(initialPage.address, initialPage.pointer)}),
 	  mFreePages(std::ranges::distance(*initialPage.pointer | std::views::filter([](auto&& tableEntry) { return tableEntry.isPresent(); }))) { }
 
 	int	map(kfs::x86::PageDirectory &directory, const kfs::x86::VirtualAddress addr);
@@ -35,7 +35,7 @@ private:
 	auto	findFirstFreePages(kfs::x86::PageDirectory&, range&);
 	int	allocatePageTable(kfs::x86::PageDirectory&, const kfs::x86::VirtualAddress);
 	int	registerPageTable(kfs::x86::PageDirectoryEntry&, kfs::x86::PageTableEntry&, const kfs::x86::VirtualAddress);
-	std::map<PhysicalAddress, kfs::x86::PageTable*>	mMap;
+	std::map<PhysicalAddress, kfs::x86::PageTable*>	mPageTableMap;
 	size_t	mFreePages;
 }; // class PageManager
 

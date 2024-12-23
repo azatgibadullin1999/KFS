@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 13:17:49 by larlena           #+#    #+#             */
-/*   Updated: 2024/07/07 12:30:17 by larlena          ###   ########.fr       */
+/*   Updated: 2024/10/09 12:54:09 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <bitset>
 #include <algorithm>
 #include <ranges>
+#include <service/memory/page_manager.hpp>
 
 ktl::array<uint8_t, 0x2000>	preallocated_pages;
 static const size_t	size_of_page = 0x400;
@@ -30,6 +31,7 @@ extern "C" void *mmap(void *addr, size_t length, int prot, int flags, int fd, of
 	if (indexOfFreePages.begin() != indexOfFreePages.end()) {
 		return reinterpret_cast<void *>(preallocated_pages[*indexOfFreePages.begin() * size_of_page]);
 	}
+	// return 
 	return nullptr;
 }
 

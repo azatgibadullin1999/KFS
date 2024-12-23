@@ -6,27 +6,16 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 17:01:45 by larlena           #+#    #+#             */
-/*   Updated: 2024/06/12 18:12:39 by larlena          ###   ########.fr       */
+/*   Updated: 2024/12/23 20:23:39 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include <stdarg.h>
-# include <stddef.h>
-# include <api.hpp>
-
-typedef struct	s_width {
-	size_t	num;
-}		t_width;
-
-typedef struct	s_printf {
-	va_list		ap;
-	size_t		i;
-	size_t		str_size;
-	t_width		width;
-}			t_printf;
+// # include <stdarg.h>
+// # include <stddef.h>
+// # include <api.hpp>
 
 extern "C" int	printf(const char *format, ...);
 extern "C" void	*memset(void *b, int c, size_t len);
