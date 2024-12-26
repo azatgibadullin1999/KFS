@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 17:46:12 by larlena           #+#    #+#             */
-/*   Updated: 2024/12/23 20:23:20 by larlena          ###   ########.fr       */
+/*   Updated: 2024/12/24 10:45:12 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include <span>
 #include <algorithm>
 #include <ranges>
+#include "service/console/console.hpp"
 #include "service/memory/physical_memory.hpp"
 
 #if defined(__linux__)

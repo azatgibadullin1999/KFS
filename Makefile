@@ -105,7 +105,7 @@ $(NAME): $(OBJECT_FILES) $(LIBFT)
 	$(ASM) $< -o $@
 
 %$(OBJECT_EXT): %$(SOURCE_CPP_EXT)
-	$(CXX) $(CXXFLAGS) -I./kernel/ -I./kernel/api -I./libcxx-llvm-ported -I./libc-own -c -o $@ $<
+	$(CXX) $(CXXFLAGS) -I./kernel/ -I./kernel/api -I./libcxx-llvm-ported -I./libc-own -I./kernel/include -c -o $@ $<
 
 $(LIBFT):
 	$(MAKE) --directory=$(LIBC_DIR)
@@ -127,6 +127,7 @@ run:
 run_debug:
 	@qemu-system-i386 -kernel kfs -s -S -cdrom $(ISO)
 
-re:: fclean all
+re:: fclean
+	$(MAKE) all
 
 .PHONY: all clean fclean run re

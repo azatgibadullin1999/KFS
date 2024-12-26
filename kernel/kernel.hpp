@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 13:00:57 by larlena           #+#    #+#             */
-/*   Updated: 2024/10/08 11:55:33 by larlena          ###   ########.fr       */
+/*   Updated: 2024/12/24 10:37:52 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include "driver/service/symbol_processor_auto_scroll.hpp"
 # include "driver/service/usqwerty.hpp"
 # include "service/console/console.hpp"
+#include "service/memory/physical_memory.hpp"
 # include "service/shell/shell.hpp"
 # include "service/panic/panic.hpp"
 
@@ -60,6 +61,7 @@ public:
 		auto&&	shell = kfs::Shell(&kfs::ConsoleSingleton::getInstance());
 
 		kfs::ConsoleSingleton::getInstance().write(header);
+		kfs::PhysicalMemorySingleton::getInstance().showRange();
 		while (1) {
 			shell.process();
 		}

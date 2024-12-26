@@ -6,15 +6,26 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 22:15:30 by larlena           #+#    #+#             */
-/*   Updated: 2024/12/23 20:57:15 by larlena          ###   ########.fr       */
+/*   Updated: 2024/12/24 17:21:37 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "page_manager.hpp"
+#include "arch/x86/paging.hpp"
 #include "physical_memory.hpp"
+#include "service/memory/memory_range.hpp"
 
-int	kfs::PageManager::map(kfs::x86::PageDirectory& directory, const kfs::x86::VirtualAddress addr) {
-	auto&&	directoryEntry = directory[addr.getDirectoryIndex()];
+int	kfs::PageManager::map(kfs::x86::PageDirectory& directory, const kfs::VirtualAddress addr, enum AllocationType type) {
+	kfs::x86::PageDirectoryEntry	directoryEntry; // = directory[addr.getDirectoryIndex()];
+	PhysicalAddress	physAddr = kfs::PhysicalMemorySingleton::getInstance().alloc();
+
+	if (addr.get() == nullptr) {
+		
+	}
+
+	if (type == AllocationType::PhysicalMapping) {
+		map(directory, physAddr, physAddr)
+	}
 
 	if (!directoryEntry.isPresent()) {
 		allocatePageTable(directory, addr);
@@ -52,7 +63,7 @@ auto	kfs::PageManager::findFirstFreePages(kfs::x86::PageDirectory& directory, ra
 }
 
 
-int	kfs::PageManager::allocatePageTable(kfs::x86::PageDirectory& directory, const kfs::x86::VirtualAddress addr) {
+int	kfs::PageManager::allocatePageTable(kfs::x86::PageDirectory& directory, const kfs::VirtualAddress addr) {
 	auto&&	freePages = ktl::array<TableWithDirectory, 4>();
 	auto&&	page = freePages.begin();
 
@@ -64,7 +75,7 @@ int	kfs::PageManager::allocatePageTable(kfs::x86::PageDirectory& directory, cons
 	registerPageTable(*page->first, *page->second, addr);
 }
 
-int	kfs::PageManager::registerPageTable(kfs::x86::PageDirectoryEntry& directoryEntry, kfs::x86::PageTableEntry& freeTableEntry, const kfs::x86::VirtualAddress addr) {
+int	kfs::PageManager::registerPageTable(kfs::x86::PageDirectoryEntry& directoryEntry, kfs::x86::PageTableEntry& freeTableEntry, const kfs::VirtualAddress addr) {
 	auto&&	physicalAddress = kfs::PhysicalMemorySingleton::getInstance().alloc();
 
 	freeTableEntry.setPhysicalAddress(physicalAddress);
@@ -75,4 +86,15 @@ int	kfs::PageManager::registerPageTable(kfs::x86::PageDirectoryEntry& directoryE
 
 	directoryEntry.setPhysicalAddress(result.first->first);
 }
+
+
+int	kfs::PageManager::map(kfs::x86::PageDirectory &directory, const PhysicalAddress physAddr, const kfs::VirtualAddress virtAddr) {
+	kfs::x86::PageDirectoryEntry	direcotyrEntry = directory[virtAddr.getDirectoryIndex()];
+
+	if (!direcotyrEntry.isPresent()) {
+		auto&&	addr = kfs::PhysicalMemorySingleton::getInstance().alloc();
+		map(directory, addr, reinterpret_cast<void *>(addr));
+	}
+}
+
 

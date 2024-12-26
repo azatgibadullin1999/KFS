@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 18:17:49 by larlena           #+#    #+#             */
-/*   Updated: 2024/07/12 19:03:45 by larlena          ###   ########.fr       */
+/*   Updated: 2024/12/24 10:42:43 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@
 # include <stdint.h>
 # include <bitset>
 # include <array>
-# include "service/memory/physical_memory.hpp"
-
+# include "arch/kerneldef.h"
 namespace kfs::x86 {
 
 namespace experimental {
@@ -179,28 +178,6 @@ using Page = ktl::array<uint8_t, 0x1000>;
 using PageDirectory = ktl::array<PageDirectoryEntry, 0x400>;
 
 using PageTable = ktl::array<PageTableEntry, 0x400>;
-
-// template <typename PageElement>
-// class PagePointer {
-// public:
-// 	PagePointer(PageElement* ptr, PhysicalAddress addr)
-// 	: pointer(ptr),
-// 	  address(addr) { }
-
-// 	PageElement&	operator * () noexcept {
-// 		return *pointer;
-// 	}
-
-// 	PageElement*	operator -> () noexcept {
-// 		return pointer;
-// 	}
-
-
-
-// private:
-// 	PageElement	*pointer;
-// 	PhysicalAddress	address;
-// };
 
 struct PageDirectoryPointer {
 	PageDirectory	*pointer;

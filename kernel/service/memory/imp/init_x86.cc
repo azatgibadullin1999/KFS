@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 22:17:54 by larlena           #+#    #+#             */
-/*   Updated: 2024/07/08 23:03:29 by larlena          ###   ########.fr       */
+/*   Updated: 2024/12/24 10:44:51 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ InitialPageDirectory::InitialPageDirectory() noexcept {
 
 
 std::pair<kfs::x86::PageDirectoryPointer, kfs::x86::PageTablePointer>	initPaging() noexcept {
-	get_page_directory()[0].setPhysicalAddress(reinterpret_cast<kfs::PhysicalAddress>(get_page_table().data()));
+	get_page_directory()[0].setPhysicalAddress(reinterpret_cast<PhysicalAddress>(get_page_table().data()));
 	get_page_directory()[0].flags.present = 1;
 
 	asm volatile (
@@ -49,6 +49,6 @@ std::pair<kfs::x86::PageDirectoryPointer, kfs::x86::PageTablePointer>	initPaging
 	"or $0x80000000, %eax\n\t"
 	"mov %eax, %cr0\n\t"
 	);
-	return {{reinterpret_cast<kfs::x86::PageDirectory*>(get_page_directory().data()), reinterpret_cast<kfs::PhysicalAddress>(get_page_directory().data())},
-		{reinterpret_cast<kfs::x86::PageTable*>(get_page_table().data()), reinterpret_cast<kfs::PhysicalAddress>(get_page_table().data())}};
+	return {{reinterpret_cast<kfs::x86::PageDirectory*>(get_page_directory().data()), reinterpret_cast<PhysicalAddress>(get_page_directory().data())},
+		{reinterpret_cast<kfs::x86::PageTable*>(get_page_table().data()), reinterpret_cast<PhysicalAddress>(get_page_table().data())}};
 }
