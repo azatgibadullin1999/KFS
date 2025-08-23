@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:19:43 by larlena           #+#    #+#             */
-/*   Updated: 2024/12/26 11:47:24 by larlena          ###   ########.fr       */
+/*   Updated: 2025/04/04 15:00:21 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define __KFS_KERNEL_SERVICE_MEMORY_MEMORY_RANGE_HPP__
 
 # include <cstddef>
-# include <__utility/pair.h>
+# include <utility>
 # include "ktypedef.h"
 
 namespace kfs {
@@ -33,11 +33,11 @@ std::pair<MemoryRange, MemoryRange>	exclude(const MemoryRange& memRange, const M
 
 } // namespace kfs
 
-bool	operator == (const kfs::MemoryRange& lhs, const kfs::MemoryRange& rhs);
-bool	operator != (const kfs::MemoryRange& lhs, const kfs::MemoryRange& rhs);
-bool	operator < (const kfs::MemoryRange& lhs, const kfs::MemoryRange& rhs);
-bool	operator > (const kfs::MemoryRange& lhs, const kfs::MemoryRange& rhs);
-bool	operator >= (const kfs::MemoryRange& lhs, const kfs::MemoryRange& rhs);
-bool	operator <= (const kfs::MemoryRange& lhs, const kfs::MemoryRange& rhs);
+static inline bool operator == (const kfs::MemoryRange& lhs, const kfs::MemoryRange& rhs) { return lhs.begin == rhs.begin && lhs.end == rhs.end; }
+static inline bool operator != (const kfs::MemoryRange& lhs, const kfs::MemoryRange& rhs) { return !(lhs == rhs); }
+static inline bool operator <  (const kfs::MemoryRange& lhs, const kfs::MemoryRange& rhs) { return lhs.begin < rhs.begin && lhs.end < rhs.end; }
+static inline bool operator >  (const kfs::MemoryRange& lhs, const kfs::MemoryRange& rhs) { return lhs.begin > rhs.begin && lhs.end > rhs.end; }
+static inline bool operator >= (const kfs::MemoryRange& lhs, const kfs::MemoryRange& rhs) { return !(lhs < rhs); }
+static inline bool operator <= (const kfs::MemoryRange& lhs, const kfs::MemoryRange& rhs) { return !(lhs > rhs); }
 
 #endif // __KFS_KERNEL_SERVICE_MEMORY_MEMORY_RANGE_HPP__

@@ -28,7 +28,7 @@
 # include<__algorithm/find_if_not.h>
 # include<__algorithm/find_segment_if.h>
 // # include<__algorithm/fold.h>
-// # include<__algorithm/for_each.h>
+# include<__algorithm/for_each.h>
 # include<__algorithm/for_each_n.h>
 # include<__algorithm/for_each_segment.h>
 # include<__algorithm/generate.h>
@@ -117,8 +117,8 @@
 // # include<__algorithm/ranges_find_first_of.h>
 // # include<__algorithm/ranges_find_if.h>
 // # include<__algorithm/ranges_find_if_not.h>
-// # include<__algorithm/ranges_for_each.h>
-// # include<__algorithm/ranges_for_each_n.h>
+# include<__algorithm/ranges_for_each.h>
+# include<__algorithm/ranges_for_each_n.h>
 // # include<__algorithm/ranges_generate.h>
 // # include<__algorithm/ranges_generate_n.h>
 // # include<__algorithm/ranges_includes.h>
@@ -154,10 +154,10 @@
 // # include<__algorithm/ranges_pop_heap.h>
 // # include<__algorithm/ranges_prev_permutation.h>
 // # include<__algorithm/ranges_push_heap.h>
-// # include<__algorithm/ranges_remove.h>
-// # include<__algorithm/ranges_remove_copy.h>
-// # include<__algorithm/ranges_remove_copy_if.h>
-// # include<__algorithm/ranges_remove_if.h>
+# include<__algorithm/ranges_remove.h>
+# include<__algorithm/ranges_remove_copy.h>
+# include<__algorithm/ranges_remove_copy_if.h>
+# include<__algorithm/ranges_remove_if.h>
 // # include<__algorithm/ranges_replace.h>
 // # include<__algorithm/ranges_replace_copy.h>
 // # include<__algorithm/ranges_replace_copy_if.h>
@@ -184,7 +184,7 @@
 // # include<__algorithm/ranges_unique.h>
 // # include<__algorithm/ranges_unique_copy.h>
 # include<__algorithm/ranges_upper_bound.h>
-// # include<__algorithm/remove.h>
+# include<__algorithm/remove.h>
 # include<__algorithm/remove_copy.h>
 # include<__algorithm/remove_copy_if.h>
 # include<__algorithm/remove_if.h>

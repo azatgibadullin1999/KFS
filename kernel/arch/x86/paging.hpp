@@ -6,17 +6,21 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 18:17:49 by larlena           #+#    #+#             */
-/*   Updated: 2024/12/24 10:42:43 by larlena          ###   ########.fr       */
+/*   Updated: 2025/06/20 22:01:55 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __KFS_KERNEL_ARCH_X86_PAIGING_HPP__
 # define __KFS_KERNEL_ARCH_X86_PAIGING_HPP__
 
-# include <stdint.h>
-# include <bitset>
-# include <array>
-# include "arch/kerneldef.h"
+#include <cstddef>
+#include <span>
+#include <stdint.h>
+#include <bitset>
+#include <array>
+#include <utility>
+#include "arch/kerneldef.h"
+
 namespace kfs::x86 {
 
 namespace experimental {
@@ -67,127 +71,125 @@ struct [[gnu::packed]] PageTableFlags : public PageFlags {
 
 namespace detail {
 
-struct [[gnu::packed]] PageDirectoryFlags {
-	uint8_t	present:1;
-	uint8_t	read_write:1;
-	uint8_t	user_supervisor:1;
-	uint8_t	page_write_through:1;
-	uint8_t	page_cache_disable:1;
-	uint8_t	accesed:1;
-	uint8_t	avaliable:1;
-	uint8_t	page_size:1;
-};
-
-struct [[gnu::packed]] PageTableFlags {
-	uint8_t	present:1;
-	uint8_t	read_write:1;
-	uint8_t	user_supervisor:1;
-	uint8_t	page_write_through:1;
-	uint8_t	page_cache_disable:1;
-	uint8_t	accesed:1;
-	uint8_t	dirty:1;
-	uint8_t	page_atribute_table:1;
-};
-
-struct [[gnu::packed]] PageDirectory4KBEntry {
-	PageDirectoryFlags	flags;
-	uint8_t			avaliable:4;
-	uint8_t			base_low:4;
-	uint16_t		base_high;
-};
-
-struct [[gnu::packed]] PageTableEntry {
-	PageTableFlags	flags;
-	uint8_t		global:1;
-	uint8_t		avaliable:3;
-	uint8_t		base_low:4;
-	uint16_t	base_high;
-};
 
 const inline uint32_t	address_mask = 0xFFFFF000;
 
 } // namespace detail
 
-class VirtualAddress {
-public:
-	VirtualAddress(void *virtual_address)
-	: mVirtualAddress(virtual_address) { }
-	
-	VirtualAddress(size_t directory_index, size_t table_index)
-	: mVirtualAddress(reinterpret_cast<void*>(directory_index << 22 | table_index << 12 ) ) { }
+namespace page {
 
-	size_t	getDirectoryIndex() const noexcept {
-		return reinterpret_cast<size_t>(mVirtualAddress) >> 22;
+constexpr size_t size = 0x1000;
+
+
+struct Page {
+	ktl::array<uint8_t, size> data;
+};
+static_assert(sizeof(Page) == 0x1000, "");
+
+
+using Pair = std::pair<PhysicalAddress, VirtualAddress>;
+
+enum Type {
+	eDefault,
+	eDirectory,
+	eTable,
+};
+
+struct MetaData {
+	VirtualAddress virtAddr;
+	PhysicalAddress physAddr;
+};
+
+template <typename UnitEntry>
+concept MappingUnitEntry = requires(UnitEntry unit) {
+	{ unit.present };
+	{ unit.getPhysAddr() } -> std::same_as<PhysicalAddress>;
+	{ unit.setPhysAddr(std::declval<PhysicalAddress>()) };
+};
+
+template <typename Unit>
+concept MappingUnit = requires(Unit unit) {
+	{ unit.getEntrys() };
+};
+
+struct Directory : Page {
+	using Pair = std::pair<PhysicalAddress, Directory *>;
+	struct Entry {
+		void	setPhysAddr(PhysicalAddress address) noexcept {
+			base_low = address >> 12;
+			base_high = address >> 16;
+		}
+		PhysicalAddress	getPhysAddr() const noexcept {
+			return base_high << 16 | base_low << 12;
+		}
+		operator uint32_t() noexcept {
+			return *reinterpret_cast<uint32_t *>(this);
+		}
+		uint8_t	present:1;
+		uint8_t	read_write:1;
+		uint8_t	user_supervisor:1;
+		uint8_t	page_write_through:1;
+		uint8_t	page_cache_disable:1;
+		uint8_t	accesed:1;
+		uint8_t	dirty:1;
+		uint8_t	page_atribute_table:1;
+		uint8_t	avaliable:4;
+		uint8_t	base_low:4;
+		uint16_t base_high;
+	};
+
+	auto getEntrys() {
+		return std::span<Entry>(reinterpret_cast<Entry*>(data.begin()), reinterpret_cast<Entry*>(data.end()));
 	}
+	// ktl::array<Entry, 0x400> entrys;
+};
+static_assert(sizeof(Directory::Entry) == 4, "");
+static_assert(sizeof(Directory) == 0x1000, "");
 
-	size_t	getTableIndex() const noexcept {
-		return reinterpret_cast<size_t>(mVirtualAddress) >> 12 & 0x3FF;
+struct Table : Page {
+	using Pair = std::pair<PhysicalAddress, Table *>;
+	struct Entry {
+		void	setPhysAddr(PhysicalAddress address) noexcept {
+			base_low = address >> 12;
+			base_high = address >> 16;
+		}
+		PhysicalAddress	getPhysAddr() const noexcept {
+			return base_high << 16 | base_low << 12;
+		}
+		operator uint32_t() noexcept {
+			return *reinterpret_cast<uint32_t *>(this);
+		}
+		uint8_t	present:1;
+		uint8_t	read_write:1;
+		uint8_t	user_supervisor:1;
+		uint8_t	page_write_through:1;
+		uint8_t	page_cache_disable:1;
+		uint8_t	accesed:1;
+		uint8_t	dirty:1;
+		uint8_t	page_atribute_table:1;
+		uint8_t	global:1;
+		uint8_t	avaliable:3;
+		uint8_t	base_low:4;
+		uint16_t base_high;
+	};
+	auto getEntrys() {
+		return std::span<Entry>(reinterpret_cast<Entry*>(data.begin()), reinterpret_cast<Entry*>(data.end()));
 	}
+	// ktl::array<Entry, 0x400> entrys;
+};
+static_assert(sizeof(Table::Entry) == 4, "");
+static_assert(sizeof(Table) == 0x1000, "");
 
-	void	*get() const noexcept {
-		return mVirtualAddress;
-	}
-private:
-	void	*mVirtualAddress;
-}; // class VirtualAddress
+template <MappingUnit Unit> size_t index(VirtualAddress addr);
+template <> inline size_t index<Directory>(VirtualAddress addr) { return addr >> 22; }
+template <> inline size_t index<Table>(VirtualAddress addr) { return (addr >> 12) & 0x3FF ; }
 
-class [[gnu::packed]] PageTableEntry : public detail::PageTableEntry {
-public:
-	void	setPhysicalAddress(PhysicalAddress address) noexcept {
-		base_low = address >> 12;
-		base_high = address >> 16;
-	}
+template <MappingUnit Unit> bool recursiveMapping(void);
+template <> inline bool recursiveMapping<Directory>(void) { return true; }
+template <> inline bool recursiveMapping<Table>(void) { return false; }
 
-	PhysicalAddress	getPhysicalAddress() const noexcept {
-		return base_high << 16 | base_low << 12;
-	}
+} // namespace page
 
-	void	setPresent() noexcept { flags.present = true; }
-	void	unsetPresent() noexcept { flags.present = false; }
-	bool	isPresent() noexcept { return flags.present; }
-
-	operator uint32_t() noexcept {
-		return *reinterpret_cast<uint32_t *>(this);
-	}
-}; // class PageTableEntry
-
-class [[gnu::packed]] PageDirectoryEntry : public detail::PageDirectory4KBEntry {
-public:
-	void	setPhysicalAddress(PhysicalAddress address) noexcept {
-		base_low = address >> 12;
-		base_high = address >> 16;
-	}
-
-	PhysicalAddress	getPhysicalAddress() const noexcept {
-		return base_high << 16 | base_low << 12;
-	}
-
-	void	setPresent() noexcept { flags.present = true; }
-	void	unsetPresent() noexcept { flags.present = false; }
-	bool	isPresent() noexcept { return flags.present; }
-
-	operator uint32_t() noexcept {
-		return *reinterpret_cast<uint32_t *>(this);
-	}
-}; // class PageDirectoryEntry
-
-using PageUnit = ktl::array<uint32_t, 0x400>;
-
-using Page = ktl::array<uint8_t, 0x1000>;
-
-using PageDirectory = ktl::array<PageDirectoryEntry, 0x400>;
-
-using PageTable = ktl::array<PageTableEntry, 0x400>;
-
-struct PageDirectoryPointer {
-	PageDirectory	*pointer;
-	PhysicalAddress	address;
-}; // struct PageDirectoryPointer
-
-struct PageTablePointer {
-	PageTable	*pointer;
-	PhysicalAddress	address;
-}; // struct PageTablePointer
 
 } // namespace kfs::x86
 

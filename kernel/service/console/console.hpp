@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 15:26:50 by larlena           #+#    #+#             */
-/*   Updated: 2024/07/06 14:00:35 by larlena          ###   ########.fr       */
+/*   Updated: 2025/03/27 19:56:11 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ private:
 
 // }
 
-typedef typename kfs::interface::StaticSingletonWrapper<Console>	ConsoleSingleton;
+typedef typename kfs::interface::singleton_wrapper<Console>	console;
 
 }
 

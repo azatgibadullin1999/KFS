@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 14:19:30 by larlena           #+#    #+#             */
-/*   Updated: 2024/10/09 12:41:22 by larlena          ###   ########.fr       */
+/*   Updated: 2025/03/28 15:07:46 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,8 @@
 
 namespace kfs {
 
-class AddressSpace {
-public:
-	AddressSpace(kfs::x86::PageDirectoryPointer directory)
-	: mDirectory(directory) { }
-private:
-	kfs::x86::PageDirectoryPointer	mDirectory;
+struct AddressSpace {
+	kfs::x86::page::Directory	directory;
 };
 
 }

@@ -12,6 +12,7 @@
 
 #include <string.h>
 
+__attribute__((used))
 void	*memmove(void *dst, const void *src, size_t len)
 {
 	unsigned char	*buf1;

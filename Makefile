@@ -1,22 +1,29 @@
+# CC = clang-19 --target=i686-pc-none-elf -march=i686
+# CXX = clang++-19 --target=i686-pc-none-elf -march=i686
 CC = i686-elf-gcc
 CXX = i686-elf-g++
 ASM = i686-elf-as
-CFLAGS =	-O2 \
+LD = i686-elf-ld
+# LD = lld-19
+CFLAGS =	-O3 \
 		-g \
 		-fno-builtin \
 		-fno-exceptions \
 		-fno-stack-protector \
 		-ffreestanding \
-		-nostdlib \
-		-nodefaultlibs \
+		-Wconversion \
 		-Wall \
-		-Wextra
+		-Wextra \
 
 CXXFLAGS =	$(CFLAGS) \
-		-std=c++20 \
+		-pedantic \
+		-flto \
+		-std=c++23 \
 		-fno-rtti \
 		-fno-threadsafe-statics \
 
+
+		# -nodefaultlibs \
 
 export CC
 export ASM
@@ -38,6 +45,7 @@ SOURCE_ASM_EXT = .S
 LINKER_SCRIPT_EXT = .ld
 OBJECT_EXT = .o
 INCLUDE_EXT = .hpp
+HEADER_DEPENDENCY_EXT = .d
 
 export SOURCE_CPP_EXT
 export SOURCE_C_EXT
@@ -48,33 +56,33 @@ export INCLUDE_EXT
 
 SOURCE_ASM_NAME = boot$(SOURCE_ASM_EXT)
 
-SOURCE_CPP_NAME =	kernel_main$(SOURCE_CPP_EXT) \
-			global_variable_support$(SOURCE_CPP_EXT) \
-			pure_virtual_functions$(SOURCE_CPP_EXT) \
-			alloc$(SOURCE_CPP_EXT) \
-			keyboard$(SOURCE_CPP_EXT) \
-			text_display$(SOURCE_CPP_EXT) \
-			port$(SOURCE_CPP_EXT) \
-			console$(SOURCE_CPP_EXT) \
-			usqwerty$(SOURCE_CPP_EXT) \
-			command_text_display$(SOURCE_CPP_EXT) \
-			command_default$(SOURCE_CPP_EXT) \
-			command_default_auto_scroll$(SOURCE_CPP_EXT) \
-			command_press_newline_auto_scroll$(SOURCE_CPP_EXT) \
-			command_press_backspace$(SOURCE_CPP_EXT) \
-			command_press_newline$(SOURCE_CPP_EXT) \
-			command_press_scroll$(SOURCE_CPP_EXT) \
-			command_press_tab$(SOURCE_CPP_EXT) \
-			write$(SOURCE_CPP_EXT) \
-			gdt_default$(SOURCE_CPP_EXT) \
-			shell$(SOURCE_CPP_EXT) \
-			memory$(SOURCE_CPP_EXT) \
-			memory_range$(SOURCE_CPP_EXT) \
-			physical_memory$(SOURCE_CPP_EXT) \
-			page_manager$(SOURCE_CPP_EXT) \
-			init_x86$(SOURCE_CPP_EXT) \
-			mmap$(SOURCE_CPP_EXT) \
-			panic$(SOURCE_CPP_EXT)
+SOURCE_CPP_NAME = kernel_main$(SOURCE_CPP_EXT) \
+		  global_variable_support$(SOURCE_CPP_EXT) \
+		  pure_virtual_functions$(SOURCE_CPP_EXT) \
+		  alloc$(SOURCE_CPP_EXT) \
+		  keyboard$(SOURCE_CPP_EXT) \
+		  text_display$(SOURCE_CPP_EXT) \
+		  port$(SOURCE_CPP_EXT) \
+		  console$(SOURCE_CPP_EXT) \
+		  usqwerty$(SOURCE_CPP_EXT) \
+		  command_text_display$(SOURCE_CPP_EXT) \
+		  command_default$(SOURCE_CPP_EXT) \
+		  command_default_auto_scroll$(SOURCE_CPP_EXT) \
+		  command_press_newline_auto_scroll$(SOURCE_CPP_EXT) \
+		  command_press_backspace$(SOURCE_CPP_EXT) \
+		  command_press_newline$(SOURCE_CPP_EXT) \
+		  command_press_scroll$(SOURCE_CPP_EXT) \
+		  command_press_tab$(SOURCE_CPP_EXT) \
+		  write$(SOURCE_CPP_EXT) \
+		  gdt_default$(SOURCE_CPP_EXT) \
+		  shell$(SOURCE_CPP_EXT) \
+		  memory$(SOURCE_CPP_EXT) \
+		  memory_range$(SOURCE_CPP_EXT) \
+		  physical_memory$(SOURCE_CPP_EXT) \
+		  page_manager$(SOURCE_CPP_EXT) \
+		  panic$(SOURCE_CPP_EXT) \
+		  init_x86$(SOURCE_CPP_EXT) \
+		  mmap$(SOURCE_CPP_EXT)
 
 LINKER_SCRIPT_NAME = linker$(LINKER_SCRIPT_EXT)
 
@@ -84,7 +92,9 @@ SOURCE_CPP_FILES = $(foreach P, $(SOURCE_CPP_NAME), $(shell find . -name "$(P)")
 LINKER_SCRIPT_FILES = $(foreach P, $(LINKER_SCRIPT_NAME), $(shell find . -name "$(P)"))
 
 OBJECT_FILES =	$(SOURCE_ASM_FILES:$(SOURCE_ASM_EXT)=$(OBJECT_EXT)) \
-		$(SOURCE_CPP_FILES:$(SOURCE_CPP_EXT)=$(OBJECT_EXT))
+		$(SOURCE_CPP_FILES:$(SOURCE_CPP_EXT)=$(OBJECT_EXT)) \
+
+HEADER_DEPENDENCY_FILES = $(OBJECT_FILES:$(OBJECT_EXT)=$(HEADER_DEPENDENCY_EXT))
 
 ISO_BUILD_DIR = root
 
@@ -104,8 +114,11 @@ $(NAME): $(OBJECT_FILES) $(LIBFT)
 %$(OBJECT_EXT): %$(SOURCE_ASM_EXT)
 	$(ASM) $< -o $@
 
+-include $(HEADER_DEPENDENCY_FILES)
+
 %$(OBJECT_EXT): %$(SOURCE_CPP_EXT)
-	$(CXX) $(CXXFLAGS) -I./kernel/ -I./kernel/api -I./libcxx-llvm-ported -I./libc-own -I./kernel/include -c -o $@ $<
+	$(CXX) -MMD $(CXXFLAGS) -I./kernel/ -I./kernel/api -I./libcxx-llvm-ported -I./libc-own -I./kernel/include -c -o $@ $<
+	clang-tidy-19 $< -checks=-*,clang-analyzer-*,-clang-analyzer-cplusplus*,cppcoreguidelines-
 
 $(LIBFT):
 	$(MAKE) --directory=$(LIBC_DIR)
@@ -113,9 +126,11 @@ $(LIBFT):
 clean::
 	@rm -rf $(OBJECT_FILES)
 	@rm -rf $(ISO_BUILD_DIR)
+	@rm -rf $(HEADER_DEPENDENCY_FILES)
 	$(MAKE) --directory=$(LIBC_DIR) clean
 
 fclean:: clean
+clean::
 	@rm -rf $(NAME)
 	@rm -rf $(ISO)
 	@rm -rf $(LIBFT)

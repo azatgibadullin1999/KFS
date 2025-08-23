@@ -12,7 +12,8 @@
 
 #include <string.h>
 
-void	*memcpy(void *dst, const void *src, size_t n)
+__attribute__((used))
+void	*memcpy(void *dst, const void *src, size_t n) 
 {
 	size_t			i;
 	unsigned char	*buf1;

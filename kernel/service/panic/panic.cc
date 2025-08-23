@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 12:20:08 by larlena           #+#    #+#             */
-/*   Updated: 2024/10/08 11:57:03 by larlena          ###   ########.fr       */
+/*   Updated: 2025/03/27 21:12:26 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ const char*	gPanicHeaderMessege ="\
 \n";
 
 void	kfs::panic() {
-	auto&&	console = kfs::ConsoleSingleton::getInstance();
+	auto&&	console = console::instance();
 	
 	console.getTextDisplay()->clear();
 	console.getTextDisplay()->setCursorPosition(0, 0);

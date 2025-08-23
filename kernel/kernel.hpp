@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 13:00:57 by larlena           #+#    #+#             */
-/*   Updated: 2024/12/24 10:37:52 by larlena          ###   ########.fr       */
+/*   Updated: 2025/03/27 19:56:22 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ public:
 		static auto&&	display = kfs::driver::vga::VGATextDisplay();
 		static auto&&	keyboard = kfs::driver::ps2::Keyboard(kfs::driver::common::USqwerty());
 		static auto&&	processor = kfs::driver::common::SymbolProcessorAutoScroll(&display);
-		kfs::ConsoleSingleton::getInstance().setTextDisplay(&display);
-		kfs::ConsoleSingleton::getInstance().setKeyboard(&keyboard);
-		kfs::ConsoleSingleton::getInstance().setSymbolProcessor(&processor);
+		kfs::console::instance().setTextDisplay(&display);
+		kfs::console::instance().setKeyboard(&keyboard);
+		kfs::console::instance().setSymbolProcessor(&processor);
 
 		auto&&	memory [[maybe_unused]] = Memory::init(
 			reinterpret_cast<multiboot_memory_map_t *>(mbd->mmap_addr),
@@ -58,10 +58,9 @@ public:
      +#+         +#+ +#+#+#    +#+    +#+	    +#+#+#+#+#+   +#+\n\
     #+#        #+#   #+#+     #+#    #+#	         #+#    #+#\n\
    ##########  ##########    #########	        	###   ########.fr\n\n";
-		auto&&	shell = kfs::Shell(&kfs::ConsoleSingleton::getInstance());
+		auto&&	shell = kfs::Shell(&kfs::console::instance());
 
-		kfs::ConsoleSingleton::getInstance().write(header);
-		kfs::PhysicalMemorySingleton::getInstance().showRange();
+		kfs::console::instance().write(header);
 		while (1) {
 			shell.process();
 		}

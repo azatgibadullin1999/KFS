@@ -6,17 +6,17 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 14:03:28 by larlena           #+#    #+#             */
-/*   Updated: 2024/10/09 11:12:45 by larlena          ###   ########.fr       */
+/*   Updated: 2025/01/21 17:40:48 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cstdlib>
 
-void *operator new(size_t size) {
+void *operator new(std::size_t size) {
     return ::malloc(size);
 }
  
-void *operator new[](size_t size) {
+void *operator new[](std::size_t size) {
     return ::malloc(size);
 }
  

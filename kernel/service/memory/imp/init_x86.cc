@@ -6,49 +6,64 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 22:17:54 by larlena           #+#    #+#             */
-/*   Updated: 2024/12/24 10:44:51 by larlena          ###   ########.fr       */
+/*   Updated: 2025/04/04 15:04:27 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "init_x86.hpp"
+#include "arch/kerneldef.h"
+#include "arch/x86/paging.hpp"
+#include <array>
+#include <memory>
+#include <algorithm>
+#include <__bit/bit_cast.h>
 
-ktl::array<InitialPageDirectory, 0x400>&	get_page_directory() {
-	static ktl::array<InitialPageDirectory, 0x400>	page_directory [[gnu::section(".bss")]] [[gnu::aligned(0x1000)]];
-	return page_directory;
+namespace kfs::x86::page::initial {
+
+page::Directory&	getDirectory() {
+	static page::Directory	directory [[gnu::section(".bss")]] [[gnu::aligned(0x1000)]];
+
+	std::ranges::for_each(directory.entrys, [](auto &&entry) {
+		entry.read_write = true;
+		entry.set_phys_addr(0);
+	});
+	return directory;
 }
 
-ktl::array<InitialPageTable, 0x400>&	get_page_table() {
-	static ktl::array<InitialPageTable, 0x400>	page_table [[gnu::section(".bss")]] [[gnu::aligned(0x1000)]];
-	return page_table;
+page::Table&	getTable() {
+	static page::Table	table [[gnu::section(".bss")]] [[gnu::aligned(0x1000)]];\
+	size_t index = 0;
+
+	std::ranges::for_each(table.entrys, [&index](auto &&entry) {
+		entry.present = true;
+		entry.read_write = true;
+		entry.set_phys_addr(index++ * 0x1000);
+	});
+	return table;
 }
 
-InitialPageTable::InitialPageTable() noexcept {
-	static size_t it = 0;
-	flags.present = 1;
-	flags.read_write = 1;
-	setPhysicalAddress(it++ * 0x1000);
-}
+std::pair<page::Directory::Pair, page::Table::Pair>	init_paging() noexcept {
+	auto &&directory = getDirectory();
+	auto &&directoryEntry = directory.entrys[0];
+	auto &&initialTable = getTable();
 
-InitialPageDirectory::InitialPageDirectory() noexcept {
-	flags.read_write = 1;
-	setPhysicalAddress(0);
-}
-
-
-std::pair<kfs::x86::PageDirectoryPointer, kfs::x86::PageTablePointer>	initPaging() noexcept {
-	get_page_directory()[0].setPhysicalAddress(reinterpret_cast<PhysicalAddress>(get_page_table().data()));
-	get_page_directory()[0].flags.present = 1;
+	directoryEntry.present = true;
+	directoryEntry.set_phys_addr(std::bit_cast<PhysicalAddress>(initialTable.entrys.data()));
 
 	asm volatile (
 	"mov %0, %%cr3\n\t"
 		:
-		: "a"(get_page_directory().data()));
+		: "a"(directory.entrys.data()));
 
 	asm volatile (
 	"mov %cr0, %eax\n\t"
 	"or $0x80000000, %eax\n\t"
 	"mov %eax, %cr0\n\t"
 	);
-	return {{reinterpret_cast<kfs::x86::PageDirectory*>(get_page_directory().data()), reinterpret_cast<PhysicalAddress>(get_page_directory().data())},
-		{reinterpret_cast<kfs::x86::PageTable*>(get_page_table().data()), reinterpret_cast<PhysicalAddress>(get_page_table().data())}};
+	return {
+		{std::bit_cast<PhysicalAddress>(std::addressof(directory)),   std::addressof(directory)},
+		{std::bit_cast<PhysicalAddress>(std::addressof(initialTable)),std::addressof(initialTable)}
+	};
+}
+
 }
