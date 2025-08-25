@@ -1,6 +1,2 @@
 .*
-*.o
-*.a
-root
-kfs
-kfs.iso
+build

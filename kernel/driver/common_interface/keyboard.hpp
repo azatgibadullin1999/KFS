@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 19:42:09 by larlena           #+#    #+#             */
-/*   Updated: 2024/06/05 21:54:48 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/13 14:32:19 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <utility>
 # include <array>
 # include <bitset>
-# include <libft.hpp>
 
 namespace kfs::driver::interface {
 

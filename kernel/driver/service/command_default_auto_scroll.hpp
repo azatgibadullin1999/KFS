@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 16:37:02 by larlena           #+#    #+#             */
-/*   Updated: 2024/06/12 18:10:23 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/13 17:36:07 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define __KFS_KERNEL_DRIVER_SERVICE_COMMAND_DEFAULT_AUTO_SCROLL_HPP__
 
 # include "command_text_display.hpp"
-# include <libft.hpp>
+# include <cctype>
 
 namespace kfs::driver::common {
 
@@ -24,7 +24,7 @@ public:
 	using CommandTextDisplay::operator=;
 
 	bool	operator == (const char &rhs) const {
-		return isprint(rhs);
+		return std::isprint(rhs);
 	}
 
 	void	execute() override;

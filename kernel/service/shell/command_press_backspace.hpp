@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 23:47:48 by larlena           #+#    #+#             */
-/*   Updated: 2024/06/07 16:15:59 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/13 16:05:25 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <stddef.h>
 # include <iterator>
-# include "common/command.hpp"
+# include "command.hpp"
 
 
 namespace kfs::shell {

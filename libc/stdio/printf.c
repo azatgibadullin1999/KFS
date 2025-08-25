@@ -6,12 +6,14 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 17:09:38 by larlena           #+#    #+#             */
-/*   Updated: 2024/12/23 20:45:39 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/13 17:43:00 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <api.h>
 #include <stdarg.h>
+#include <ctype.h>
+#include <stdlib.h>
 #include <string.h>
 
 typedef struct	s_width {

@@ -6,16 +6,18 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 07:02:48 by larlena           #+#    #+#             */
-/*   Updated: 2024/06/12 18:14:14 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/13 17:37:45 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __KFS_KERNEL_SERVICE_SHELL_IMPL_COMMAND_BUILTIN_STACK_HPP__
 # define __KFS_KERNEL_SERVICE_SHELL_IMPL_COMMAND_BUILTIN_STACK_HPP__
 
-# include "service/shell/interface/command_builtin.hpp"
-# include "kernel.hpp"
-# include "common/factory.hpp"
+# include <cstdio>
+# include <cctype>
+
+# include "interface/command_builtin.hpp"
+# include "factory.hpp"
 
 extern void	*stack_top;
 
@@ -51,23 +53,23 @@ public:
 		}
 		
 		for (; it > ite; it -= shift) {
-			printf("%8x: ", it);
+			std::printf("%8x: ", it);
 			for (size_t index = -1; index != -(shift + 1); --index) {
-				printf("%2p ", it[index]);
+				std::printf("%2p ", it[index]);
 				if (index == -(shift / 2)) {
-					printf(" ");
+					std::printf(" ");
 				}
 			}
 			for (size_t index = 1; index != -(shift + 1); --index) {
-				if (isprint(it[index]) && !isspace(it[index])) {
-					printf("%c", it[index]);
+				if (std::isprint(it[index]) && !std::isspace(it[index])) {
+					std::printf("%c", it[index]);
 				} else {
-					printf("%c", '.');
+					std::printf("%c", '.');
 				}
 			}
-			printf("\n");
+			std::printf("\n");
 		}
-		printf("size of stack (divided by %d): %d  |  stack top: %8x\nebp: %8x  |  esp: %8x\n", shift, ((size_t)stack_top - esp) / shift, stack_top, esp, ebp);
+		std::printf("size of stack (divided by %d): %d  |  stack top: %8x\nebp: %8x  |  esp: %8x\n", shift, ((size_t)stack_top - esp) / shift, stack_top, esp, ebp);
 		
 	}
 };

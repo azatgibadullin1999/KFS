@@ -6,14 +6,14 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 22:00:20 by larlena           #+#    #+#             */
-/*   Updated: 2024/06/05 21:40:05 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/13 14:29:38 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __KFS_KERNEL_SERVICE_SHELL_SHELL_HPP__
 # define __KFS_KERNEL_SERVICE_SHELL_SHELL_HPP__
 
-# include "interface/shell.hpp"
+# include "../shell.hpp"
 # include <array>
 
 namespace kfs {

@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 01:23:52 by larlena           #+#    #+#             */
-/*   Updated: 2024/06/07 17:06:41 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/13 15:20:20 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <tuple>
 # include <utility>
 # include <algorithm>
-# include "common/command.hpp"
+# include "command.hpp"
 
 namespace kfs::driver::interface {
 

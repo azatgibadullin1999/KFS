@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 13:00:57 by larlena           #+#    #+#             */
-/*   Updated: 2025/03/27 19:56:22 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/13 16:27:37 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,11 @@
 # include <stdbool.h>
 # include <stddef.h>
 # include <stdint.h>
-# include <libft.hpp>
-# include "driver/ps2/service/impl/keyboard.hpp"
-# include "driver/vga/service/impl/text_display.hpp"
+# include "driver/ps2/keyboard.hpp"
+# include "driver/vga/text_display.hpp"
 # include "driver/service/symbol_processor_auto_scroll.hpp"
 # include "driver/service/usqwerty.hpp"
 # include "service/console/console.hpp"
-#include "service/memory/physical_memory.hpp"
 # include "service/shell/shell.hpp"
 # include "service/panic/panic.hpp"
 

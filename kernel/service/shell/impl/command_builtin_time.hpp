@@ -6,16 +6,16 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 07:01:32 by larlena           #+#    #+#             */
-/*   Updated: 2024/06/05 21:56:32 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/13 17:09:19 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __KFS_KERNEL_SERVICE_SHELL_IMPL_COMMAND_BUILTIN_TIME_HPP__
 # define __KFS_KERNEL_SERVICE_SHELL_IMPL_COMMAND_BUILTIN_TIME_HPP__
 
-# include "service/shell/interface/command_builtin.hpp"
-# include "common/factory.hpp"
-# include "driver/utils/port.hpp"
+# include "interface/command_builtin.hpp"
+# include "factory.hpp"
+# include "port.hpp"
 
 namespace kfs::shell {
 
@@ -126,7 +126,7 @@ public:
 			year += (CURRENT_YEAR / 100) * 100;
 			if(year < CURRENT_YEAR) year += 100;
 		}
-		printf("%d/%d/%d %d:%d:%d\n", day, month, year, hour, minute, second);
+		std::printf("%d/%d/%d %d:%d:%d\n", day, month, year, hour, minute, second);
 	}
 private:
 	inline static const size_t	CURRENT_YEAR = 2024;

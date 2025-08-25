@@ -60,8 +60,7 @@ size_t strlen(const char* s);
 #include <__config>
 #include <__type_traits/is_constant_evaluated.h>
 
-// #include <string.h>
-#include <libft.hpp>
+#include <string.h>
 #define _LIBCPP_STRING_H
 
 #ifndef _LIBCPP_STRING_H

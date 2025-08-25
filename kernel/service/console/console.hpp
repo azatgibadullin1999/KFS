@@ -6,15 +6,15 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 15:26:50 by larlena           #+#    #+#             */
-/*   Updated: 2025/03/27 19:56:11 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/13 16:02:43 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __KFS_KERNEL_CONSOLE_HPP__
 # define __KFS_KERNEL_CONSOLE_HPP__
 
-# include "interface/console.hpp"
-# include "common/singleton.hpp"
+# include "../console.hpp"
+# include "singleton.hpp"
 namespace kfs {
 
 // namespace {

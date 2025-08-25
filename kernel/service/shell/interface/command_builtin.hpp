@@ -6,14 +6,14 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 06:44:56 by larlena           #+#    #+#             */
-/*   Updated: 2024/07/11 12:32:47 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/13 16:06:14 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __KFS_KERNEL_SERVICE_SHELL_INTERFACE_COMMAND_BUILTIN_HPP__
 # define __KFS_KERNEL_SERVICE_SHELL_INTERFACE_COMMAND_BUILTIN_HPP__
 
-# include "common/command.hpp"
+# include "command.hpp"
 # include <string_view>
 # include <array>
 

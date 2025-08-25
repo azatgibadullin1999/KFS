@@ -6,15 +6,17 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 07:03:01 by larlena           #+#    #+#             */
-/*   Updated: 2024/06/05 21:56:32 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/13 18:10:46 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __KFS_KERNEL_SERVICE_SHELL_IMPL_COMMAND_BUILTIN_HALT_HPP__
 # define __KFS_KERNEL_SERVICE_SHELL_IMPL_COMMAND_BUILTIN_HALT_HPP__
 
-# include "service/shell/interface/command_builtin.hpp"
-# include "common/factory.hpp"
+# include <cstdio>
+
+# include "factory.hpp"
+# include "interface/command_builtin.hpp"
 
 namespace kfs::shell {
 
@@ -32,7 +34,7 @@ public:
 		return "da\n";
 	}
 	void		execute() {
-		printf("CommandBuiltinHalt\n");
+		std::printf("CommandBuiltinHalt\n");
 	}
 };
 

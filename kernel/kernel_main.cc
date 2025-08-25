@@ -6,22 +6,14 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 17:46:12 by larlena           #+#    #+#             */
-/*   Updated: 2024/12/24 10:45:12 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/13 16:28:56 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdint.h>
-#include "../boot/multiboot.h"
+#include "multiboot.h"
 #include "kernel.hpp"
-#include <string.h>
-#include <stdio.h>
 #include <elf.h>
-
-#include <span>
-#include <algorithm>
-#include <ranges>
-#include "service/console/console.hpp"
-#include "service/memory/physical_memory.hpp"
 
 #if defined(__linux__)
 # error "You are not using a cross-compiler, you will most certainly run into trouble"

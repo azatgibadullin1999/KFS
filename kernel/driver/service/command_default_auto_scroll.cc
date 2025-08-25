@@ -6,18 +6,20 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 16:37:16 by larlena           #+#    #+#             */
-/*   Updated: 2024/06/12 18:10:23 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/13 17:35:59 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "command_default_auto_scroll.hpp"
+#include <cctype>
+
 #include "command_press_scroll.hpp"
+#include "command_default_auto_scroll.hpp"
 
 namespace kfs::driver::common {
 
 void	CommandDefaultAutoScroll::execute() {
 	static auto&&	scroll = CommandPressScroll(0, mTextDisplay);
-	if (!isprint(mChar))
+	if (!std::isprint(mChar))
 			return;
 	size_t	row = mTextDisplay->getCurrentRow();
 	size_t	column = mTextDisplay->getCurrentColumn();

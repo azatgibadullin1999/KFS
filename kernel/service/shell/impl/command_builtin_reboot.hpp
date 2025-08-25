@@ -6,15 +6,15 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 06:59:13 by larlena           #+#    #+#             */
-/*   Updated: 2024/06/05 21:56:32 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/13 16:06:47 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __KFS_KERNEL_SERVICE_SHELL_IMPL_COMMAND_BUILTIN_REBOOT_HPP__
 # define __KFS_KERNEL_SERVICE_SHELL_IMPL_COMMAND_BUILTIN_REBOOT_HPP__
 
-# include "service/shell/interface/command_builtin.hpp"
-# include "common/factory.hpp"
+# include "interface/command_builtin.hpp"
+# include "factory.hpp"
 
 namespace kfs::shell {
 
