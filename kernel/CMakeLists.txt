@@ -2,6 +2,7 @@ add_subdirectory(api)
 add_subdirectory(service)
 add_subdirectory(driver)
 add_subdirectory(common)
+add_subdirectory(arch)
 
 execute_process(
 	COMMAND ${CMAKE_C_COMPILER} -print-libgcc-file-name

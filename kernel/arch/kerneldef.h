@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 10:40:49 by larlena           #+#    #+#             */
-/*   Updated: 2025/04/02 14:21:27 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/13 22:37:11 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <cstddef>
 
-using VirtualAddress = size_t;
-using PhysicalAddress = size_t;
+using virt_addr_t = void *;
+using phys_addr_t = size_t;
 
 #endif // __KFS_KERNEL_ARCH_KERNELDEF_H__

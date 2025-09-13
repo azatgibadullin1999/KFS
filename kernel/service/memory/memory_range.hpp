@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:19:43 by larlena           #+#    #+#             */
-/*   Updated: 2025/04/04 15:00:21 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/13 23:30:09 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,14 @@
 
 # include <cstddef>
 # include <utility>
-# include "ktypedef.h"
+
+# include "kerneldef.h"
 
 namespace kfs {
 
 struct MemoryRange {
-	addr_t	begin;
-	addr_t	end;
+	phys_addr_t	begin;
+	phys_addr_t	end;
 };
 
 bool		valid(const MemoryRange& range) noexcept;

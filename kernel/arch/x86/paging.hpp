@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 18:17:49 by larlena           #+#    #+#             */
-/*   Updated: 2025/06/20 22:01:55 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/13 22:54:21 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include <bitset>
 #include <array>
 #include <utility>
-#include "arch/kerneldef.h"
+#include "kerneldef.h"
 
 namespace kfs::x86 {
 
@@ -87,7 +87,7 @@ struct Page {
 static_assert(sizeof(Page) == 0x1000, "");
 
 
-using Pair = std::pair<PhysicalAddress, VirtualAddress>;
+using Pair = std::pair<phys_addr_t, virt_addr_t>;
 
 enum Type {
 	eDefault,
@@ -96,15 +96,15 @@ enum Type {
 };
 
 struct MetaData {
-	VirtualAddress virtAddr;
-	PhysicalAddress physAddr;
+	virt_addr_t virtAddr;
+	phys_addr_t physAddr;
 };
 
 template <typename UnitEntry>
 concept MappingUnitEntry = requires(UnitEntry unit) {
 	{ unit.present };
-	{ unit.getPhysAddr() } -> std::same_as<PhysicalAddress>;
-	{ unit.setPhysAddr(std::declval<PhysicalAddress>()) };
+	{ unit.getPhysAddr() } -> std::same_as<phys_addr_t>;
+	{ unit.setPhysAddr(std::declval<phys_addr_t>()) };
 };
 
 template <typename Unit>
@@ -113,13 +113,13 @@ concept MappingUnit = requires(Unit unit) {
 };
 
 struct Directory : Page {
-	using Pair = std::pair<PhysicalAddress, Directory *>;
+	using Pair = std::pair<phys_addr_t, Directory *>;
 	struct Entry {
-		void	setPhysAddr(PhysicalAddress address) noexcept {
+		void	setPhysAddr(phys_addr_t address) noexcept {
 			base_low = address >> 12;
 			base_high = address >> 16;
 		}
-		PhysicalAddress	getPhysAddr() const noexcept {
+		phys_addr_t	getPhysAddr() const noexcept {
 			return base_high << 16 | base_low << 12;
 		}
 		operator uint32_t() noexcept {
@@ -147,13 +147,13 @@ static_assert(sizeof(Directory::Entry) == 4, "");
 static_assert(sizeof(Directory) == 0x1000, "");
 
 struct Table : Page {
-	using Pair = std::pair<PhysicalAddress, Table *>;
+	using Pair = std::pair<phys_addr_t, Table *>;
 	struct Entry {
-		void	setPhysAddr(PhysicalAddress address) noexcept {
+		void	setPhysAddr(phys_addr_t address) noexcept {
 			base_low = address >> 12;
 			base_high = address >> 16;
 		}
-		PhysicalAddress	getPhysAddr() const noexcept {
+		phys_addr_t	getPhysAddr() const noexcept {
 			return base_high << 16 | base_low << 12;
 		}
 		operator uint32_t() noexcept {
@@ -180,9 +180,9 @@ struct Table : Page {
 static_assert(sizeof(Table::Entry) == 4, "");
 static_assert(sizeof(Table) == 0x1000, "");
 
-template <MappingUnit Unit> size_t index(VirtualAddress addr);
-template <> inline size_t index<Directory>(VirtualAddress addr) { return addr >> 22; }
-template <> inline size_t index<Table>(VirtualAddress addr) { return (addr >> 12) & 0x3FF ; }
+template <MappingUnit Unit> size_t index(virt_addr_t addr);
+template <> inline size_t index<Directory>(virt_addr_t addr) { return reinterpret_cast<size_t>(addr) >> 22; }
+template <> inline size_t index<Table>(virt_addr_t addr) { return (reinterpret_cast<size_t>(addr) >> 12) & 0x3FF ; }
 
 template <MappingUnit Unit> bool recursiveMapping(void);
 template <> inline bool recursiveMapping<Directory>(void) { return true; }
