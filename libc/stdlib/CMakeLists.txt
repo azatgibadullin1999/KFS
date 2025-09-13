@@ -1,5 +1,5 @@
 add_library(kfs_libc_stdlib STATIC
-        # malloc.c
+        malloc.c
         atoi.c
         itoa.c
 )
