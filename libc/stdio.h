@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 19:52:03 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/13 17:51:09 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/14 00:48:12 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+#define EOF -1
 
 int	printf(const char *format, ...);
 

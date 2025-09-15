@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 07:00:54 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/13 16:07:02 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/14 00:18:24 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ public:
 	CommandBuiltinShutdown() :
 	mPort(0x604) { }
 
-	ktl::string_view	getName() const {
+	std::string_view	getName() const {
 		return "shutdown";
 	}
-	ktl::string_view	getShortDescription() const {
+	std::string_view	getShortDescription() const {
 		return "shutdown - Command to power off the system.\n";
 	}
-	ktl::string_view	getFullDescription() const {
+	std::string_view	getFullDescription() const {
 		return "da\n";
 	}
 	void		execute() {

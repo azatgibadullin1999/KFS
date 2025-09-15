@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 11:05:04 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/13 16:09:32 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/14 00:18:24 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ class CommandBuiltinPanic :
 	public kfs::shell::interface::ICommandBuiltin,
 	public kfs::interface::StaticInstanceFactory<CommandBuiltinPanic> {
 public:
-	ktl::string_view	getName() const {
+	std::string_view	getName() const {
 		return "panic";
 	}
-	ktl::string_view	getShortDescription() const {
+	std::string_view	getShortDescription() const {
 		return "panic - Calls panic function that stops system.\n";
 	}
-	ktl::string_view	getFullDescription() const {
+	std::string_view	getFullDescription() const {
 		return "da\n";
 	}
 	void		execute() { }

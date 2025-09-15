@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 00:12:42 by larlena           #+#    #+#             */
-/*   Updated: 2024/06/07 17:46:37 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/15 18:18:56 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,19 @@ namespace {
 
 template <typename ContainerArgs, typename ContainerStr>
 ContainerArgs	&parse(ContainerArgs &args, ContainerStr &str) {
-	static const ktl::array<char, 6>	spaceChars{'\t', '\v', ' ' , '\n', '\r', '\f'};
-	auto&&	it = ktl::find_first_not_of(str.begin(), str.end(), spaceChars.begin(), spaceChars.end());
+	static const std::array<char, 6>	spaceChars{'\t', '\v', ' ' , '\n', '\r', '\f'};
+	auto&&	it = std::ranges::find_if(str, [&spaceChars](auto &&ch) {
+		return std::ranges::find(spaceChars, ch) == spaceChars.end();
+	});
 	auto&&	argsIt = args.begin();
 	auto	ite = it;
 
 	for (; argsIt != args.end() - 1 && it != str.end(); ++argsIt) {
 		*argsIt = it;
 		it = std::find_first_of(it, str.end(), spaceChars.begin(), spaceChars.end());
-		ite = ktl::find_first_not_of(it, str.end(), spaceChars.begin(), spaceChars.end());
+		ite = std::find_if(it, str.end(), [&spaceChars](auto &&ch) {
+			return std::ranges::find(spaceChars, ch) == spaceChars.end();
+		});
 		std::fill(it, ite, 0);
 		it = ite;
 	}

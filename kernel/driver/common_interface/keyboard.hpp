@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 19:42:09 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/13 14:32:19 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/14 00:18:49 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ class IKeyboard {
 public:
 	class Decoder {
 	public:
-		using container = ktl::array<uint8_t, 128>;
+		using container = std::array<uint8_t, 128>;
 
 		constexpr Decoder(container &&keyMap, container &&shiftKeyMap) :
 		mKeyMap(std::move(keyMap)),
@@ -91,7 +91,7 @@ public:
 
 		container		mKeyMap;
 		container		mShiftKeyMap;
-		ktl::array<uint8_t, 256>	mBackwardKeyMap;
+		std::array<uint8_t, 256>	mBackwardKeyMap;
 	};
 	constexpr IKeyboard(Decoder &&decoder) :
 	mDecoder(std::move(decoder)) { }
@@ -102,7 +102,7 @@ public:
 		return mKeysState[mDecoder.encode(code)];
 	}
 protected:
-	mutable ktl::bitset<128>	mKeysState;
+	mutable std::bitset<128>	mKeysState;
 	Decoder			mDecoder;
 };
 

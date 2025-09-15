@@ -2,6 +2,7 @@ add_library(kfs_libc_stdlib STATIC
         malloc.c
         atoi.c
         itoa.c
+        div.c
 )
 
 include_directories(SYSTEM ${CMAKE_CURRENT_SOURCE_DIR})

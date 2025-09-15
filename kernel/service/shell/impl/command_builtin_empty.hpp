@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 16:41:15 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/13 17:08:32 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/14 00:18:24 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ class CommandBuiltinEmpty :
 	public kfs::shell::interface::ICommandBuiltin,
 	public kfs::interface::StaticInstanceFactory<CommandBuiltinEmpty> {
 public:
-	ktl::string_view	getName() const {
+	std::string_view	getName() const {
 		return "empty";
 	}
-	ktl::string_view	getShortDescription() const {
+	std::string_view	getShortDescription() const {
 		return "empty\n";
 	}
-	ktl::string_view	getFullDescription() const {
+	std::string_view	getFullDescription() const {
 		return "empty\n";
 	}
 	void		execute() {

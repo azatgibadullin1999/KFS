@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 13:09:28 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/13 17:52:06 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/14 01:01:03 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ char	*strchr(const char *s, int c);
 char	*strrchr(const char *s, int c);
 char	*strnstr(const char *str1, const char *str2, size_t len);
 int	strncmp(const char *str1, const char *str2, size_t n);
-char	*itoa(long long value, char *str, int base);
-int	atoi(const char *str);
 void	*memchr(const void *s, int c, size_t n);
 
 #ifdef __cplusplus

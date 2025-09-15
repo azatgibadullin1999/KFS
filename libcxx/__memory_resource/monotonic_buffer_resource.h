@@ -9,7 +9,6 @@
 #ifndef _LIBCPP___MEMORY_RESOURCE_MONOTONIC_BUFFER_RESOURCE_H
 #define _LIBCPP___MEMORY_RESOURCE_MONOTONIC_BUFFER_RESOURCE_H
 
-#include <__availability>
 #include <__config>
 #include <__memory/addressof.h>
 #include <__memory_resource/memory_resource.h>
@@ -83,7 +82,7 @@ public:
 
   monotonic_buffer_resource(const monotonic_buffer_resource&) = delete;
 
-  /* _LIBCPP_HIDE_FROM_ABI_VIRTUAL */ ~monotonic_buffer_resource() /* override */ { /* release(); */ }
+  _LIBCPP_HIDE_FROM_ABI_VIRTUAL ~monotonic_buffer_resource() override { release(); }
 
   monotonic_buffer_resource& operator=(const monotonic_buffer_resource&) = delete;
 
@@ -91,21 +90,16 @@ public:
     if (__initial_.__start_ != nullptr)
       __initial_.__cur_ = __initial_.__end_;
     while (__chunks_ != nullptr) {
-      // __chunk_footer* __next = __chunks_->__next_;
-      // __res_->deallocate(__chunks_->__start_, __chunks_->__allocation_size(), __chunks_->__align_);
-      // __chunks_ = __next;
+      __chunk_footer* __next = __chunks_->__next_;
+      __res_->deallocate(__chunks_->__start_, __chunks_->__allocation_size(), __chunks_->__align_);
+      __chunks_ = __next;
     }
   }
 
   _LIBCPP_HIDE_FROM_ABI memory_resource* upstream_resource() const { return __res_; }
 
 protected:
-  void* do_allocate(size_t __bytes, size_t __alignment) override {
-    if ((__initial_.__cur_ -= __bytes) >= __initial_.__start_) {
-      return __initial_.__cur_;
-    }
-    return nullptr;
-  }
+  void* do_allocate(size_t __bytes, size_t __alignment) override; // key function
 
   _LIBCPP_HIDE_FROM_ABI_VIRTUAL void do_deallocate(void*, size_t, size_t) override {}
 

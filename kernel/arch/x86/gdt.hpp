@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 11:54:03 by larlena           #+#    #+#             */
-/*   Updated: 2024/06/12 18:13:03 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/14 00:18:12 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ public:
 	}
 
 private:
-	ktl::array<Desk, NumberOfDesks>	mDesks;
+	std::array<Desk, NumberOfDesks>	mDesks;
 	Register	mRegister;
 };
 

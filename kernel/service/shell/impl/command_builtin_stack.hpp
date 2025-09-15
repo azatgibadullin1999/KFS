@@ -6,14 +6,14 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 07:02:48 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/13 17:37:45 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/14 00:49:02 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __KFS_KERNEL_SERVICE_SHELL_IMPL_COMMAND_BUILTIN_STACK_HPP__
 # define __KFS_KERNEL_SERVICE_SHELL_IMPL_COMMAND_BUILTIN_STACK_HPP__
 
-# include <cstdio>
+# include <cstdlib>
 # include <cctype>
 
 # include "interface/command_builtin.hpp"
@@ -27,13 +27,13 @@ class CommandBuiltinStack :
 	public kfs::shell::interface::ICommandBuiltin,
 	public kfs::interface::StaticInstanceFactory<CommandBuiltinStack> {
 public:
-	ktl::string_view	getName() const {
+	std::string_view	getName() const {
 		return "stack";
 	}
-	ktl::string_view	getShortDescription() const {
+	std::string_view	getShortDescription() const {
 		return "stack - Command prints kernel stack\n";
 	}
-	ktl::string_view	getFullDescription() const {
+	std::string_view	getFullDescription() const {
 		return "da\n";
 	}
 	void		execute() {
@@ -46,10 +46,10 @@ public:
 		auto	ite = reinterpret_cast<uint8_t *>(esp);
 
 		if (*(mArgs + 1)) {
-			it -= shift * atoi(*(mArgs + 1));
+			it -= shift * std::atoi(*(mArgs + 1));
 		}
 		if (*(mArgs + 2)) {
-			ite = it - shift * atoi(*(mArgs + 2));
+			ite = it - shift * std::atoi(*(mArgs + 2));
 		}
 		
 		for (; it > ite; it -= shift) {

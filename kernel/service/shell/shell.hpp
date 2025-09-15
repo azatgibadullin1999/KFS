@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 22:00:20 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/13 14:29:38 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/14 00:18:12 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ namespace kfs {
 
 class Shell : public kfs::interface::IShell {
 public:
-	typedef ktl::array<char, 32>		Container;
-	typedef ktl::array<Container::iterator, 8> ContainerOfArgs;
+	typedef std::array<char, 32>		Container;
+	typedef std::array<Container::iterator, 8> ContainerOfArgs;
 	using IShell::IShell;
 
 	void	process() override;

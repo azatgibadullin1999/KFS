@@ -56,12 +56,10 @@ size_t strlen(const char* s);
 
 */
 
-#include <__assert> // all public C++ headers provide the assertion handler
 #include <__config>
 #include <__type_traits/is_constant_evaluated.h>
 
 #include <string.h>
-#define _LIBCPP_STRING_H
 
 #ifndef _LIBCPP_STRING_H
 #   error <cstring> tried including <string.h> but didn't find libc++'s <string.h> header. \
@@ -80,25 +78,35 @@ _LIBCPP_BEGIN_NAMESPACE_STD
 using ::size_t _LIBCPP_USING_IF_EXISTS;
 using ::memcpy _LIBCPP_USING_IF_EXISTS;
 using ::memmove _LIBCPP_USING_IF_EXISTS;
-// using ::strcpy _LIBCPP_USING_IF_EXISTS;
-// using ::strncpy _LIBCPP_USING_IF_EXISTS;
-// using ::strcat _LIBCPP_USING_IF_EXISTS;
-// using ::strncat _LIBCPP_USING_IF_EXISTS;
+#ifndef _LIBCPP_KFS
+using ::strcpy _LIBCPP_USING_IF_EXISTS;
+using ::strncpy _LIBCPP_USING_IF_EXISTS;
+using ::strcat _LIBCPP_USING_IF_EXISTS;
+using ::strncat _LIBCPP_USING_IF_EXISTS;
+#endif // _LIBCPP_KFS
 using ::memcmp _LIBCPP_USING_IF_EXISTS;
-// using ::strcmp _LIBCPP_USING_IF_EXISTS;
+#ifndef _LIBCPP_KFS
+using ::strcmp _LIBCPP_USING_IF_EXISTS;
+#endif // _LIBCPP_KFS
 using ::strncmp _LIBCPP_USING_IF_EXISTS;
-// using ::strcoll _LIBCPP_USING_IF_EXISTS;
-// using ::strxfrm _LIBCPP_USING_IF_EXISTS;
+#ifndef _LIBCPP_KFS
+using ::strcoll _LIBCPP_USING_IF_EXISTS;
+using ::strxfrm _LIBCPP_USING_IF_EXISTS;
+#endif // _LIBCPP_KFS
 using ::memchr _LIBCPP_USING_IF_EXISTS;
 using ::strchr _LIBCPP_USING_IF_EXISTS;
-// using ::strcspn _LIBCPP_USING_IF_EXISTS;
-// using ::strpbrk _LIBCPP_USING_IF_EXISTS;
+#ifndef _LIBCPP_KFS
+using ::strcspn _LIBCPP_USING_IF_EXISTS;
+using ::strpbrk _LIBCPP_USING_IF_EXISTS;
 using ::strrchr _LIBCPP_USING_IF_EXISTS;
-// using ::strspn _LIBCPP_USING_IF_EXISTS;
-// using ::strstr _LIBCPP_USING_IF_EXISTS;
-// using ::strtok _LIBCPP_USING_IF_EXISTS;
+using ::strspn _LIBCPP_USING_IF_EXISTS;
+using ::strstr _LIBCPP_USING_IF_EXISTS;
+using ::strtok _LIBCPP_USING_IF_EXISTS;
+#endif // _LIBCPP_KFS
 using ::memset _LIBCPP_USING_IF_EXISTS;
-// using ::strerror _LIBCPP_USING_IF_EXISTS;
+#ifndef _LIBCPP_KFS
+using ::strerror _LIBCPP_USING_IF_EXISTS;
+#endif // _LIBCPP_KFS
 using ::strlen _LIBCPP_USING_IF_EXISTS;
 
 _LIBCPP_END_NAMESPACE_STD

@@ -1,6 +1,6 @@
 add_library(kfs_service_memory
 	memory.cc
-	physical_memory.cc
+	# physical_memory.cc
 	imp/init_x86.cc
 )
 

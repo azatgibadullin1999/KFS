@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 20:11:15 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/13 23:23:05 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/15 17:57:52 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ Memory	Memory::init(multiboot_memory_map_t *addr, size_t length, multiboot_elf_s
 
 	// kfs::PhysicalMemory::instance().init(addr, length, elfsh);
 	// auto&&	gdt [[maybe_unused]] = kfs::x86::GDTDefault{};
-	auto&&	[directory, table] = kfs::x86::page::initial::init_paging();
+	// kfs::x86::page::initial::init_paging();
 
 	// auto&&	address_space = kfs::AddressSpace{*directory.second};
 	// auto&&	page_manager [[maybe_unused]] = kfs::x86::page::Manager(table);

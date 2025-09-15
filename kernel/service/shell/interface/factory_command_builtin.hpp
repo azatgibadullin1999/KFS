@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 08:30:51 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/13 16:06:04 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/14 00:18:24 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ namespace kfs::shell {
 
 template <typename ... Args>
 class FactoryCommandBuiltin {
-	using Container = ktl::array<kfs::shell::interface::ICommandBuiltin *, sizeof ... (Args)>;
+	using Container = std::array<kfs::shell::interface::ICommandBuiltin *, sizeof ... (Args)>;
 public:
 	FactoryCommandBuiltin() :
 	mArray{static_cast<kfs::shell::interface::ICommandBuiltin *>(Args::create()) ...} { }
 
-	kfs::shell::interface::ICommandBuiltin	*process(ktl::string_view command) {
+	kfs::shell::interface::ICommandBuiltin	*process(std::string_view command) {
 		return *std::find(mArray.begin(), mArray.end() - 1, command);
 	}
 private:

@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 08:04:34 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/13 17:08:45 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/14 00:18:24 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ class CommandBuiltinHelp :
 	public kfs::shell::interface::ICommandBuiltin,
 	public kfs::interface::StaticInstanceFactory<CommandBuiltinHelp<Args ...>> {
 public:
-	ktl::string_view	getName() const {
+	std::string_view	getName() const {
 		return "help";
 	}
-	ktl::string_view	getShortDescription() const {
+	std::string_view	getShortDescription() const {
 		return "help - Command shows commands and short descriptions.\n";
 	}
-	ktl::string_view	getFullDescription() const {
+	std::string_view	getFullDescription() const {
 		return "da\n";
 	}
 	void		execute() {

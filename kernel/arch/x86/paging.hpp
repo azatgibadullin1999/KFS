@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 18:17:49 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/13 22:54:21 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/14 00:18:49 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ public:
 		return flags[0];
 	}
 protected:
-	ktl::bitset<8>	flags [[no_unique_address]];
+	std::bitset<8>	flags [[no_unique_address]];
 };
 
 struct [[gnu::packed]] PageDirectoryFlags : public PageFlags {
@@ -82,7 +82,7 @@ constexpr size_t size = 0x1000;
 
 
 struct Page {
-	ktl::array<uint8_t, size> data;
+	std::array<uint8_t, size> data;
 };
 static_assert(sizeof(Page) == 0x1000, "");
 
@@ -141,7 +141,7 @@ struct Directory : Page {
 	auto getEntrys() {
 		return std::span<Entry>(reinterpret_cast<Entry*>(data.begin()), reinterpret_cast<Entry*>(data.end()));
 	}
-	// ktl::array<Entry, 0x400> entrys;
+	// std::array<Entry, 0x400> entrys;
 };
 static_assert(sizeof(Directory::Entry) == 4, "");
 static_assert(sizeof(Directory) == 0x1000, "");
@@ -175,7 +175,7 @@ struct Table : Page {
 	auto getEntrys() {
 		return std::span<Entry>(reinterpret_cast<Entry*>(data.begin()), reinterpret_cast<Entry*>(data.end()));
 	}
-	// ktl::array<Entry, 0x400> entrys;
+	// std::array<Entry, 0x400> entrys;
 };
 static_assert(sizeof(Table::Entry) == 4, "");
 static_assert(sizeof(Table) == 0x1000, "");

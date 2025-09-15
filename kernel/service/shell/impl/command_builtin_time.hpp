@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 07:01:32 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/13 17:09:19 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/14 00:18:24 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ private:
 		return mCMOSData.read();
 	}
 public:
-	ktl::string_view	getName() const {
+	std::string_view	getName() const {
 		return "time";
 	}
-	ktl::string_view	getShortDescription() const {
+	std::string_view	getShortDescription() const {
 		return "time - Command shows current time\n";
 	}
-	ktl::string_view	getFullDescription() const {
+	std::string_view	getFullDescription() const {
 		return "da\n";
 	}
 	void		execute() {

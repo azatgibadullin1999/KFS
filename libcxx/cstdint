@@ -140,12 +140,10 @@ Types:
 }  // std
 */
 
-// #include <__assert> // all public C++ headers provide the assertion handler
 #include <__config>
 
 #include <stdint.h>
 
-#define _LIBCPP_STDINT_H
 #ifndef _LIBCPP_STDINT_H
 #   error <cstdint> tried including <stdint.h> but didn't find libc++'s <stdint.h> header. \
           This usually means that your header search paths are not configured properly. \
