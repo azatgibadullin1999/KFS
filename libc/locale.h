@@ -14,6 +14,10 @@
 
 #include <stdint.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #define LC_ALL                 (1 << 0) // All of the locale
 #define LC_ALL_MASK            ~LC_ALL
 #define LC_ADDRESS             (1 << 1) // Formatting of addresses and geography-related items (*)
@@ -82,5 +86,9 @@ typedef struct lconv {                /* Values in the "C" locale: */
 char *setlocale(int category, const char *locale);
 
 lconv_t *localeconv(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
