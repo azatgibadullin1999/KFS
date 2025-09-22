@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 08:04:34 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/14 00:18:24 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/22 14:13:20 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ public:
 		return "help";
 	}
 	std::string_view	getShortDescription() const {
-		return "help - Command shows commands and short descriptions.\n";
+		return "shows commands and short descriptions";
 	}
 	std::string_view	getFullDescription() const {
-		return "da\n";
+		return "da";
 	}
 	void		execute() {
 		std::printf("====================\n");
-		(std::printf("%s", Args::create()->getShortDescription()), ...);
+		(std::printf("%s - %s\n", Args::create()->getName().data(), Args::create()->getShortDescription().data()), ...);
 		std::printf("====================\n");
 	}
 };

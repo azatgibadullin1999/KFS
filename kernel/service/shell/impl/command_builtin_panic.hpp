@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 11:05:04 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/14 00:18:24 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/22 14:13:09 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include "interface/command_builtin.hpp"
 # include "factory.hpp"
+#include <string>
+#include <string_view>
 
 namespace kfs::shell {
 
@@ -26,10 +28,10 @@ public:
 		return "panic";
 	}
 	std::string_view	getShortDescription() const {
-		return "panic - Calls panic function that stops system.\n";
+		return "calls panic function that stops system";
 	}
 	std::string_view	getFullDescription() const {
-		return "da\n";
+		return "da";
 	}
 	void		execute() { }
 };

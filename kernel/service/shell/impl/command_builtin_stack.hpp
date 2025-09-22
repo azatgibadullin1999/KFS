@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 07:02:48 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/14 00:49:02 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/22 14:09:34 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ public:
 		return "stack";
 	}
 	std::string_view	getShortDescription() const {
-		return "stack - Command prints kernel stack\n";
+		return "prints kernel stack";
 	}
 	std::string_view	getFullDescription() const {
-		return "da\n";
+		return "da";
 	}
 	void		execute() {
 		size_t	esp;

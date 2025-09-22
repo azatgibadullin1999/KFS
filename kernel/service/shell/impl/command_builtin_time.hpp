@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 07:01:32 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/14 00:18:24 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/22 14:09:40 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ public:
 		return "time";
 	}
 	std::string_view	getShortDescription() const {
-		return "time - Command shows current time\n";
+		return "shows current time";
 	}
 	std::string_view	getFullDescription() const {
-		return "da\n";
+		return "da";
 	}
 	void		execute() {
 		int century_register = 0x00;   

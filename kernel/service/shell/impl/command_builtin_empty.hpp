@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 16:41:15 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/14 00:18:24 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/22 14:08:42 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ public:
 		return "empty";
 	}
 	std::string_view	getShortDescription() const {
-		return "empty\n";
+		return "empty";
 	}
 	std::string_view	getFullDescription() const {
-		return "empty\n";
+		return "empty";
 	}
 	void		execute() {
 		if (!*mArgs) {

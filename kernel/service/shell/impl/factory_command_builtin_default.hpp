@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 12:14:16 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/13 16:05:54 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/22 00:23:46 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ kfs::shell::CommandBuiltinReboot, \
 kfs::shell::CommandBuiltinShutdown, \
 kfs::shell::CommandBuiltinTime, \
 kfs::shell::CommandBuiltinStack, \
-kfs::shell::CommandBuiltinPanic
+kfs::shell::CommandBuiltinPanic, \
+kfs::shell::CommandBuiltinHalt
 
 namespace kfs::shell {
 

@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 07:03:01 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/14 00:18:24 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/22 14:09:04 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,15 @@ public:
 		return "halt";
 	}
 	std::string_view	getShortDescription() const {
-		return "da\n";
+		return "halts system";
 	}
 	std::string_view	getFullDescription() const {
-		return "da\n";
+		return "da";
 	}
 	void		execute() {
-		std::printf("CommandBuiltinHalt\n");
+		asm volatile (
+		"hlt"
+		);
 	}
 };
 
