@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include <stddef.h>
 
 char	*strnstr(const char *str1, const char *str2, size_t len)
 {

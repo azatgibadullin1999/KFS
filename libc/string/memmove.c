@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include <stddef.h>
+
+void	*memcpy(void *dst, const void *src, size_t n);
 
 __attribute__((used))
 void	*memmove(void *dst, const void *src, size_t len)

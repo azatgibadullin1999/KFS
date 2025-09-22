@@ -3,8 +3,6 @@ add_library(kfs_api
 	write.cc
 )
 
-include_directories(SYSTEM ${CMAKE_CURRENT_SOURCE_DIR})
-
 target_link_libraries(kfs_api
 	PUBLIC kfs::service
 )

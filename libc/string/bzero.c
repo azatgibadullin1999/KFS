@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include <stddef.h>
+
+void *memset(void *b, int c, size_t len);
 
 void	bzero(void *s, size_t n) {
 	memset(s, 0, n);

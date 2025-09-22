@@ -9,8 +9,6 @@ add_library(kfs_libc_ctype
         toupper.c
 )
 
-include_directories(SYSTEM ${CMAKE_CURRENT_SOURCE_DIR})
-
 add_library(kfs::libc::ctype
         ALIAS kfs_libc_ctype
 )

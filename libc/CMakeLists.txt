@@ -1,3 +1,5 @@
+include_directories(SYSTEM ${CMAKE_CURRENT_SOURCE_DIR})
+
 add_subdirectory(errno)
 add_subdirectory(stdio)
 add_subdirectory(stdlib)
@@ -13,9 +15,6 @@ target_link_libraries(kfs_libc INTERFACE
 	kfs::libc::ctype
 	kfs::libc::stdio
 )
-
-include_directories(SYSTEM ${CMAKE_CURRENT_SOURCE_DIR})
-
 
 add_library(kfs::libc
         ALIAS kfs_libc

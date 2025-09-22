@@ -10,9 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ctype.h>
-
-inline int	isalpha(int c)
-{
+int isalpha(int c) {
 	return ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'));
 }

@@ -168,9 +168,9 @@ using ::vscanf _LIBCPP_USING_IF_EXISTS;
 
 #endif // _LIBCPP_KFS
 using ::printf _LIBCPP_USING_IF_EXISTS;
-#ifndef _LIBCPP_KFS
 using ::putchar _LIBCPP_USING_IF_EXISTS;
 using ::puts _LIBCPP_USING_IF_EXISTS;
+#ifndef _LIBCPP_KFS
 using ::vprintf _LIBCPP_USING_IF_EXISTS;
 #endif // _LIBCPP_KFS
 

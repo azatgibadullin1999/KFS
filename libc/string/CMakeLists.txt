@@ -15,8 +15,6 @@ add_library(kfs_libc_string
         strrchr.c
 )
 
-include_directories(SYSTEM ${CMAKE_CURRENT_SOURCE_DIR})
-
 add_library(kfs::libc::string
         ALIAS kfs_libc_string
 )

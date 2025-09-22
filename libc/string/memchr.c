@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include <stddef.h>
 
 __attribute__((used))
 void	*memchr(const void *s, int c, size_t n)

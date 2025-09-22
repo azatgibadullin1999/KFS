@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include <stddef.h>
+
+size_t	strlen(const char *str);
 
 char	*strrchr(const char *s, int c)
 {

@@ -13,8 +13,7 @@
 #include <ctype.h>
 #include <stddef.h>
 
-int		atoi(const char *str)
-{
+int atoi(const char *str) {
 	size_t		it = 0;
 	int		sign = 1;
 	long long	dst = 0;

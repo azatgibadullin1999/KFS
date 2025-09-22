@@ -5,8 +5,6 @@ add_library(kfs_libc_stdlib STATIC
         div.c
 )
 
-include_directories(SYSTEM ${CMAKE_CURRENT_SOURCE_DIR})
-
 target_link_libraries(kfs_libc_stdlib
         kfs::libc::ctype
 )

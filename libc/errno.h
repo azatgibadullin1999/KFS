@@ -9,18 +9,18 @@
  * 
  */
 
-#ifndef __LIBC_ERRNO_H__
-# define __LIBC_ERRNO_H__
+#ifndef __KFS_LIBC_ERRNO_H__
+# define __KFS_LIBC_ERRNO_H__
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 int *errno_location(void);
-# define errno (*errno_location ())
+# define errno (*errno_location())
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // __LIBC_ERRNO_H__
+#endif // __KFS_LIBC_ERRNO_H__

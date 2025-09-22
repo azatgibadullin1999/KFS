@@ -6,38 +6,38 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 14:35:58 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/13 22:17:47 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/22 14:24:33 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <stdbool.h>
-# include <stddef.h>
-# include <sys/mmap.h>
+#include <stddef.h>
+#include <stdbool.h>
+#include <sys/mmap.h>
 
-# define TINY_HEAP_ALLOCATION_SIZE ((size_t)(4 * getpagesize()))
-# define TINY_BLOCK_SIZE ((size_t)(TINY_HEAP_ALLOCATION_SIZE / 128))
-# define SMALL_HEAP_ALLOCATION_SIZE ((size_t)(16 * getpagesize()))
-# define SMALL_BLOCK_SIZE ((size_t)(SMALL_HEAP_ALLOCATION_SIZE / 128))
+#define TINY_HEAP_ALLOCATION_SIZE ((size_t)(4 * getpagesize()))
+#define TINY_BLOCK_SIZE ((size_t)(TINY_HEAP_ALLOCATION_SIZE / 128))
+#define SMALL_HEAP_ALLOCATION_SIZE ((size_t)(16 * getpagesize()))
+#define SMALL_BLOCK_SIZE ((size_t)(SMALL_HEAP_ALLOCATION_SIZE / 128))
 
-# define HEAP_SHIFT(start) ((void *)start + sizeof(t_heap_head))
-# define BLOCK_SHIFT(start) ((void *)start + sizeof(t_block_head))
+#define HEAP_SHIFT(start) ((void *)start + sizeof(t_heap_head))
+#define BLOCK_SHIFT(start) ((void *)start + sizeof(t_block_head))
 
-# define BLOCK_FREE 0x1
-# define BLOCK_OCCUPIED 0x0
-# define BLOCK_FLAG_OFFSET 3
+#define BLOCK_FREE 0x1
+#define BLOCK_OCCUPIED 0x0
+#define BLOCK_FLAG_OFFSET 3
 
-# define __BLOCK_METADATA_SIZE__ \
+#define __BLOCK_METADATA_SIZE__ \
 	((size_t)(sizeof(t_block_head) + sizeof(t_block_tail)))
-# define __HEAP_METADATA_SIZE__ \
+#define __HEAP_METADATA_SIZE__ \
 	((size_t)(sizeof(t_heap_head) + 3 * __BLOCK_METADATA_SIZE__))
-# define __MIN_USER_DATA__ \
+#define __MIN_USER_DATA__ \
 	((size_t)(0x1 << BLOCK_FLAG_OFFSET))
-# define __MIN_BLOCK_SIZE__ \
+#define __MIN_BLOCK_SIZE__ \
 	((size_t)(__BLOCK_METADATA_SIZE__ + __MIN_USER_DATA__))
 
-# define TINY 0x01
-# define SMALL 0x02
-# define LARGE 0x04
+#define TINY 0x01
+#define SMALL 0x02
+#define LARGE 0x04
 
 typedef struct s_block_head {
 	struct s_block_head *prev;

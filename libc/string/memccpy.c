@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include <stddef.h>
 
 void	*memccpy(void *dst, const void *src, int c, size_t n)
 {
