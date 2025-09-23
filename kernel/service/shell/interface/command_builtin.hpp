@@ -6,16 +6,17 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 06:44:56 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/15 18:25:27 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/23 15:51:09 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __KFS_KERNEL_SERVICE_SHELL_INTERFACE_COMMAND_BUILTIN_HPP__
 # define __KFS_KERNEL_SERVICE_SHELL_INTERFACE_COMMAND_BUILTIN_HPP__
 
-# include "command.hpp"
-#include <algorithm>
+# include <algorithm>
 # include <string_view>
+
+# include "common/command.hpp"
 
 namespace kfs::shell::interface {
 

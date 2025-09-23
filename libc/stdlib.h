@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:58:13 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/22 00:46:42 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/23 15:31:48 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 # include <stddef.h>
 
-#ifdef __cplusplus
+# ifdef __cplusplus
 extern "C" {
-#endif
+# endif
 
 typedef struct {
 	int quot; /* Quotient */
@@ -45,8 +45,8 @@ int atoi(const char *str);
 void *malloc(size_t);
 void free(void *);
 
-#ifdef __cplusplus
+# ifdef __cplusplus
 }
-#endif
+# endif
 
 #endif // __KFS_LIBC_STDLIB_H__

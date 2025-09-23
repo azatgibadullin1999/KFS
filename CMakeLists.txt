@@ -9,7 +9,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 
 set(KFS_COMMON_FLAGS "-fno-builtin -fno-stack-protector -ffreestanding -Wconversion -Wall -Wextra -pedantic")
-set(KFS_CXX_FLAGS "-fno-exceptions -std=c++23 -fno-rtti -fno-threadsafe-statics")
+set(KFS_CXX_FLAGS "-std=c++23 -fno-rtti -fno-threadsafe-statics")
 set(KFS_C_FLAGS "")
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${KFS_COMMON_FLAGS} ${KFS_C_FLAGS}")
@@ -18,23 +18,20 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${KFS_COMMON_FLAGS} ${KFS_CXX_FLAGS}")
 include_directories(SYSTEM
 	${CMAKE_CURRENT_SOURCE_DIR}/libcxx
 	${CMAKE_CURRENT_SOURCE_DIR}/libc
+	${CMAKE_CURRENT_SOURCE_DIR}/kernel
 	${CMAKE_CURRENT_SOURCE_DIR}/kernel/api
+	${CMAKE_CURRENT_SOURCE_DIR}/boot
 )
 
-add_subdirectory(kernel/api)
-link_libraries(kfs::api)
-add_subdirectory(libc)
-link_libraries(kfs::libc)
-add_subdirectory(libcxx)
 execute_process(
 	COMMAND ${CMAKE_C_COMPILER} -print-libgcc-file-name
 	OUTPUT_VARIABLE LIBGCC_FILE
 	OUTPUT_STRIP_TRAILING_WHITESPACE
 )
-link_libraries(${LIBGCC_FILE})
+add_subdirectory(kernel/api)
+add_subdirectory(libc)
+add_subdirectory(libcxx)
 add_subdirectory(cxx-support)
-link_libraries(kfs::cxx::support)
-
 add_subdirectory(boot)
 add_subdirectory(kernel)
 

@@ -6,16 +6,16 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 15:31:13 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/13 16:26:27 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/23 15:35:22 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __KFS_KERNEL_INTERFACE_CONSOLE_HPP__
 # define __KFS_KERNEL_INTERFACE_CONSOLE_HPP__
 
-# include "../driver/common_interface/text_display.hpp"
-# include "../driver/common_interface/keyboard.hpp"
-# include "../driver/common_interface/symbol_processor.hpp"
+# include "driver/common_interface/text_display.hpp"
+# include "driver/common_interface/keyboard.hpp"
+# include "driver/common_interface/symbol_processor.hpp"
 
 namespace kfs::interface {
 

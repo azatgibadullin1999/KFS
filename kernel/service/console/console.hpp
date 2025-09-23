@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 15:26:50 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/13 16:02:43 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/23 15:40:35 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define __KFS_KERNEL_CONSOLE_HPP__
 
 # include "../console.hpp"
-# include "singleton.hpp"
+# include "common/singleton.hpp"
 namespace kfs {
 
 // namespace {

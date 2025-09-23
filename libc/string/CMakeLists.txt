@@ -1,4 +1,4 @@
-add_library(kfs_libc_string
+add_library(kfs_libc_string OBJECT
         bzero.c
         memchr.c
         memcmp.c

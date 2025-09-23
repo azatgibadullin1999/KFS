@@ -1,6 +1,6 @@
 enable_language(ASM-ATT)
 
-add_library(kfs_boot
+add_library(kfs_boot OBJECT
         arch/i386/boot.s
 )
 

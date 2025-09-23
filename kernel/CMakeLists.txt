@@ -10,6 +10,22 @@ execute_process(
 )
 
 add_executable(${CMAKE_PROJECT_NAME}
+	$<TARGET_OBJECTS:kfs::api>
+	$<TARGET_OBJECTS:kfs::boot>
+	$<TARGET_OBJECTS:kfs::cxx::support>
+	$<TARGET_OBJECTS:kfs::libc::stdio>
+	$<TARGET_OBJECTS:kfs::libc::errno>
+	$<TARGET_OBJECTS:kfs::libc::ctype>
+	$<TARGET_OBJECTS:kfs::libc::string>
+	$<TARGET_OBJECTS:kfs::libc::stdlib>
+	$<TARGET_OBJECTS:kfs::driver::vga>
+	$<TARGET_OBJECTS:kfs::driver::ps2>
+	$<TARGET_OBJECTS:kfs::driver::utils>
+	$<TARGET_OBJECTS:kfs::driver::common>
+	$<TARGET_OBJECTS:kfs::driver::service>
+	$<TARGET_OBJECTS:kfs::service::shell>
+	$<TARGET_OBJECTS:kfs::service::memory>
+	$<TARGET_OBJECTS:kfs::service::console>
 	kernel_main.cc
 	kernel.cc
 )
@@ -17,15 +33,7 @@ add_executable(${CMAKE_PROJECT_NAME}
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
 target_link_libraries(${CMAKE_PROJECT_NAME}
-	kfs::boot
-	kfs::driver::common
-	kfs::driver::service
-	kfs::driver::utils
-	kfs::driver::vga
-	kfs::service::console
-	kfs::driver::ps2
-	kfs::service::shell
-	kfs::service::memory
+	${LIBGCC_FILE}
 )
 
 target_link_options(${CMAKE_PROJECT_NAME} PUBLIC

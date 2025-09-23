@@ -1,14 +1,5 @@
-add_library(kfs_service_console
+add_library(kfs_service_console OBJECT
 	console.cc
-)
-
-target_include_directories(kfs_service_console
-	PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
-)
-
-target_link_libraries(kfs_service_console
-	PUBLIC kfs::driver::common
-	PUBLIC kfs::common::pattern
 )
 
 add_library(kfs::service::console

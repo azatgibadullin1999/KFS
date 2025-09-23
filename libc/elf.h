@@ -6,14 +6,18 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:55:19 by larlena           #+#    #+#             */
-/*   Updated: 2024/06/20 15:28:44 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/23 15:30:53 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __KFS_KERNEL_API_ELF_H__
-# define __KFS_KERNEL_API_ELF_H__
+#ifndef __KFS_LIBC_ELF_H__
+# define __KFS_LIBC_ELF_H__
 
 # include <stdint.h>
+
+# ifdef __cplusplus
+extern "C" {
+# endif
 
 typedef uint16_t Elf32_Half;	// Unsigned half int
 typedef uint32_t Elf32_Off;	// Unsigned offset
@@ -83,4 +87,8 @@ enum Elf_Type {
 # define EM_386		(3)  // x86 Machine Type
 # define EV_CURRENT	(1)  // ELF Current Version
 
-#endif // __KFS_KERNEL_API_ELF_H__
+# ifdef __cplusplus
+}
+# endif
+
+#endif // __KFS_LIBC_ELF_H__

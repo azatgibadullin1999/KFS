@@ -6,9 +6,12 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 20:11:15 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/15 17:57:52 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/19 17:52:28 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <span>
+#include <cstdio>
 
 #include "memory.hpp"
 #include "imp/init_x86.hpp"
@@ -20,9 +23,13 @@
 Memory	Memory::init(multiboot_memory_map_t *addr, size_t length, multiboot_elf_section_header_table_t *elfsh) {
 	static auto&&	memory = Memory();
 
-	// kfs::PhysicalMemory::instance().init(addr, length, elfsh);
+
+	kfs::PhysicalMemory::instance().init(std::span<multiboot_memory_map_t>{
+		addr,
+		addr + length / sizeof(multiboot_memory_map_t)
+	});
 	// auto&&	gdt [[maybe_unused]] = kfs::x86::GDTDefault{};
-	// kfs::x86::page::initial::init_paging();
+	kfs::x86::page::initial::init_paging();
 
 	// auto&&	address_space = kfs::AddressSpace{*directory.second};
 	// auto&&	page_manager [[maybe_unused]] = kfs::x86::page::Manager(table);

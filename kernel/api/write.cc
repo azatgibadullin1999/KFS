@@ -6,11 +6,11 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 14:26:49 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/22 00:34:43 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/23 15:54:28 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "console/console.hpp"
+# include "service/console/console.hpp"
 
 extern "C" {
 

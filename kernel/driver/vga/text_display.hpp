@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 18:30:28 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/13 16:12:39 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/23 15:37:06 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include <stdint.h>
 # include <stddef.h>
-# include "port.hpp"
-# include "../common_interface/text_display.hpp"
+# include "driver/utils/port.hpp"
+# include "driver/common_interface/text_display.hpp"
 
 namespace kfs::driver::vga {
 

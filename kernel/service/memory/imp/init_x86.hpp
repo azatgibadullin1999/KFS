@@ -6,11 +6,11 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 20:19:04 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/13 23:14:36 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/23 15:39:21 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "x86/paging.hpp"
+# include "arch/x86/paging.hpp"
 
 namespace kfs::x86::page::initial {
 

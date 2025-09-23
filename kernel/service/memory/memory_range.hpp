@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:19:43 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/13 23:30:09 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/23 15:40:40 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <cstddef>
 # include <utility>
 
-# include "kerneldef.h"
+# include "arch/kerneldef.h"
 
 namespace kfs {
 

@@ -1,4 +1,4 @@
-add_library(kfs_libc_errno STATIC
+add_library(kfs_libc_errno OBJECT
         errno.c
 )
 

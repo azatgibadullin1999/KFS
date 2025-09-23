@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 16:41:15 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/22 14:08:42 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/23 15:52:31 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 
 # include <cstdio>
 
-# include "interface/command_builtin.hpp"
-# include "factory.hpp"
+# include "service/shell/interface/command_builtin.hpp"
+# include "common/factory.hpp"
 
 namespace kfs::shell {
 

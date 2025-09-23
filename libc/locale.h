@@ -12,9 +12,9 @@
 #ifndef __KFS_LIBC_LOCALE_H__
 # define __KFS_LIBC_LOCALE_H__
 
-#ifdef __cplusplus
+# ifdef __cplusplus
 extern "C" {
-#endif
+# endif
 
 #define LC_ALL                 (1 << 0) // All of the locale
 #define LC_ALL_MASK            ~LC_ALL
@@ -85,8 +85,8 @@ char *setlocale(int category, const char *locale);
 
 lconv_t *localeconv(void);
 
-#ifdef __cplusplus
+# ifdef __cplusplus
 }
-#endif
+# endif
 
 #endif // __KFS_LIBC_LOCALE_H__

@@ -6,15 +6,15 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 15:41:55 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/13 15:31:55 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/23 15:38:16 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __KFS_KERNEL_DRIVER_SERVICE_COMMAND_TEXT_DISPLAY_HPP__
 # define __KFS_KERNEL_DRIVER_SERVICE_COMMAND_TEXT_DISPLAY_HPP__
 
-# include "command.hpp"
-# include "text_display.hpp"
+# include "common/command.hpp"
+# include "driver/common_interface/text_display.hpp"
 
 namespace kfs::interface {
 

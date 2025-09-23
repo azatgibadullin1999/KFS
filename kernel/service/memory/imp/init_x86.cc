@@ -6,13 +6,13 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 22:17:54 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/13 23:16:22 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/23 15:41:10 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "init_x86.hpp"
-# include "kerneldef.h"
-# include "x86/paging.hpp"
+# include "arch/kerneldef.h"
+# include "arch/x86/paging.hpp"
 # include <array>
 # include <memory>
 # include <algorithm>

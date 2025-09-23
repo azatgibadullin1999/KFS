@@ -10,10 +10,6 @@ target_link_libraries(kfs_service INTERFACE
 	kfs::service::memory
 )
 
-target_include_directories(kfs_service INTERFACE
-	${CMAKE_CURRENT_SOURCE_DIR}
-)
-
 add_library(kfs::service
 	ALIAS kfs_service
 )

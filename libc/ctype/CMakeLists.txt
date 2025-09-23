@@ -1,4 +1,4 @@
-add_library(kfs_libc_ctype
+add_library(kfs_libc_ctype OBJECT
         isalnum.c
         isalpha.c
         isascii.c

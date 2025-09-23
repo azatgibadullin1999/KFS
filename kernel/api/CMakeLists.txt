@@ -1,5 +1,5 @@
-add_library(kfs_api
-	# sys/mmap.cc
+add_library(kfs_api OBJECT
+	sys/mmap.cc
 	write.cc
 )
 

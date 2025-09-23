@@ -12,15 +12,15 @@
 #ifndef __KFS_LIBC_ERRNO_H__
 # define __KFS_LIBC_ERRNO_H__
 
-#ifdef __cplusplus
+# ifdef __cplusplus
 extern "C" {
-#endif
+# endif
 
 int *errno_location(void);
 # define errno (*errno_location())
 
-#ifdef __cplusplus
+# ifdef __cplusplus
 }
-#endif
+# endif
 
 #endif // __KFS_LIBC_ERRNO_H__

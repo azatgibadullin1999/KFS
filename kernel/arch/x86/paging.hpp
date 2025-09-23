@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 18:17:49 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/14 00:18:49 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/23 15:39:43 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include <bitset>
 #include <array>
 #include <utility>
-#include "kerneldef.h"
+#include "arch/kerneldef.h"
 
 namespace kfs::x86 {
 

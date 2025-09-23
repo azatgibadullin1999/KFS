@@ -6,16 +6,16 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 07:00:54 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/22 14:09:29 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/23 15:53:30 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __KFS_KERNEL_SERVICE_SHELL_IMPL_COMMAND_BUILTIN_SHUTDOWN_HPP__
 # define __KFS_KERNEL_SERVICE_SHELL_IMPL_COMMAND_BUILTIN_SHUTDOWN_HPP__
 
-# include "interface/command_builtin.hpp"
-# include "port.hpp"
-# include "factory.hpp"
+# include "service/shell/interface/command_builtin.hpp"
+# include "driver/utils/port.hpp"
+# include "common/factory.hpp"
 
 namespace kfs::shell {
 

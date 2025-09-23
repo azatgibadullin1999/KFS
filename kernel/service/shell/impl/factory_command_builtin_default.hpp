@@ -6,14 +6,14 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 12:14:16 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/22 00:23:46 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/23 15:50:50 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __KFS_KERNEL_SERVICE_SHELL_IMPL_FACTORY_COMMAND_BUILTIN_DEFAULT_HPP__
 # define __KFS_KERNEL_SERVICE_SHELL_IMPL_FACTORY_COMMAND_BUILTIN_DEFAULT_HPP__
 
-# include "interface/factory_command_builtin.hpp"
+# include "service/shell/interface/factory_command_builtin.hpp"
 # include "command_builtin_halt.hpp"
 # include "command_builtin_help.hpp"
 # include "command_builtin_reboot.hpp"

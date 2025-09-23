@@ -6,17 +6,18 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 11:05:04 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/22 14:13:09 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/23 15:52:58 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __KFS_KERNEL_SERVICE_SHELL_IMPL_COMMAND_BUILTIN_PANIC_HPP__
 # define __KFS_KERNEL_SERVICE_SHELL_IMPL_COMMAND_BUILTIN_PANIC_HPP__
 
-# include "interface/command_builtin.hpp"
-# include "factory.hpp"
-#include <string>
-#include <string_view>
+# include <string>
+# include <string_view>
+
+# include "service/shell/interface/command_builtin.hpp"
+# include "common/factory.hpp"
 
 namespace kfs::shell {
 

@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 13:09:28 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/22 00:47:06 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/23 15:31:57 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 # include <stddef.h>
 
-#ifdef __cplusplus
+# ifdef __cplusplus
 extern "C" {
-#endif
+# endif
 
 void *memset(void *b, int c, size_t len);
 void bzero(void *s, size_t n);
@@ -34,8 +34,8 @@ char *strnstr(const char *str1, const char *str2, size_t len);
 int strncmp(const char *str1, const char *str2, size_t n);
 void *memchr(const void *s, int c, size_t n);
 
-#ifdef __cplusplus
+# ifdef __cplusplus
 }
-#endif
+# endif
 
 #endif // __KFS_LIBC_STRING_H__

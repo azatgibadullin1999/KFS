@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 15:45:49 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/13 17:37:22 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/23 15:40:48 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <cctype>
 
-# include "command.hpp"
+# include "common/command.hpp"
 # include "../console.hpp"
 
 namespace kfs::shell {
