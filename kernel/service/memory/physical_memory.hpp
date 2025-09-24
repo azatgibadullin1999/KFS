@@ -6,13 +6,15 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 20:02:55 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/23 15:40:55 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/24 19:36:39 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __KFS_KERNEL_SERVICE_MEMORY_PHYSICAL_MEMORY_HPP__
 # define __KFS_KERNEL_SERVICE_MEMORY_PHYSICAL_MEMORY_HPP__
 
+#include <iterator>
+#include <ranges>
 # include <span>
 # include <list>
 # include <vector>
@@ -43,8 +45,7 @@ public:
 	void	dealloc(phys_addr_t);
 private:
 	std::list<MemoryRange> _memory;
-	std::list<std::vector<size_t>> _used_chunks;
-	static const inline size_t _chunk_size = 0x400;
+	std::vector<bool> _used_chunks;
 }; // class PhysicalMemory
 
 } // namespace details

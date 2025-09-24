@@ -56,6 +56,6 @@ add_custom_target(run
 )
 
 add_custom_target(run_debug
-	@qemu-system-i386 -kernel kfs -s -S -cdrom ${CMAKE_CURRENT_BINARY_DIR}/${KFS_ISO_TARGET}
+	@qemu-system-i386 -kernel $<TARGET_FILE:${CMAKE_PROJECT_NAME}> -s -S -cdrom ${CMAKE_CURRENT_BINARY_DIR}/${KFS_ISO_TARGET}
         DEPENDS iso
 )
