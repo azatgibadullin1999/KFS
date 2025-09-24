@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 14:35:58 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/25 00:14:17 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/25 01:04:58 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@
 #define SMALL_HEAP_ALLOCATION_SIZE ((size_t)(16 * getpagesize()))
 #define SMALL_BLOCK_SIZE ((size_t)(SMALL_HEAP_ALLOCATION_SIZE / 128))
 
-#define HEAP_SHIFT(start) ((byte_t *)start + sizeof(t_heap_head))
-#define BLOCK_SHIFT(start) ((byte_t *)start + sizeof(t_block_head))
+#define HEAP_SHIFT(start) ((byte_t *)start + sizeof(heap_head))
+#define BLOCK_SHIFT(start) ((byte_t *)start + sizeof(block_head))
 
 #define BLOCK_FREE 0x1
 #define BLOCK_OCCUPIED 0x0
 #define BLOCK_FLAG_OFFSET 3
 
 #define __BLOCK_METADATA_SIZE__ \
-	((size_t)(sizeof(t_block_head) + sizeof(t_block_tail)))
+	((size_t)(sizeof(block_head) + sizeof(t_block_tail)))
 #define __HEAP_METADATA_SIZE__ \
-	((size_t)(sizeof(t_heap_head) + 3 * __BLOCK_METADATA_SIZE__))
+	((size_t)(sizeof(heap_head) + 3 * __BLOCK_METADATA_SIZE__))
 #define __MIN_USER_DATA__ \
 	((size_t)(0x1 << BLOCK_FLAG_OFFSET))
 #define __MIN_BLOCK_SIZE__ \
@@ -45,7 +45,7 @@ typedef struct s_block_head {
 	struct s_block_head *prev;
 	struct s_block_head *next;
 	size_t data;
-} t_block_head;
+} block_head;
 
 typedef struct s_block_tail {
 	size_t data;
@@ -56,15 +56,17 @@ typedef struct s_heap_head {
 	struct s_heap_head *next;
 	size_t total_size;
 	size_t flags;
-} t_heap_head;
+} heap_head;
 
-inline static t_heap_head **__get_heap(void) {
-	static t_heap_head *heap = NULL;
+
+
+inline static heap_head **__get_heap(void) {
+	static heap_head *heap = NULL;
 	return &heap;
 }
 
-inline static t_heap_head *get_heap(void) { return *__get_heap(); }
-inline static void set_heap(t_heap_head *heap) { *__get_heap() = heap; }
+inline static heap_head *get_heap(void) { return *__get_heap(); }
+inline static void set_heap(heap_head *heap) { *__get_heap() = heap; }
 
 
 inline static bool is_meta_block__(size_t data);
@@ -72,16 +74,16 @@ inline static bool is_free_block__(size_t data);
 inline static void *get_free_block__(size_t size);
 inline static void mark_block_as_free__(size_t *data);
 inline static void mark_block_as_occupied__(size_t *data);
-inline static t_block_head *get_next_block__(t_block_head *block);
-inline static t_block_head *get_prev_block__(t_block_head *block);
-inline static t_block_tail *get_current_block_tail__(t_block_head *block);
-static void free_heap__(t_heap_head *heap);
-static t_block_head *merge_adjacent_free_blocks__(t_block_head *block);
-static void *get_first_free_block__(t_block_head *block,
-				    t_block_head *(*iterate)(t_block_head *));
+inline static block_head *get_next_block__(block_head *block);
+inline static block_head *get_prev_block__(block_head *block);
+inline static t_block_tail *get_current_block_tail__(block_head *block);
+static void free_heap__(heap_head *heap);
+static block_head *merge_adjacent_free_blocks__(block_head *block);
+static void *get_first_free_block__(block_head *block,
+				    block_head *(*iterate)(block_head *));
 
 void *malloc(size_t size) {
-	t_block_head *dst;
+	block_head *dst;
 
 	if ((size == 0) || ((dst = get_free_block__(size)) == NULL)) {
 		return NULL;
@@ -94,7 +96,7 @@ void *malloc(size_t size) {
 }
 
 void free(void *ptr) {
-	t_block_head *block = (t_block_head *)((byte_t *)ptr - sizeof(t_block_head));
+	block_head *block = (block_head *)((byte_t *)ptr - sizeof(block_head));
 
 	if (ptr == NULL) {
 		return;
@@ -108,7 +110,7 @@ void free(void *ptr) {
 	block->next->prev = block;
 	if (is_meta_block__(get_next_block__(block)->data) &&
 	    is_meta_block__(get_prev_block__(block)->data)) {
-		free_heap__((t_heap_head *)((byte_t *)block->prev - sizeof(t_heap_head)));
+		free_heap__((heap_head *)((byte_t *)block->prev - sizeof(heap_head)));
 	}
 }
 
@@ -160,21 +162,21 @@ inline static size_t get_block_size__(size_t data) {
 	return data & (__SIZE_MAX__ << BLOCK_FLAG_OFFSET);
 }
 
-inline static t_block_tail *get_current_block_tail__(t_block_head *block) {
-	return (t_block_tail *)((byte_t *)block + get_block_size__(block->data) + sizeof(t_block_head));
+inline static t_block_tail *get_current_block_tail__(block_head *block) {
+	return (t_block_tail *)((byte_t *)block + get_block_size__(block->data) + sizeof(block_head));
 }
 
-inline static t_block_tail *get_previous_block_tail__(t_block_head *block) {
+inline static t_block_tail *get_previous_block_tail__(block_head *block) {
 	return (t_block_tail *)((byte_t *)block - sizeof(t_block_tail));
 }
 
-inline static t_block_head *get_next_block__(t_block_head *block) {
-	return (t_block_head *)((byte_t *)block +
+inline static block_head *get_next_block__(block_head *block) {
+	return (block_head *)((byte_t *)block +
 	       (__BLOCK_METADATA_SIZE__ + get_block_size__(block->data)));
 }
 
-inline static t_block_head *get_prev_block__(t_block_head *block) {
-	return (t_block_head *)((byte_t *)block -
+inline static block_head *get_prev_block__(block_head *block) {
+	return (block_head *)((byte_t *)block -
 	       (__BLOCK_METADATA_SIZE__ +
 		get_block_size__(get_previous_block_tail__(block)->data)));
 }
@@ -199,7 +201,7 @@ static unsigned char get_type_of_heap__(size_t block_size) {
 	}
 }
 
-static void init_block__(t_block_head *block, size_t total_size) {
+static void init_block__(block_head *block, size_t total_size) {
 	block->prev = NULL;
 	block->next = NULL;
 	block->data = BLOCK_FREE;
@@ -207,11 +209,11 @@ static void init_block__(t_block_head *block, size_t total_size) {
 	get_current_block_tail__(block)->data = block->data;
 }
 
-static void init_primary_block__(t_heap_head *heap, size_t heap_size) {
-	size_t size = heap_size - sizeof(t_heap_head);
-	t_block_head *first = (t_block_head *)(HEAP_SHIFT(heap));
-	t_block_head *last = (t_block_head *)((byte_t *)first + size - __BLOCK_METADATA_SIZE__);
-	t_block_head *block = (t_block_head *)((byte_t *)first + __BLOCK_METADATA_SIZE__);
+static void init_primary_block__(heap_head *heap, size_t heap_size) {
+	size_t size = heap_size - sizeof(heap_head);
+	block_head *first = (block_head *)(HEAP_SHIFT(heap));
+	block_head *last = (block_head *)((byte_t *)first + size - __BLOCK_METADATA_SIZE__);
+	block_head *block = (block_head *)((byte_t *)first + __BLOCK_METADATA_SIZE__);
 
 	init_block__(first, 0);
 	first->data = BLOCK_OCCUPIED;
@@ -233,7 +235,7 @@ static void init_primary_block__(t_heap_head *heap, size_t heap_size) {
 ================================
 */
 
-static void *init_heap__(t_heap_head *heap, size_t size, size_t heap_type) {
+static void *init_heap__(heap_head *heap, size_t size, size_t heap_type) {
 	heap->total_size = size;
 	heap->flags = heap_type;
 	heap->next = get_heap();
@@ -245,7 +247,7 @@ static void *init_heap__(t_heap_head *heap, size_t size, size_t heap_type) {
 }
 
 static void *create_heap__(size_t size, size_t heap_type) {
-	t_heap_head *new_heap;
+	heap_head *new_heap;
 	size_t heap_size = get_size_of_heap__(size, heap_type);
 
 	if ((new_heap = mmap(NULL, heap_size, PROT_READ | PROT_WRITE,
@@ -257,7 +259,7 @@ static void *create_heap__(size_t size, size_t heap_type) {
 	return new_heap;
 }
 
-static void *find_free_heap__(t_heap_head *heap, size_t heap_type) {
+static void *find_free_heap__(heap_head *heap, size_t heap_type) {
 	while (heap) {
 		if (heap->flags == heap_type) {
 			return heap;
@@ -267,9 +269,9 @@ static void *find_free_heap__(t_heap_head *heap, size_t heap_type) {
 	return heap;
 }
 
-static void *find_free_block__(t_heap_head *heap, size_t size) {
-	t_block_head *it = ((t_block_head *)HEAP_SHIFT(heap))->next;
-	t_block_head *buff = it;
+static void *find_free_block__(heap_head *heap, size_t size) {
+	block_head *it = ((block_head *)HEAP_SHIFT(heap))->next;
+	block_head *buff = it;
 	size_t it_size = get_block_size__(it->data);
 	size_t buff_size = it_size;
 
@@ -285,12 +287,12 @@ static void *find_free_block__(t_heap_head *heap, size_t size) {
 	return get_block_size__(buff->data) < size ? NULL : buff;
 }
 
-static void trim_block__(t_block_head *block, size_t size) {
+static void trim_block__(block_head *block, size_t size) {
 	size_t block_size = get_block_size__(block->data);
-	t_block_head *buff;
+	block_head *buff;
 
 	if (block_size - size >= __MIN_BLOCK_SIZE__) {
-		buff = (t_block_head *)((byte_t *)block + size + __BLOCK_METADATA_SIZE__);
+		buff = (block_head *)((byte_t *)block + size + __BLOCK_METADATA_SIZE__);
 		init_block__(buff, block_size - size - __BLOCK_METADATA_SIZE__);
 		buff->next = block->next;
 		buff->prev = block;
@@ -302,8 +304,8 @@ static void trim_block__(t_block_head *block, size_t size) {
 }
 
 static void *get_free_block__(size_t input_size) {
-	t_heap_head *heap = get_heap();
-	t_block_head *block;
+	heap_head *heap = get_heap();
+	block_head *block;
 	size_t size = round_size__(input_size);
 	size_t heap_type = get_type_of_heap__(size);
 
@@ -331,7 +333,7 @@ static void *get_free_block__(size_t input_size) {
 
 inline static bool is_meta_block__(size_t data) { return data == 0; }
 
-static void free_heap__(t_heap_head *heap) {
+static void free_heap__(heap_head *heap) {
 	if (heap->next) {
 		heap->next->prev = heap->prev;
 	}
@@ -344,8 +346,8 @@ static void free_heap__(t_heap_head *heap) {
 	munmap(heap, heap->total_size);
 }
 
-static void *get_first_free_block__(t_block_head *block,
-				    t_block_head *(*iterate)(t_block_head *)) {
+static void *get_first_free_block__(block_head *block,
+				    block_head *(*iterate)(block_head *)) {
 	block = iterate(block);
 	while (block && (!is_free_block__(block->data) &&
 			 !is_meta_block__(block->data))) {
@@ -354,7 +356,7 @@ static void *get_first_free_block__(t_block_head *block,
 	return block;
 }
 
-static void merge_blocks__(t_block_head *first, t_block_head *second) {
+static void merge_blocks__(block_head *first, block_head *second) {
 	set_block_size__(&first->data, __BLOCK_METADATA_SIZE__ +
 					   get_block_size__(first->data) +
 					   get_block_size__(second->data));
@@ -362,8 +364,8 @@ static void merge_blocks__(t_block_head *first, t_block_head *second) {
 	get_current_block_tail__(first)->data = first->data;
 }
 
-static t_block_head *merge_adjacent_free_blocks__(t_block_head *block) {
-	t_block_head *buff;
+static block_head *merge_adjacent_free_blocks__(block_head *block) {
+	block_head *buff;
 
 	buff = get_next_block__(block);
 	if (is_free_block__(buff->data)) {
