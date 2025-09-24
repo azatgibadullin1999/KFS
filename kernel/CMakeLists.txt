@@ -24,6 +24,7 @@ add_executable(${CMAKE_PROJECT_NAME}
 	$<TARGET_OBJECTS:kfs::driver::common>
 	$<TARGET_OBJECTS:kfs::driver::service>
 	$<TARGET_OBJECTS:kfs::service::shell>
+	$<TARGET_OBJECTS:kfs::service::panic>
 	$<TARGET_OBJECTS:kfs::service::memory>
 	$<TARGET_OBJECTS:kfs::service::console>
 	kernel_main.cc

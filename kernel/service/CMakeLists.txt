@@ -1,6 +1,7 @@
 add_subdirectory(console)
 add_subdirectory(memory)
 add_subdirectory(shell)
+add_subdirectory(panic)
 
 add_library(kfs_service INTERFACE)
 

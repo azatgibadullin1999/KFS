@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:58:13 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/23 15:31:48 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/24 18:34:19 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int atoi(const char *str);
 
 void *malloc(size_t);
 void free(void *);
+
+void abort();
 
 # ifdef __cplusplus
 }

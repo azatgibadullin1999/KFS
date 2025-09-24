@@ -125,7 +125,9 @@ using ::free _LIBCPP_USING_IF_EXISTS;
 using ::malloc _LIBCPP_USING_IF_EXISTS;
 #ifndef _LIBCPP_KFS
 using ::realloc _LIBCPP_USING_IF_EXISTS;
+#endif // _LIBCPP_KFS
 using ::abort _LIBCPP_USING_IF_EXISTS;
+#ifndef _LIBCPP_KFS
 using ::atexit _LIBCPP_USING_IF_EXISTS;
 using ::exit _LIBCPP_USING_IF_EXISTS;
 using ::_Exit _LIBCPP_USING_IF_EXISTS;

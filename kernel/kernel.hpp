@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 13:00:57 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/13 16:27:37 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/24 18:42:47 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <stdbool.h>
 # include <stddef.h>
-# include <stdint.h>
 # include "driver/ps2/keyboard.hpp"
 # include "driver/vga/text_display.hpp"
 # include "driver/service/symbol_processor_auto_scroll.hpp"
@@ -23,14 +22,13 @@
 # include "service/console/console.hpp"
 # include "service/shell/shell.hpp"
 # include "service/panic/panic.hpp"
-
 # include "service/memory/memory.hpp"
-
 # include "../boot/multiboot.h"
 
 class Kernel {
 public:
 	static Kernel	init(multiboot_info_t* mbd) {
+		static auto&&	panic = kfs::PanicHandler{};
 		static auto&&	display = kfs::driver::vga::VGATextDisplay();
 		static auto&&	keyboard = kfs::driver::ps2::Keyboard(kfs::driver::common::USqwerty());
 		static auto&&	processor = kfs::driver::common::SymbolProcessorAutoScroll(&display);

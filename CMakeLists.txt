@@ -9,7 +9,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 
 set(KFS_COMMON_FLAGS "-fno-builtin -fno-stack-protector -ffreestanding -Wconversion -Wall -Wextra -pedantic")
-set(KFS_CXX_FLAGS "-std=c++23 -fno-rtti -fno-threadsafe-statics")
+set(KFS_CXX_FLAGS "-fno-exceptions -std=c++23 -fno-rtti -fno-threadsafe-statics")
 set(KFS_C_FLAGS "")
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${KFS_COMMON_FLAGS} ${KFS_C_FLAGS}")

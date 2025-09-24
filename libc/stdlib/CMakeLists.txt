@@ -1,4 +1,5 @@
 add_library(kfs_libc_stdlib OBJECT
+        abort.c
         malloc.c
         atoi.c
         itoa.c

@@ -6,12 +6,18 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 12:20:16 by larlena           #+#    #+#             */
-/*   Updated: 2024/07/11 14:11:02 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/24 19:03:18 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 namespace kfs {
 
-void	panic();
+namespace detail {
+void panic();
+}
+
+struct PanicHandler {
+	PanicHandler();
+};
 
 } // namespace kfs

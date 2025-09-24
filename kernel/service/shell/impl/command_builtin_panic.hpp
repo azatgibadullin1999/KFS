@@ -6,17 +6,18 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 11:05:04 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/23 15:52:58 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/23 19:29:13 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __KFS_KERNEL_SERVICE_SHELL_IMPL_COMMAND_BUILTIN_PANIC_HPP__
 # define __KFS_KERNEL_SERVICE_SHELL_IMPL_COMMAND_BUILTIN_PANIC_HPP__
 
-# include <string>
+#include <exception>
 # include <string_view>
 
 # include "service/shell/interface/command_builtin.hpp"
+# include "service/panic/panic.hpp"
 # include "common/factory.hpp"
 
 namespace kfs::shell {
@@ -34,7 +35,9 @@ public:
 	std::string_view	getFullDescription() const {
 		return "da";
 	}
-	void		execute() { }
+	void		execute() {
+		std::terminate();
+	}
 };
 
 }

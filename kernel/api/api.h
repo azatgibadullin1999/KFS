@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 14:30:17 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/22 00:36:52 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/24 18:36:21 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ extern "C" {
 
 void	__kfs_putchar(char c);
 void	__kfs_puts(const char *str);
+void	__kfs_panic();
 void	*allocate_pages(size_t num_of_pages);
 
 #ifdef __cplusplus
