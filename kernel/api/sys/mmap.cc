@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 13:17:49 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/24 23:12:09 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/25 23:37:14 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ void *mmap(void *addr, size_t length, int prot, int flags, int fd, off_t offset)
 	static std::array<bool, 10zu> used;
 	std::size_t contiguous = 0;
 
-	std::printf("%s: length %lu\n", __FUNCTION__, length);
-
 	for (auto &&index : std::views::iota(0zu, 10zu)) {
 		if (!used[index]) {
 			if (length / sizeof(Page) < contiguous) {
@@ -45,7 +43,7 @@ void *mmap(void *addr, size_t length, int prot, int flags, int fd, off_t offset)
 }
 
 int munmap(void *addr, size_t length) {
-
+	return 0;
 }
 
 int getpagesize(void) {

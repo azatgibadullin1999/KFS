@@ -6,12 +6,13 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 14:35:58 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/25 01:04:58 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/25 23:14:40 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 #include <stdbool.h>
+#include <stdio.h>
 #include <sys/mmap.h>
 
 #define TINY_HEAP_ALLOCATION_SIZE ((size_t)(4 * getpagesize()))
@@ -19,362 +20,311 @@
 #define SMALL_HEAP_ALLOCATION_SIZE ((size_t)(16 * getpagesize()))
 #define SMALL_BLOCK_SIZE ((size_t)(SMALL_HEAP_ALLOCATION_SIZE / 128))
 
-#define HEAP_SHIFT(start) ((byte_t *)start + sizeof(heap_head))
-#define BLOCK_SHIFT(start) ((byte_t *)start + sizeof(block_head))
+#define HEAP_TINY  0
+#define HEAP_SMALL 1
+#define HEAP_LARGE 2
 
-#define BLOCK_FREE 0x1
-#define BLOCK_OCCUPIED 0x0
-#define BLOCK_FLAG_OFFSET 3
 
-#define __BLOCK_METADATA_SIZE__ \
-	((size_t)(sizeof(block_head) + sizeof(t_block_tail)))
-#define __HEAP_METADATA_SIZE__ \
-	((size_t)(sizeof(heap_head) + 3 * __BLOCK_METADATA_SIZE__))
-#define __MIN_USER_DATA__ \
-	((size_t)(0x1 << BLOCK_FLAG_OFFSET))
-#define __MIN_BLOCK_SIZE__ \
-	((size_t)(__BLOCK_METADATA_SIZE__ + __MIN_USER_DATA__))
+/* Forward Declaretions */
+/* ==================== */
 
-#define TINY 0x01
-#define SMALL 0x02
-#define LARGE 0x04
+typedef struct heap_s heap;
+static void *heap_alloc(heap *, size_t size);
+static void  heap_free(heap *self, void *memory);
+static heap *new_heap(size_t size);
+static void  delete_heap(heap *);
+static heap *heap_get_begin(void);
+static heap *heap_get_end(void);
+static heap *heap_get_next(heap *it);
+static bool  heap_containes(heap *self, void *memory);
 
-typedef unsigned char byte_t;
-
-typedef struct s_block_head {
-	struct s_block_head *prev;
-	struct s_block_head *next;
-	size_t data;
-} block_head;
-
-typedef struct s_block_tail {
-	size_t data;
-} t_block_tail;
-
-typedef struct s_heap_head {
-	struct s_heap_head *prev;
-	struct s_heap_head *next;
-	size_t total_size;
-	size_t flags;
-} heap_head;
+/* ==================== */
+/* Forward Declaretions */
 
 
 
-inline static heap_head **__get_heap(void) {
-	static heap_head *heap = NULL;
-	return &heap;
-}
-
-inline static heap_head *get_heap(void) { return *__get_heap(); }
-inline static void set_heap(heap_head *heap) { *__get_heap() = heap; }
 
 
-inline static bool is_meta_block__(size_t data);
-inline static bool is_free_block__(size_t data);
-inline static void *get_free_block__(size_t size);
-inline static void mark_block_as_free__(size_t *data);
-inline static void mark_block_as_occupied__(size_t *data);
-inline static block_head *get_next_block__(block_head *block);
-inline static block_head *get_prev_block__(block_head *block);
-inline static t_block_tail *get_current_block_tail__(block_head *block);
-static void free_heap__(heap_head *heap);
-static block_head *merge_adjacent_free_blocks__(block_head *block);
-static void *get_first_free_block__(block_head *block,
-				    block_head *(*iterate)(block_head *));
+/* Malloc & Free */
+/* ============= */
 
 void *malloc(size_t size) {
-	block_head *dst;
+	void *memory = NULL;
+	heap *begin = heap_get_begin();
+	heap *end = heap_get_end();
+	heap *it;
 
-	if ((size == 0) || ((dst = get_free_block__(size)) == NULL)) {
-		return NULL;
-	}
-	mark_block_as_occupied__(&dst->data);
-	dst->next->prev = dst->prev;
-	dst->prev->next = dst->next;
-	get_current_block_tail__(dst)->data = dst->data;
-	return BLOCK_SHIFT(dst);
-}
-
-void free(void *ptr) {
-	block_head *block = (block_head *)((byte_t *)ptr - sizeof(block_head));
-
-	if (ptr == NULL) {
-		return;
-	}
-	mark_block_as_free__(&block->data);
-	block = merge_adjacent_free_blocks__(block);
-	get_current_block_tail__(block)->data = block->data;
-	block->next = get_first_free_block__(block, get_next_block__);
-	block->prev = get_first_free_block__(block, get_prev_block__);
-	block->prev->next = block;
-	block->next->prev = block;
-	if (is_meta_block__(get_next_block__(block)->data) &&
-	    is_meta_block__(get_prev_block__(block)->data)) {
-		free_heap__((heap_head *)((byte_t *)block->prev - sizeof(heap_head)));
-	}
-}
-
-/*
-============================
-	SHARED UTILS
-============================
-*/
-
-inline static bool is_tiny_heap__(unsigned char flag) {
-	return flag & TINY;
-}
-
-inline static bool is_small_heap__(unsigned char flag) {
-	return flag & SMALL;
-}
-
-inline static bool is_tiny_block__(size_t size) {
-	return size <= TINY_BLOCK_SIZE;
-}
-
-inline static bool is_small_block__(size_t size) {
-	return size <= SMALL_BLOCK_SIZE;
-}
-
-inline static bool is_free_block__(size_t data) {
-	return data & BLOCK_FREE;
-}
-
-inline static void mark_block_as_free__(size_t *data) {
-	*data |= BLOCK_FREE;
-}
-
-inline static void mark_block_as_occupied__(size_t *data) {
-	*data &= (__SIZE_MAX__ << 0x1);
-}
-
-inline static size_t round_size__(size_t size) {
-	return (size & (__SIZE_MAX__ << BLOCK_FLAG_OFFSET)) +
-	       (1 << BLOCK_FLAG_OFFSET);
-}
-
-inline static void set_block_size__(size_t *data, size_t size) {
-	*data =
-	    (size & (__SIZE_MAX__ << BLOCK_FLAG_OFFSET)) | (*data & BLOCK_FREE);
-}
-
-inline static size_t get_block_size__(size_t data) {
-	return data & (__SIZE_MAX__ << BLOCK_FLAG_OFFSET);
-}
-
-inline static t_block_tail *get_current_block_tail__(block_head *block) {
-	return (t_block_tail *)((byte_t *)block + get_block_size__(block->data) + sizeof(block_head));
-}
-
-inline static t_block_tail *get_previous_block_tail__(block_head *block) {
-	return (t_block_tail *)((byte_t *)block - sizeof(t_block_tail));
-}
-
-inline static block_head *get_next_block__(block_head *block) {
-	return (block_head *)((byte_t *)block +
-	       (__BLOCK_METADATA_SIZE__ + get_block_size__(block->data)));
-}
-
-inline static block_head *get_prev_block__(block_head *block) {
-	return (block_head *)((byte_t *)block -
-	       (__BLOCK_METADATA_SIZE__ +
-		get_block_size__(get_previous_block_tail__(block)->data)));
-}
-
-static size_t get_size_of_heap__(size_t block_size, unsigned char block_type) {
-	if (is_tiny_heap__(block_type)) {
-		return TINY_HEAP_ALLOCATION_SIZE;
-	} else if (is_small_heap__(block_type)) {
-		return SMALL_HEAP_ALLOCATION_SIZE;
-	} else {
-		return block_size + __HEAP_METADATA_SIZE__;
-	}
-}
-
-static unsigned char get_type_of_heap__(size_t block_size) {
-	if (is_tiny_block__(block_size)) {
-		return TINY;
-	} else if (is_small_block__(block_size)) {
-		return SMALL;
-	} else {
-		return LARGE;
-	}
-}
-
-static void init_block__(block_head *block, size_t total_size) {
-	block->prev = NULL;
-	block->next = NULL;
-	block->data = BLOCK_FREE;
-	set_block_size__(&block->data, total_size);
-	get_current_block_tail__(block)->data = block->data;
-}
-
-static void init_primary_block__(heap_head *heap, size_t heap_size) {
-	size_t size = heap_size - sizeof(heap_head);
-	block_head *first = (block_head *)(HEAP_SHIFT(heap));
-	block_head *last = (block_head *)((byte_t *)first + size - __BLOCK_METADATA_SIZE__);
-	block_head *block = (block_head *)((byte_t *)first + __BLOCK_METADATA_SIZE__);
-
-	init_block__(first, 0);
-	first->data = BLOCK_OCCUPIED;
-	init_block__(last, 0);
-	last->data = BLOCK_OCCUPIED;
-	init_block__(block, (size_t)((byte_t *)last - (byte_t *)first) -
-				2 * __BLOCK_METADATA_SIZE__);
-	first->next = block;
-	first->prev = last;
-	last->next = first;
-	last->prev = block;
-	block->next = last;
-	block->prev = first;
-}
-
-/*
-================================
-	UTILS FOR MALLOC
-================================
-*/
-
-static void *init_heap__(heap_head *heap, size_t size, size_t heap_type) {
-	heap->total_size = size;
-	heap->flags = heap_type;
-	heap->next = get_heap();
-	set_heap(heap);
-	if (heap->next != NULL) {
-		heap->next->prev = heap;
-	}
-	return heap;
-}
-
-static void *create_heap__(size_t size, size_t heap_type) {
-	heap_head *new_heap;
-	size_t heap_size = get_size_of_heap__(size, heap_type);
-
-	if ((new_heap = mmap(NULL, heap_size, PROT_READ | PROT_WRITE,
-			     MAP_PRIVATE | MAP_ANON, -1, 0)) == NULL) {
-		return new_heap;
-	}
-	init_heap__(new_heap, heap_size, heap_type);
-	init_primary_block__(new_heap, heap_size);
-	return new_heap;
-}
-
-static void *find_free_heap__(heap_head *heap, size_t heap_type) {
-	while (heap) {
-		if (heap->flags == heap_type) {
-			return heap;
-		}
-		heap = heap->next;
-	}
-	return heap;
-}
-
-static void *find_free_block__(heap_head *heap, size_t size) {
-	block_head *it = ((block_head *)HEAP_SHIFT(heap))->next;
-	block_head *buff = it;
-	size_t it_size = get_block_size__(it->data);
-	size_t buff_size = it_size;
-
-	while (it_size) {
-		if (((buff_size > it_size) && (it_size >= size)) &&
-		    is_free_block__(it->data)) {
-			buff = it;
-			buff_size = get_block_size__(buff->data);
-		}
-		it = it->next;
-		it_size = get_block_size__(it->data);
-	}
-	return get_block_size__(buff->data) < size ? NULL : buff;
-}
-
-static void trim_block__(block_head *block, size_t size) {
-	size_t block_size = get_block_size__(block->data);
-	block_head *buff;
-
-	if (block_size - size >= __MIN_BLOCK_SIZE__) {
-		buff = (block_head *)((byte_t *)block + size + __BLOCK_METADATA_SIZE__);
-		init_block__(buff, block_size - size - __BLOCK_METADATA_SIZE__);
-		buff->next = block->next;
-		buff->prev = block;
-		block->next = buff;
-		buff->next->prev = buff;
-		set_block_size__(&block->data, size);
-		get_current_block_tail__(block)->data = block->data;
-	}
-}
-
-static void *get_free_block__(size_t input_size) {
-	heap_head *heap = get_heap();
-	block_head *block;
-	size_t size = round_size__(input_size);
-	size_t heap_type = get_type_of_heap__(size);
-
-	while (true) {
-		if ((heap = find_free_heap__(heap, heap_type)) == NULL) {
-			if ((heap = create_heap__(size, heap_type)) == NULL) {
-				return NULL;
-			}
-		}
-		if ((block = find_free_block__(heap, size)) == NULL) {
-			heap = heap->next;
-		} else {
+	for (it = begin; it != end; it = heap_get_next(it)) {
+		if ((memory = heap_alloc(it, size))) {
 			break;
 		}
 	}
-	trim_block__(block, size);
-	return block;
+
+	if (it == NULL) {
+		it = new_heap(size);
+		memory = heap_alloc(it, size);
+	}
+
+	return memory;
 }
 
-/*
-==============================
-	UTILS FOR FREE
-==============================
-*/
-
-inline static bool is_meta_block__(size_t data) { return data == 0; }
-
-static void free_heap__(heap_head *heap) {
-	if (heap->next) {
-		heap->next->prev = heap->prev;
-	}
-	if (heap->prev) {
-		heap->prev->next = heap->next;
-	}
-	if (heap == get_heap()) {
-		set_heap(heap->next);
-	}
-	munmap(heap, heap->total_size);
+void free(void *memory) {
+	heap *begin = heap_get_begin();
+	heap *end = heap_get_end();
+	heap *it;
+	
+	for (it = begin; it != end && !heap_containes(it, memory); it = heap_get_next(it)) { }
+	heap_free(it, memory);
 }
 
-static void *get_first_free_block__(block_head *block,
-				    block_head *(*iterate)(block_head *)) {
-	block = iterate(block);
-	while (block && (!is_free_block__(block->data) &&
-			 !is_meta_block__(block->data))) {
-		block = iterate(block);
-	}
-	return block;
+/* ============= */
+/* Malloc & Free */
+
+
+
+
+
+
+/* struct block_data */
+/* ================= */
+
+typedef unsigned char  byte_t;
+typedef struct __attribute__((packed)) block_data_s {
+	size_t size : (sizeof(size_t) * 8) - 1;
+	size_t occupied : 1;
+} block_data_t;
+_Static_assert(sizeof(size_t) == sizeof(block_data_t), "is not rigth size");
+
+static inline int  block_data_ctor(block_data_t *self, size_t size);
+
+
+static inline size_t block_data_get_size(block_data_t *self)                { return self->size; }
+static inline void   block_data_set_size(block_data_t *self, size_t size)   { self->size = (size_t)size; }
+static inline bool   block_data_is_occupied(block_data_t *self)             { return self->occupied; }
+static inline void   block_data_set_occupied(block_data_t *self, bool flag) { self->occupied = flag; }
+
+static inline block_data_t *block_data_get_next(block_data_t *self) {
+	return (block_data_t *)((byte_t *)self + block_data_get_size(self) + sizeof(*self));
+}
+static inline void *block_data_to_memory(block_data_t *self) {
+	return (byte_t *)self + sizeof(*self);
 }
 
-static void merge_blocks__(block_head *first, block_head *second) {
-	set_block_size__(&first->data, __BLOCK_METADATA_SIZE__ +
-					   get_block_size__(first->data) +
-					   get_block_size__(second->data));
-	first->next = second->next;
-	get_current_block_tail__(first)->data = first->data;
+static inline block_data_t *memory_to_block_data(void *memory) {
+	return (block_data_t *)((byte_t *)memory - sizeof(block_data_t));
 }
 
-static block_head *merge_adjacent_free_blocks__(block_head *block) {
-	block_head *buff;
+static void block_data_shrink_to_fit(block_data_t *self, size_t size) {
+	size_t block_size = block_data_get_size(self);
+	
+	if (block_size - size <= sizeof(*self) * 2) {
+		return;
+	}
 
-	buff = get_next_block__(block);
-	if (is_free_block__(buff->data)) {
-		merge_blocks__(block, buff);
-	}
-	buff = get_prev_block__(block);
-	if (is_free_block__(buff->data)) {
-		merge_blocks__(buff, block);
-		block = buff;
-	}
-	return block;
+	block_data_set_size(self, size);
+	block_data_t *new = block_data_get_next(self);
+	block_data_ctor(new, block_size - size);
 }
+
+static void *block_data_alloc(block_data_t *self, size_t size) {
+	if (block_data_get_size(self) < size) {
+		return NULL;
+	}
+
+	block_data_shrink_to_fit(self, size);
+	block_data_set_occupied(self, true);
+
+	return block_data_to_memory(self);
+}
+
+
+	/* Ctor & Dtor */
+	/* =========== */
+
+static inline int  block_data_ctor(block_data_t *self, size_t size) {
+	self->size = size - sizeof(block_data_t);
+	self->occupied = false;
+	return 0;
+}
+static inline void   block_data_dtor(block_data_t *self) {
+	self->occupied = false;
+}
+
+	/* =========== */
+	/* Ctor & Dtor */
+
+/* ================= */
+/* struct block_data */
+
+
+
+
+
+/* struct heap */
+/* =========== */
+
+typedef struct __attribute__((packed)) heap_data_s {
+	size_t size;
+	unsigned short type;
+} heap_data;
+
+typedef struct __attribute__((packed)) heap_s {
+	struct heap_s *prev;
+	struct heap_s *next;
+	size_t size;
+	unsigned short type;
+} heap;
+
+static heap *g_heap = NULL;
+
+static inline heap *heap_get_begin(void)    { return g_heap; }
+static inline heap *heap_get_end(void)      { return NULL; }
+static inline heap *heap_get_next(heap *it) { return it->next; }
+
+static inline block_data_t *heap_get_block_begin(heap *self) {
+	return (block_data_t *)((byte_t *)self + sizeof(*self));
+}
+
+static inline block_data_t *heap_get_block_end(heap *self) {
+	return (block_data_t *)((byte_t *)self + self->size - sizeof(block_data_t));
+}
+
+static bool heap_containes(heap *self, void *memory) {
+	return memory > (void *)heap_get_block_begin(self) && memory < (void *)heap_get_block_end(self);
+}
+
+static heap_data get_heap_data(size_t size) {
+	heap_data data;
+	if (size <= TINY_BLOCK_SIZE) {
+		data.size = TINY_HEAP_ALLOCATION_SIZE;
+		data.type = HEAP_TINY;
+	} else if (size <= SMALL_BLOCK_SIZE) {
+		data.size = SMALL_HEAP_ALLOCATION_SIZE;
+		data.type = HEAP_SMALL;
+	} else {
+		data.type = HEAP_LARGE;
+		data.size = size + sizeof(heap) + sizeof(block_data_t) * 2;
+	}
+	return data;
+}
+
+static void heap_try_merge_block(heap *self, block_data_t *block) {
+	block_data_t *begin = block_data_get_next(block);
+	block_data_t *end   = heap_get_block_end(self);
+	block_data_t *it;
+
+	for (it = begin; it != end && !block_data_is_occupied(it); it = block_data_get_next(it)) {
+		block_data_set_size(block,
+			block_data_get_size(block) + block_data_get_size(it) + sizeof(*it));
+	}
+}
+
+void *heap_alloc(heap *self, size_t size) {
+	if (self->type != get_heap_data(size).type) {
+		return NULL;
+	}
+
+	block_data_t *begin = heap_get_block_begin(self);
+	block_data_t *end   = heap_get_block_end(self);
+	block_data_t *it;
+	void *memory = NULL;
+
+	for (it = begin; it != end; it = block_data_get_next(it)) {
+		if (block_data_is_occupied(it))
+			continue;
+
+		heap_try_merge_block(self, it);
+
+		if ((memory = block_data_alloc(it, size))) {
+			break;
+		}
+	}
+
+	return memory;
+}
+
+static void delete_heap(heap *obj);
+
+static void heap_free(heap *self, void *memory) {
+	block_data_t *first = heap_get_block_begin(self);
+	block_data_t *block = memory_to_block_data(memory);
+
+	block_data_set_occupied(block, false);
+	heap_try_merge_block(self, block);
+	heap_try_merge_block(self, first);
+
+	if (block_data_get_size(first) + sizeof(block_data_t) * 2 + sizeof(*self) == self->size) {
+		delete_heap(self);
+	}
+}
+
+
+
+	/* Ctor & Dtor */
+	/* =========== */
+
+static void heap_prep(heap *self, heap_data data) {
+	self->size = data.size;
+	self->type = data.type;
+	self->next = g_heap;
+	g_heap = self;
+	if (self->next != NULL) {
+		self->next->prev = self;
+	}
+}
+
+static int heap_ctor(heap *self, heap_data data) {
+	heap_prep(self, data);
+
+	block_data_t *begin = heap_get_block_begin(self);
+	block_data_t *end   = heap_get_block_end(self);
+	size_t memory_size  = self->size - sizeof(*self) - sizeof(*end);
+
+	/**
+	 * @brief init first block
+	 * @size: (total size) - sizeof(struct heap)  - sizeof(last block)
+	 */
+	block_data_ctor(begin, memory_size);
+
+	/**
+	 * @brief init last block
+	 */
+	block_data_ctor(end, sizeof(*end));
+	block_data_set_occupied(end, true);
+}
+
+static void heap_dtor(heap *self) {
+	block_data_dtor(heap_get_block_begin(self));
+}
+
+static heap *new_heap(size_t size) {
+	heap *obj;
+	heap_data data = get_heap_data(size);
+
+	if ((obj = mmap(NULL, data.size, PROT_READ | PROT_WRITE,
+			     MAP_PRIVATE | MAP_ANON, -1, 0)) == NULL) {
+		return obj;
+	}
+	heap_ctor(obj, data);
+	return obj;
+}
+
+static void delete_heap(heap *obj) {
+	if (obj->next) {
+		obj->next->prev = obj->prev;
+	}
+	if (obj->prev) {
+		obj->prev->next = obj->next;
+	}
+	if (obj == g_heap) {
+		g_heap = obj->next;
+	}
+	heap_dtor(obj);
+	munmap(obj, obj->size);
+}
+
+	/* =========== */
+	/* Ctor & Dtor */
+
+/* =========== */
+/* struct heap */
