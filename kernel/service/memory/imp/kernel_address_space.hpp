@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   paging.hpp                                         :+:      :+:    :+:   */
+/*   kernel_address_space.hpp                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/09 12:38:43 by larlena           #+#    #+#             */
-/*   Updated: 2025/05/05 17:53:06 by larlena          ###   ########.fr       */
+/*   Created: 2024/05/26 20:19:04 by larlena           #+#    #+#             */
+/*   Updated: 2025/09/27 23:23:35 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __KFS_KERNEL_ARCH_PAIGING_HPP__
-# define __KFS_KERNEL_ARCH_PAIGING_HPP__
+#include <multiboot.h>
 
-# include "arch/x86/paging.hpp"
+#include <service/memory/paging.hpp>
+#include <service/memory/address_space.hpp>
 
-namespace kfs::page {
-	using namespace kfs::x86::page;
+namespace kfs {
+
+struct KernelAddressSpace : public AddressSpace {
+	KernelAddressSpace();
+};
+
 }
-
-#endif // __KFS_KERNEL_ARCH_PAIGING_HPP__

@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 13:17:49 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/25 23:37:14 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/26 19:56:47 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void *mmap(void *addr, size_t length, int prot, int flags, int fd, off_t offset)
 		}
 	}
 
-	return (void *)kfs::PhysicalMemory::instance().alloc();
+	return (void *)kfs::PhysicalMemory::instance().allocate();
 }
 
 int munmap(void *addr, size_t length) {

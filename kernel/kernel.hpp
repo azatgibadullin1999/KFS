@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 13:00:57 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/24 18:42:47 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/27 18:41:00 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,18 @@
 # include "service/memory/memory.hpp"
 # include "../boot/multiboot.h"
 
+namespace kfs {
+
 class Kernel {
 public:
 	static Kernel	init(multiboot_info_t* mbd) {
-		static auto&&	panic = kfs::PanicHandler{};
-		static auto&&	display = kfs::driver::vga::VGATextDisplay();
-		static auto&&	keyboard = kfs::driver::ps2::Keyboard(kfs::driver::common::USqwerty());
-		static auto&&	processor = kfs::driver::common::SymbolProcessorAutoScroll(&display);
-		kfs::console::instance().setTextDisplay(&display);
-		kfs::console::instance().setKeyboard(&keyboard);
-		kfs::console::instance().setSymbolProcessor(&processor);
+		static auto&&	panic = PanicHandler{};
+		static auto&&	display = driver::vga::VGATextDisplay();
+		static auto&&	keyboard = driver::ps2::Keyboard(driver::common::USqwerty());
+		static auto&&	processor = driver::common::SymbolProcessorAutoScroll(&display);
+		console::instance().setTextDisplay(&display);
+		console::instance().setKeyboard(&keyboard);
+		console::instance().setSymbolProcessor(&processor);
 
 		auto&&	memory [[maybe_unused]] = Memory::init(
 			reinterpret_cast<multiboot_memory_map_t *>(mbd->mmap_addr),
@@ -54,13 +56,15 @@ public:
      +#+         +#+ +#+#+#    +#+    +#+	    +#+#+#+#+#+   +#+\n\
     #+#        #+#   #+#+     #+#    #+#	         #+#    #+#\n\
    ##########  ##########    #########	        	###   ########.fr\n\n";
-		auto&&	shell = kfs::Shell(&kfs::console::instance());
+		auto&&	shell = Shell(&console::instance());
 
-		kfs::console::instance().write(header);
+		console::instance().write(header);
 		while (1) {
 			shell.process();
 		}
 	}
 };
+
+} // namespace kfs
 
 #endif // __KFS_KERNEL_KERNEL_HPP__

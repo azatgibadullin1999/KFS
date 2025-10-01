@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 20:02:55 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/24 19:36:39 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/27 23:16:52 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ public:
 		return *this;
 	}
 
-	phys_addr_t	alloc();
-	void	dealloc(phys_addr_t);
+	phys_addr_t allocate();
+	void deallocate(phys_addr_t);
 private:
 	std::list<MemoryRange> _memory;
 	std::vector<bool> _used_chunks;
@@ -50,7 +50,7 @@ private:
 
 } // namespace details
 
-using PhysicalMemory = kfs::interface::singleton_wrapper<details::PhysicalMemory>;
+using PhysicalMemory = interface::singleton_wrapper<details::PhysicalMemory>;
 
 } // namespace kfs
 

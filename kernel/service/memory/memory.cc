@@ -6,33 +6,37 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 20:11:15 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/24 22:03:03 by larlena          ###   ########.fr       */
+/*   Updated: 2025/10/01 16:45:26 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <cstddef>
 #include <span>
 #include <cstdio>
 
+#include <elf.h>
+#include <service/memory/memory_range.hpp>
+
 #include "memory.hpp"
-#include "imp/init_x86.hpp"
+#include "gdt_default.hpp"
 #include "physical_memory.hpp"
-// #include "page_manager.hpp"
-// #include "address_space.hpp"
-// #include "arch/x86/gdt_default.hpp"
+#include "imp/kernel_address_space.hpp"
+
+namespace kfs {
 
 Memory	Memory::init(multiboot_memory_map_t *addr, size_t length, multiboot_elf_section_header_table_t *elfsh) {
-	static auto&&	memory = Memory();
-
-
-	kfs::PhysicalMemory::instance().init(std::span<multiboot_memory_map_t>{
+	std::span<multiboot_memory_map_t> memory_map{
 		addr,
 		addr + length / sizeof(multiboot_memory_map_t)
-	});
-	// auto&&	gdt [[maybe_unused]] = kfs::x86::GDTDefault{};
-	// kfs::x86::page::initial::init_paging();
+	};
+	
+	static auto&&	memory = Memory();
 
-	// auto&&	address_space = kfs::AddressSpace{*directory.second};
-	// auto&&	page_manager [[maybe_unused]] = kfs::x86::page::Manager(table);
-
+	PhysicalMemory::instance().init(memory_map);
+	static auto&&	gdt [[maybe_unused]] = x86::GDTDefault{};
+	static auto&&	address_space = KernelAddressSpace{ };
+	
 	return memory;
 }
+
+} // namespace kfs

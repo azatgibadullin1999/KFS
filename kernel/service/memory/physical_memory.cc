@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 20:37:04 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/24 22:05:40 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/28 19:36:21 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <ranges>
 #include <cstddef>
 #include <cstdio>
+#include <algorithm>
 
 #include <elf.h>
 
@@ -31,11 +32,21 @@ PhysicalMemory::PhysicalMemory(std::span<multiboot_memory_map_t> memory_map)
 	| std::views::filter([](auto &&map) {
 		return map.type == MULTIBOOT_MEMORY_AVAILABLE;
 	})
-	 | std::views::transform([](auto &&map) {
+	| std::views::transform([](auto &&map) {
 		return MemoryRange{
 			static_cast<phys_addr_t>(map.addr >> 12),
 			static_cast<phys_addr_t>((map.addr >> 12) + (map.len >> 12)), 
 		};
+	})
+	| std::views::transform([](auto &&range) {
+		if (range.end < 1024)
+			range.end = 0, range.begin = 0;
+		else if (range.begin < 1024)
+			range.begin = 1024;
+		return range;
+	})
+	| std::views::filter([](auto &&range) {
+		return range.begin != 0 && range.end != 0;
 	})
 	| std::ranges::to<decltype(_memory)>()
 }
@@ -49,10 +60,11 @@ PhysicalMemory::PhysicalMemory(std::span<multiboot_memory_map_t> memory_map)
 		return 0;
 	})
 	| std::ranges::to<decltype(_used_chunks)>()
-} { }
+} {
+}
 
 
-phys_addr_t	PhysicalMemory::alloc() {
+phys_addr_t	PhysicalMemory::allocate() {
 	if (_memory.empty())
 		return 0;
 
@@ -66,7 +78,7 @@ phys_addr_t	PhysicalMemory::alloc() {
 	return 0;
 }
 
-void	PhysicalMemory::dealloc(phys_addr_t addr) {
+void	PhysicalMemory::deallocate(phys_addr_t addr) {
 	addr >>= 12;
 	for (auto &&tuple : std::views::zip(_memory | std::views::transform([](auto &&entry) { return std::views::iota(entry.begin, entry.end); }) | std::views::join, _used_chunks)) {
 		auto &&[iaddr, used] = tuple;

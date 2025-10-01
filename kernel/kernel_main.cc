@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 17:46:12 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/13 16:28:56 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/27 18:41:10 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ extern "C" void kernel_main(uint32_t magic, multiboot_info_t* mbd, void *stack_t
 	}
 
 	stack_top = stack_top_top;
-	auto&&	kernel = Kernel::init(mbd);
+	auto&&	kernel = kfs::Kernel::init(mbd);
 
 	kernel.start();
 }

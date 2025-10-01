@@ -6,17 +6,17 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 11:54:03 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/14 00:18:12 by larlena          ###   ########.fr       */
+/*   Updated: 2025/09/26 00:07:13 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __KFS_KERNEL_ARCH_X86_GDT_HPP__
-# define __KFS_KERNEL_ARCH_X86_GDT_HPP__
+#ifndef __KFS_KERNEL_SERVICE_MEMORY_GDT_HPP__
+# define __KFS_KERNEL_SERVICE_MEMORY_GDT_HPP__
 
-# include <stdint.h>
 # include <array>
 # include <utility>
-# include <libft.hpp>
+# include <cstring>
+# include <cstdint>
 
 namespace kfs::x86 {
 
@@ -52,7 +52,7 @@ protected:
 			mBase(base) { }
 
 		void	move(Desk *desk) const  {
-			memmove((void *)mBase, desk, mLimit);
+			std::memmove((void *)mBase, desk, mLimit);
 		}
 
 		void	load() const {
@@ -92,4 +92,4 @@ private:
 
 } // kfs::x86
 
-#endif // __KFS_KERNEL_ARCH_X86_GDT_HPP__
+#endif // __KFS_KERNEL_SERVICE_MEMORY_GDT_HPP__
