@@ -31,7 +31,7 @@ execute_process(
 add_subdirectory(kernel/api)
 add_subdirectory(libc)
 add_subdirectory(libcxx)
-add_subdirectory(cxx-support)
+add_subdirectory(libcxxabi)
 add_subdirectory(boot)
 add_subdirectory(kernel)
 

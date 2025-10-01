@@ -11,7 +11,7 @@ execute_process(
 add_executable(${CMAKE_PROJECT_NAME}
 	$<TARGET_OBJECTS:kfs::api>
 	$<TARGET_OBJECTS:kfs::boot>
-	$<TARGET_OBJECTS:kfs::cxx::support>
+	$<TARGET_OBJECTS:kfs::libcxxabi>
 	$<TARGET_OBJECTS:kfs::libc::stdio>
 	$<TARGET_OBJECTS:kfs::libc::errno>
 	$<TARGET_OBJECTS:kfs::libc::ctype>

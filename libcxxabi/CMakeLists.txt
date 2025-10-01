@@ -1,4 +1,4 @@
-add_library(kfs_cxx_support OBJECT
+add_library(kfs_libcxxabi OBJECT
         alloc.cc
         execption.cc
         cxa_terminate.cc
@@ -6,6 +6,6 @@ add_library(kfs_cxx_support OBJECT
         pure_virtual_functions.cc
 )
 
-add_library(kfs::cxx::support
-        ALIAS kfs_cxx_support
+add_library(kfs::libcxxabi
+        ALIAS kfs_libcxxabi
 )
