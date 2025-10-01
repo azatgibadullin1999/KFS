@@ -1,14 +1,13 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   api.h                                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/17 14:30:17 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/24 18:36:21 by larlena          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+/**
+ * @file api.h
+ * @author larlena (azat251061@gmail.com)
+ * @brief 
+ * @version 0.1
+ * @date 01-10-2025
+ * 
+ * @copyright Copyright (c) 2025
+ * 
+ */
 
 #ifndef __KFS_KERNEL_API_API_HPP__
 # define __KFS_KERNEL_API_API_HPP__

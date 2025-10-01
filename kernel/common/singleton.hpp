@@ -1,14 +1,13 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   singleton.hpp                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/27 14:27:33 by larlena           #+#    #+#             */
-/*   Updated: 2025/03/27 19:29:03 by larlena          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+/**
+ * @file singleton.hpp
+ * @author larlena (azat251061@gmail.com)
+ * @brief 
+ * @version 0.1
+ * @date 01-10-2025
+ * 
+ * @copyright Copyright (c) 2025
+ * 
+ */
 
 #ifndef __KFS_KERNEL_INTERFACE_SINGLETON_HPP__
 # define __KFS_KERNEL_INTERFACE_SINGLETON_HPP__

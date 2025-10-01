@@ -1,14 +1,13 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   command_press_newline.hpp                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/25 01:16:34 by larlena           #+#    #+#             */
-/*   Updated: 2024/06/07 16:15:59 by larlena          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+/**
+ * @file command_press_newline.hpp
+ * @author larlena (azat251061@gmail.com)
+ * @brief 
+ * @version 0.1
+ * @date 01-10-2025
+ * 
+ * @copyright Copyright (c) 2025
+ * 
+ */
 
 #ifndef __KFS_KERNEL_SERVICE_SHELL_COMMAND_PRESS_NEWLINE_HPP__
 # define __KFS_KERNEL_SERVICE_SHELL_COMMAND_PRESS_NEWLINE_HPP__

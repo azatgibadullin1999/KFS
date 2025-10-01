@@ -1,14 +1,13 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   command_press_backspace.cc                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/14 19:19:12 by larlena           #+#    #+#             */
-/*   Updated: 2024/05/17 19:37:40 by larlena          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+/**
+ * @file command_press_backspace.cc
+ * @author larlena (azat251061@gmail.com)
+ * @brief 
+ * @version 0.1
+ * @date 01-10-2025
+ * 
+ * @copyright Copyright (c) 2025
+ * 
+ */
 
 #include "command_press_backspace.hpp"
 

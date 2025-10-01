@@ -1,14 +1,13 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   command_builtin_panic.hpp                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/09 11:05:04 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/23 19:29:13 by larlena          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+/**
+ * @file command_builtin_panic.hpp
+ * @author larlena (azat251061@gmail.com)
+ * @brief 
+ * @version 0.1
+ * @date 01-10-2025
+ * 
+ * @copyright Copyright (c) 2025
+ * 
+ */
 
 #ifndef __KFS_KERNEL_SERVICE_SHELL_IMPL_COMMAND_BUILTIN_PANIC_HPP__
 # define __KFS_KERNEL_SERVICE_SHELL_IMPL_COMMAND_BUILTIN_PANIC_HPP__

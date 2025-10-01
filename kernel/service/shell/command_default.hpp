@@ -1,14 +1,13 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   command_default.hpp                                :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/27 15:45:49 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/23 15:40:48 by larlena          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+/**
+ * @file command_default.hpp
+ * @author larlena (azat251061@gmail.com)
+ * @brief 
+ * @version 0.1
+ * @date 01-10-2025
+ * 
+ * @copyright Copyright (c) 2025
+ * 
+ */
 
 #ifndef __KFS_KERNEL_SERVICE_SHELL_COMMAND_DEFAULT_HPP__
 # define __KFS_KERNEL_SERVICE_SHELL_COMMAND_DEFAULT_HPP__

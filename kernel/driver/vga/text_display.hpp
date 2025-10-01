@@ -1,14 +1,13 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   text_display.hpp                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/12 18:30:28 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/23 15:37:06 by larlena          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+/**
+ * @file text_display.hpp
+ * @author larlena (azat251061@gmail.com)
+ * @brief 
+ * @version 0.1
+ * @date 01-10-2025
+ * 
+ * @copyright Copyright (c) 2025
+ * 
+ */
 
 #ifndef __KERNEL_DRIVER_VGA_SERVICE_IMPL_TEXT_DISPLAY_HPP__
 # define __KERNEL_DRIVER_VGA_SERVICE_IMPL_TEXT_DISPLAY_HPP__

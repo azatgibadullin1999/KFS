@@ -1,14 +1,16 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   panic.hpp                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/11 12:20:16 by larlena           #+#    #+#             */
-/*   Updated: 2025/09/24 19:03:18 by larlena          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+/**
+ * @file panic.hpp
+ * @author larlena (azat251061@gmail.com)
+ * @brief 
+ * @version 0.1
+ * @date 01-10-2025
+ * 
+ * @copyright Copyright (c) 2025
+ * 
+ */
+
+#ifndef __KFS_KERNEL_SERVICE_PANIC_PANIC_HPP__
+# define __KFS_KERNEL_SERVICE_PANIC_PANIC_HPP__
 
 namespace kfs {
 
@@ -21,3 +23,5 @@ struct PanicHandler {
 };
 
 } // namespace kfs
+
+#endif // __KFS_KERNEL_SERVICE_PANIC_PANIC_HPP__
