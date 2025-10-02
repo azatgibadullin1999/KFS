@@ -12,7 +12,7 @@
 #ifndef __KFS_KERNEL_SERVICE_SHELL_HPP__
 # define __KFS_KERNEL_SERVICE_SHELL_HPP__
 
-# include <service/console.hpp>
+# include "service/console.hpp"
 
 namespace kfs::interface {
 

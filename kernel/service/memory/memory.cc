@@ -14,7 +14,6 @@
 #include <cstdio>
 
 #include <elf.h>
-#include <service/memory/memory_range.hpp>
 
 #include "memory.hpp"
 #include "gdt_default.hpp"
@@ -26,7 +25,7 @@ namespace kfs {
 Memory	Memory::init(multiboot_memory_map_t *addr, size_t length, multiboot_elf_section_header_table_t *elfsh) {
 	std::span<multiboot_memory_map_t> memory_map{
 		addr,
-		addr + length / sizeof(multiboot_memory_map_t)
+		addr + (length / sizeof(multiboot_memory_map_t))
 	};
 	
 	static auto&&	memory = Memory();

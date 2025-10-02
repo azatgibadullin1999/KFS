@@ -17,15 +17,15 @@
 
 # include <multiboot.h>
 
-# include <service/shell/shell.hpp>
-# include <service/panic/panic.hpp>
-# include <service/memory/memory.hpp>
-# include <service/console/console.hpp>
+# include "service/shell/shell.hpp"
+# include "service/panic/panic.hpp"
+# include "service/memory/memory.hpp"
+# include "service/console/console.hpp"
 
-# include <driver/ps2/keyboard.hpp>
-# include <driver/vga/text_display.hpp>
-# include <driver/service/usqwerty.hpp>
-# include <driver/service/symbol_processor_auto_scroll.hpp>
+# include "driver/ps2/keyboard.hpp"
+# include "driver/vga/text_display.hpp"
+# include "driver/service/usqwerty.hpp"
+# include "driver/service/symbol_processor_auto_scroll.hpp"
 
 extern "C" {
 	extern std::byte _kfs_sections_begin;

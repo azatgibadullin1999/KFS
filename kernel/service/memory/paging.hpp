@@ -12,14 +12,13 @@
 #ifndef __KFS_KERNEL_SERVICE_MEMORY_PAIGING_HPP__
 # define __KFS_KERNEL_SERVICE_MEMORY_PAIGING_HPP__
 
-#include <bitset>
-#include <span>
-#include <array>
-#include <cstdint>
-#include <cstddef>
-#include <utility>
+# include <span>
+# include <array>
+# include <cstdint>
+# include <cstddef>
+# include <utility>
 
-#include "arch/kerneldef.h"
+# include "arch/kerneldef.h"
 
 namespace kfs::page {
 
@@ -33,8 +32,8 @@ struct Page {
 };
 static_assert(sizeof(Page) == 0x1000, "");
 
-constexpr std::size_t page_size = sizeof(Page);
-constexpr std::size_t page_mask = ~(sizeof(Page) - 1);
+constexpr std::size_t g_page_size = sizeof(Page);
+constexpr std::size_t g_page_mask = ~(sizeof(Page) - 1);
 
 namespace detail {
 struct DirectoryEntry {

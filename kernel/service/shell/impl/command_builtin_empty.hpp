@@ -14,8 +14,8 @@
 
 # include <cstdio>
 
-# include "service/shell/interface/command_builtin.hpp"
 # include "common/factory.hpp"
+# include "service/shell/interface/command_builtin.hpp"
 
 namespace kfs::shell {
 
@@ -23,20 +23,20 @@ class CommandBuiltinEmpty :
 	public kfs::shell::interface::ICommandBuiltin,
 	public kfs::interface::StaticInstanceFactory<CommandBuiltinEmpty> {
 public:
-	std::string_view	getName() const {
+	std::string_view	get_name() const {
 		return "empty";
 	}
-	std::string_view	getShortDescription() const {
+	std::string_view	get_short_description() const {
 		return "empty";
 	}
-	std::string_view	getFullDescription() const {
+	std::string_view	get_full_description() const {
 		return "empty";
 	}
 	void		execute() {
-		if (!*mArgs) {
+		if (!*_args) {
 			return ;
 		}
-		std::printf("There is no command \"%s\", type \"help\" to see the list of commands\n", *mArgs);
+		std::printf("There is no command \"%s\", type \"help\" to see the list of commands\n", *_args);
 	}
 };
 

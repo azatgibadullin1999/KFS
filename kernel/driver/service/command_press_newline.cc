@@ -14,14 +14,14 @@
 namespace kfs::driver::common {
 
 void	CommandPressNewLine::execute() {
-	size_t	column = mTextDisplay->getCurrentColumn();
+	size_t	column = _text_display->get_current_column();
 	size_t	row = 0;
 
-	if (++column == mTextDisplay->getColumn()) {
+	if (++column == _text_display->get_column()) {
 		column = 0;
-		mTextDisplay->clear();
+		_text_display->clear();
 	}
-	mTextDisplay->setCursorPosition(row, column);
+	_text_display->set_cursor_position(row, column);
 }
 
 }

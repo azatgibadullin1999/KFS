@@ -11,8 +11,7 @@
 
 #include <multiboot.h>
 
-#include <service/memory/paging.hpp>
-#include <service/memory/address_space.hpp>
+#include "service/memory/address_space.hpp"
 
 namespace kfs {
 

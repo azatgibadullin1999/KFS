@@ -15,6 +15,7 @@
 # include <array>
 # include <algorithm>
 # include <string_view>
+
 # include "command_builtin.hpp"
 
 namespace kfs::shell {
@@ -24,13 +25,13 @@ class FactoryCommandBuiltin {
 	using Container = std::array<kfs::shell::interface::ICommandBuiltin *, sizeof ... (Args)>;
 public:
 	FactoryCommandBuiltin() :
-	mArray{static_cast<kfs::shell::interface::ICommandBuiltin *>(Args::create()) ...} { }
+	_array{static_cast<kfs::shell::interface::ICommandBuiltin *>(Args::create()) ...} { }
 
 	kfs::shell::interface::ICommandBuiltin	*process(std::string_view command) {
-		return *std::find(mArray.begin(), mArray.end() - 1, command);
+		return *std::find(_array.begin(), _array.end() - 1, command);
 	}
 private:
-	Container	mArray;
+	Container	_array;
 };
 
 }

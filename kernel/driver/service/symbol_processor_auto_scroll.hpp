@@ -14,6 +14,7 @@
 
 # include "driver/common_interface/symbol_processor.hpp"
 # include "driver/common_interface/keyboard.hpp"
+
 # include "command_press_newline_auto_scroll.hpp"
 # include "command_default_auto_scroll.hpp"
 # include "command_press_backspace.hpp"

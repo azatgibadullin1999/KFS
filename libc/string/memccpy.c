@@ -23,8 +23,9 @@ void	*memccpy(void *dst, const void *src, int c, size_t n)
 	while (i < n)
 	{
 		buf1[i] = buf2[i];
-		if (buf2[i] == (unsigned char)c)
+		if (buf2[i] == (unsigned char)c) {
 			return ((void *)&buf1[i + 1]);
+		}
 		i++;
 	}
 	return (NULL);

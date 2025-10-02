@@ -14,10 +14,10 @@
 namespace kfs::driver::common {
 
 void	CommandPressTab::execute() {
-	auto&&	currentRow = mTextDisplay->getCurrentRow();
-	auto&&	newCursorPositionByRow = currentRow + (mTabSize - (currentRow % mTabSize));
+	auto&&	row = _text_display->get_current_row();
+	auto&&	new_cursor_position = row + (_tab_size - (row % _tab_size));
 
-	mTextDisplay->setCursorPosition(newCursorPositionByRow, mTextDisplay->getCurrentColumn());
+	_text_display->set_cursor_position(new_cursor_position, _text_display->get_current_column());
 }
 
 }

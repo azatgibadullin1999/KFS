@@ -1,0 +1,17 @@
+AccessModifierOffset: 0
+AlignAfterOpenBracket: BAS_DontAlign
+AlignArrayOfStructures: AIAS_Right
+
+AlignConsecutiveAssignments: AcrossComments
+AlignConsecutiveAssignments:
+  AlignCompound: true
+  AlignFunctionDeclarations: true
+  AlignFunctionPointers: false
+  PadOperators: true
+AlignConsecutiveBitFields: AcrossComments
+AlignConsecutiveDeclarations: AcrossComments
+AlignConsecutiveMacros: AcrossComments
+AlignConsecutiveShortCaseStatements: AcrossComments
+AlignEscapedNewlines: ENAS_LeftWithLastLine
+
+

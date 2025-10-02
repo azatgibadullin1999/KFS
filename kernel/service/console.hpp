@@ -12,9 +12,9 @@
 #ifndef __KFS_KERNEL_SERVICE_CONSOLE_HPP__
 # define __KFS_KERNEL_SERVICE_CONSOLE_HPP__
 
-# include <driver/common_interface/keyboard.hpp>
-# include <driver/common_interface/text_display.hpp>
-# include <driver/common_interface/symbol_processor.hpp>
+# include "driver/common_interface/keyboard.hpp"
+# include "driver/common_interface/text_display.hpp"
+# include "driver/common_interface/symbol_processor.hpp"
 
 namespace kfs::interface {
 
@@ -34,7 +34,7 @@ public:
 	virtual void	write(char) = 0;
 	virtual void	write(const char *) = 0;
 	virtual char	read() = 0;
-	virtual char	readBlocking() = 0;
+	virtual char	read_blocking() = 0;
 
 	void	set_text_display(kfs::driver::interface::ITextDisplay *text_display) {
 		_text_display = text_display;

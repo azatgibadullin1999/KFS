@@ -12,8 +12,6 @@
 #include <span>
 #include <ranges>
 #include <cstddef>
-#include <cstdio>
-#include <algorithm>
 
 #include <elf.h>
 
@@ -38,10 +36,11 @@ PhysicalMemory::PhysicalMemory(std::span<multiboot_memory_map_t> memory_map)
 		};
 	})
 	| std::views::transform([](auto &&range) {
-		if (range.end < 1024)
+		if (range.end < 1024) {
 			range.end = 0, range.begin = 0;
-		else if (range.begin < 1024)
+		} else if (range.begin < 1024) {
 			range.begin = 1024;
+		}
 		return range;
 	})
 	| std::views::filter([](auto &&range) {
@@ -64,12 +63,13 @@ PhysicalMemory::PhysicalMemory(std::span<multiboot_memory_map_t> memory_map)
 
 
 phys_addr_t	PhysicalMemory::allocate() {
-	if (_memory.empty())
+	if (_memory.empty()) {
 		return 0;
+	}
 
 	for (auto &&tuple : std::views::zip(_memory | std::views::transform([](auto &&entry) { return std::views::iota(entry.begin, entry.end); }) | std::views::join, _used_chunks)) {
 		auto &&[iaddr, used] = tuple;
-		if (used == false) {
+		if (not used) {
 			used = true;
 			return iaddr << 12;
 		}
@@ -77,11 +77,11 @@ phys_addr_t	PhysicalMemory::allocate() {
 	return 0;
 }
 
-void	PhysicalMemory::deallocate(phys_addr_t addr) {
-	addr >>= 12;
+void	PhysicalMemory::deallocate(phys_addr_t memory) {
+	memory >>= 12;
 	for (auto &&tuple : std::views::zip(_memory | std::views::transform([](auto &&entry) { return std::views::iota(entry.begin, entry.end); }) | std::views::join, _used_chunks)) {
 		auto &&[iaddr, used] = tuple;
-		if (addr == iaddr) {
+		if (memory == iaddr) {
 			used = false;
 			return;
 		}

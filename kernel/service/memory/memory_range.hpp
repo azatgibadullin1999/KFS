@@ -25,11 +25,11 @@ struct MemoryRange {
 };
 
 bool		valid(const MemoryRange& range) noexcept;
-bool		adjacent(const MemoryRange& lhsRange, const MemoryRange& rhsRange) noexcept;
-MemoryRange	merge(const MemoryRange& lhsRange, const MemoryRange& rhsRange) noexcept;
-MemoryRange	intersec(const MemoryRange& lhsRange, const MemoryRange& rhsRange) noexcept;	
-bool		intersected(const MemoryRange& lhsRange, const MemoryRange& rhsRange) noexcept;
-std::pair<MemoryRange, MemoryRange>	exclude(const MemoryRange& memRange, const MemoryRange& exclude) noexcept;
+bool		adjacent(const MemoryRange& lhs, const MemoryRange& rhs) noexcept;
+MemoryRange	merge(const MemoryRange& lhs, const MemoryRange& rhs) noexcept;
+MemoryRange	intersec(const MemoryRange& lhs, const MemoryRange& rhs) noexcept;	
+bool		intersected(const MemoryRange& lhs, const MemoryRange& rhs) noexcept;
+std::pair<MemoryRange, MemoryRange>	exclude(const MemoryRange& mem_range, const MemoryRange& exclude) noexcept;
 
 } // namespace kfs
 

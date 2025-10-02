@@ -9,17 +9,12 @@
  * 
  */
 
-#include <cstdio>
-#include <algorithm>
-
-#include <arch/kerneldef.h>
-#include <exception>
-#include <memory>
 #include <ranges>
-#include <service/memory/paging.hpp>
-#include <service/memory/address_space.hpp>
-#include <service/memory/physical_memory.hpp>
-#include <tuple>
+
+#include "arch/kerneldef.h"
+#include "service/memory/paging.hpp"
+#include "service/memory/address_space.hpp"
+#include "service/memory/physical_memory.hpp"
 
 #include "kernel_address_space.hpp"
 
@@ -35,7 +30,7 @@ struct InitialMemoryMapping : page::Page::MemoryMapping {
 
 KernelAddressSpace::KernelAddressSpace()
 : AddressSpace{ InitialMemoryMapping{ PhysicalMemory::instance().allocate() } } {
-	std::span<page::Directory::Entry> directory = reinterpret_cast<page::Directory *>(get_page_directory_physical_address())->entrys();
+	std::span<page::Directory::Entry> directory = reinterpret_cast<page::Directory *>(_get_page_directory_physical_address())->entrys();
 
 	directory.front().set(nullptr)
 		.phys_addr(PhysicalMemory::instance().allocate())

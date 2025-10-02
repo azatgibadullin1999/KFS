@@ -12,4 +12,4 @@
 #include "api.h"
 #include "stdlib.h"
 
-void abort() { __kfs_panic(); }
+void abort(void) { kfs_panic(); }

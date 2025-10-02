@@ -11,7 +11,7 @@
 
 #include <cstdint>
 
-#include <kernel.hpp>
+#include "kernel.hpp"
 
 #if defined(__linux__)
 # error "You are not using a cross-compiler, you will most certainly run into trouble"
@@ -21,14 +21,14 @@
 # error "This tutorial needs to be compiled with a ix86-elf compiler"
 #endif
 
-void	*stack_top;
+void	*g_stack_top;
 
-extern "C" void kernel_main(uint32_t magic, multiboot_info_t* mbd, void *stack_top_top) {
+extern "C" void kernel_main(uint32_t magic, multiboot_info_t* mbd, void *stack_top) {
 	if (magic != MULTIBOOT_BOOTLOADER_MAGIC) {
 		return ;
 	}
 
-	stack_top = stack_top_top;
+	g_stack_top = stack_top;
 	auto&&	kernel = kfs::Kernel::init(mbd);
 
 	kernel.start();

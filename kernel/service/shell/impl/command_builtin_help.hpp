@@ -14,8 +14,8 @@
 
 # include <cstdio>
 
-# include "service/shell/interface/command_builtin.hpp"
 # include "common/factory.hpp"
+# include "service/shell/interface/command_builtin.hpp"
 
 namespace kfs::shell {
 
@@ -24,18 +24,18 @@ class CommandBuiltinHelp :
 	public kfs::shell::interface::ICommandBuiltin,
 	public kfs::interface::StaticInstanceFactory<CommandBuiltinHelp<Args ...>> {
 public:
-	std::string_view	getName() const {
+	std::string_view	get_name() const {
 		return "help";
 	}
-	std::string_view	getShortDescription() const {
+	std::string_view	get_short_description() const {
 		return "shows commands and short descriptions";
 	}
-	std::string_view	getFullDescription() const {
+	std::string_view	get_full_description() const {
 		return "da";
 	}
 	void		execute() {
 		std::printf("====================\n");
-		(std::printf("%s - %s\n", Args::create()->getName().data(), Args::create()->getShortDescription().data()), ...);
+		(std::printf("%s - %s\n", Args::create()->get_name().data(), Args::create()->get_short_description().data()), ...);
 		std::printf("====================\n");
 	}
 };

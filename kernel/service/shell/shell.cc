@@ -17,23 +17,23 @@ namespace {
 
 template <typename ContainerArgs, typename ContainerStr>
 ContainerArgs	&parse(ContainerArgs &args, ContainerStr &str) {
-	static const std::array<char, 6>	spaceChars{'\t', '\v', ' ' , '\n', '\r', '\f'};
-	auto&&	it = std::ranges::find_if(str, [&spaceChars](auto &&ch) {
-		return std::ranges::find(spaceChars, ch) == spaceChars.end();
+	static const std::array<char, 6>	space_chars{'\t', '\v', ' ' , '\n', '\r', '\f'};
+	auto&&	it = std::ranges::find_if(str, [](auto &&ch) {
+		return std::ranges::find(space_chars, ch) == space_chars.end();
 	});
-	auto&&	argsIt = args.begin();
+	auto&&	args_it = args.begin();
 	auto	ite = it;
 
-	for (; argsIt != args.end() - 1 && it != str.end(); ++argsIt) {
-		*argsIt = it;
-		it = std::find_first_of(it, str.end(), spaceChars.begin(), spaceChars.end());
-		ite = std::find_if(it, str.end(), [&spaceChars](auto &&ch) {
-			return std::ranges::find(spaceChars, ch) == spaceChars.end();
+	for (; args_it != args.end() - 1 && it != str.end(); ++args_it) {
+		*args_it = it;
+		it = std::find_first_of(it, str.end(), space_chars.begin(), space_chars.end());
+		ite = std::find_if(it, str.end(), [](auto &&ch) {
+			return std::ranges::find(space_chars, ch) == space_chars.end();
 		});
 		std::fill(it, ite, 0);
 		it = ite;
 	}
-	*--argsIt = nullptr;
+	*--args_it = nullptr;
 	return args;
 }
 
@@ -44,15 +44,15 @@ void	kfs::Shell::process() {
 	auto&&	shared_it = _input_string_buff.begin();
 	auto&&	processor = kfs::shell::SymbolProcessorForShell<Container>(_input_string_buff, shared_it, _console);
 	std::fill(_input_string_buff.begin(), _input_string_buff.end(), 0);
-	std::fill(mArgs.begin(), mArgs.end(), nullptr);
+	std::fill(_args.begin(), _args.end(), nullptr);
 
 	_console->write(mPromptForInput);
 	while (*shared_it != '\n') {
-		*shared_it = _console->readBlocking();
+		*shared_it = _console->read_blocking();
 		processor.process(*shared_it);
 	}
 	_console->write('\n');
 
-	mArgs = parse(mArgs, _input_string_buff);
-	factory.process(*mArgs.begin())->setArgs(mArgs.data())->execute();
+	_args = parse(_args, _input_string_buff);
+	factory.process(*_args.begin())->set_args(_args.data())->execute();
 }

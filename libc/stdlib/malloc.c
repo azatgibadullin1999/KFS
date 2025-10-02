@@ -28,14 +28,14 @@
 /* ==================== */
 
 typedef struct heap_s heap;
-static void *heap_alloc(heap *, size_t size);
-static void  heap_free(heap *self, void *memory);
+static void *heap_alloc(heap */* self */, size_t size);
+static void  heap_free(heap */* self */, void *memory);
 static heap *new_heap(size_t size);
-static void  delete_heap(heap *);
+static void  delete_heap(heap *obj);
 static heap *heap_get_begin(void);
 static heap *heap_get_end(void);
 static heap *heap_get_next(heap *it);
-static bool  heap_containes(heap *self, void *memory);
+static bool  heap_containes(heap */* self */, void *memory);
 
 /* ==================== */
 /* Forward Declaretions */
@@ -229,8 +229,9 @@ void *heap_alloc(heap *self, size_t size) {
 	void *memory = NULL;
 
 	for (it = begin; it != end; it = block_data_get_next(it)) {
-		if (block_data_is_occupied(it))
+		if (block_data_is_occupied(it)) {
 			continue;
+		}
 
 		heap_try_merge_block(self, it);
 
@@ -241,8 +242,6 @@ void *heap_alloc(heap *self, size_t size) {
 
 	return memory;
 }
-
-static void delete_heap(heap *obj);
 
 static void heap_free(heap *self, void *memory) {
 	block_data_t *first = heap_get_block_begin(self);
@@ -290,6 +289,7 @@ static int heap_ctor(heap *self, heap_data data) {
 	 */
 	block_data_ctor(end, sizeof(*end));
 	block_data_set_occupied(end, true);
+	return 0;
 }
 
 static void heap_dtor(heap *self) {

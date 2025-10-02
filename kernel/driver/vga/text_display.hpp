@@ -21,41 +21,40 @@ namespace kfs::driver::vga {
 
 class VGATextDisplay : public kfs::driver::interface::ITextDisplay {
 public:
-	VGATextDisplay(const size_t &sizeOfColumn, const size_t &sizeOfRow) :
-	ITextDisplay(sizeOfColumn, sizeOfRow),
-	mBuffer(reinterpret_cast<uint16_t*>(0xB8000)),
-	mColor(vgaEntryColor(CYAN, BLACK)),
-	mPort1(0x3D4),
-	mPort2(0x3D5) {
-		clear();
+	VGATextDisplay(const size_t &column_size, const size_t &row_size) :
+	ITextDisplay{ column_size, row_size },
+	_buffer{ reinterpret_cast<uint16_t*>(0xB8000) },
+	_color{ _vga_entry_color(EColor::CYAN, EColor::BLACK) },
+	_port1{ 0x3D4 },
+	_port2{ 0x3D5 } {
+		VGATextDisplay::clear();
 	}
 	
 	VGATextDisplay() :
-	VGATextDisplay(25, 80) { }
+	VGATextDisplay{25, 80} { }
 
-	void	write(char character, size_t row, size_t column) override;
-	char	read(size_t row, size_t column) override;
+	void write(char character, size_t row, size_t column) override;
+	char read(size_t row, size_t column) override;
 
-	void	clear() override;
+	void clear() override;
 
-	bool	setCursorPosition(size_t row, size_t column) override;
+	bool set_cursor_position(size_t row, size_t column) override;
 
-	void	updateCursorPosition() override;
+	void update_cursor_position() override;
 
-	void	setColor(Color color);
-
-private:
-	void	updateCursor(int row, int column);
-	void	enableCursor(uint8_t cursor_start, uint8_t cursor_end);
-	void	disableCursor();
-	uint8_t	vgaEntryColor(enum Color fg, enum Color bg) { return fg | bg << 4; }
-	uint16_t	vgaEntry(unsigned char uc, uint8_t color) { return (uint16_t) uc | (uint16_t) color << 8; }
+	void set_color(EColor color) override;
 
 private:
-	uint16_t* mBuffer;
-	uint8_t mColor;
-	const kfs::driver::utils::PortByte	mPort1;
-	const kfs::driver::utils::PortByte	mPort2;
+	void _update_cursor(int row, int column);
+	void _enable_cursor(uint8_t cursor_start, uint8_t cursor_end);
+	void _disable_cursor();
+	static uint8_t _vga_entry_color(enum EColor fg, enum EColor bg) { return fg | bg << 4; }
+	static uint16_t _vga_entry(unsigned char uc, uint8_t color) { return (uint16_t) uc | (uint16_t) color << 8; }
+
+	uint16_t* _buffer;
+	uint8_t _color;
+	const kfs::driver::utils::PortByte	_port1;
+	const kfs::driver::utils::PortByte	_port2;
 };
 
 }

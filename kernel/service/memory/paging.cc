@@ -10,7 +10,8 @@
  */
 
 #include "paging.hpp"
-#include <arch/kerneldef.h>
+
+#include "arch/kerneldef.h"
 
 namespace {
 
@@ -25,11 +26,13 @@ void invaledate_page(virt_addr_t address) noexcept {
 }
 
 kfs::page::Table::Entry::Setter::~Setter() {
-	if (_address)
+	if (_address) {
 		invaledate_page(_address);
+	}
 }
 
 kfs::page::Directory::Entry::Setter::~Setter() {
-	if (_address)
+	if (_address) {
 		invaledate_page(_address);
+	}
 }

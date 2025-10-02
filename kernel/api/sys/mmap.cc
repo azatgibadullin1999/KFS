@@ -12,17 +12,18 @@
 #include <array>
 #include <ranges>
 #include <cstddef>
-#include <service/memory/physical_memory.hpp>
 #include <sys/types.h>
+
+#include "service/memory/physical_memory.hpp"
 
 struct Page {
 	std::array<std::byte, 0x1000> entry;
 };
-std::array<Page, 25>	preallocated_pages;
+std::array<Page, 25>	g_preallocated_pages;
 
 extern "C" {
 
-void *mmap(void *addr, size_t length, int prot, int flags, int fd, off_t offset) {
+void *mmap(void */* addr */, size_t length, int /* prot */, int /* flags */, int /* fd */, off_t /* offset */) {
 	static std::array<bool, 10zu> used;
 	std::size_t contiguous = 0;
 
@@ -32,16 +33,15 @@ void *mmap(void *addr, size_t length, int prot, int flags, int fd, off_t offset)
 				contiguous++;
 			}
 			used[index] = true;
-			return preallocated_pages[index].entry.data();
-		} else {
-			contiguous = 0;
+			return g_preallocated_pages[index].entry.data();
 		}
+		contiguous = 0;
 	}
 
 	return (void *)kfs::PhysicalMemory::instance().allocate();
 }
 
-int munmap(void *addr, size_t length) {
+int munmap(void */* addr */, size_t /* length */) {
 	return 0;
 }
 

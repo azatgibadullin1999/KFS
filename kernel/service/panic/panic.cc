@@ -9,11 +9,12 @@
  * 
  */
 
-#include "panic.hpp"
-#include "service/console/console.hpp"
 #include <exception>
 
-const char*	gPanicHeaderMessege ="\
+#include "panic.hpp"
+#include "service/console/console.hpp"
+
+const char*	g_panic_header_messege ="\
        )       (        )       (           (                 )  (          \n\
     ( /(       )\\ )  ( /(       )\\ )        )\\ )    (      ( /(  )\\ )   (   \n\
     )\\()) (   (()/(  )\\()) (   (()/(       (()/(    )\\     )\\())(()/(   )\\  \n\
@@ -26,9 +27,9 @@ const char*	gPanicHeaderMessege ="\
 void kfs::detail::panic() {
 	auto&&	console = kfs::console::instance();
 	auto&&  text_display = console.get_text_display();
-	text_display->setCursorPosition(0, text_display->getCurrentColumn());
+	text_display->set_cursor_position(0, text_display->get_current_column());
 
-	console.write(gPanicHeaderMessege);
+	console.write(g_panic_header_messege);
 	asm volatile (
 	"hlt"
 	);

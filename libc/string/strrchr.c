@@ -13,18 +13,19 @@
 
 size_t	strlen(const char *str);
 
-char	*strrchr(const char *s, int c)
-{
+char	*strrchr(const char *s, int c) {
 	size_t	i;
 
 	i = strlen(s);
 	while (i > 0)
 	{
-		if (s[i] == c)
-			return ((char *)&s[i]);
+		if (s[i] == c) {
+			return (char *)(s + i);
+		}
 		i--;
 	}
-	if (s[i] == c)
-		return ((char *)&s[i]);
+	if (s[i] == c) {
+		return (char *)(s + i);
+	}
 	return (NULL);
 }

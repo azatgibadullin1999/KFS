@@ -12,8 +12,9 @@
 #ifndef __KFS_KERNEL_CONSOLE_HPP__
 # define __KFS_KERNEL_CONSOLE_HPP__
 
-# include "../console.hpp"
+# include "service/console.hpp"
 # include "common/singleton.hpp"
+
 namespace kfs {
 
 // namespace {
@@ -26,15 +27,15 @@ public:
 	void	write(char c) override;
 	void	write(const char *str) override;
 	char	read() override;
-	char	readBlocking() override;
+	char	read_blocking() override;
 private:
-	uint8_t	mScanCodeBuff;
-	char	mCharBuff;
+	uint8_t	_scan_code_buff;
+	char	_char_buff;
 };
 
 // }
 
-typedef typename kfs::interface::singleton_wrapper<Console>	console;
+typedef typename kfs::interface::SingletonWrapper<Console>	console;
 
 }
 

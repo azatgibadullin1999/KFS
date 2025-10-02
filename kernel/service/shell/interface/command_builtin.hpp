@@ -12,7 +12,6 @@
 #ifndef __KFS_KERNEL_SERVICE_SHELL_INTERFACE_COMMAND_BUILTIN_HPP__
 # define __KFS_KERNEL_SERVICE_SHELL_INTERFACE_COMMAND_BUILTIN_HPP__
 
-# include <algorithm>
 # include <string_view>
 
 # include "common/command.hpp"
@@ -22,26 +21,30 @@ namespace kfs::shell::interface {
 class ICommandBuiltin : public kfs::interface::ICommand {
 public:
 	virtual ~ICommandBuiltin() { }
-	virtual std::string_view	getName() const = 0;
-	virtual std::string_view	getShortDescription() const = 0;
-	virtual std::string_view	getFullDescription() const = 0;
-	ICommandBuiltin	*setArgs(char **args) {
-		mArgs = args;
+	virtual std::string_view	get_name() const = 0;
+	virtual std::string_view	get_short_description() const = 0;
+	virtual std::string_view	get_full_description() const = 0;
+	ICommandBuiltin	*set_args(char **args) {
+		_args = args;
 		return this;
 	}
 protected:
-	char **mArgs;
+	char **_args;
 };
 
+[[maybe_unused]]
 static bool operator == (kfs::shell::interface::ICommandBuiltin *lhs, std::string_view rhs) noexcept {
-	return lhs->getName() == rhs;
+	return lhs->get_name() == rhs;
 }
+[[maybe_unused]]
 static bool operator == (std::string_view lhs, kfs::shell::interface::ICommandBuiltin *rhs) noexcept {
 	return rhs == lhs;
 }
+[[maybe_unused]]
 static bool operator != (kfs::shell::interface::ICommandBuiltin *lhs, std::string_view rhs) noexcept {
 	return !(lhs == rhs);
 }
+[[maybe_unused]]
 static bool operator != (std::string_view lhs, kfs::shell::interface::ICommandBuiltin *rhs) noexcept {
 	return !(rhs == lhs);
 }

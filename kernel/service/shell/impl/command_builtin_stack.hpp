@@ -15,10 +15,10 @@
 # include <cstdlib>
 # include <cctype>
 
-# include "service/shell/interface/command_builtin.hpp"
 # include "common/factory.hpp"
+# include "service/shell/interface/command_builtin.hpp"
 
-extern void	*stack_top;
+extern void	*g_stack_top;
 
 namespace kfs::shell {
 
@@ -26,13 +26,13 @@ class CommandBuiltinStack :
 	public kfs::shell::interface::ICommandBuiltin,
 	public kfs::interface::StaticInstanceFactory<CommandBuiltinStack> {
 public:
-	std::string_view	getName() const {
+	std::string_view	get_name() const {
 		return "stack";
 	}
-	std::string_view	getShortDescription() const {
+	std::string_view	get_short_description() const {
 		return "prints kernel stack";
 	}
-	std::string_view	getFullDescription() const {
+	std::string_view	get_full_description() const {
 		return "da";
 	}
 	void		execute() {
@@ -41,14 +41,14 @@ public:
 		asm("mov %%esp, %0\t\n" : "=r"(esp));
 		asm("mov %%ebp, %0\t\n" : "=r"(ebp));
 		unsigned int	shift = 0x10;
-		auto	it = reinterpret_cast<uint8_t *>(stack_top);
+		auto	it = reinterpret_cast<uint8_t *>(g_stack_top);
 		auto	ite = reinterpret_cast<uint8_t *>(esp);
 
-		if (*(mArgs + 1)) {
-			it -= shift * std::atoi(*(mArgs + 1));
+		if (*(_args + 1)) {
+			it -= shift * std::atoi(*(_args + 1));
 		}
-		if (*(mArgs + 2)) {
-			ite = it - shift * std::atoi(*(mArgs + 2));
+		if (*(_args + 2)) {
+			ite = it - shift * std::atoi(*(_args + 2));
 		}
 		
 		for (; it > ite; it -= shift) {
@@ -68,7 +68,7 @@ public:
 			}
 			std::printf("\n");
 		}
-		std::printf("size of stack (divided by %d): %d  |  stack top: %8x\nebp: %8x  |  esp: %8x\n", shift, ((size_t)stack_top - esp) / shift, stack_top, esp, ebp);
+		std::printf("size of stack (divided by %d): %d  |  stack top: %8x\nebp: %8x  |  esp: %8x\n", shift, ((size_t)g_stack_top - esp) / shift, g_stack_top, esp, ebp);
 		
 	}
 };

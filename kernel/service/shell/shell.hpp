@@ -14,7 +14,7 @@
 
 # include <array>
 
-# include <service/shell.hpp>
+# include "service/shell.hpp"
 
 namespace kfs {
 
@@ -28,7 +28,7 @@ public:
 private:
 	inline static const char	enter = '\n';
 	Container	_input_string_buff;
-	ContainerOfArgs	mArgs;
+	ContainerOfArgs	_args;
 	const char	mPromptForInput[6] = "L&D> ";
 };
 

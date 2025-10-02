@@ -12,8 +12,9 @@
 #ifndef __KFS_KERNEL_DRIVER_SERVICE_COMMAND_DEFAULT_AUTO_SCROLL_HPP__
 # define __KFS_KERNEL_DRIVER_SERVICE_COMMAND_DEFAULT_AUTO_SCROLL_HPP__
 
-# include "command_text_display.hpp"
 # include <cctype>
+
+# include "command_text_display.hpp"
 
 namespace kfs::driver::common {
 

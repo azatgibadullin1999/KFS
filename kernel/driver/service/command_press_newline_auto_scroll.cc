@@ -15,17 +15,17 @@
 namespace kfs::driver::common {
 
 void	CommandPressNewLineAutoScroll::execute() {
-	static auto&&	scroll = CommandPressScroll(0, mTextDisplay);
-	size_t	column = mTextDisplay->getCurrentColumn();
+	static auto&&	scroll = CommandPressScroll(0, _text_display);
+	size_t	column = _text_display->get_current_column();
 	size_t	row = 0;
 
-	if (++column == mTextDisplay->getColumn() - 1) {
-		mTextDisplay->setCursorPosition(row, column);
+	if (++column == _text_display->get_column() - 1) {
+		_text_display->set_cursor_position(row, column);
 		scroll.execute();
-		row = mTextDisplay->getCurrentRow();
-		column = mTextDisplay->getCurrentColumn();
+		row = _text_display->get_current_row();
+		column = _text_display->get_current_column();
 	}
-	mTextDisplay->setCursorPosition(row, column);
+	_text_display->set_cursor_position(row, column);
 }
 
 }

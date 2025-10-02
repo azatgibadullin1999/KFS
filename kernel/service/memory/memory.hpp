@@ -13,7 +13,8 @@
 # define __KFS_KERNEL_SERVICE_MEMORY_MEMORY_HPP__
 
 # include <stddef.h>
-# include "multiboot.h"
+
+# include <multiboot.h>
 
 namespace kfs {
 

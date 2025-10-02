@@ -13,11 +13,11 @@
 
 extern "C" {
 
-void	__kfs_putchar(char c) {
+void	kfs_putchar(char c) {
 	kfs::console::instance().write(c);
 }
 
-void	__kfs_puts(const char *str) {
+void	kfs_puts(const char *str) {
 	kfs::console::instance().write(str);
 }
 

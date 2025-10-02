@@ -12,15 +12,16 @@
 #ifndef __KFS_KERNEL_DRIVER_UTILS_PORT_HPP__
 # define __KFS_KERNEL_DRIVER_UTILS_PORT_HPP__
 
-# include <stdint.h>
+# include <cstdint>
 
 namespace kfs::driver::utils {
 
 class PortBase{
 public:
-	PortBase(uint16_t port) : mPort(port) { }
+	PortBase(uint16_t port)
+	: _port(port) { }
 protected:
-	uint16_t	mPort;
+	uint16_t	_port;
 };
 
 class PortByte : public PortBase{

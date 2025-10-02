@@ -12,7 +12,11 @@
 #ifndef __KFS_KERNEL_API_SYS_TYPES_H__
 # define __KFS_KERNEL_API_SYS_TYPES_H__
 
-# include <stdint.h>
+# ifdef __cplusplus
+#  include <cstdint>
+# else
+#  include <stdint.h>
+# endif
 
 typedef uint32_t off_t;
 

@@ -12,22 +12,21 @@
 #ifndef __KFS_KERNEL_SERVICE_MEMORY_PHYSICAL_MEMORY_HPP__
 # define __KFS_KERNEL_SERVICE_MEMORY_PHYSICAL_MEMORY_HPP__
 
-#include <iterator>
-#include <ranges>
 # include <span>
 # include <list>
 # include <vector>
 # include <cstddef>
 
-# include "arch/kerneldef.h"
 # include "multiboot.h"
+# include "arch/kerneldef.h"
 # include "common/singleton.hpp"
-# include "memory_range.hpp"
 
+# include "memory_range.hpp"
 
 namespace kfs {
 
 namespace details {
+
 
 class PhysicalMemory {
 public:
@@ -41,7 +40,7 @@ public:
 	}
 
 	phys_addr_t allocate();
-	void deallocate(phys_addr_t);
+	void deallocate(phys_addr_t memory);
 private:
 	std::list<MemoryRange> _memory;
 	std::vector<bool> _used_chunks;
@@ -49,7 +48,7 @@ private:
 
 } // namespace details
 
-using PhysicalMemory = interface::singleton_wrapper<details::PhysicalMemory>;
+using PhysicalMemory = interface::SingletonWrapper<details::PhysicalMemory>;
 
 } // namespace kfs
 

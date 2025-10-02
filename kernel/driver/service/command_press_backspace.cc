@@ -14,16 +14,16 @@
 namespace kfs::driver::common {
 
 void	CommandPressBackspace::execute() {
-	size_t	row = mTextDisplay->getCurrentRow();
-	size_t	column = mTextDisplay->getCurrentColumn();
+	size_t	row = _text_display->get_current_row();
+	size_t	column = _text_display->get_current_column();
 
 	if (row == 0 && column != 0) {
 		column -= 1;
-		row = mTextDisplay->getRow();
+		row = _text_display->get_row();
 	}
 	row -= 1;
-	mTextDisplay->write(' ', row, column);
-	mTextDisplay->setCursorPosition(row, column);	
+	_text_display->write(' ', row, column);
+	_text_display->set_cursor_position(row, column);	
 }
 
 }

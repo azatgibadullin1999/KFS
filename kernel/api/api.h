@@ -12,19 +12,23 @@
 #ifndef __KFS_KERNEL_API_API_HPP__
 # define __KFS_KERNEL_API_API_HPP__
 
-# include <stddef.h>
+# ifdef __cplusplus
+#  include <cstddef>
+# else
+#  include <stddef.h>
+# endif
 
-#ifdef __cplusplus
+# ifdef __cplusplus
 extern "C" {
-#endif
+# endif
 
-void	__kfs_putchar(char c);
-void	__kfs_puts(const char *str);
-void	__kfs_panic();
+void	kfs_putchar(char c);
+void	kfs_puts(const char *str);
+void	kfs_panic();
 void	*allocate_pages(size_t num_of_pages);
 
-#ifdef __cplusplus
+# ifdef __cplusplus
 }
-#endif
+# endif
 
 #endif // __KFS_KERNEL_API_API_HPP__

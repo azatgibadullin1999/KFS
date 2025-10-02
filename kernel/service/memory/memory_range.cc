@@ -9,9 +9,9 @@
  * 
  */
 
-#include "memory_range.hpp"
 #include <algorithm>
-#include <__utility/cmp.h>
+
+#include "memory_range.hpp"
 
 namespace kfs {
 
@@ -19,44 +19,44 @@ bool	valid(const MemoryRange& range) noexcept {
 	return std::cmp_less(range.begin, range.end);
 }
 
-bool	adjacent(const MemoryRange& lhsRange, const MemoryRange& rhsRange) noexcept {
-	return     std::cmp_equal(lhsRange.end, rhsRange.begin)
-		or std::cmp_equal(lhsRange.begin, rhsRange.end);
+bool	adjacent(const MemoryRange& lhs, const MemoryRange& rhs) noexcept {
+	return     std::cmp_equal(lhs.end, rhs.begin)
+		or std::cmp_equal(lhs.begin, rhs.end);
 }
 
-MemoryRange	merge(const MemoryRange& lhsRange, const MemoryRange& rhsRange) noexcept {
+MemoryRange	merge(const MemoryRange& lhs, const MemoryRange& rhs) noexcept {
 	MemoryRange	result;
-	if (adjacent(lhsRange, rhsRange)) {
-		result.begin = std::min(lhsRange.begin, rhsRange.begin);
-		result.end   = std::max(lhsRange.end, rhsRange.end);
+	if (adjacent(lhs, rhs)) {
+		result.begin = std::min(lhs.begin, rhs.begin);
+		result.end   = std::max(lhs.end, rhs.end);
 	}
 	return result; 
 }
 
-MemoryRange	intersec(const MemoryRange& lhsRange, const MemoryRange& rhsRange) noexcept {
+MemoryRange	intersec(const MemoryRange& lhs, const MemoryRange& rhs) noexcept {
 	MemoryRange	result;
-	result.begin = std::max(lhsRange.begin, rhsRange.begin);
-	result.end   = std::min(lhsRange.end, rhsRange.end);
+	result.begin = std::max(lhs.begin, rhs.begin);
+	result.end   = std::min(lhs.end, rhs.end);
 	return result;
 }
 
-bool	intersected(const MemoryRange& lhsRange, const MemoryRange& rhsRange) noexcept {
-	auto	tmp = intersec(lhsRange, rhsRange);
+bool	intersected(const MemoryRange& lhs, const MemoryRange& rhs) noexcept {
+	auto	tmp = intersec(lhs, rhs);
 	return valid(tmp);
 }
 
-std::pair<MemoryRange, MemoryRange>	exclude(const MemoryRange& memRange, const MemoryRange& exclude) noexcept {
-	std::pair<MemoryRange, MemoryRange>	resultRanges = {{0, 0}, {0, 0}};
+std::pair<MemoryRange, MemoryRange>	exclude(const MemoryRange& mem_range, const MemoryRange& exclude) noexcept {
+	std::pair<MemoryRange, MemoryRange>	result = {{0, 0}, {0, 0}};
 
-	if (memRange.begin < exclude.begin) {
-		resultRanges.first.begin = memRange.begin;
-		resultRanges.first.end = exclude.begin;
+	if (mem_range.begin < exclude.begin) {
+		result.first.begin = mem_range.begin;
+		result.first.end = exclude.begin;
 	}
-	if (memRange.end > exclude.end) {
-		resultRanges.second.begin = exclude.end;
-		resultRanges.second.end = memRange.end;
+	if (mem_range.end > exclude.end) {
+		result.second.begin = exclude.end;
+		result.second.end = mem_range.end;
 	}
-	return resultRanges;
+	return result;
 }
 
 } // namespace kfs::details

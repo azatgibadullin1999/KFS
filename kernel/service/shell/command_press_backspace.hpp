@@ -12,9 +12,10 @@
 #ifndef __KFS_KERNEL_SERVICE_SHELL_COMMAND_PRESSBACK_SPACE_HPP__
 # define __KFS_KERNEL_SERVICE_SHELL_COMMAND_PRESSBACK_SPACE_HPP__
 
-# include <stddef.h>
-# include <iterator>
+# include <cstddef>
+
 # include "common/command.hpp"
+# include "service/console.hpp"
 
 
 namespace kfs::shell {
@@ -23,22 +24,22 @@ template <typename Container>
 class CommandPressBackspaceShell final : public kfs::interface::ICommand {
 public:
 	CommandPressBackspaceShell(Container &shared_container, typename Container::iterator &shared_it, kfs::interface::IConsole *console) :
-	mSharedContainer(shared_container),
-	mSharedIt(shared_it),
-	mConsole(console) { }
+	_shared_container(shared_container),
+	_shared_it(shared_it),
+	_console(console) { }
 
 	void	execute() override {
-		if (mSharedContainer.begin() == mSharedIt) {
+		if (_shared_container.begin() == _shared_it) {
 			return ;
 		}
-		mConsole->write(*mSharedIt);
-		*mSharedIt = ' ';
-		--mSharedIt;
+		_console->write(*_shared_it);
+		*_shared_it = ' ';
+		--_shared_it;
 	}
 private:
-	Container	&mSharedContainer;
-	typename Container::iterator	&mSharedIt;
-	kfs::interface::IConsole	*mConsole;
+	Container	&_shared_container;
+	typename Container::iterator	&_shared_it;
+	kfs::interface::IConsole	*_console;
 };
 
 }

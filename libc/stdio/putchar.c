@@ -12,6 +12,6 @@
 #include <api.h>
 
 int putchar(int ch) {
-	__kfs_putchar((char)ch);
+	kfs_putchar((char)ch);
 	return 1;
 }

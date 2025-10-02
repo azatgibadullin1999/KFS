@@ -12,7 +12,7 @@
 #ifndef __KFS_KERNEL_DRIVER_SERVICE_COMMAND_PRESS_BACKSPACE_HPP__
 # define __KFS_KERNEL_DRIVER_SERVICE_COMMAND_PRESS_BACKSPACE_HPP__
 
-# include <stddef.h>
+# include <cstddef>
 # include "command_text_display.hpp"
 
 namespace kfs::driver::common {

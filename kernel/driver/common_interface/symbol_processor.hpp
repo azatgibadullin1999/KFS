@@ -15,7 +15,6 @@
 # include <tuple>
 # include <utility>
 # include <algorithm>
-# include "common/command.hpp"
 
 namespace kfs::driver::interface {
 
@@ -40,17 +39,17 @@ template <typename ... Args>
 class SymbolProcessor : public ISymbolProcessor {
 public:
 	SymbolProcessor() = default;
-	SymbolProcessor(const Args& ... args) : mArgs(args...) { }
-	SymbolProcessor(Args&& ... args) : mArgs(std::move(args)...) { }
+	SymbolProcessor(const Args& ... args) : _args(args...) { }
+	SymbolProcessor(Args&& ... args) : _args(std::move(args)...) { }
 	SymbolProcessor(const SymbolProcessor& other) = default;
 	SymbolProcessor(SymbolProcessor&& other) = default;
 
 
 	void	process(const char& c) override {
-		find<sizeof...(Args) - 1>(c, mArgs);
+		find<sizeof...(Args) - 1>(c, _args);
 	}
 private:
-	std::tuple<Args...>	mArgs;
+	std::tuple<Args...>	_args;
 };
 
 }

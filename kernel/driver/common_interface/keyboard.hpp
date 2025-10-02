@@ -12,7 +12,7 @@
 #ifndef __KFS_KERNEL_DRIVER_COMMON_INTERFACE_KEYBOARD__
 # define __KFS_KERNEL_DRIVER_COMMON_INTERFACE_KEYBOARD__
 
-# include <stdint.h>
+# include <cstdint>
 # include <utility>
 # include <array>
 # include <bitset>
@@ -25,26 +25,26 @@ public:
 	public:
 		using container = std::array<uint8_t, 128>;
 
-		constexpr Decoder(container &&keyMap, container &&shiftKeyMap) :
-		mKeyMap(std::move(keyMap)),
-		mShiftKeyMap(std::move(shiftKeyMap)),
-		mBackwardKeyMap() {
-			updateBackwardKeyMap();
+		constexpr Decoder(container &&key_map, container &&shift_key_map) :
+		_key_map(std::move(key_map)),
+		_shift_key_map(std::move(shift_key_map)),
+		_backward_key_map() {
+			_update_backward_key_map();
 		}
 
 		constexpr Decoder(Decoder &&other) :
-		Decoder(std::move(other.mKeyMap), std::move(other.mShiftKeyMap)) { }
+		Decoder(std::move(other._key_map), std::move(other._shift_key_map)) { }
 
 		uint8_t	decode(const uint8_t &key) const {
-			return mKeyMap[key];
+			return _key_map[key];
 		}
 
-		uint8_t	decodeShift(const uint8_t &key) const {
-			return mShiftKeyMap[key];
+		uint8_t	decode_shift(const uint8_t &key) const {
+			return _shift_key_map[key];
 		}
 
 		uint8_t	encode(const uint8_t &code) const {
-			return mBackwardKeyMap[code];
+			return _backward_key_map[code];
 		}
 
 		inline static const uint8_t UNKNOWN = 0xFF;
@@ -81,28 +81,28 @@ public:
 		inline static const uint8_t ALTGR = 0xFF - 31;
 		inline static const uint8_t NUMLCK = 0xFF - 32;
 	protected:
-		constexpr void	updateBackwardKeyMap() {
-			for (uint8_t it = 0; it < sizeof(mKeyMap); ++it) {
-				mBackwardKeyMap[mKeyMap[it]] = it;
-				mBackwardKeyMap[mShiftKeyMap[it]] = it;
+		constexpr void	_update_backward_key_map() {
+			for (uint8_t it = 0; it < sizeof(_key_map); ++it) {
+				_backward_key_map[_key_map[it]] = it;
+				_backward_key_map[_shift_key_map[it]] = it;
 			}
 		}
 
-		container		mKeyMap;
-		container		mShiftKeyMap;
-		std::array<uint8_t, 256>	mBackwardKeyMap;
+		container		_key_map;
+		container		_shift_key_map;
+		std::array<uint8_t, 256>	_backward_key_map;
 	};
 	constexpr IKeyboard(Decoder &&decoder) :
-	mDecoder(std::move(decoder)) { }
+	_decoder(std::move(decoder)) { }
 
 	virtual uint8_t	read() const = 0;
 
-	bool	isKeyPressed(const uint8_t &code) const {
-		return mKeysState[mDecoder.encode(code)];
+	bool	is_key_pressed(const uint8_t &code) const {
+		return _keys_state[_decoder.encode(code)];
 	}
 protected:
-	mutable std::bitset<128>	mKeysState;
-	Decoder			mDecoder;
+	mutable std::bitset<128>	_keys_state;
+	Decoder			_decoder;
 };
 
 }

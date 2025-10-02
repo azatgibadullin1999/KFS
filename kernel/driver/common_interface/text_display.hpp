@@ -18,7 +18,7 @@ namespace kfs::driver::interface {
 
 class ITextDisplay {
 public:
-	enum Color {
+	enum EColor {
 		BLACK = 0,
 		BLUE = 1,
 		GREEN = 2,
@@ -36,41 +36,41 @@ public:
 		LIGHT_BROWN = 14,
 		WHITE = 15,
 	};
-public:
-	ITextDisplay(const size_t &columnsNumber, const size_t &rowsNumber) :
-	mColumnsNumber(columnsNumber),
-	mRowsNumber(rowsNumber),
-	mColumn(0),
-	mRow(0) { }
+
+	ITextDisplay(const size_t &columns_umber, const size_t &rows_umber) :
+	_columns_number{ columns_umber },
+	_rows_number{ rows_umber },
+	_column{ 0 },
+	_row{ 0 } { }
 
 	virtual void	write(char, size_t row, size_t column) = 0;
 	virtual char	read(size_t row, size_t column) = 0;
 
 	virtual void	clear() = 0;
 
-	virtual bool	setCursorPosition(size_t row, size_t column) = 0;
+	virtual bool	set_cursor_position(size_t row, size_t column) = 0;
 
-	virtual void	updateCursorPosition() = 0;
+	virtual void	update_cursor_position() = 0;
 
-	virtual void	setColor(Color color) = 0;
+	virtual void	set_color(EColor color) = 0;
 
-	const size_t	&getCurrentColumn() const {
-		return mColumn;
+	const size_t	&get_current_column() const {
+		return _column;
 	}
-	const size_t	&getCurrentRow() const {
-		return mRow;
+	const size_t	&get_current_row() const {
+		return _row;
 	}
-	const size_t	&getColumn() const {
-		return mColumnsNumber;
+	const size_t	&get_column() const {
+		return _columns_number;
 	}
-	const size_t	&getRow() const {
-		return mRowsNumber;
+	const size_t	&get_row() const {
+		return _rows_number;
 	}
 protected:
-	const size_t mColumnsNumber;
-	const size_t mRowsNumber;
-	size_t mColumn;
-	size_t mRow;
+	const size_t _columns_number;
+	const size_t _rows_number;
+	size_t _column;
+	size_t _row;
 };
 
 

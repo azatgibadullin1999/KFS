@@ -13,10 +13,10 @@
 
 namespace kfs::driver::interface {
 
-bool	ITextDisplay::setCursorPosition(size_t row, size_t column) {
-	if (column < mColumnsNumber && row < mRowsNumber) {
-		mColumn = column;
-		mRow = row;
+bool	ITextDisplay::set_cursor_position(size_t row, size_t column) {
+	if (column < _columns_number && row < _rows_number) {
+		_column = column;
+		_row = row;
 		return false;
 	}
 	return true;

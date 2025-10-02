@@ -13,6 +13,7 @@
 # define __KFS_KERNEL_SERVICE_SHELL_IMPL_FACTORY_COMMAND_BUILTIN_DEFAULT_HPP__
 
 # include "service/shell/interface/factory_command_builtin.hpp"
+
 # include "command_builtin_halt.hpp"
 # include "command_builtin_help.hpp"
 # include "command_builtin_reboot.hpp"

@@ -13,6 +13,6 @@
 #include <string.h>
 
 int puts(const char* str) {
-	__kfs_puts(str);
+	kfs_puts(str);
 	return strlen(str);
 }

@@ -14,8 +14,8 @@
 
 # include <span>
 
-# include <arch/kerneldef.h>
-# include <service/memory/paging.hpp>
+# include "arch/kerneldef.h"
+# include "service/memory/paging.hpp"
 
 namespace kfs {
 
@@ -25,12 +25,12 @@ struct AddressSpace {
 	void load() noexcept;
 
 	virt_addr_t allocate();
-	void deallocate(virt_addr_t);
+	void deallocate(virt_addr_t memory);
 
 protected:
-	std::span<page::Table> get_page_tables() noexcept;
-	page::Directory &get_page_directory() noexcept;
-	phys_addr_t get_page_directory_physical_address() noexcept;
+	std::span<page::Table> _get_page_tables() const noexcept;
+	page::Directory &_get_page_directory() const noexcept;
+	phys_addr_t _get_page_directory_physical_address() const noexcept;
 private:
 	page::Page::MemoryMapping _page_directory;
 };

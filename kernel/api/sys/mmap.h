@@ -12,12 +12,17 @@
 #ifndef __KFS_KERNEL_API_SYS_MMAP_H__
 # define __KFS_KERNEL_API_SYS_MMAP_H__
 
-# include <stddef.h>
+# ifdef __cplusplus
+#  include <cstddef>
+# else
+#  include <stddef.h>
+# endif
+
 # include <sys/types.h>
 
-#ifdef __cplusplus
+# ifdef __cplusplus
 extern "C" {
-#endif
+# endif
 
 # define PROT_EXEC 0x0
 # define PROT_READ 0x0
@@ -32,8 +37,8 @@ int munmap(void *addr, size_t length);
 
 int getpagesize(void);
 
-#ifdef __cplusplus
+# ifdef __cplusplus
 }
-#endif
+# endif
 
 #endif // __KFS_KERNEL_API_SYS_MMAP_H__

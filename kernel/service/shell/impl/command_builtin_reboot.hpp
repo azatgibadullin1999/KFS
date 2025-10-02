@@ -12,8 +12,8 @@
 #ifndef __KFS_KERNEL_SERVICE_SHELL_IMPL_COMMAND_BUILTIN_REBOOT_HPP__
 # define __KFS_KERNEL_SERVICE_SHELL_IMPL_COMMAND_BUILTIN_REBOOT_HPP__
 
-# include "service/shell/interface/command_builtin.hpp"
 # include "common/factory.hpp"
+# include "service/shell/interface/command_builtin.hpp"
 
 namespace kfs::shell {
 
@@ -21,13 +21,13 @@ class CommandBuiltinReboot :
 	public kfs::shell::interface::ICommandBuiltin,
 	public kfs::interface::StaticInstanceFactory<CommandBuiltinReboot> {
 public:
-	std::string_view	getName() const {
+	std::string_view	get_name() const {
 		return "reboot";
 	}
-	std::string_view	getShortDescription() const {
+	std::string_view	get_short_description() const {
 		return "restarts the system";
 	}
-	std::string_view	getFullDescription() const {
+	std::string_view	get_full_description() const {
 		return "da";
 	}
 	void		execute() {

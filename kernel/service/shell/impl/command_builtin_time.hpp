@@ -12,9 +12,9 @@
 #ifndef __KFS_KERNEL_SERVICE_SHELL_IMPL_COMMAND_BUILTIN_TIME_HPP__
 # define __KFS_KERNEL_SERVICE_SHELL_IMPL_COMMAND_BUILTIN_TIME_HPP__
 
-# include "service/shell/interface/command_builtin.hpp"
-# include "common/factory.hpp"
-# include "driver/utils/port.hpp"
+# include <common/factory.hpp>
+# include <driver/utils/port.hpp>
+# include <service/shell/interface/command_builtin.hpp>
 
 namespace kfs::shell {
 
@@ -22,26 +22,27 @@ class CommandBuiltinTime :
 	public kfs::shell::interface::ICommandBuiltin,
 	public kfs::interface::StaticInstanceFactory<CommandBuiltinTime> {
 private:
-	int get_update_in_progress_flag() {
-		mCMOSAddress.write(0x0A);
-		return mCMOSData.read() & 0x80;
+	int _get_update_in_progress_flag() {
+		_CMOS_address.write(0x0A);
+		return _CMOS_data.read() & 0x80;
 	}
 
-	unsigned char get_RTC_register(int reg) {
-		mCMOSAddress.write(reg);
-		return mCMOSData.read();
+	unsigned char _get_RTC_register(int reg) {
+		_CMOS_address.write(reg);
+		return _CMOS_data.read();
 	}
 public:
-	std::string_view	getName() const {
+	std::string_view	get_name() const {
 		return "time";
 	}
-	std::string_view	getShortDescription() const {
+	std::string_view	get_short_description() const {
 		return "shows current time";
 	}
-	std::string_view	getFullDescription() const {
+	std::string_view	get_full_description() const {
 		return "da";
 	}
 	void		execute() {
+	// NOLINTBEGIN
 		int century_register = 0x00;   
 		static unsigned char second;
 		static unsigned char minute;
@@ -62,15 +63,15 @@ public:
 		// Note: This uses the "read registers until you get the same values twice in a row" technique
 		//       to avoid getting dodgy/inconsistent values due to RTC updates
 
-		while (get_update_in_progress_flag());                // Make sure an update isn't in progress
-		second = get_RTC_register(0x00);
-		minute = get_RTC_register(0x02);
-		hour = get_RTC_register(0x04);
-		day = get_RTC_register(0x07);
-		month = get_RTC_register(0x08);
-		year = get_RTC_register(0x09);
+		while (_get_update_in_progress_flag()) { };                // Make sure an update isn't in progress
+		second = _get_RTC_register(0x00);
+		minute = _get_RTC_register(0x02);
+		hour = _get_RTC_register(0x04);
+		day = _get_RTC_register(0x07);
+		month = _get_RTC_register(0x08);
+		year = _get_RTC_register(0x09);
 		if(century_register != 0) {
-			century = get_RTC_register(century_register);
+			century = _get_RTC_register(century_register);
 		}
 
 		do {
@@ -81,21 +82,21 @@ public:
 			last_month = month;
 			last_year = year;
 			last_century = century;	
-			while (get_update_in_progress_flag());           // Make sure an update isn't in progress
-			second = get_RTC_register(0x00);
-			minute = get_RTC_register(0x02);
-			hour = get_RTC_register(0x04);
-			day = get_RTC_register(0x07);
-			month = get_RTC_register(0x08);
-			year = get_RTC_register(0x09);
+			while (_get_update_in_progress_flag());           // Make sure an update isn't in progress
+			second = _get_RTC_register(0x00);
+			minute = _get_RTC_register(0x02);
+			hour = _get_RTC_register(0x04);
+			day = _get_RTC_register(0x07);
+			month = _get_RTC_register(0x08);
+			year = _get_RTC_register(0x09);
 			if(century_register != 0) {
-				century = get_RTC_register(century_register);
+				century = _get_RTC_register(century_register);
 			}
 		} while ((last_second != second) || (last_minute != minute) || (last_hour != hour) ||
 			 (last_day != day) || (last_month != month) || (last_year != year) ||
 			 (last_century != century));
 
-		registerB = get_RTC_register(0x0B);
+		registerB = _get_RTC_register(0x0B);
 
 		// Convert BCD to binary values if necessary
  
@@ -126,11 +127,12 @@ public:
 			if(year < CURRENT_YEAR) year += 100;
 		}
 		std::printf("%d/%d/%d %d:%d:%d\n", day, month, year, hour, minute, second);
+	// NOLINTEND
 	}
 private:
 	inline static const size_t	CURRENT_YEAR = 2024;
-	kfs::driver::utils::PortByte	mCMOSAddress = 0x70;
-	kfs::driver::utils::PortByte	mCMOSData = 0x71;
+	kfs::driver::utils::PortByte	_CMOS_address = 0x70;
+	kfs::driver::utils::PortByte	_CMOS_data = 0x71;
 };
 
 }

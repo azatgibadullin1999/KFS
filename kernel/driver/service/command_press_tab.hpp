@@ -12,8 +12,8 @@
 #ifndef __KFS_KERNEL_DRIVER_SERVICE_COMMAND_PRESS_TAB_HPP__
 # define __KFS_KERNEL_DRIVER_SERVICE_COMMAND_PRESS_TAB_HPP__
 
-# include <stdint.h>
-# include <stddef.h>
+# include <cstddef>
+
 # include "command_text_display.hpp"
 
 namespace kfs::driver::common {
@@ -22,13 +22,13 @@ class CommandPressTab final : public kfs::interface::CommandTextDisplay<CommandP
 public:
 	CommandPressTab(char c,kfs::driver::interface::ITextDisplay *text_display, size_t tabSize) :
 	CommandTextDisplay(c, text_display),
-	mTabSize(tabSize) { }
+	_tab_size(tabSize) { }
 	using CommandTextDisplay::operator==;
 	using CommandTextDisplay::operator=;
 
 	void	execute() override;
 private:
-	size_t	mTabSize;
+	size_t	_tab_size;
 };
 
 }

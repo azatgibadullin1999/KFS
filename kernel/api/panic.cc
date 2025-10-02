@@ -11,6 +11,6 @@
 
 #include "service/panic/panic.hpp"
 
-extern "C" void __kfs_panic() {
+extern "C" void kfs_panic() {
 	kfs::detail::panic();
 }

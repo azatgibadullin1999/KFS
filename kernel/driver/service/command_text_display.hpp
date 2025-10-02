@@ -21,16 +21,16 @@ template <typename Child>
 class CommandTextDisplay : public kfs::interface::ICommand {
 public:
 	CommandTextDisplay(char character, kfs::driver::interface::ITextDisplay *text_display) :
-	mTextDisplay(text_display),
-	mChar(character) { }
+	_text_display(text_display),
+	_character(character) { }
 
 	CommandTextDisplay	&operator = (const char &c) noexcept {
-		mChar = c;
+		_character = c;
 		return *this;
 	}
 
 	bool	operator == (const char &c) const noexcept {
-		return mChar == c;
+		return _character == c;
 	}
 
 	void	execute() override {
@@ -38,8 +38,8 @@ public:
 	}
 
 protected:
-	kfs::driver::interface::ITextDisplay *mTextDisplay;
-	char	mChar;
+	kfs::driver::interface::ITextDisplay *_text_display;
+	char	_character;
 };
 
 } // namespace kfs::interface

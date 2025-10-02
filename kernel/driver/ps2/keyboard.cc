@@ -14,22 +14,21 @@
 namespace kfs::driver::ps2 {
 
 uint8_t	Keyboard::read() const {
-	auto&&	code = mPort.read();
-	auto&&	isReleased = code & 0x80;
+	auto&&	code = _port.read();
+	auto&&	released = code & 0x80;
 	code &= ~0x80;
-	if (mKeysState[code]) {
-		mKeysState[code] = !isReleased;
+	if (_keys_state[code]) {
+		_keys_state[code] = not released;
 		return 0xFF;
 	}
-	if (isReleased) {
+	if (released) {
 		return 0xFF;
 	}
-	mKeysState[code] = true;
-	if (isKeyPressed(Decoder::LSHFT) || isKeyPressed(Decoder::RSHFT)) {
-		return mDecoder.decodeShift(code);
-	} else {
-		return mDecoder.decode(code);
+	_keys_state[code] = true;
+	if (is_key_pressed(Decoder::LSHFT) || is_key_pressed(Decoder::RSHFT)) {
+		return _decoder.decode_shift(code);
 	}
+	return _decoder.decode(code);
 }
 
 }

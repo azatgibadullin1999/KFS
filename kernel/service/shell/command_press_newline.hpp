@@ -12,10 +12,10 @@
 #ifndef __KFS_KERNEL_SERVICE_SHELL_COMMAND_PRESS_NEWLINE_HPP__
 # define __KFS_KERNEL_SERVICE_SHELL_COMMAND_PRESS_NEWLINE_HPP__
 
-# include <stddef.h>
-# include <iterator>
-# include "common/command.hpp"
+# include <cstddef>
 
+# include "common/command.hpp"
+# include "service/console.hpp"
 
 namespace kfs::shell {
 
@@ -23,15 +23,15 @@ template <typename Container>
 class CommandPressNewLineShell final : public kfs::interface::ICommand {
 public:
 	CommandPressNewLineShell(typename Container::iterator &shared_it, kfs::interface::IConsole *console) :
-	mSharedIt(shared_it),
-	mConsole(console) { }
+	_shared_it(shared_it),
+	_console(console) { }
 
 	void	execute() override {
-		mConsole->write('\n');
+		_console->write('\n');
 	}
 private:
-	typename Container::iterator	&mSharedIt;
-	kfs::interface::IConsole	*mConsole;
+	typename Container::iterator	&_shared_it;
+	kfs::interface::IConsole	*_console;
 };
 
 }

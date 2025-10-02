@@ -15,35 +15,37 @@
 # include <cctype>
 
 # include "common/command.hpp"
-# include "../console.hpp"
+# include "service/console.hpp"
 
 namespace kfs::shell {
 
 template <typename Container>
 class CommandDefaultShell final : public kfs::interface::ICommand {
 public:
-	CommandDefaultShell(Container &shared_container, typename Container::iterator &shared_it, kfs::interface::IConsole *console) :
-	mSharedContainer(shared_container),
-	mConsole(console),
-	mSharedIt(shared_it) { }
+	CommandDefaultShell(Container &shared_container, typename Container::iterator &shared_it, kfs::interface::IConsole *console)
+	: _character{ }
+	, _shared_container{ shared_container }
+	, _console{ console }
+	, _shared_it{ shared_it } { }
 
 	CommandDefaultShell	&operator = (const char &c) {
-		mCharacter = c;
+		_character = c;
 		return *this;
 	}
 
 	void	execute() override {
-		if (!std::isprint(mCharacter) || mSharedIt == (mSharedContainer.end() - 1))
+		if (!std::isprint(_character) || _shared_it == (_shared_container.end() - 1)) {
 			return;
-		*mSharedIt = mCharacter;
-		mConsole->write(mCharacter);
-		++mSharedIt;
+		}
+		*_shared_it = _character;
+		_console->write(_character);
+		++_shared_it;
 	}
 private:
-	char	mCharacter;
-	Container	&mSharedContainer;
-	kfs::interface::IConsole	*mConsole;
-	typename Container::iterator	&mSharedIt;
+	char	_character;
+	Container	&_shared_container;
+	kfs::interface::IConsole	*_console;
+	typename Container::iterator	&_shared_it;
 
 };
 

@@ -18,9 +18,12 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${KFS_COMMON_FLAGS} ${KFS_CXX_FLAGS}")
 include_directories(SYSTEM
 	${CMAKE_CURRENT_SOURCE_DIR}/libcxx
 	${CMAKE_CURRENT_SOURCE_DIR}/libc
-	${CMAKE_CURRENT_SOURCE_DIR}/kernel
 	${CMAKE_CURRENT_SOURCE_DIR}/kernel/api
 	${CMAKE_CURRENT_SOURCE_DIR}/boot
+)
+
+include_directories(
+	${CMAKE_CURRENT_SOURCE_DIR}/kernel
 )
 
 execute_process(
