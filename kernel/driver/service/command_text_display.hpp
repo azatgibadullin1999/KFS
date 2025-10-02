@@ -20,8 +20,8 @@ namespace kfs::interface {
 template <typename Child>
 class CommandTextDisplay : public kfs::interface::ICommand {
 public:
-	CommandTextDisplay(char character, kfs::driver::interface::ITextDisplay *textDisplay) :
-	mTextDisplay(textDisplay),
+	CommandTextDisplay(char character, kfs::driver::interface::ITextDisplay *text_display) :
+	mTextDisplay(text_display),
 	mChar(character) { }
 
 	CommandTextDisplay	&operator = (const char &c) noexcept {

@@ -9,23 +9,23 @@
  * 
  */
 
-#ifndef __KFS_KERNEL_INTERFACE_SHELL_HPP__
-# define __KFS_KERNEL_INTERFACE_SHELL_HPP__
+#ifndef __KFS_KERNEL_SERVICE_SHELL_HPP__
+# define __KFS_KERNEL_SERVICE_SHELL_HPP__
 
-# include "console.hpp"
+# include <service/console.hpp>
 
 namespace kfs::interface {
 
 class IShell {
 public:
 	IShell(IConsole *console) :
-	mConsole(console) { }
+	_console(console) { }
 
 	virtual void	process() = 0;
 protected:
-	IConsole	*mConsole;
+	IConsole	*_console;
 };
 
 }
 
-#endif // __KFS_KERNEL_INTERFACE_SHELL_HPP__
+#endif // __KFS_KERNEL_SERVICE_SHELL_HPP__

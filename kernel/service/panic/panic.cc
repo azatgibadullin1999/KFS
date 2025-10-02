@@ -25,7 +25,7 @@ const char*	gPanicHeaderMessege ="\
 
 void kfs::detail::panic() {
 	auto&&	console = kfs::console::instance();
-	auto&&  text_display = console.getTextDisplay();
+	auto&&  text_display = console.get_text_display();
 	text_display->setCursorPosition(0, text_display->getCurrentColumn());
 
 	console.write(gPanicHeaderMessege);

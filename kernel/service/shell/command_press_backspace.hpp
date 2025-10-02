@@ -22,9 +22,9 @@ namespace kfs::shell {
 template <typename Container>
 class CommandPressBackspaceShell final : public kfs::interface::ICommand {
 public:
-	CommandPressBackspaceShell(Container &sharedContainer, typename Container::iterator &sharedIt, kfs::interface::IConsole *console) :
-	mSharedContainer(sharedContainer),
-	mSharedIt(sharedIt),
+	CommandPressBackspaceShell(Container &shared_container, typename Container::iterator &shared_it, kfs::interface::IConsole *console) :
+	mSharedContainer(shared_container),
+	mSharedIt(shared_it),
 	mConsole(console) { }
 
 	void	execute() override {

@@ -30,13 +30,13 @@ class SymbolProcessorAutoScroll final : public kfs::driver::interface::SymbolPro
 	kfs::driver::common::CommandPressNewLineAutoScroll
 > {
 public:
-	SymbolProcessorAutoScroll(kfs::driver::interface::ITextDisplay *textDisplay) :
+	SymbolProcessorAutoScroll(kfs::driver::interface::ITextDisplay *text_display) :
 	SymbolProcessor(
-		CommandPressTab('\t', textDisplay, 8),
-		CommandPressScroll(kfs::driver::interface::IKeyboard::Decoder::DOWN, textDisplay),
-		CommandPressBackspace('\b', textDisplay),
-		CommandDefaultAutoScroll(0, textDisplay),
-		CommandPressNewLineAutoScroll('\n', textDisplay)
+		CommandPressTab('\t', text_display, 8),
+		CommandPressScroll(kfs::driver::interface::IKeyboard::Decoder::DOWN, text_display),
+		CommandPressBackspace('\b', text_display),
+		CommandDefaultAutoScroll(0, text_display),
+		CommandPressNewLineAutoScroll('\n', text_display)
 		) { }
 };
 

@@ -22,8 +22,8 @@ namespace kfs::shell {
 template <typename Container>
 class CommandPressNewLineShell final : public kfs::interface::ICommand {
 public:
-	CommandPressNewLineShell(typename Container::iterator &sharedIt, kfs::interface::IConsole *console) :
-	mSharedIt(sharedIt),
+	CommandPressNewLineShell(typename Container::iterator &shared_it, kfs::interface::IConsole *console) :
+	mSharedIt(shared_it),
 	mConsole(console) { }
 
 	void	execute() override {

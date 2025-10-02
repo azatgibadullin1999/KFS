@@ -22,10 +22,10 @@ namespace kfs::shell {
 template <typename Container>
 class CommandDefaultShell final : public kfs::interface::ICommand {
 public:
-	CommandDefaultShell(Container &sharedContainer, typename Container::iterator &sharedIt, kfs::interface::IConsole *console) :
-	mSharedContainer(sharedContainer),
+	CommandDefaultShell(Container &shared_container, typename Container::iterator &shared_it, kfs::interface::IConsole *console) :
+	mSharedContainer(shared_container),
 	mConsole(console),
-	mSharedIt(sharedIt) { }
+	mSharedIt(shared_it) { }
 
 	CommandDefaultShell	&operator = (const char &c) {
 		mCharacter = c;

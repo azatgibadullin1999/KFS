@@ -20,8 +20,8 @@ namespace kfs::driver::common {
 
 class CommandPressTab final : public kfs::interface::CommandTextDisplay<CommandPressTab> {
 public:
-	CommandPressTab(char c,kfs::driver::interface::ITextDisplay *textDisplay, size_t tabSize) :
-	CommandTextDisplay(c, textDisplay),
+	CommandPressTab(char c,kfs::driver::interface::ITextDisplay *text_display, size_t tabSize) :
+	CommandTextDisplay(c, text_display),
 	mTabSize(tabSize) { }
 	using CommandTextDisplay::operator==;
 	using CommandTextDisplay::operator=;

@@ -9,10 +9,9 @@
  * 
  */
 
-#include <stdint.h>
-#include "multiboot.h"
-#include "kernel.hpp"
-#include <elf.h>
+#include <cstdint>
+
+#include <kernel.hpp>
 
 #if defined(__linux__)
 # error "You are not using a cross-compiler, you will most certainly run into trouble"

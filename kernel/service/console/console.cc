@@ -12,28 +12,28 @@
 #include "console.hpp"
 
 void	kfs::Console::process() {
-	mScanCodeBuff = mKeyboard->read();
+	mScanCodeBuff = _keyboard->read();
 	if (mScanCodeBuff == 0xFF) {
 		return;
 	}
-	mProcessor->process(mCharBuff);
-	mTextDisplay->updateCursorPosition();
+	_processor->process(mCharBuff);
+	_text_display->updateCursorPosition();
 }
 
 void	kfs::Console::write(char c) {
-	mProcessor->process(c);
-	mTextDisplay->updateCursorPosition();
+	_processor->process(c);
+	_text_display->updateCursorPosition();
 }
 
 void	kfs::Console::write(const char *str) {
 	for (size_t it = 0; str[it]; ++it) {
-		mProcessor->process(str[it]);
+		_processor->process(str[it]);
 	}
-	mTextDisplay->updateCursorPosition();
+	_text_display->updateCursorPosition();
 }
 
 char	kfs::Console::read() {
-	mScanCodeBuff = mKeyboard->read();
+	mScanCodeBuff = _keyboard->read();
 	if (mScanCodeBuff == 0xFF) {
 		return -1;
 	}

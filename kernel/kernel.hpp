@@ -12,17 +12,33 @@
 #ifndef __KFS_KERNEL_KERNEL_HPP__
 # define __KFS_KERNEL_KERNEL_HPP__
 
-# include <stdbool.h>
-# include <stddef.h>
-# include "driver/ps2/keyboard.hpp"
-# include "driver/vga/text_display.hpp"
-# include "driver/service/symbol_processor_auto_scroll.hpp"
-# include "driver/service/usqwerty.hpp"
-# include "service/console/console.hpp"
-# include "service/shell/shell.hpp"
-# include "service/panic/panic.hpp"
-# include "service/memory/memory.hpp"
-# include "../boot/multiboot.h"
+# include <cstddef>
+# include <cstdbool>
+
+# include <multiboot.h>
+
+# include <service/shell/shell.hpp>
+# include <service/panic/panic.hpp>
+# include <service/memory/memory.hpp>
+# include <service/console/console.hpp>
+
+# include <driver/ps2/keyboard.hpp>
+# include <driver/vga/text_display.hpp>
+# include <driver/service/usqwerty.hpp>
+# include <driver/service/symbol_processor_auto_scroll.hpp>
+
+extern "C" {
+	extern std::byte _kfs_sections_begin;
+	extern std::byte _text_begin;
+	extern std::byte _text_end;
+	extern std::byte _rodata_begin;
+	extern std::byte _rodata_end;
+	extern std::byte _data_begin;
+	extern std::byte _data_end;
+	extern std::byte _bss_begin;
+	extern std::byte _bss_end;
+	extern std::byte _kfs_sections_end;
+}
 
 namespace kfs {
 
@@ -33,9 +49,9 @@ public:
 		static auto&&	display = driver::vga::VGATextDisplay();
 		static auto&&	keyboard = driver::ps2::Keyboard(driver::common::USqwerty());
 		static auto&&	processor = driver::common::SymbolProcessorAutoScroll(&display);
-		console::instance().setTextDisplay(&display);
-		console::instance().setKeyboard(&keyboard);
-		console::instance().setSymbolProcessor(&processor);
+		console::instance().set_text_display(&display);
+		console::instance().set_keyboard(&keyboard);
+		console::instance().set_symbol_processor(&processor);
 
 		auto&&	memory [[maybe_unused]] = Memory::init(
 			reinterpret_cast<multiboot_memory_map_t *>(mbd->mmap_addr),

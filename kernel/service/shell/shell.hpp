@@ -12,8 +12,9 @@
 #ifndef __KFS_KERNEL_SERVICE_SHELL_SHELL_HPP__
 # define __KFS_KERNEL_SERVICE_SHELL_SHELL_HPP__
 
-# include "../shell.hpp"
 # include <array>
+
+# include <service/shell.hpp>
 
 namespace kfs {
 
@@ -26,7 +27,7 @@ public:
 	void	process() override;
 private:
 	inline static const char	enter = '\n';
-	Container	mInputStringBuff;
+	Container	_input_string_buff;
 	ContainerOfArgs	mArgs;
 	const char	mPromptForInput[6] = "L&D> ";
 };

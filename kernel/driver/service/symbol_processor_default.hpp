@@ -31,13 +31,13 @@ class SymbolProcessorDefault final : public kfs::driver::interface::SymbolProces
 	kfs::driver::common::CommandDefault
 > {
 public:
-	SymbolProcessorDefault(kfs::driver::interface::ITextDisplay *textDisplay) :
+	SymbolProcessorDefault(kfs::driver::interface::ITextDisplay *text_display) :
 	SymbolProcessor(
-		CommandPressBackspace('\b' ,textDisplay),
-		CommandPressNewLine('\n', textDisplay),
-		CommandPressScroll(kfs::driver::interface::IKeyboard::Decoder::DOWN, textDisplay),
-		CommandPressTab('\t', textDisplay, 8),
-		CommandDefault(0, textDisplay)
+		CommandPressBackspace('\b' ,text_display),
+		CommandPressNewLine('\n', text_display),
+		CommandPressScroll(kfs::driver::interface::IKeyboard::Decoder::DOWN, text_display),
+		CommandPressTab('\t', text_display, 8),
+		CommandDefault(0, text_display)
 		) { }
 };
 

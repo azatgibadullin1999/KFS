@@ -41,18 +41,18 @@ ContainerArgs	&parse(ContainerArgs &args, ContainerStr &str) {
 
 void	kfs::Shell::process() {
 	static auto&&	factory = kfs::shell::FactoryCommandBuiltinDefault();
-	auto&&	sharedIt = mInputStringBuff.begin();
-	auto&&	processor = kfs::shell::SymbolProcessorForShell<Container>(mInputStringBuff, sharedIt, mConsole);
-	std::fill(mInputStringBuff.begin(), mInputStringBuff.end(), 0);
+	auto&&	shared_it = _input_string_buff.begin();
+	auto&&	processor = kfs::shell::SymbolProcessorForShell<Container>(_input_string_buff, shared_it, _console);
+	std::fill(_input_string_buff.begin(), _input_string_buff.end(), 0);
 	std::fill(mArgs.begin(), mArgs.end(), nullptr);
 
-	mConsole->write(mPromptForInput);
-	while (*sharedIt != '\n') {
-		*sharedIt = mConsole->readBlocking();
-		processor.process(*sharedIt);
+	_console->write(mPromptForInput);
+	while (*shared_it != '\n') {
+		*shared_it = _console->readBlocking();
+		processor.process(*shared_it);
 	}
-	mConsole->write('\n');
+	_console->write('\n');
 
-	mArgs = parse(mArgs, mInputStringBuff);
+	mArgs = parse(mArgs, _input_string_buff);
 	factory.process(*mArgs.begin())->setArgs(mArgs.data())->execute();
 }
