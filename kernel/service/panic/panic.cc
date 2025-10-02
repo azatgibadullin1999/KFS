@@ -24,7 +24,7 @@ const char*	g_panic_header_messege ="\
   | ' <  | _| |   / | .` || _| | |__       |  _/   / _ \\  | .` | | |  | (__ \n\
   |_|\\_\\ |___||_|_\\ |_|\\_||___||____|      |_|    /_/ \\_\\ |_|\\_||___|  \\___|\n";
 
-void kfs::detail::panic() {
+[[noreturn]] void kfs::detail::panic() {
 	auto&&	console = kfs::console::instance();
 	auto&&  text_display = console.get_text_display();
 	text_display->set_cursor_position(0, text_display->get_current_column());

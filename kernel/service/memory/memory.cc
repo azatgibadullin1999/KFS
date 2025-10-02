@@ -22,7 +22,7 @@
 
 namespace kfs {
 
-Memory	Memory::init(multiboot_memory_map_t *addr, size_t length, multiboot_elf_section_header_table_t *elfsh) {
+Memory	Memory::init(multiboot_memory_map_t *addr, size_t length) {
 	std::span<multiboot_memory_map_t> memory_map{
 		addr,
 		addr + (length / sizeof(multiboot_memory_map_t))
@@ -32,7 +32,7 @@ Memory	Memory::init(multiboot_memory_map_t *addr, size_t length, multiboot_elf_s
 
 	PhysicalMemory::instance().init(memory_map);
 	static auto&&	gdt [[maybe_unused]] = x86::GDTDefault{};
-	static auto&&	address_space = KernelAddressSpace{ };
+	static auto&&	address_space [[maybe_unused]] = KernelAddressSpace{ };
 	
 	return memory;
 }

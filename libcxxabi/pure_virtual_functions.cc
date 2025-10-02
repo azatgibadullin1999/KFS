@@ -17,6 +17,7 @@ void __cxa_pure_virtual() {
 
 int _purecall() {
     // Do nothing or print an error message.
+    return 0;
 }
 
 }

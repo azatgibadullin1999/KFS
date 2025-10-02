@@ -1,4 +1,5 @@
 Checks: >
+  llvm-header-guard
   readability-identifier-naming,
   readability-use-std-min-max,
   readability-use-anyofallof,

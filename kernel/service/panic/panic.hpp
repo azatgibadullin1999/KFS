@@ -15,7 +15,7 @@
 namespace kfs {
 
 namespace detail {
-void panic();
+[[noreturn]] void panic();
 }
 
 struct PanicHandler {

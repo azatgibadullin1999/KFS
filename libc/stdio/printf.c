@@ -71,7 +71,8 @@ static int	ft_hex_types_output(unsigned int n, int reg, t_printf *all) {
 	char	buff[sizeof(n) * 3];
 
 	itoa(n, buff, 16);
-	ft_str_toupper(buff);
+	if (reg)
+		ft_str_toupper(buff);
 	ft_printf_putstr(buff, all);
 
 	return (0);

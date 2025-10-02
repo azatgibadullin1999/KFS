@@ -45,7 +45,7 @@ namespace kfs {
 class Kernel {
 public:
 	static Kernel	init(multiboot_info_t* mbd) {
-		static auto&&	panic = PanicHandler{};
+		PanicHandler{};
 		static auto&&	display = driver::vga::VGATextDisplay();
 		static auto&&	keyboard = driver::ps2::Keyboard(driver::common::USqwerty());
 		static auto&&	processor = driver::common::SymbolProcessorAutoScroll(&display);
@@ -55,8 +55,7 @@ public:
 
 		auto&&	memory [[maybe_unused]] = Memory::init(
 			reinterpret_cast<multiboot_memory_map_t *>(mbd->mmap_addr),
-			mbd->mmap_length,
-			&mbd->u.elf_sec);
+			mbd->mmap_length);
 		
 		static auto&&	kernel = Kernel();
 		return kernel;

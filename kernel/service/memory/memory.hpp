@@ -20,7 +20,7 @@ namespace kfs {
 
 class Memory {
 public:
-	static Memory	init(multiboot_memory_map_t *addr, size_t len, multiboot_elf_section_header_table_t *elfsh);
+	static Memory	init(multiboot_memory_map_t *addr, size_t len);
 private:
 };
 
