@@ -9,8 +9,8 @@
  * 
  */
 
-#ifndef __KFS_KERNEL_COMMON_COMMAND_HPP__
-# define __KFS_KERNEL_COMMON_COMMAND_HPP__
+#ifndef KFS_KERNEL_COMMON_COMMAND_HPP
+# define KFS_KERNEL_COMMON_COMMAND_HPP
 
 namespace kfs::interface {
 
@@ -44,4 +44,4 @@ public:
 
 }
 
-#endif // __KFS_KERNEL_COMMON_COMMAND_HPP__
+#endif // KFS_KERNEL_COMMON_COMMAND_HPP

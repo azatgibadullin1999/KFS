@@ -9,8 +9,8 @@
  * 
  */
 
-#ifndef __KFS_KERNEL_CONSOLE_HPP__
-# define __KFS_KERNEL_CONSOLE_HPP__
+#ifndef KFS_KERNEL_CONSOLE_HPP
+# define KFS_KERNEL_CONSOLE_HPP
 
 # include "service/console.hpp"
 # include "common/singleton.hpp"
@@ -39,4 +39,4 @@ typedef typename kfs::interface::SingletonWrapper<Console>	console;
 
 }
 
-#endif // __KFS_KERNEL_CONSOLE_HPP__
+#endif // KFS_KERNEL_CONSOLE_HPP

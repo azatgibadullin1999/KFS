@@ -30,7 +30,7 @@ const char*	g_panic_header_messege ="\
 	text_display->set_cursor_position(0, text_display->get_current_column());
 
 	console.write(g_panic_header_messege);
-	asm volatile ("hlt");
+	for (;;) { asm volatile ("hlt"); }
 }
 
 kfs::PanicHandler::PanicHandler() {

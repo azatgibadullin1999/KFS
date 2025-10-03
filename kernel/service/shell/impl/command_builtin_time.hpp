@@ -9,8 +9,8 @@
  * 
  */
 
-#ifndef __KFS_KERNEL_SERVICE_SHELL_IMPL_COMMAND_BUILTIN_TIME_HPP__
-# define __KFS_KERNEL_SERVICE_SHELL_IMPL_COMMAND_BUILTIN_TIME_HPP__
+#ifndef KFS_KERNEL_SERVICE_SHELL_IMPL_COMMAND_BUILTIN_TIME_HPP
+# define KFS_KERNEL_SERVICE_SHELL_IMPL_COMMAND_BUILTIN_TIME_HPP
 
 # include <common/factory.hpp>
 # include <driver/utils/port.hpp>
@@ -123,18 +123,18 @@ public:
 		if(century_register != 0) {
 			year += century * 100;
 		} else {
-			year += (CURRENT_YEAR / 100) * 100;
-			if(year < CURRENT_YEAR) year += 100;
+			year += (g_current_year / 100) * 100;
+			if(year < g_current_year) year += 100;
 		}
 		std::printf("%d/%d/%d %d:%d:%d\n", day, month, year, hour, minute, second);
 	// NOLINTEND
 	}
 private:
-	inline static const size_t	CURRENT_YEAR = 2024;
+	inline static const size_t	g_current_year = 2024;
 	kfs::driver::utils::PortByte	_CMOS_address = 0x70;
 	kfs::driver::utils::PortByte	_CMOS_data = 0x71;
 };
 
 }
 
-#endif // __KFS_KERNEL_SERVICE_SHELL_IMPL_COMMAND_BUILTIN_TIME_HPP__
+#endif // KFS_KERNEL_SERVICE_SHELL_IMPL_COMMAND_BUILTIN_TIME_HPP

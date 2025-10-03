@@ -9,8 +9,8 @@
  * 
  */
 
-#ifndef __KFS_KERNEL_SERVICE_CONSOLE_HPP__
-# define __KFS_KERNEL_SERVICE_CONSOLE_HPP__
+#ifndef KFS_KERNEL_SERVICE_CONSOLE_HPP
+# define KFS_KERNEL_SERVICE_CONSOLE_HPP
 
 # include "driver/common_interface/keyboard.hpp"
 # include "driver/common_interface/text_display.hpp"
@@ -67,4 +67,4 @@ protected:
 
 }
 
-#endif // __KFS_KERNEL_SERVICE_CONSOLE_HPP__
+#endif // KFS_KERNEL_SERVICE_CONSOLE_HPP

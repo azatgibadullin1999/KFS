@@ -9,8 +9,8 @@
  * 
  */
 
-#ifndef __KFS_KERNEL_SERVICE_MEMORY_PHYSICAL_MEMORY_HPP__
-# define __KFS_KERNEL_SERVICE_MEMORY_PHYSICAL_MEMORY_HPP__
+#ifndef KFS_KERNEL_SERVICE_MEMORY_PHYSICAL_MEMORY_HPP
+# define KFS_KERNEL_SERVICE_MEMORY_PHYSICAL_MEMORY_HPP
 
 # include <span>
 # include <list>
@@ -52,4 +52,4 @@ using PhysicalMemory = interface::SingletonWrapper<details::PhysicalMemory>;
 
 } // namespace kfs
 
-#endif // __KFS_KERNEL_SERVICE_MEMORY_PHYSICAL_MEMORY_HPP__
+#endif // KFS_KERNEL_SERVICE_MEMORY_PHYSICAL_MEMORY_HPP

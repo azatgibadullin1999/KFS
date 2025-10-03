@@ -3,17 +3,34 @@ project(kfs
         VERSION 1.0.0
         LANGUAGES CXX C ASM-ATT)
 
+option(ENABLE_CLANG_TIDY "Run clang-tidy during build" ON)
+
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+set(KFS_COMMON_FLAGS
+	-fno-builtin
+	-fno-stack-protector
+	-ffreestanding
+	-Wall
+	-Wextra
+	-pedantic
+)
+set(KFS_CXX_FLAGS
+	-fno-exceptions
+	-std=c++23
+	-fno-rtti
+	-fno-threadsafe-statics
+)
+set(KFS_C_FLAGS)
 
-set(KFS_COMMON_FLAGS "-fno-builtin -fno-stack-protector -ffreestanding -Wall -Wextra -pedantic")
-set(KFS_CXX_FLAGS "-fno-exceptions -std=c++23 -fno-rtti -fno-threadsafe-statics")
-set(KFS_C_FLAGS "")
+string(JOIN " " KFS_COMMON_FLAGS_STR ${KFS_COMMON_FLAGS})
+string(JOIN " " KFS_CXX_FLAGS_STR    ${KFS_CXX_FLAGS})
+string(JOIN " " KFS_C_FLAGS_STR      ${KFS_C_FLAGS})
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${KFS_COMMON_FLAGS} ${KFS_C_FLAGS}")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${KFS_COMMON_FLAGS} ${KFS_CXX_FLAGS}")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${KFS_COMMON_FLAGS_STR} ${KFS_C_FLAGS_STR}")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${KFS_COMMON_FLAGS_STR} ${KFS_CXX_FLAGS_STR}")
 
 include_directories(SYSTEM
 	${CMAKE_CURRENT_SOURCE_DIR}/libcxx

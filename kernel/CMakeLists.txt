@@ -1,3 +1,17 @@
+if (ENABLE_CLANG_TIDY)
+	set(CLANG_TIDY_EXE
+		clang-tidy
+	)
+	set(CLANG_TIDY_ARGS
+		--quiet
+		--config-file ${PROJECT_SOURCE_DIR}/.clang-tidy
+		-extra-arg=--target=i386-elf
+		-extra-arg=-U__linux__
+		-extra-arg=-D__i386__
+	)
+	set(CMAKE_CXX_CLANG_TIDY "${CLANG_TIDY_EXE};${CLANG_TIDY_ARGS}")
+endif()
+
 add_subdirectory(service)
 add_subdirectory(driver)
 add_subdirectory(common)

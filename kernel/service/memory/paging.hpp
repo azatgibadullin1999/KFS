@@ -9,8 +9,8 @@
  * 
  */
 
-#ifndef __KFS_KERNEL_SERVICE_MEMORY_PAIGING_HPP__
-# define __KFS_KERNEL_SERVICE_MEMORY_PAIGING_HPP__
+#ifndef KFS_KERNEL_SERVICE_MEMORY_PAIGING_HPP
+# define KFS_KERNEL_SERVICE_MEMORY_PAIGING_HPP
 
 # include <span>
 # include <array>
@@ -164,4 +164,4 @@ static_assert(sizeof(Table) == 0x1000, "");
 
 } // namespace kfs::page
 
-#endif // __KFS_KERNEL_SERVICE_MEMORY_PAIGING_HPP__
+#endif // KFS_KERNEL_SERVICE_MEMORY_PAIGING_HPP

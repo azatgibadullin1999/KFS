@@ -9,8 +9,8 @@
  * 
  */
 
-#ifndef __KFS_KERNEL_KERNEL_HPP__
-# define __KFS_KERNEL_KERNEL_HPP__
+#ifndef KFS_KERNEL_KERNEL_HPP
+# define KFS_KERNEL_KERNEL_HPP
 
 # include <cstddef>
 # include <cstdbool>
@@ -28,6 +28,7 @@
 # include "driver/service/symbol_processor_auto_scroll.hpp"
 
 extern "C" {
+// NOLINTBEGIN
 	extern std::byte _kfs_sections_begin;
 	extern std::byte _text_begin;
 	extern std::byte _text_end;
@@ -38,6 +39,7 @@ extern "C" {
 	extern std::byte _bss_begin;
 	extern std::byte _bss_end;
 	extern std::byte _kfs_sections_end;
+// NOLINTEND
 }
 
 namespace kfs {
@@ -81,4 +83,4 @@ public:
 
 } // namespace kfs
 
-#endif // __KFS_KERNEL_KERNEL_HPP__
+#endif // KFS_KERNEL_KERNEL_HPP

@@ -9,8 +9,8 @@
  * 
  */
 
-#ifndef __KFS_KERNEL_DRIVER_SERVICE_COMMAND_TEXT_DISPLAY_HPP__
-# define __KFS_KERNEL_DRIVER_SERVICE_COMMAND_TEXT_DISPLAY_HPP__
+#ifndef KFS_KERNEL_DRIVER_SERVICE_COMMAND_TEXT_DISPLAY_HPP
+# define KFS_KERNEL_DRIVER_SERVICE_COMMAND_TEXT_DISPLAY_HPP
 
 # include "common/command.hpp"
 # include "driver/common_interface/text_display.hpp"
@@ -44,4 +44,4 @@ protected:
 
 } // namespace kfs::interface
 
-#endif // __KFS_KERNEL_DRIVER_SERVICE_COMMAND_TEXT_DISPLAY_HPP__
+#endif // KFS_KERNEL_DRIVER_SERVICE_COMMAND_TEXT_DISPLAY_HPP

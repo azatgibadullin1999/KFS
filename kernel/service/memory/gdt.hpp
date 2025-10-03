@@ -9,8 +9,8 @@
  * 
  */
 
-#ifndef __KFS_KERNEL_SERVICE_MEMORY_GDT_HPP__
-# define __KFS_KERNEL_SERVICE_MEMORY_GDT_HPP__
+#ifndef KFS_KERNEL_SERVICE_MEMORY_GDT_HPP
+# define KFS_KERNEL_SERVICE_MEMORY_GDT_HPP
 
 # include <array>
 # include <utility>
@@ -51,7 +51,7 @@ protected:
 			_base(base) { }
 
 		void	move(Desk *desk) const  {
-			std::memmove((void *)_base, desk, _limit);
+			std::memmove(reinterpret_cast<void *>(_base), desk, _limit);
 		}
 
 		void	load() const {
@@ -91,4 +91,4 @@ private:
 
 } // kfs::x86
 
-#endif // __KFS_KERNEL_SERVICE_MEMORY_GDT_HPP__
+#endif // KFS_KERNEL_SERVICE_MEMORY_GDT_HPP

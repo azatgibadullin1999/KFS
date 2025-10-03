@@ -9,8 +9,8 @@
  * 
  */
 
-#ifndef __KFS_LIBC_STRING_H__
-# define __KFS_LIBC_STRING_H__
+#ifndef KFS_LIBC_STRING_H
+# define KFS_LIBC_STRING_H
 
 # include <stddef.h>
 
@@ -37,4 +37,4 @@ void *memchr(const void *s, int c, size_t n);
 }
 # endif
 
-#endif // __KFS_LIBC_STRING_H__
+#endif // KFS_LIBC_STRING_H

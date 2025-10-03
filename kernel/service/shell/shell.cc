@@ -46,7 +46,7 @@ void	kfs::Shell::process() {
 	std::fill(_input_string_buff.begin(), _input_string_buff.end(), 0);
 	std::fill(_args.begin(), _args.end(), nullptr);
 
-	_console->write(mPromptForInput);
+	_console->write(_prompt);
 	while (*shared_it != '\n') {
 		*shared_it = _console->read_blocking();
 		processor.process(*shared_it);

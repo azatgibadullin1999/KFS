@@ -9,8 +9,8 @@
  * 
  */
 
-#ifndef __KFS_KERNEL_SERVICE_PANIC_PANIC_HPP__
-# define __KFS_KERNEL_SERVICE_PANIC_PANIC_HPP__
+#ifndef KFS_KERNEL_SERVICE_PANIC_PANIC_HPP
+# define KFS_KERNEL_SERVICE_PANIC_PANIC_HPP
 
 namespace kfs {
 
@@ -24,4 +24,4 @@ struct PanicHandler {
 
 } // namespace kfs
 
-#endif // __KFS_KERNEL_SERVICE_PANIC_PANIC_HPP__
+#endif // KFS_KERNEL_SERVICE_PANIC_PANIC_HPP

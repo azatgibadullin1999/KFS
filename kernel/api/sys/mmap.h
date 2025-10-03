@@ -9,8 +9,8 @@
  * 
  */
 
-#ifndef __KFS_KERNEL_API_SYS_MMAP_H__
-# define __KFS_KERNEL_API_SYS_MMAP_H__
+#ifndef KFS_KERNEL_API_SYS_MMAP_H
+# define KFS_KERNEL_API_SYS_MMAP_H
 
 # ifdef __cplusplus
 #  include <cstddef>
@@ -41,4 +41,4 @@ int getpagesize(void);
 }
 # endif
 
-#endif // __KFS_KERNEL_API_SYS_MMAP_H__
+#endif // KFS_KERNEL_API_SYS_MMAP_H

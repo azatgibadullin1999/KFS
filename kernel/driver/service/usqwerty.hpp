@@ -9,8 +9,8 @@
  * 
  */
 
-#ifndef __KFS_KERNEL_DRIVER_SERVICE_USQWERTY_HPP__
-# define __KFS_KERNEL_DRIVER_SERVICE_USQWERTY_HPP__
+#ifndef KFS_KERNEL_DRIVER_SERVICE_USQWERTY_HPP
+# define KFS_KERNEL_DRIVER_SERVICE_USQWERTY_HPP
 
 # include "driver/common_interface/keyboard.hpp"
 
@@ -40,4 +40,4 @@ public:
 
 }
 
-#endif // __KFS_KERNEL_DRIVER_SERVICE_USQWERTY_HPP__
+#endif // KFS_KERNEL_DRIVER_SERVICE_USQWERTY_HPP

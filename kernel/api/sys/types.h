@@ -9,8 +9,8 @@
  * 
  */
 
-#ifndef __KFS_KERNEL_API_SYS_TYPES_H__
-# define __KFS_KERNEL_API_SYS_TYPES_H__
+#ifndef KFS_KERNEL_API_SYS_TYPES_H
+# define KFS_KERNEL_API_SYS_TYPES_H
 
 # ifdef __cplusplus
 #  include <cstdint>
@@ -20,4 +20,4 @@
 
 typedef uint32_t off_t;
 
-#endif // __KFS_KERNEL_API_SYS_TYPES_H__
+#endif // KFS_KERNEL_API_SYS_TYPES_H

@@ -9,8 +9,8 @@
  * 
  */
 
-#ifndef __KFS_KERNEL_SERVICE_SHELL_SYBOL_PROCESSOR_HPP__
-# define __KFS_KERNEL_SERVICE_SHELL_SYBOL_PROCESSOR_HPP__
+#ifndef KFS_KERNEL_SERVICE_SHELL_SYBOL_PROCESSOR_HPP
+# define KFS_KERNEL_SERVICE_SHELL_SYBOL_PROCESSOR_HPP
 
 # include "command_default.hpp"
 # include "command_press_backspace.hpp"
@@ -39,4 +39,4 @@ private:
 
 }
 
-#endif // __KFS_KERNEL_SERVICE_SHELL_SYBOL_PROCESSOR_HPP__
+#endif // KFS_KERNEL_SERVICE_SHELL_SYBOL_PROCESSOR_HPP

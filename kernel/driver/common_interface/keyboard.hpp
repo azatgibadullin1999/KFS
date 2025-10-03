@@ -9,8 +9,8 @@
  * 
  */
 
-#ifndef __KFS_KERNEL_DRIVER_COMMON_INTERFACE_KEYBOARD__
-# define __KFS_KERNEL_DRIVER_COMMON_INTERFACE_KEYBOARD__
+#ifndef KFS_KERNEL_DRIVER_COMMON_INTERFACE_KEYBOARD_HPP
+# define KFS_KERNEL_DRIVER_COMMON_INTERFACE_KEYBOARD_HPP
 
 # include <cstdint>
 # include <utility>
@@ -47,6 +47,7 @@ public:
 			return _backward_key_map[code];
 		}
 
+// NOLINTBEGIN
 		inline static const uint8_t UNKNOWN = 0xFF;
 		inline static const uint8_t ESC = 0xFF - 1;
 		inline static const uint8_t CTRL = 0xFF - 2;
@@ -80,6 +81,7 @@ public:
 		inline static const uint8_t NONE = 0xFF - 30;
 		inline static const uint8_t ALTGR = 0xFF - 31;
 		inline static const uint8_t NUMLCK = 0xFF - 32;
+// NOLINTEND
 	protected:
 		constexpr void	_update_backward_key_map() {
 			for (uint8_t it = 0; it < sizeof(_key_map); ++it) {
@@ -107,4 +109,4 @@ protected:
 
 }
 
-#endif // __KFS_KERNEL_DRIVER_COMMON_INTERFACE_KEYBOARD__
+#endif // KFS_KERNEL_DRIVER_COMMON_INTERFACE_KEYBOARD_HPP

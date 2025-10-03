@@ -9,8 +9,8 @@
  * 
  */
 
-#ifndef __KFS_KERNEL_SERVICE_MEMORY_MEMORY_RANGE_HPP__
-# define __KFS_KERNEL_SERVICE_MEMORY_MEMORY_RANGE_HPP__
+#ifndef KFS_KERNEL_SERVICE_MEMORY_MEMORY_RANGE_HPP
+# define KFS_KERNEL_SERVICE_MEMORY_MEMORY_RANGE_HPP
 
 # include <cstddef>
 # include <utility>
@@ -40,4 +40,4 @@ static inline bool operator >  (const kfs::MemoryRange& lhs, const kfs::MemoryRa
 static inline bool operator >= (const kfs::MemoryRange& lhs, const kfs::MemoryRange& rhs) { return !(lhs < rhs); }
 static inline bool operator <= (const kfs::MemoryRange& lhs, const kfs::MemoryRange& rhs) { return !(lhs > rhs); }
 
-#endif // __KFS_KERNEL_SERVICE_MEMORY_MEMORY_RANGE_HPP__
+#endif // KFS_KERNEL_SERVICE_MEMORY_MEMORY_RANGE_HPP

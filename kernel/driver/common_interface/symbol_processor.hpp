@@ -9,8 +9,8 @@
  * 
  */
 
-#ifndef __KFS_KERNEL_DRIVER_COMMON_INTERFACE_SYMBOL_PROCESSOR_HPP__
-# define __KFS_KERNEL_DRIVER_COMMON_INTERFACE_SYMBOL_PROCESSOR_HPP__
+#ifndef KFS_KERNEL_DRIVER_COMMON_INTERFACE_SYMBOL_PROCESSOR_HPP
+# define KFS_KERNEL_DRIVER_COMMON_INTERFACE_SYMBOL_PROCESSOR_HPP
 
 # include <tuple>
 # include <utility>
@@ -23,15 +23,15 @@ public:
 	virtual void	process(const char&) = 0;
 };
 
-template <size_t it, typename ... Args>
+template <size_t It, typename ... Args>
 void	find(const char& c, std::tuple<Args...> &args) {
-	if (std::get<it>(args) == c) {
-		std::get<it>(args) = c;
-		std::get<it>(args).execute();
+	if (std::get<It>(args) == c) {
+		std::get<It>(args) = c;
+		std::get<It>(args).execute();
 		return;
 	}
-	if constexpr (it != 0) {
-		find<it - 1>(c, args);
+	if constexpr (It != 0) {
+		find<It - 1>(c, args);
 	}
 }
 
@@ -54,4 +54,4 @@ private:
 
 }
 
-#endif // __KFS_KERNEL_DRIVER_COMMON_INTERFACE_SYMBOL_PROCESSOR_HPP__
+#endif // KFS_KERNEL_DRIVER_COMMON_INTERFACE_SYMBOL_PROCESSOR_HPP

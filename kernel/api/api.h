@@ -9,8 +9,8 @@
  * 
  */
 
-#ifndef __KFS_KERNEL_API_API_HPP__
-# define __KFS_KERNEL_API_API_HPP__
+#ifndef KFS_KERNEL_API_API_HPP
+# define KFS_KERNEL_API_API_HPP
 
 # ifdef __cplusplus
 #  include <cstddef>
@@ -31,4 +31,4 @@ void	*allocate_pages(size_t num_of_pages);
 }
 # endif
 
-#endif // __KFS_KERNEL_API_API_HPP__
+#endif // KFS_KERNEL_API_API_HPP

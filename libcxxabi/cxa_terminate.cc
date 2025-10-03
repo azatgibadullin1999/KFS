@@ -28,7 +28,7 @@ _LIBCPP_EXPORTED_FROM_ABI terminate_handler get_terminate() _NOEXCEPT {
 
 [[noreturn]]
 _LIBCPP_NORETURN _LIBCPP_EXPORTED_FROM_ABI void terminate() _NOEXCEPT {
-	__terminate_fn();
+	for (;;) { __terminate_fn(); }
 }
 
 }  // std
@@ -36,8 +36,8 @@ _LIBCPP_NORETURN _LIBCPP_EXPORTED_FROM_ABI void terminate() _NOEXCEPT {
 _LIBCPP_BEGIN_NAMESPACE_STD
 
 _LIBCPP_NORETURN _LIBCPP_AVAILABILITY_VERBOSE_ABORT _LIBCPP_OVERRIDABLE_FUNC_VIS
-_LIBCPP_ATTRIBUTE_FORMAT(__printf__, 1, 2) void __libcpp_verbose_abort(const char* __format, ...) {
-	__terminate_fn();
+_LIBCPP_ATTRIBUTE_FORMAT(__printf__, 1, 2) void __libcpp_verbose_abort(const char* /* __format */, ...) {
+	terminate();
 }
 
 _LIBCPP_END_NAMESPACE_STD

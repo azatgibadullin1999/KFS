@@ -9,8 +9,8 @@
  * 
  */
 
-#ifndef __KFS_KERNEL_SERVICE_SHELL_HPP__
-# define __KFS_KERNEL_SERVICE_SHELL_HPP__
+#ifndef KFS_KERNEL_SERVICE_SHELL_HPP
+# define KFS_KERNEL_SERVICE_SHELL_HPP
 
 # include "service/console.hpp"
 
@@ -28,4 +28,4 @@ protected:
 
 }
 
-#endif // __KFS_KERNEL_SERVICE_SHELL_HPP__
+#endif // KFS_KERNEL_SERVICE_SHELL_HPP

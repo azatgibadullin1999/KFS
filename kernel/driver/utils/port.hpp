@@ -9,8 +9,8 @@
  * 
  */
 
-#ifndef __KFS_KERNEL_DRIVER_UTILS_PORT_HPP__
-# define __KFS_KERNEL_DRIVER_UTILS_PORT_HPP__
+#ifndef KFS_KERNEL_DRIVER_UTILS_PORT_HPP
+# define KFS_KERNEL_DRIVER_UTILS_PORT_HPP
 
 # include <cstdint>
 
@@ -40,4 +40,4 @@ public:
 
 }
 
-#endif // __KFS_KERNEL_DRIVER_UTILS_PORT_HPP__
+#endif // KFS_KERNEL_DRIVER_UTILS_PORT_HPP

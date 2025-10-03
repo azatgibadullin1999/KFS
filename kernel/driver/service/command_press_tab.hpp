@@ -9,8 +9,8 @@
  * 
  */
 
-#ifndef __KFS_KERNEL_DRIVER_SERVICE_COMMAND_PRESS_TAB_HPP__
-# define __KFS_KERNEL_DRIVER_SERVICE_COMMAND_PRESS_TAB_HPP__
+#ifndef KFS_KERNEL_DRIVER_SERVICE_COMMAND_PRESS_TAB_HPP
+# define KFS_KERNEL_DRIVER_SERVICE_COMMAND_PRESS_TAB_HPP
 
 # include <cstddef>
 
@@ -20,9 +20,9 @@ namespace kfs::driver::common {
 
 class CommandPressTab final : public kfs::interface::CommandTextDisplay<CommandPressTab> {
 public:
-	CommandPressTab(char c,kfs::driver::interface::ITextDisplay *text_display, size_t tabSize) :
+	CommandPressTab(char c,kfs::driver::interface::ITextDisplay *text_display, size_t tab_size) :
 	CommandTextDisplay(c, text_display),
-	_tab_size(tabSize) { }
+	_tab_size(tab_size) { }
 	using CommandTextDisplay::operator==;
 	using CommandTextDisplay::operator=;
 
@@ -33,4 +33,4 @@ private:
 
 }
 
-#endif // __KFS_KERNEL_DRIVER_SERVICE_COMMAND_PRESS_TAB_HPP__
+#endif // KFS_KERNEL_DRIVER_SERVICE_COMMAND_PRESS_TAB_HPP

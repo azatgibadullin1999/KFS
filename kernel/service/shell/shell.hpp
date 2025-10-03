@@ -9,8 +9,8 @@
  * 
  */
 
-#ifndef __KFS_KERNEL_SERVICE_SHELL_SHELL_HPP__
-# define __KFS_KERNEL_SERVICE_SHELL_SHELL_HPP__
+#ifndef KFS_KERNEL_SERVICE_SHELL_SHELL_HPP
+# define KFS_KERNEL_SERVICE_SHELL_SHELL_HPP
 
 # include <array>
 
@@ -26,12 +26,11 @@ public:
 
 	void	process() override;
 private:
-	inline static const char	enter = '\n';
 	Container	_input_string_buff;
 	ContainerOfArgs	_args;
-	const char	mPromptForInput[6] = "L&D> ";
+	const char	_prompt[6] = "L&D> ";
 };
 
 }
 
-#endif // __KFS_KERNEL_SERVICE_SHELL_SHELL_HPP__
+#endif // KFS_KERNEL_SERVICE_SHELL_SHELL_HPP

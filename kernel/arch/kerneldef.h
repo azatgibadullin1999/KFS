@@ -9,12 +9,12 @@
  * 
  */
 
-#ifndef __KFS_KERNEL_ARCH_KERNELDEF_H__
-# define __KFS_KERNEL_ARCH_KERNELDEF_H__
+#ifndef KFS_KERNEL_ARCH_KERNELDEF_H
+# define KFS_KERNEL_ARCH_KERNELDEF_H
 
 # include <cstddef>
 
 using virt_addr_t = void *;
 using phys_addr_t = std::size_t;
 
-#endif // __KFS_KERNEL_ARCH_KERNELDEF_H__
+#endif // KFS_KERNEL_ARCH_KERNELDEF_H

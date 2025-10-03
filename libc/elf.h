@@ -9,8 +9,8 @@
  * 
  */
 
-#ifndef __KFS_LIBC_ELF_H__
-# define __KFS_LIBC_ELF_H__
+#ifndef KFS_LIBC_ELF_H
+# define KFS_LIBC_ELF_H
 
 # include <stdint.h>
 
@@ -90,4 +90,4 @@ enum Elf_Type {
 }
 # endif
 
-#endif // __KFS_LIBC_ELF_H__
+#endif // KFS_LIBC_ELF_H

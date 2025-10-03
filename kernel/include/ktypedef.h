@@ -9,9 +9,9 @@
  * 
  */
 
-#ifndef __KFS_KERNEL_INCLUDE_H__
-# define __KFS_KERNEL_INCLUDE_H__
+#ifndef KFS_KERNEL_INCLUDE_H
+# define KFS_KERNEL_INCLUDE_H
 
 #include <arch/kerneldef.h>
 
-#endif // __KFS_KERNEL_INCLUDE_H__
+#endif // KFS_KERNEL_INCLUDE_H
