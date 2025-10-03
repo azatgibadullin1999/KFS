@@ -1,5 +1,6 @@
 Checks: >
-  llvm-header-guard
+  llvm-header-guard,
+  # modernize-*,
   readability-identifier-naming,
   readability-use-std-min-max,
   readability-use-anyofallof,
@@ -39,15 +40,17 @@ Checks: >
   readability-avoid-nested-conditional-operator,
   readability-avoid-const-params-in-decls
 
+HeaderFilterRegex: '(^|.*/)kernel/.*\.hpp$'
+
 CheckOptions:
   - key: readability-uniqueptr-delete-release.PreferResetCall
     value: true
   - key: llvm-header-guard.HeaderFileExtensions
     value: 'h,hpp,hh'
   - key: llvm-header-guard.HeaderGuardPrefix
-    value: '__KFS_'
+    value: '__'
   - key: llvm-header-guard.HeaderGuardSuffix
-    value: '_H__'
+    value: '__'
   - key: readability-identifier-naming.AggressiveDependentMemberLookup
     value: true
   - key: readability-identifier-naming.CheckAnonFieldInParent
@@ -88,6 +91,8 @@ CheckOptions:
     value: '_'
   - key: readability-identifier-naming.ProtectedMethodPrefix
     value: '_'
+  - key: readability-identifier-naming.StaticVariableCase
+    value: ''
   - key: readability-identifier-naming.StructCase
     value: CamelCase
   - key: readability-identifier-naming.TemplateParameterCase

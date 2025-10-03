@@ -54,23 +54,23 @@ public:
 
 	virtual void	set_color(EColor color) = 0;
 
-	const size_t	&get_current_column() const {
+	std::size_t get_current_column() const {
 		return _column;
 	}
-	const size_t	&get_current_row() const {
+	std::size_t get_current_row() const {
 		return _row;
 	}
-	const size_t	&get_column() const {
+	std::size_t get_column() const {
 		return _columns_number;
 	}
-	const size_t	&get_row() const {
+	std::size_t get_row() const {
 		return _rows_number;
 	}
 protected:
-	const size_t _columns_number;
-	const size_t _rows_number;
-	size_t _column;
-	size_t _row;
+	const std::size_t _columns_number;
+	const std::size_t _rows_number;
+	std::size_t _column;
+	std::size_t _row;
 };
 
 

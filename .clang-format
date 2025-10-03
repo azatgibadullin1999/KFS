@@ -3,7 +3,7 @@ AlignAfterOpenBracket: BAS_DontAlign
 AlignArrayOfStructures: AIAS_Right
 
 AlignConsecutiveAssignments: AcrossComments
-AlignConsecutiveAssignments:
+  
   AlignCompound: true
   AlignFunctionDeclarations: true
   AlignFunctionPointers: false
