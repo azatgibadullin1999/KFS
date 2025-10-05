@@ -17,10 +17,14 @@
 
 # include <multiboot.h>
 
-# include "service/shell/shell.hpp"
-# include "service/panic/panic.hpp"
-# include "service/memory/memory.hpp"
-# include "service/console/console.hpp"
+# include <kfs/shell.hpp>
+# include <kfs/panic.hpp>
+# include <kfs/memory.hpp>
+# include <kfs/console.hpp>
+
+
+# include "shell/shell.hpp"
+# include "console/console.hpp"
 
 # include "driver/ps2/keyboard.hpp"
 # include "driver/vga/text_display.hpp"

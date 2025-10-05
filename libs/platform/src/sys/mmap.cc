@@ -14,7 +14,6 @@
 #include <cstddef>
 #include <sys/types.h>
 
-#include "service/memory/physical_memory.hpp"
 
 struct Page {
 	std::array<std::byte, 0x1000> entry;
@@ -38,7 +37,7 @@ void *mmap(void */* addr */, size_t length, int /* prot */, int /* flags */, int
 		contiguous = 0;
 	}
 
-	return (void *)kfs::PhysicalMemory::instance().allocate();
+	return nullptr;
 }
 
 int munmap(void */* addr */, size_t /* length */) {

@@ -18,6 +18,9 @@
 
 namespace kfs {
 
+using virt_addr_t = void *;
+using phys_addr_t = std::size_t;
+
 class Memory {
 public:
 	static Memory	init(multiboot_memory_map_t *addr, size_t len);

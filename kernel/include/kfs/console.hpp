@@ -12,9 +12,9 @@
 #ifndef KFS_KERNEL_SERVICE_CONSOLE_HPP
 # define KFS_KERNEL_SERVICE_CONSOLE_HPP
 
-# include "kfs/keyboard.hpp"
-# include "kfs/text_display.hpp"
-# include "kfs/symbol_processor.hpp"
+# include <kfs/keyboard.hpp>
+# include <kfs/text_display.hpp>
+# include <kfs/symbol_processor.hpp>
 
 namespace kfs {
 
@@ -23,7 +23,7 @@ public:
 	IConsole() { }
 
 	IConsole(
-	kfs::ITextDisplay		*text_display,
+	kfs::ITextDisplay	*text_display,
 	kfs::ISymbolProcessor	*processor,
 	kfs::IKeyboard		*keyboard) :
 	_text_display(text_display),

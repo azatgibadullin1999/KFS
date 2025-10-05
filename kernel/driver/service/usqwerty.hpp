@@ -12,11 +12,11 @@
 #ifndef KFS_KERNEL_DRIVER_SERVICE_USQWERTY_HPP
 # define KFS_KERNEL_DRIVER_SERVICE_USQWERTY_HPP
 
-# include "driver/common_interface/keyboard.hpp"
+# include <kfs/keyboard.hpp>
 
 namespace kfs::driver::common {
 
-class USqwerty : public kfs::driver::interface::IKeyboard::Decoder {
+class USqwerty : public kfs::IKeyboard::Decoder {
 public:
 	USqwerty() : Decoder({
 	UNKNOWN,ESC,'1','2','3','4','5','6','7','8','9','0','-','=','\b','\t',

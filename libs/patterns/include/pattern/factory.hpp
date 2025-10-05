@@ -9,10 +9,10 @@
  * 
  */
 
-#ifndef KFS_LIBS_PATTERNS_FACTORY_HPP
-# define KFS_LIBS_PATTERNS_FACTORY_HPP
+#ifndef PATTERN_FACTORY_HPP
+# define PATTERN_FACTORY_HPP
 
-namespace kfs::interface {
+namespace pattern {
 
 template <typename T>
 class IFactory {
@@ -44,4 +44,4 @@ public:
 
 }
 
-#endif // KFS_LIBS_PATTERNS_FACTORY_HPP
+#endif // PATTERN_FACTORY_HPP

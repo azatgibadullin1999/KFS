@@ -14,11 +14,11 @@
 
 # include <cctype>
 
-# include "command_text_display.hpp"
+# include <kfs/command_text_display.hpp>
 
 namespace kfs::driver::common {
 
-class CommandDefaultAutoScroll final : public kfs::interface::CommandTextDisplay<CommandDefaultAutoScroll> {
+class CommandDefaultAutoScroll final : public kfs::CommandTextDisplay<CommandDefaultAutoScroll> {
 public:
 	using CommandTextDisplay::CommandTextDisplay;
 	using CommandTextDisplay::operator=;

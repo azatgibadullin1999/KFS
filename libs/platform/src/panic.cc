@@ -9,7 +9,7 @@
  * 
  */
 
-#include "service/panic/panic.hpp"
+#include <kfs/panic.hpp>
 
 extern "C" void kfs_panic() {
 	kfs::detail::panic();

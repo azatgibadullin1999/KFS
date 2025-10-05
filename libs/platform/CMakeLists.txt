@@ -1,14 +1,14 @@
-add_library(kfs_api OBJECT
-	sys/mmap.cc
-	write.cc
-	panic.cc
+include_directories(SYSTEM
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
-target_link_libraries(kfs_api
-	PUBLIC kfs::service
+add_library(kfs_platform OBJECT
+	src/sys/mmap.cc
+	src/write.cc
+	src/panic.cc
 )
 
-add_library(kfs::api
-	ALIAS kfs_api
+add_library(kfs::platform
+	ALIAS kfs_platform
 )
 

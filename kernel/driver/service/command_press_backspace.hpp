@@ -13,11 +13,11 @@
 # define KFS_KERNEL_DRIVER_SERVICE_COMMAND_PRESS_BACKSPACE_HPP
 
 # include <cstddef>
-# include "command_text_display.hpp"
+# include <kfs/command_text_display.hpp>
 
 namespace kfs::driver::common {
 
-class CommandPressBackspace final : public kfs::interface::CommandTextDisplay<CommandPressBackspace> {
+class CommandPressBackspace final : public kfs::CommandTextDisplay<CommandPressBackspace> {
 public:
 	using CommandTextDisplay::CommandTextDisplay;
 	using CommandTextDisplay::operator==;

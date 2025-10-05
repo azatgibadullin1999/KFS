@@ -9,10 +9,10 @@
  * 
  */
 
-#ifndef KFS_LIBS_PATTERNS_COMMAND_HPP
-# define KFS_LIBS_PATTERNS_COMMAND_HPP
+#ifndef PATTERN_COMMAND_HPP
+# define PATTERN_COMMAND_HPP
 
-namespace kfs::interface {
+namespace pattern {
 
 class ICommand {
 public:
@@ -22,4 +22,4 @@ public:
 	
 }
 
-#endif // KFS_LIBS_PATTERNS_COMMAND_HPP
+#endif // PATTERN_COMMAND_HPP

@@ -33,14 +33,13 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${KFS_COMMON_FLAGS_STR} ${KFS_C_FLAGS_STR}")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${KFS_COMMON_FLAGS_STR} ${KFS_CXX_FLAGS_STR}")
 
 include_directories(SYSTEM
-	${CMAKE_CURRENT_SOURCE_DIR}/libcxx
-	${CMAKE_CURRENT_SOURCE_DIR}/libc
-	${CMAKE_CURRENT_SOURCE_DIR}/kernel/api
+	${CMAKE_CURRENT_SOURCE_DIR}/libs/libcxx/include
+	${CMAKE_CURRENT_SOURCE_DIR}/libs/libc/include
 	${CMAKE_CURRENT_SOURCE_DIR}/boot
 )
-
 include_directories(
-	${CMAKE_CURRENT_SOURCE_DIR}/kernel
+	${CMAKE_CURRENT_SOURCE_DIR}/libs/patterns/include
+	${CMAKE_CURRENT_SOURCE_DIR}/kernel/include
 )
 
 execute_process(
@@ -48,10 +47,9 @@ execute_process(
 	OUTPUT_VARIABLE LIBGCC_FILE
 	OUTPUT_STRIP_TRAILING_WHITESPACE
 )
-add_subdirectory(kernel/api)
-add_subdirectory(libc)
-add_subdirectory(libcxx)
-add_subdirectory(libcxxabi)
+add_subdirectory(libs/platform/)
+add_subdirectory(libs/libc)
+add_subdirectory(libs/libcxxabi)
 add_subdirectory(boot)
 add_subdirectory(kernel)
 

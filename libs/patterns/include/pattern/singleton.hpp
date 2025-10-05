@@ -9,10 +9,10 @@
  * 
  */
 
-#ifndef KFS_LIBS_PATTERNS_SINGLETON_HPP
-# define KFS_LIBS_PATTERNS_SINGLETON_HPP
+#ifndef PATTERN_SINGLETON_HPP
+# define PATTERN_SINGLETON_HPP
 
-namespace kfs::interface {
+namespace pattern {
 
 template <typename WrappedClass>
 class SingletonWrapper final : public WrappedClass {
@@ -34,4 +34,4 @@ public:
 
 }
 
-#endif // KFS_LIBS_PATTERNS_SINGLETON_HPP
+#endif // PATTERN_SINGLETON_HPP

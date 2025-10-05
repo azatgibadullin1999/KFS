@@ -13,11 +13,11 @@
 # define KFS_KERNEL_DRIVER_SERVICE_COMMAND_PRESS_NEWLINE_AUTO_SCROLL_HPP
 
 # include <cstddef>
-# include "command_text_display.hpp"
+# include <kfs/command_text_display.hpp>
 
 namespace kfs::driver::common {
 
-class CommandPressNewLineAutoScroll final : public kfs::interface::CommandTextDisplay<CommandPressNewLineAutoScroll> {
+class CommandPressNewLineAutoScroll final : public kfs::CommandTextDisplay<CommandPressNewLineAutoScroll> {
 public:
 	using CommandTextDisplay::CommandTextDisplay;
 	using CommandTextDisplay::operator==;

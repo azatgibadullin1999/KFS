@@ -12,7 +12,7 @@
 #include <array>
 #include <cstddef>
 #include <exception>
-#include "service/panic/panic.hpp"
+#include <kfs/panic.hpp>
 
 extern "C" {
 

@@ -14,12 +14,12 @@
 
 # include <stdint.h>
 # include <stddef.h>
-# include "driver/utils/port.hpp"
-# include "driver/common_interface/text_display.hpp"
+# include "../utils/port.hpp"
+# include <kfs/text_display.hpp>
 
 namespace kfs::driver::vga {
 
-class VGATextDisplay : public kfs::driver::interface::ITextDisplay {
+class VGATextDisplay : public kfs::ITextDisplay {
 public:
 	VGATextDisplay(const size_t &column_size, const size_t &row_size) :
 	ITextDisplay{ column_size, row_size },

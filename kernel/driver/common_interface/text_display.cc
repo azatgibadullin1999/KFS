@@ -9,9 +9,9 @@
  * 
  */
 
-#include "text_display.hpp"
+#include <kfs/text_display.hpp>
 
-namespace kfs::driver::interface {
+namespace kfs {
 
 bool	ITextDisplay::set_cursor_position(size_t row, size_t column) {
 	if (column < _columns_number && row < _rows_number) {

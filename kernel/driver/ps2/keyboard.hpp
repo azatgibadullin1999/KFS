@@ -13,12 +13,12 @@
 # define KFS_KERNEL_DRIVER_PS2_SERVICE_IMPL_KEYBOARD_HPP
 
 # include <cstdint>
-# include "driver/utils/port.hpp"
-# include "driver/common_interface/keyboard.hpp"
+# include "../utils/port.hpp"
+# include <kfs/keyboard.hpp>
 
 namespace kfs::driver::ps2 {
 
-class Keyboard : public kfs::driver::interface::IKeyboard {
+class Keyboard : public kfs::IKeyboard {
 public:
 	Keyboard(Decoder &&decoder) :
 		IKeyboard(std::move(decoder)),

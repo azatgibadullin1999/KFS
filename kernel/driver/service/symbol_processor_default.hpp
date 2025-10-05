@@ -12,9 +12,9 @@
 #ifndef KFS_KERNEL_DRIVER_SERVICE_SYMBOL_PROCESSOR_DEFAULT_HPP
 # define KFS_KERNEL_DRIVER_SERVICE_SYMBOL_PROCESSOR_DEFAULT_HPP
 
-# include "driver/common_interface/symbol_processor.hpp"
-# include "driver/common_interface/keyboard.hpp"
-# include "driver/common_interface/text_display.hpp"
+# include <kfs/symbol_processor.hpp>
+# include <kfs/keyboard.hpp>
+# include <kfs/text_display.hpp>
 
 # include "command_press_backspace.hpp"
 # include "command_press_newline.hpp"
@@ -24,7 +24,7 @@
 
 namespace kfs::driver::common {
 
-class SymbolProcessorDefault final : public kfs::driver::interface::SymbolProcessor <
+class SymbolProcessorDefault final : public kfs::driver::SymbolProcessor <
 	kfs::driver::common::CommandPressBackspace,
 	kfs::driver::common::CommandPressNewLine,
 	kfs::driver::common::CommandPressScroll,
@@ -32,11 +32,11 @@ class SymbolProcessorDefault final : public kfs::driver::interface::SymbolProces
 	kfs::driver::common::CommandDefault
 > {
 public:
-	SymbolProcessorDefault(kfs::driver::interface::ITextDisplay *text_display) :
+	SymbolProcessorDefault(kfs::ITextDisplay *text_display) :
 	SymbolProcessor(
 		CommandPressBackspace('\b' ,text_display),
 		CommandPressNewLine('\n', text_display),
-		CommandPressScroll(kfs::driver::interface::IKeyboard::Decoder::DOWN, text_display),
+		CommandPressScroll(kfs::driver::IKeyboard::Decoder::DOWN, text_display),
 		CommandPressTab('\t', text_display, 8),
 		CommandDefault(0, text_display)
 		) { }

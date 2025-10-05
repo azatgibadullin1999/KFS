@@ -13,11 +13,11 @@
 # define KFS_KERNEL_DRIVER_SERVICE_COMMAND_PRESS_NEWLINE_HPP
 
 # include <cstddef>
-# include "command_text_display.hpp"
+# include <kfs/command_text_display.hpp>
 
 namespace kfs::driver::common {
 
-class CommandPressNewLine final : public kfs::interface::CommandTextDisplay<CommandPressNewLine> {
+class CommandPressNewLine final : public kfs::CommandTextDisplay<CommandPressNewLine> {
 public:
 	using CommandTextDisplay::CommandTextDisplay;
 	using CommandTextDisplay::operator==;

@@ -12,11 +12,11 @@
 #ifndef KFS_KERNEL_DRIVER_SERVICE_COMMAND_DEFAULT_HPP
 # define KFS_KERNEL_DRIVER_SERVICE_COMMAND_DEFAULT_HPP
 
-# include "command_text_display.hpp"
+# include <kfs/command_text_display.hpp>
 
 namespace kfs::driver::common {
 
-class CommandDefault final : public kfs::interface::CommandTextDisplay<CommandDefault> {
+class CommandDefault final : public kfs::CommandTextDisplay<CommandDefault> {
 public:
 	using CommandTextDisplay::CommandTextDisplay;
 	using CommandTextDisplay::operator=;

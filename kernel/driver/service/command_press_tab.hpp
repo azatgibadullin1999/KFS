@@ -14,13 +14,13 @@
 
 # include <cstddef>
 
-# include "command_text_display.hpp"
+# include <kfs/command_text_display.hpp>
 
 namespace kfs::driver::common {
 
-class CommandPressTab final : public kfs::interface::CommandTextDisplay<CommandPressTab> {
+class CommandPressTab final : public kfs::CommandTextDisplay<CommandPressTab> {
 public:
-	CommandPressTab(char c,kfs::driver::interface::ITextDisplay *text_display, size_t tab_size) :
+	CommandPressTab(char c, kfs::ITextDisplay *text_display, size_t tab_size) :
 	CommandTextDisplay(c, text_display),
 	_tab_size(tab_size) { }
 	using CommandTextDisplay::operator==;
