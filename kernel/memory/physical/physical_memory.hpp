@@ -17,11 +17,11 @@
 # include <vector>
 # include <cstddef>
 
-# include "multiboot.h"
+# include <multiboot.h>
 # include <kfs/memory.hpp>
-# include "pattern/singleton.hpp"
+# include <pattern/singleton.hpp>
 
-# include "memory_range.hpp"
+# include "../memory_range.hpp"
 
 namespace kfs {
 

@@ -12,21 +12,20 @@
 #ifndef KFS_KERNEL_DRIVER_VGA_SERVICE_IMPL_TEXT_DISPLAY_HPP
 # define KFS_KERNEL_DRIVER_VGA_SERVICE_IMPL_TEXT_DISPLAY_HPP
 
+# include <cstdint>
 # include <stdint.h>
 # include <stddef.h>
-# include "../utils/port.hpp"
 # include <kfs/text_display.hpp>
+# include <kfs/arch/x86/hwio/port.hpp>
 
 namespace kfs::driver::vga {
 
 class VGATextDisplay : public kfs::ITextDisplay {
 public:
-	VGATextDisplay(const size_t &column_size, const size_t &row_size) :
-	ITextDisplay{ column_size, row_size },
-	_buffer{ reinterpret_cast<uint16_t*>(0xB8000) },
-	_color{ _vga_entry_color(EColor::CYAN, EColor::BLACK) },
-	_port1{ 0x3D4 },
-	_port2{ 0x3D5 } {
+	VGATextDisplay(const size_t &column_size, const size_t &row_size)
+	: ITextDisplay{ column_size, row_size }
+	, _buffer{ reinterpret_cast<uint16_t*>(0xB8000) }
+	, _color{ _vga_entry_color(EColor::CYAN, EColor::BLACK) } {
 		VGATextDisplay::clear();
 	}
 	
@@ -53,8 +52,8 @@ private:
 
 	uint16_t* _buffer;
 	uint8_t _color;
-	const kfs::driver::utils::PortByte	_port1;
-	const kfs::driver::utils::PortByte	_port2;
+	kfs::hwio::Port<0x3D4, uint8_t>	_port1;
+	kfs::hwio::Port<0x3D5, uint8_t>	_port2;
 };
 
 }

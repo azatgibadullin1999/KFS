@@ -22,7 +22,7 @@
 #include <kfs/memory.hpp>
 
 #include "paging.hpp"
-#include "physical_memory.hpp"
+#include "../physical/physical_memory.hpp"
 
 #include "address_space.hpp"
 

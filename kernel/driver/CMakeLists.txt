@@ -2,7 +2,6 @@ add_subdirectory(common_interface)
 add_subdirectory(ps2)
 add_subdirectory(vga)
 add_subdirectory(service)
-add_subdirectory(utils)
 
 add_library(kfs_driver INTERFACE)
 

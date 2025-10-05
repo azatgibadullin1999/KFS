@@ -12,9 +12,11 @@
 #ifndef KFS_KERNEL_SERVICE_SHELL_IMPL_COMMAND_BUILTIN_SHUTDOWN_HPP
 # define KFS_KERNEL_SERVICE_SHELL_IMPL_COMMAND_BUILTIN_SHUTDOWN_HPP
 
-# include "pattern/factory.hpp"
-# include "../driver/utils/port.hpp"
+# include <cstdint>
+
+# include <pattern/factory.hpp>
 # include "../interface/command_builtin.hpp"
+# include <kfs/arch/x86/hwio/port.hpp>
 
 namespace kfs::shell {
 
@@ -22,8 +24,7 @@ class CommandBuiltinShutdown :
 	public kfs::shell::ICommandBuiltin,
 	public pattern::StaticInstanceFactory<CommandBuiltinShutdown> {
 public:
-	CommandBuiltinShutdown() :
-	_port(0x604) { }
+	CommandBuiltinShutdown() { }
 
 	std::string_view	get_name() const {
 		return "shutdown";
@@ -38,7 +39,7 @@ public:
 		_port.write(0x2000);
 	}
 private:
-	kfs::driver::utils::PortWord	_port;
+	kfs::hwio::Port<0x604, uint16_t> _port;
 };
 
 }

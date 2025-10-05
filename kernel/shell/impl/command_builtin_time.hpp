@@ -13,10 +13,9 @@
 # define KFS_KERNEL_SERVICE_SHELL_IMPL_COMMAND_BUILTIN_TIME_HPP
 
 # include <pattern/factory.hpp>
+# include <kfs/arch/x86/hwio/port.hpp>
+
 # include "../interface/command_builtin.hpp"
-
-# include "../driver/utils/port.hpp"
-
 
 namespace kfs::shell {
 
@@ -133,8 +132,8 @@ public:
 	}
 private:
 	inline static const size_t	g_current_year = 2024;
-	kfs::driver::utils::PortByte	_CMOS_address = 0x70;
-	kfs::driver::utils::PortByte	_CMOS_data = 0x71;
+	kfs::hwio::Port<0x70, uint8_t>	_CMOS_address;
+	kfs::hwio::Port<0x71, uint8_t>	_CMOS_data;
 };
 
 }

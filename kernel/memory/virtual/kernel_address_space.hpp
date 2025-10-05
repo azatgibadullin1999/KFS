@@ -11,7 +11,7 @@
 
 #include <multiboot.h>
 
-#include "../address_space.hpp"
+#include "address_space.hpp"
 
 namespace kfs {
 

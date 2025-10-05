@@ -16,7 +16,7 @@
 #include <elf.h>
 
 #include <kfs/memory.hpp>
-#include "memory_range.hpp"
+#include "../memory_range.hpp"
 #include "physical_memory.hpp"
 
 namespace kfs {

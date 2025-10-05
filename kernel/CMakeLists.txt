@@ -19,6 +19,7 @@ add_subdirectory(console)
 add_subdirectory(memory)
 add_subdirectory(shell)
 add_subdirectory(panic)
+add_subdirectory(arch/x86)
 
 execute_process(
 	COMMAND ${CMAKE_C_COMPILER} -print-libgcc-file-name
@@ -33,9 +34,9 @@ add_executable(${CMAKE_PROJECT_NAME}
 	$<TARGET_OBJECTS:kfs::libcxxabi>
 	$<TARGET_OBJECTS:kfs::driver::vga>
 	$<TARGET_OBJECTS:kfs::driver::ps2>
-	$<TARGET_OBJECTS:kfs::driver::utils>
 	$<TARGET_OBJECTS:kfs::driver::common>
 	$<TARGET_OBJECTS:kfs::driver::service>
+	$<TARGET_OBJECTS:kfs::arch>
 	$<TARGET_OBJECTS:kfs::shell>
 	$<TARGET_OBJECTS:kfs::panic>
 	$<TARGET_OBJECTS:kfs::memory>

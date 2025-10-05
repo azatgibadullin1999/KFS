@@ -16,9 +16,9 @@
 #include <elf.h>
 
 #include <kfs/memory.hpp>
-#include "gdt_default.hpp"
-#include "physical_memory.hpp"
-#include "imp/kernel_address_space.hpp"
+#include "segmentation/gdt_default.hpp"
+#include "physical/physical_memory.hpp"
+#include "virtual/kernel_address_space.hpp"
 
 namespace kfs {
 

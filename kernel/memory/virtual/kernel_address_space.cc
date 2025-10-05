@@ -12,9 +12,9 @@
 #include <ranges>
 
 #include <kfs/memory.hpp>
-#include "../paging.hpp"
-#include "../address_space.hpp"
-#include "../physical_memory.hpp"
+#include "paging.hpp"
+#include "address_space.hpp"
+#include "../physical/physical_memory.hpp"
 
 #include "kernel_address_space.hpp"
 

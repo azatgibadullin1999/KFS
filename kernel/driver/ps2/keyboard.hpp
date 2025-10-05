@@ -13,20 +13,19 @@
 # define KFS_KERNEL_DRIVER_PS2_SERVICE_IMPL_KEYBOARD_HPP
 
 # include <cstdint>
-# include "../utils/port.hpp"
 # include <kfs/keyboard.hpp>
+# include <kfs/arch/x86/hwio/port.hpp>
 
 namespace kfs::driver::ps2 {
 
 class Keyboard : public kfs::IKeyboard {
 public:
-	Keyboard(Decoder &&decoder) :
-		IKeyboard(std::move(decoder)),
-		_port(0x60) { }
+	Keyboard(Decoder &&decoder)
+	: IKeyboard(std::move(decoder)) { }
 
 	uint8_t	read() const override;
 private:
-	kfs::driver::utils::PortByte	_port;
+	kfs::hwio::Port<0x60, uint8_t>	_port;
 };
 
 }
