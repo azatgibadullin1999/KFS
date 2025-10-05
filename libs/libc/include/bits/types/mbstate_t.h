@@ -9,11 +9,11 @@
  * 
  */
 
-#ifndef KFS_LIBC_MBSTATE_T_H
-# define KFS_LIBC_MBSTATE_T_H
+#ifndef KFS_LIBS_LIBC_BITS_TYPES_MBSTATE_T_H
+# define KFS_LIBS_LIBC_BITS_TYPES_MBSTATE_T_H
 
 typedef struct {
   unsigned char __seq[4];
 } mbstate_t;
 
-#endif // KFS_LIBC_MBSTATE_T_H
+#endif // KFS_LIBS_LIBC_BITS_TYPES_MBSTATE_T_H

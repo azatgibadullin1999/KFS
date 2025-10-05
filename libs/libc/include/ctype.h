@@ -9,8 +9,8 @@
  * 
  */
 
-#ifndef KFS_LIBC_CTYPE_H
-# define KFS_LIBC_CTYPE_H
+#ifndef KFS_LIBS_LIBC_CTYPE_H
+# define KFS_LIBS_LIBC_CTYPE_H
 
 # ifdef __cplusplus
 extern "C" {
@@ -29,4 +29,4 @@ int tolower(int c);
 }
 # endif
 
-#endif // KFS_LIBC_CTYPE_H
+#endif // KFS_LIBS_LIBC_CTYPE_H

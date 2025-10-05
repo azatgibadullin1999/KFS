@@ -14,7 +14,7 @@
 
 # include <cstddef>
 
-namespace kfs::driver::interface {
+namespace kfs {
 
 class ITextDisplay {
 public:
@@ -37,18 +37,18 @@ public:
 		WHITE = 15,
 	};
 
-	ITextDisplay(const size_t &columns_umber, const size_t &rows_umber) :
+	ITextDisplay(const std::size_t &columns_umber, const std::size_t &rows_umber) :
 	_columns_number{ columns_umber },
 	_rows_number{ rows_umber },
 	_column{ 0 },
 	_row{ 0 } { }
 
-	virtual void	write(char, size_t row, size_t column) = 0;
-	virtual char	read(size_t row, size_t column) = 0;
+	virtual void	write(char, std::size_t row, std::size_t column) = 0;
+	virtual char	read(std::size_t row, std::size_t column) = 0;
 
 	virtual void	clear() = 0;
 
-	virtual bool	set_cursor_position(size_t row, size_t column) = 0;
+	virtual bool	set_cursor_position(std::size_t row, std::size_t column) = 0;
 
 	virtual void	update_cursor_position() = 0;
 

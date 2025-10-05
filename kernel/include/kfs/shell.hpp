@@ -12,9 +12,9 @@
 #ifndef KFS_KERNEL_SERVICE_SHELL_HPP
 # define KFS_KERNEL_SERVICE_SHELL_HPP
 
-# include "service/console.hpp"
+# include "console.hpp"
 
-namespace kfs::interface {
+namespace kfs {
 
 class IShell {
 public:

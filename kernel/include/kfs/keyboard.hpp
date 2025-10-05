@@ -17,7 +17,7 @@
 # include <array>
 # include <bitset>
 
-namespace kfs::driver::interface {
+namespace kfs {
 
 class IKeyboard {
 public:

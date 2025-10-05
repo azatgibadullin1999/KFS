@@ -9,8 +9,8 @@
  * 
  */
 
-#ifndef KFS_KERNEL_INTERFACE_COMMAND_HPP
-# define KFS_KERNEL_INTERFACE_COMMAND_HPP
+#ifndef KFS_LIBS_PATTERNS_COMMAND_HPP
+# define KFS_LIBS_PATTERNS_COMMAND_HPP
 
 namespace kfs::interface {
 
@@ -22,4 +22,4 @@ public:
 	
 }
 
-#endif // KFS_KERNEL_INTERFACE_COMMAND_HPP
+#endif // KFS_LIBS_PATTERNS_COMMAND_HPP

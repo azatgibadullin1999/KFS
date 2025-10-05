@@ -9,8 +9,8 @@
  * 
  */
 
-#ifndef KFS_LIBC_ERRNO_H
-# define KFS_LIBC_ERRNO_H
+#ifndef KFS_LIBS_LIBC_ERRNO_H
+# define KFS_LIBS_LIBC_ERRNO_H
 
 # ifdef __cplusplus
 extern "C" {
@@ -23,4 +23,4 @@ int *errno_location(void);
 }
 # endif
 
-#endif // KFS_LIBC_ERRNO_H
+#endif // KFS_LIBS_LIBC_ERRNO_H

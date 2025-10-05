@@ -9,8 +9,8 @@
  * 
  */
 
-#ifndef KFS_LIBC_STDIO_H
-# define KFS_LIBC_STDIO_H
+#ifndef KFS_LIBS_LIBC_STDIO_H
+# define KFS_LIBS_LIBC_STDIO_H
 
 # ifdef __cplusplus
 extern "C" {
@@ -26,4 +26,4 @@ int puts(const char *ch);
 }
 # endif
 
-#endif // KFS_LIBC_STDIO_H
+#endif // KFS_LIBS_LIBC_STDIO_H

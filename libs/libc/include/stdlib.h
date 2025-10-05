@@ -9,8 +9,8 @@
  * 
  */
 
-#ifndef KFS_LIBC_STDLIB_H
-# define KFS_LIBC_STDLIB_H
+#ifndef KFS_LIBS_LIBC_STDLIB_H
+# define KFS_LIBS_LIBC_STDLIB_H
 
 # include <stddef.h>
 
@@ -50,4 +50,4 @@ void abort();
 }
 # endif
 
-#endif // KFS_LIBC_STDLIB_H
+#endif // KFS_LIBS_LIBC_STDLIB_H

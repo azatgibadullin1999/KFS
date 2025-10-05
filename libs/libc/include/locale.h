@@ -9,8 +9,8 @@
  * 
  */
 
-#ifndef KFS_LIBC_LOCALE_H
-# define KFS_LIBC_LOCALE_H
+#ifndef KFS_LIBS_LIBC_LOCALE_H
+# define KFS_LIBS_LIBC_LOCALE_H
 
 # ifdef __cplusplus
 extern "C" {
@@ -89,4 +89,4 @@ lconv_t *localeconv(void);
 }
 # endif
 
-#endif // KFS_LIBC_LOCALE_H
+#endif // KFS_LIBS_LIBC_LOCALE_H

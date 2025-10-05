@@ -16,7 +16,7 @@
 # include <utility>
 # include <algorithm>
 
-namespace kfs::driver::interface {
+namespace kfs {
 
 class ISymbolProcessor {
 public:
